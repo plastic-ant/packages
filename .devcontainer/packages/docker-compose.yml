@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  repo:
+    env_file:
+      - .env.local
+    build:
+      context: ../
+      dockerfile: ../.devcontainer/packages/dockerfile
+      args:
+        NODE_VARIANT: 18-bullseye
+    volumes:
+      - ${HOME}${USERPROFILE}/.aws:/home/node/.aws
+      - ${HOME}${USERPROFILE}/.ssh:/home/node/.ssh
+      - ../..:/repo:cached
+    command: sleep infinity

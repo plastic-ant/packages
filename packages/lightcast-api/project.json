@@ -1,0 +1,61 @@
+{
+  "name": "lightcast-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/lightcast-api/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "publish": {
+      "command": "node tools/scripts/publish.mjs lightcast-api {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/lightcast-api/**/*.ts", "packages/lightcast-api/package.json"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/lightcast-api/jest.config.ts"
+      }
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "main": "packages/lightcast-api/src/index.ts",
+        "outputPath": "dist/packages/lightcast-api",
+        "tsConfig": "packages/lightcast-api/tsconfig.lib.json",
+        "compiler": "tsc",
+        "project": "packages/lightcast-api/package.json",
+        "format": ["cjs", "esm"],
+        "assets": [
+          {
+            "glob": "packages/lightcast-api/LICENSE",
+            "input": ".",
+            "output": "."
+          },
+          {
+            "glob": "packages/lightcast-api/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    }
+  }
+}

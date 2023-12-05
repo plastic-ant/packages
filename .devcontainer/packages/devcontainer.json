@@ -1,0 +1,91 @@
+{
+  "name": "🐋packages",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "repo",
+  "workspaceFolder": "/repo",
+  "remoteUser": "node",
+  "initializeCommand": ".devcontainer/init-command.sh .devcontainer/packages",
+  "postStartCommand": ".devcontainer/packages/post-start-command.sh",
+  "remoteEnv": { "NODE_ENV": "development", "TSS_REMOTE_DEBUG": "9229" },
+  "containerEnv": {
+    "IS_CONTAINER": "1",
+    "NX_VERBOSE_LOGGING": "false",
+    "NX_NO_CLOUD": "true"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker": "latest"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Misc
+        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+        "eslint.validate": ["json", "typescriptreact", "typescript", "javascript", "javascriptreact"],
+        "eslint.experimental.useFlatConfig": false,
+        "typescript.tsdk": "./node_modules/typescript/lib",
+        "typescript.tsserver.useSyntaxServer": "auto",
+        "typescript.tsserver.log": "off",
+        "explorer.compactFolders": false,
+        // Git
+        "[git-commit]": { "editor.rulers": [50, 72] },
+        "git.commandsToLog": ["pull", "push", "post-merge", "pre-commit", "post-checkout"],
+        // Terminal
+        "terminal.integrated.defaultProfile.windows": "PowerShell",
+        "terminal.integrated.cwd": "${workspaceFolder}",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        // Nx
+        "nxConsole.projectViewingStyle": "list",
+        "nxConsole.enableTelemetry": false,
+        // Debug
+        "debug.terminal.clearBeforeReusing": true,
+        "debug.allowBreakpointsEverywhere": true,
+        "debug.openDebug": "openOnDebugBreak",
+        "debug.node.autoattach": true,
+        "debug.javascript.terminalOptions": { "sourceMaps": true },
+        "debug.javascript.autoAttachSmartPattern": [
+          "!**/{node_modules,npm-global,.yarn,.nvm}/**",
+          "**/$KNOWN_TOOLS$/**"
+        ],
+        // Editor
+        "editor.formatOnSave": true,
+        "editor.rulers": [130],
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "prettier.prettierPath": "./node_modules/prettier",
+        // Npm
+        "npm.packageManager": "npm",
+        "npm.scriptExplorerAction": "open",
+        "files.exclude": {
+          "**/.git": true,
+          "**/.svn": true,
+          "**/.hg": true,
+          "**/CVS": true,
+          "**/.DS_Store": true,
+          "**/Thumbs.db": true
+        },
+        "search.exclude": {
+          "**/*.code-search": true,
+          "**/node_modules": true,
+          "**/bower_components": true,
+          "**/.nx": true
+        },
+        "files.watcherExclude": {
+          "**/.nx": true,
+          "**/.yarn/*/**": true,
+          "**/dist/*/**": true,
+          "**/tmp/*/**": true,
+          "**/.git/objects/**": true,
+          "**/.git/subtree-cache/**": true,
+          "**/node_modules/*/**": true,
+          "**/.hg/store/**": true
+        }
+      },
+      "extensions": [
+        "aaron-bond.better-comments",
+        "christian-kohler.path-intellisense",
+        "nrwl.angular-console",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}

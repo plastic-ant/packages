@@ -1,0 +1,20 @@
+{
+  "name": "@pas/lightcast-api",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "license": "MIT",
+  "repository": "https://github.com/plastic-ant/packages/lightcast-api",
+  "author": "Michael Devereux",
+  "main": "./src/index.js",
+  "keywords": [
+    "emsi",
+    "lightcast",
+    "api"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "tslib": "^2.3.0",
+    "typed-rest-client": "^1.8.11",
+    "type-fest": "0.21.3"
+  }
+}

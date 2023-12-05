@@ -1,0 +1,3 @@
+ARG NODE_VARIANT=16-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${NODE_VARIANT}
+CMD ["/bin/bash"]
