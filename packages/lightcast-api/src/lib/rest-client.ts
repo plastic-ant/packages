@@ -30,18 +30,9 @@ export interface AuthKeys {
  *
  */
 export class RestClient extends rm.RestClient {
-  private authClient = new ht.HttpClient("igr8-auth", [], { keepAlive: true, allowRetries: true, maxRetries: 16 });
-  private authUrlParams: string;
-  private bearerCredentialHandler = new hm.BearerCredentialHandler("invalid");
-  private scope: string[];
-
-  static makeUrl(base: string, path?: string) {
-    const url = new URL(path ?? "", base);
-    if (URL.canParse(url)) {
-      return url.toString();
-    }
-    throw new Error(`Invaild url -> ${url.toString()}`);
-  }
+  private bearerCredentialHandler = new hm.BearerCredentialHandler("");
+  private expiresIn: number = 0;
+  private scope: string[] = [];
 
   get scopes() {
     return this.scope;
@@ -52,31 +43,29 @@ export class RestClient extends rm.RestClient {
    * @param props
    * @param options
    */
-  constructor(props: AuthKeys, options?: ifm.IRequestOptions) {
-    super("igr8", undefined, [], { ...options, keepAlive: true, allowRetries: true, maxRetries: 16 });
+  constructor(private userAgent: string, private authKeys: () => AuthKeys, options?: ifm.IRequestOptions) {
+    super(userAgent, undefined, [], { ...options, keepAlive: true, allowRetries: true, maxRetries: 16 });
     this.client.handlers.push(this.bearerCredentialHandler);
-    this.authUrlParams = new URLSearchParams(omitBy(props, isNil)).toString();
-    this.scope = props.scope.split(" ");
   }
 
-  //protected abstract authenticated(): void;
-
   private async refreshToken() {
-    const response = await this.authClient.post("https://auth.emsicloud.com/connect/token", this.authUrlParams, {
-      "Content-Type": "application/x-www-form-urlencoded",
-    });
+    const now = Date.now();
+    if (now >= this.expiresIn) {
+      const auth = this.authKeys();
+      const params = new URLSearchParams(omitBy(auth, isNil)).toString();
 
-    const body = await response.readBody();
+      const response = await new ht.HttpClient(`${this.userAgent}-auth`).post(
+        "https://auth.emsicloud.com/connect/token",
+        params,
+        { "Content-Type": "application/x-www-form-urlencoded" }
+      );
 
-    if (response.message.statusCode === 200) {
-      const token = JSON.parse(body) as AuthTokenResponse;
-      this.bearerCredentialHandler.token = token.access_token;
-      this.scope = token.scope.split(" ");
-      //this.authenticated();
-      return;
+      const body = await response.readBody();
+      const { expires_in, access_token, scope } = JSON.parse(body) as AuthTokenResponse;
+      this.expiresIn = now + expires_in * 1000;
+      this.bearerCredentialHandler.token = access_token;
+      this.scope = scope.split(" ");
     }
-
-    throw new Error(body);
   }
 
   /**
@@ -85,16 +74,8 @@ export class RestClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  override async get<Q = unknown, R = unknown, P extends string = string>(
-    resource: P,
-    options?: RequestOptions<Q>
-  ): Promise<rm.IRestResponse<R>> {
-    return super.get<R>(resource, options as rm.IRequestOptions).catch(async (error) => {
-      if (error.statusCode === 401) {
-        return this.refreshToken().then(() => this.get(resource, options));
-      }
-      throw new Error(error);
-    });
+  override async get<Q = unknown, R = unknown, P extends string = string>(resource: P, options?: RequestOptions<Q>) {
+    return this.refreshToken().then(() => super.get<R>(resource, options as rm.IRequestOptions));
   }
 
   /**
@@ -108,12 +89,7 @@ export class RestClient extends rm.RestClient {
     resource: P,
     body: B,
     options?: RequestOptions<Q>
-  ): Promise<rm.IRestResponse<R>> {
-    return super.create<R>(resource, body, options as rm.IRequestOptions).catch(async (error) => {
-      if (error.statusCode === 401) {
-        return this.refreshToken().then(() => this.get(resource, options));
-      }
-      throw new Error(error);
-    });
+  ) {
+    return this.refreshToken().then(() => super.create<R>(resource, body, options as rm.IRequestOptions));
   }
 }

@@ -1,5 +1,6 @@
 import { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
+import urlcat from "urlcat";
 
 const baseUrl = "https://classification.emsicloud.com/taxonomies";
 
@@ -10,14 +11,14 @@ export default (client: RestClient) => {
      * @param facet
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy}
      */
-    meta: <R = unknown>(facet: string) => client.get<void, R>(RestClient.makeUrl(baseUrl, `${facet}`)),
+    meta: <R = unknown>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet", { facet })),
 
     /**
      *
      * @param facet
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions}
      */
-    versions: <R = unknown>(facet: string) => client.get<void, R>(RestClient.makeUrl(baseUrl, `${facet}/versions`)),
+    versions: <R = unknown>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
 
     version: (version: string) => ({
       /**
@@ -27,7 +28,7 @@ export default (client: RestClient) => {
        * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version}
        */
       meta: <R = unknown>(facet: string) =>
-        client.get<void, R>(RestClient.makeUrl(baseUrl, `${facet}/versions/${version}`)),
+        client.get<void, R>(urlcat(baseUrl, ":facet/versions/:version", { facet, version })),
 
       /**
        *
@@ -40,7 +41,7 @@ export default (client: RestClient) => {
         facet: string,
         params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
       ) =>
-        client.get<typeof params, R>(RestClient.makeUrl(baseUrl, `${facet}/versions/${version}/concepts`), {
+        client.get<typeof params, R>(urlcat(baseUrl, ":facet/versions/:version/concepts", { facet, version }), {
           queryParameters: { params },
         }),
 
@@ -57,7 +58,7 @@ export default (client: RestClient) => {
         id: string,
         params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
       ) =>
-        client.get<typeof params, R>(RestClient.makeUrl(baseUrl, `${facet}/versions/${version}/concepts/${id}`), {
+        client.get<typeof params, R>(urlcat(baseUrl, ":facet/versions/:version/concepts/:id", { facet, id, version }), {
           queryParameters: { params },
         }),
 
@@ -76,7 +77,10 @@ export default (client: RestClient) => {
           filter?: JsonObject;
         }
       ) =>
-        client.post<void, typeof body, R>(RestClient.makeUrl(baseUrl, `${facet}/versions/${version}/relations`), body),
+        client.post<void, typeof body, R>(
+          urlcat(baseUrl, ":facet/versions/:version/relations", { facet, version }),
+          body
+        ),
     }),
   };
 
@@ -87,7 +91,7 @@ export default (client: RestClient) => {
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-all-taxonomies}
    */
   const baseFunction = <R = unknown>(params?: { tags?: string }) =>
-    client.get<typeof params, R>(RestClient.makeUrl(baseUrl, `taxonomies`), {
+    client.get<typeof params, R>(urlcat(baseUrl, "taxonomies"), {
       queryParameters: { params },
     });
 

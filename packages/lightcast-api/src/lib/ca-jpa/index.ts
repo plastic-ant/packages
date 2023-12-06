@@ -5,10 +5,11 @@ import rankings from "./rankings";
 import timeseries from "./timeseries";
 import distributions from "./distributions";
 import taxonomies from "./taxonomies";
+import urlcat from "urlcat";
 
 export default (client: RestClient) => ({
-  status: <R = unknown>() => client.get<void, R>(RestClient.makeUrl("https://emsiservices.com/ca-jpa", "status")),
-  meta: <R = unknown>() => client.get<void, R>(RestClient.makeUrl("https://emsiservices.com/ca-jpa", "meta")),
+  status: <R = unknown>() => client.get<void, R>(urlcat("https://emsiservices.com/ca-jpa", "status")),
+  meta: <R = unknown>() => client.get<void, R>(urlcat("https://emsiservices.com/ca-jpa", "meta")),
   postings: postings(client),
   rankings: rankings(client),
   taxonomies: taxonomies(client),

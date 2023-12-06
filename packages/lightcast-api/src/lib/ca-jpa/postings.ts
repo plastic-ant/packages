@@ -1,5 +1,6 @@
 import { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
+import urlcat from "urlcat";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/postings";
 
@@ -11,7 +12,7 @@ export default (client: RestClient) => ({
    * @returns
    */
   byId: <R = unknown>(id: string, params?: { noc_version?: string; company_version?: string; area_version?: string }) =>
-    client.get<typeof params, R>(RestClient.makeUrl(baseUrl, `/${id}`), {
+    client.get<typeof params, R>(urlcat(baseUrl, ":id", { id }), {
       queryParameters: { params },
     }),
 
@@ -26,7 +27,7 @@ export default (client: RestClient) => ({
     body: JsonObject,
     params?: { noc_version?: string; company_version?: string; area_version?: string }
   ) =>
-    client.post<typeof params, typeof body, R>(RestClient.makeUrl(baseUrl, ``), body, {
+    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ""), body, {
       queryParameters: { params },
     }),
 });

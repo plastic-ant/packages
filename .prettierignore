@@ -1,4 +1,19 @@
-# Add files here to ignore them from prettier formatting
-/dist
+tmp
+/test
+/build
+node_modules
+/pnpm-lock.yaml
+/.vscode
+/.idea
+/.fleet
+/.github
 /coverage
+/.yarn
+/.verdaccio/build/local-registry
+/dist
+/.env
+CODEOWNERS
+
 /.nx/cache
+
+.pnpm-store

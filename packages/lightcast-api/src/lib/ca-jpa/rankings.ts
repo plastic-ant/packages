@@ -1,5 +1,6 @@
 import { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
+import urlcat from "urlcat";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/rankings";
 
@@ -17,7 +18,7 @@ const timeseries = (client: RestClient) => ({
     body: JsonObject,
     params?: { noc_version?: string; company_version?: string; area_version?: string }
   ) => {
-    client.post<typeof params, typeof body, R>(RestClient.makeUrl(baseUrl, `/${facet}/timeseries`), body, {
+    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet/timeseries", { facet }), body, {
       queryParameters: { params },
     });
   },
@@ -38,7 +39,7 @@ export default (client: RestClient) => ({
     body: JsonObject,
     params?: { noc_version?: string; company_version?: string; area_version?: string }
   ) =>
-    client.post<typeof params, typeof body, R>(RestClient.makeUrl(baseUrl, `/${facet}`), body, {
+    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet", { facet }), body, {
       queryParameters: { params },
     }),
 });

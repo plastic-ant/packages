@@ -1,8 +1,8 @@
 {
-  "name": "🐋packages",
+  "name": "🐋@pas/packages",
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "repo",
-  "workspaceFolder": "/repo",
+  "workspaceFolder": "/pas-packages",
   "remoteUser": "node",
   "initializeCommand": ".devcontainer/init-command.sh .devcontainer/packages",
   "postStartCommand": ".devcontainer/packages/post-start-command.sh",
@@ -50,10 +50,9 @@
         "editor.formatOnSave": true,
         "editor.rulers": [130],
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "prettier.prettierPath": "./node_modules/prettier",
         // Npm
-        "npm.packageManager": "npm",
         "npm.scriptExplorerAction": "open",
+        "npm.packageManager": "pnpm",
         "files.exclude": {
           "**/.git": true,
           "**/.svn": true,
@@ -63,12 +62,15 @@
           "**/Thumbs.db": true
         },
         "search.exclude": {
+          "pnpm-lock.yaml": true,
+          "**/.pnpm-store": true,
           "**/*.code-search": true,
           "**/node_modules": true,
           "**/bower_components": true,
           "**/.nx": true
         },
         "files.watcherExclude": {
+          "**/.pnpm-store": true,
           "**/.nx": true,
           "**/.yarn/*/**": true,
           "**/dist/*/**": true,

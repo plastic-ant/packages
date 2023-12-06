@@ -1,5 +1,6 @@
 import { RestClient } from "../rest-client";
 import { JsonObject } from "type-fest";
+import urlcat from "urlcat";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/distributions";
 
@@ -19,7 +20,7 @@ export default (client: RestClient) => {
       body: JsonObject,
       params?: { noc_version?: string; company_version?: string; area_version?: string }
     ) =>
-      client.post<typeof params, typeof body, R>(RestClient.makeUrl(baseUrl, facet), body, {
+      client.post<typeof params, typeof body, R>(urlcat(baseUrl, facet), body, {
         queryParameters: { params },
       }),
   };
@@ -30,7 +31,7 @@ export default (client: RestClient) => {
    *
    * @see https://docs.lightcast.dev/apis/canada-job-postings#get-distributions
    */
-  const distributions = <R = unknown>() => client.get<void, R>(RestClient.makeUrl(baseUrl));
+  const distributions = <R = unknown>() => client.get<void, R>(urlcat(baseUrl, ""));
 
   return { ...others, ...distributions } as typeof others & typeof distributions;
 };

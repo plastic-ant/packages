@@ -1,4 +1,5 @@
 import { RestClient } from "../rest-client";
+import urlcat from "urlcat";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/taxonomies";
 
@@ -16,7 +17,7 @@ const lookup = (client: RestClient) => ({
     body: { ids: (string | number)[] },
     params?: { noc_version?: string; company_version?: string; area_version?: string }
   ) =>
-    client.post<typeof params, typeof body, R>(RestClient.makeUrl(baseUrl, `${facet}/lookup`), body, {
+    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet/lookup", { facet }), body, {
       queryParameters: { params },
     }),
 });
@@ -56,13 +57,13 @@ export default (client: RestClient) => {
         company_version?: string;
         area_version?: string;
       }
-    ) => client.get<typeof params, R>(RestClient.makeUrl(baseUrl, facet), { queryParameters: { params } }),
+    ) => client.get<typeof params, R>(urlcat(baseUrl, facet), { queryParameters: { params } }),
   };
 
   /**
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#get-taxonomies}
    */
-  const baseFunction = <R = unknown>() => client.get<void, R>(RestClient.makeUrl(baseUrl));
+  const baseFunction = <R = unknown>() => client.get<void, R>(urlcat(baseUrl, ""));
 
   return { ...others, ...baseFunction } as typeof others & typeof baseFunction;
 };

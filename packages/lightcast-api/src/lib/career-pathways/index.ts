@@ -1,4 +1,5 @@
 import { RestClient } from "../rest-client";
+import urlcat from "urlcat";
 
 const baseUrl = "https://emsiservices.com/career-pathways";
 
@@ -9,14 +10,14 @@ export default (client: RestClient) => {
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-get-service-status}
      */
-    status: <R = unknown>() => client.get<void, R>(RestClient.makeUrl(baseUrl, "status")),
+    status: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "status")),
 
     /**
      *
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-get-service-metadata}
      */
-    meta: <R = unknown>() => client.get<void, R>(RestClient.makeUrl(baseUrl, "meta")),
+    meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "meta")),
 
     dimensions: {
       /**
@@ -24,7 +25,7 @@ export default (client: RestClient) => {
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-list-all-dimensions}
        */
-      listAll: <R = unknown>() => client.get<void, R>(RestClient.makeUrl(baseUrl)),
+      listAll: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "")),
 
       dimension: (dimension: "soc" | "onet" | "lotocc" | "lotspecocc") => ({
         /**
@@ -32,7 +33,7 @@ export default (client: RestClient) => {
          * @returns
          * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension}
          */
-        meta: <R = unknown>() => client.get<void, R>(RestClient.makeUrl(baseUrl, `dimensions/${dimension}`)),
+        meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, `dimensions/:dimension`, { dimension })),
 
         /**
          *
@@ -47,7 +48,7 @@ export default (client: RestClient) => {
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
         }) =>
-          client.post<void, typeof body, R>(RestClient.makeUrl(baseUrl, `dimensions/${dimension}/feederjobs`), body),
+          client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/feederjobs`, { dimension }), body),
 
         /**
          *
@@ -62,7 +63,7 @@ export default (client: RestClient) => {
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
         }) =>
-          client.post<void, typeof body, R>(RestClient.makeUrl(baseUrl, `dimensions/${dimension}/nextstepjobs`), body),
+          client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/nextstepjobs`, { dimension }), body),
 
         /**
          *
@@ -75,7 +76,7 @@ export default (client: RestClient) => {
           destinationId: string;
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        }) => client.post<void, typeof body, R>(RestClient.makeUrl(baseUrl, `dimensions/${dimension}/skillgap`), body),
+        }) => client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/skillgap`, { dimension }), body),
 
         /**
          * Get feeder and next step responses for a list of occupations.
@@ -89,7 +90,7 @@ export default (client: RestClient) => {
           categories?: string[];
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        }) => client.post<void, typeof body, R>(RestClient.makeUrl(baseUrl, `dimensions/${dimension}/bulk`), body),
+        }) => client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/bulk`, { dimension }), body),
       }),
     },
   };
@@ -99,7 +100,7 @@ export default (client: RestClient) => {
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-list-all-dimensions}
    */
-  //const baseFunction = <R = unknown>() => client.get<void, R>(RestClient.makeUrl(baseUrl));
+  //const baseFunction = <R = unknown>() => client.get<void, R>(urlcat(baseUrl));
 
   //return { ...others, ...baseFunction } as typeof others & typeof baseFunction;
 };

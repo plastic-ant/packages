@@ -5,6 +5,19 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "example": {
+      "executor": "nx:run-commands",
+      "defaultConfiguration": "skills",
+      "options": {
+        "envFile": "packages/lightcast-api/examples/.env",
+        "cwd": "packages/lightcast-api/examples"
+      },
+      "configurations": {
+        "skills": {
+          "command": "npx ts-node skills.ts"
+        }
+      }
+    },
     "publish": {
       "command": "node tools/scripts/publish.mjs lightcast-api {args.ver} {args.tag}",
       "dependsOn": ["build"]
