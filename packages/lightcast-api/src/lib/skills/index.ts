@@ -1,5 +1,6 @@
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
+import { Status, Versions } from "../types";
 
 const baseUrl = "https://emsiservices.com/skills";
 
@@ -9,7 +10,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-service-status}
    */
-  status: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "status")),
+  status: <R = Status>() => client.get<void, R>(urlcat(baseUrl, "status")),
 
   /**
    *
@@ -23,7 +24,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-list-all-versions}
    */
-  versions: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "versions")),
+  versions: <R = Versions>() => client.get<void, R>(urlcat(baseUrl, "versions")),
 
   /**
    *

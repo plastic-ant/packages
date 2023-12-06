@@ -3,6 +3,7 @@ import mappings from "./mappings";
 import taxonomies from "./taxonomies";
 import classifications from "./classifications";
 import urlcat from "urlcat";
+import { Status } from "../types";
 
 const baseUrl = "https://classification.emsicloud.com";
 
@@ -12,7 +13,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-service-status}
    */
-  status: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "status")),
+  status: <R = Status>() => client.get<void, R>(urlcat(baseUrl, "status")),
   taxonomies: taxonomies(client),
   mappings: mappings(client),
   classifications: classifications(client),

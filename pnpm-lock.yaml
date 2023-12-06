@@ -129,15 +129,19 @@ importers:
 
   packages/lightcast-api:
     dependencies:
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-      type-fest:
-        specifier: ^4.8.3
-        version: 4.8.3
       typed-rest-client:
         specifier: ^1.8.11
         version: 1.8.11
+      urlcat:
+        specifier: ^3.1.0
+        version: 3.1.0
+    devDependencies:
+      env-var:
+        specifier: ^7.4.1
+        version: 7.4.1
+      type-fest:
+        specifier: ^4.8.3
+        version: 4.8.3
 
 packages:
 
@@ -9096,7 +9100,6 @@ packages:
   /type-fest@4.8.3:
     resolution: {integrity: sha512-//BaTm14Q/gHBn09xlnKNqfI8t6bmdzx2DXYfPBNofN0WUybCEUDcbCWcTa0oF09lzLjZgPphXAsvRiMK0V6Bw==}
     engines: {node: '>=16'}
-    dev: false
 
   /type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
