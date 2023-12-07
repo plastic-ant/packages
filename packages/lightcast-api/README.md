@@ -36,9 +36,9 @@ branch. Pull requests are welcome.
 
 ## Links
 
-- Project homepage: https://github.com/plastic-ant/lightcast-api
-- Repository: https://github.com/plastic-ant/lightcast-api
-- Issue tracker: https://github.com/plastic-ant/lightcast-api/issues
+- Project homepage: https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api
+- Repository: https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api
+- Issue tracker: https://github.com/plastic-ant/packages/issues
 - Lightcast API Docs: https://docs.lightcast.dev/apis
 
 ## Licensing

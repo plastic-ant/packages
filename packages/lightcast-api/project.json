@@ -5,6 +5,29 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "release": {
+      "dependsOn": ["test", "lint", "build"],
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional",
+        "push": true,
+        "tagPrefix": "${projectName}-",
+        "postTargets": ["npm", "github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "{tag}",
+        "notes": "{notes}"
+      }
+    },
+    "npm": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
     "example": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "skills",
@@ -12,13 +35,6 @@
       "configurations": {
         "skills": { "command": "npx ts-node skills.ts" }
       }
-    },
-    "publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node tools/scripts/publish.mjs lightcast-api {args.ver} {args.tag}"
-      },
-      "dependsOn": ["build"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
