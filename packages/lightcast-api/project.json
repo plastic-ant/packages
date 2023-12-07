@@ -6,12 +6,12 @@
   "tags": [],
   "targets": {
     "release": {
-      "dependsOn": ["test", "lint", "build"],
+      "dependsOn": ["test", "lint"],
       "executor": "@jscutlery/semver:version",
       "options": {
         "preset": "conventional",
         "push": true,
-        "tagPrefix": "${projectName}-",
+        "tagPrefix": "{projectName}-",
         "postTargets": ["npm", "github"]
       }
     },
@@ -25,6 +25,8 @@
     "npm": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
+        "buildTarget": "build",
+        "distFolderPath": "dist/packages/lightcast-api",
         "access": "public"
       }
     },
