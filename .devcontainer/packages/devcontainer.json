@@ -83,6 +83,7 @@
       },
       "extensions": [
         "aaron-bond.better-comments",
+        "firsttris.vscode-jest-runner",
         "christian-kohler.path-intellisense",
         "nrwl.angular-console",
         "dbaeumer.vscode-eslint",

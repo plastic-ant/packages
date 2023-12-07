@@ -25,46 +25,39 @@ export type AuthenticationValues = {
   readonly scope: string;
 };
 
+/**
+ * Simple rest client wrapper with auto refreshing token.
+ */
 export class RestClient extends rm.RestClient {
   private bearerCredentialHandler = new hm.BearerCredentialHandler("");
   private expiresIn: number = 0;
-  private scope: string[] = [];
-
-  get scopes() {
-    return this.scope;
-  }
 
   /**
    *
    * @param userAgent
-   * @param authKeys - Function to fetch {client_id, client_secret, scope, grant_type}
+   * @param authKeys - Function to fetch lightcast access keys
    * @param options
    */
-  constructor(
-    private userAgent: string,
-    private authValues: () => AuthenticationValues,
-    options?: ifm.IRequestOptions
-  ) {
+  constructor(userAgent: string, private authValues: () => AuthenticationValues, options?: ifm.IRequestOptions) {
     super(userAgent, undefined, [], { ...options, keepAlive: true, allowRetries: true, maxRetries: 16 });
     this.client.handlers.push(this.bearerCredentialHandler);
   }
 
+  /**
+   *
+   */
   private async refreshToken() {
-    const now = Date.now();
-    if (now >= this.expiresIn) {
+    if (Date.now() >= this.expiresIn) {
       const params = new URLSearchParams(this.authValues()).toString();
 
-      const response = await new ht.HttpClient(`${this.userAgent}-auth`).post(
-        "https://auth.emsicloud.com/connect/token",
-        params,
-        { "Content-Type": "application/x-www-form-urlencoded" }
-      );
+      const response = await new ht.HttpClient(null).post("https://auth.emsicloud.com/connect/token", params, {
+        "Content-Type": "application/x-www-form-urlencoded",
+      });
 
       const body = await response.readBody();
-      const { expires_in, access_token, scope } = JSON.parse(body) as AuthTokenResponse;
-      this.expiresIn = now + expires_in * 1000;
+      const { expires_in, access_token } = JSON.parse(body) as AuthTokenResponse;
+      this.expiresIn = Date.now() + expires_in * 1000;
       this.bearerCredentialHandler.token = access_token;
-      this.scope = scope.split(" ");
     }
   }
 
@@ -74,9 +67,8 @@ export class RestClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  override async get<Q = unknown, R = unknown, P extends string = string>(resource: P, options?: RequestOptions<Q>) {
-    return this.refreshToken().then(() => super.get<R>(resource, options as rm.IRequestOptions));
-  }
+  override get = <Q = unknown, R = unknown, P extends string = string>(resource: P, options?: RequestOptions<Q>) =>
+    this.refreshToken().then(() => super.get<R>(resource, options as rm.IRequestOptions));
 
   /**
    *
@@ -85,11 +77,9 @@ export class RestClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  async post<Q = unknown, B = unknown, R = unknown, P extends string = string>(
+  post = <Q = unknown, B = unknown, R = unknown, P extends string = string>(
     resource: P,
     body: B,
     options?: RequestOptions<Q>
-  ) {
-    return this.refreshToken().then(() => super.create<R>(resource, body, options as rm.IRequestOptions));
-  }
+  ) => this.refreshToken().then(() => super.create<R>(resource, body, options as rm.IRequestOptions));
 }

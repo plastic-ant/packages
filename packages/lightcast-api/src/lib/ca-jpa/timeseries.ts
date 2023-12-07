@@ -1,4 +1,4 @@
-import { JsonObject } from "type-fest";
+import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
 

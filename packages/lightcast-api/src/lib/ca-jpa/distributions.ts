@@ -1,5 +1,5 @@
 import { RestClient } from "../rest-client";
-import { JsonObject } from "type-fest";
+import type { JsonObject } from "type-fest";
 import urlcat from "urlcat";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/distributions";
