@@ -1,9 +1,13 @@
 {
-  "name": "@pas/lightcast-api",
-  "version": "0.0.1",
+  "name": "@plastic-ant/lightcast-api",
+  "version": "0.1.0",
   "type": "commonjs",
   "license": "MIT",
-  "repository": "https://github.com/plastic-ant/packages/lightcast-api",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plastic-ant/packages/lightcast-api"
+  },
   "author": "Michael Devereux",
   "main": "./src/index.js",
   "keywords": [

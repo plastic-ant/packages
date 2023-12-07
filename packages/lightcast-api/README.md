@@ -1,4 +1,4 @@
-# @pas/lightcast-api
+# @plastic-ant/lightcast-api
 
 > The unofficial Node.js package for the Lightcast API endpoints.
 
@@ -14,13 +14,13 @@ Official API docs are available [here](https://docs.lightcast.dev/apis)
 ## Installing / Getting started
 
 ```shell
-npm install --save @pas/lightcast-api
+npm install --save @plastic-ant/lightcast-api
 ```
 
 or
 
 ```shell
-yarn add @pas/lightcast-api
+yarn add @plastic-ant/lightcast-api
 ```
 
 ## Example

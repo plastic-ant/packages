@@ -14,7 +14,10 @@
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs lightcast-api {args.ver} {args.tag}",
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs lightcast-api {args.ver} {args.tag}"
+      },
       "dependsOn": ["build"]
     },
     "lint": {
