@@ -67,7 +67,7 @@ export class RestClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  override get = <Q = unknown, R = unknown, P extends string = string>(resource: P, options?: RequestOptions<Q>) =>
+  override get = <Q = unknown, R = unknown>(resource: string, options?: RequestOptions<Q>) =>
     this.refreshToken().then(() => super.get<R>(resource, options as rm.IRequestOptions));
 
   /**
@@ -77,9 +77,6 @@ export class RestClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  post = <Q = unknown, B = unknown, R = unknown, P extends string = string>(
-    resource: P,
-    body: B,
-    options?: RequestOptions<Q>
-  ) => this.refreshToken().then(() => super.create<R>(resource, body, options as rm.IRequestOptions));
+  post = <Q = unknown, B = unknown, R = unknown>(resource: string, body: B, options?: RequestOptions<Q>) =>
+    this.refreshToken().then(() => super.create<R>(resource, body, options as rm.IRequestOptions));
 }

@@ -30,12 +30,14 @@
         "access": "public"
       }
     },
-    "example": {
+    "examples": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "skills",
       "options": { "cwd": "packages/lightcast-api/examples" },
       "configurations": {
-        "skills": { "command": "npx ts-node skills.ts" }
+        "raw": { "command": "npx ts-node raw.ts" },
+        "skills": { "command": "npx ts-node skills.ts" },
+        "ca-jpa": { "command": "npx ts-node ca-jpa.ts" }
       }
     },
     "lint": {

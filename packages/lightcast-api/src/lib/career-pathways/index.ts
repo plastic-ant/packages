@@ -22,19 +22,19 @@ export default (client: RestClient) => {
 
     dimensions: {
       /**
-       *
+       * Get a list of supported dimensions.
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-list-all-dimensions}
        */
-      listAll: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "")),
+      facets: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "")),
 
-      dimension: (dimension: "soc" | "onet" | "lotocc" | "lotspecocc") => ({
+      dimension: (facet: "soc" | "onet" | "lotocc" | "lotspecocc") => ({
         /**
          *
          * @returns
          * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension}
          */
-        meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, `dimensions/:dimension`, { dimension })),
+        meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, `dimensions/:dimension`, { dimension: facet })),
 
         /**
          *
@@ -49,7 +49,10 @@ export default (client: RestClient) => {
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
         }) =>
-          client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/feederjobs`, { dimension }), body),
+          client.post<void, typeof body, R>(
+            urlcat(baseUrl, `dimensions/:dimension/feederjobs`, { dimension: facet }),
+            body
+          ),
 
         /**
          *
@@ -64,7 +67,10 @@ export default (client: RestClient) => {
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
         }) =>
-          client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/nextstepjobs`, { dimension }), body),
+          client.post<void, typeof body, R>(
+            urlcat(baseUrl, `dimensions/:dimension/nextstepjobs`, { dimension: facet }),
+            body
+          ),
 
         /**
          *
@@ -77,7 +83,11 @@ export default (client: RestClient) => {
           destinationId: string;
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        }) => client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/skillgap`, { dimension }), body),
+        }) =>
+          client.post<void, typeof body, R>(
+            urlcat(baseUrl, `dimensions/:dimension/skillgap`, { dimension: facet }),
+            body
+          ),
 
         /**
          * Get feeder and next step responses for a list of occupations.
@@ -91,7 +101,8 @@ export default (client: RestClient) => {
           categories?: string[];
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        }) => client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/bulk`, { dimension }), body),
+        }) =>
+          client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/bulk`, { dimension: facet }), body),
       }),
     },
   };
