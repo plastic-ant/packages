@@ -2,6 +2,8 @@
 
 > The unofficial Node.js package for the Lightcast API endpoints.
 
+# PLEASE NOTE THIS PACKAGE CURRENTLY EXPERIMENTAL
+
 This package currently overs the following endpoints:
 
 - Skills
