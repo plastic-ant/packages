@@ -38,13 +38,19 @@ export default (client: RestClient) => ({
    */
   models: (model: string) => ({
     /**
-     * Get lists of DDN skills for an occupation.
+     * Get similarity mappings based on selected model and input taxonomy item.
      * @param body - { id: Occupation code of the dimension }
      * @returns
-     * @see API docs {@link https://docs.lightcast.dev/apis/ddn-api#post-get-ddn}
+     * @see API docs {@link https://docs.lightcast.dev/apis/similarity#post-get-similarity-data-on-a-selected-item}
      */
 
-    similarity: <R = ResponseType>(body: { id: string; region?: { nation: string; level?: string; id?: string } }) =>
-      client.post<void, typeof body, R>(urlcat(baseUrl, "models/:model", { model }), body),
+    similarity: <R = ResponseType>(body: {
+      input: string | string[];
+      filter?: {
+        ids?: string[];
+        minScore?: number;
+      };
+      limit: number;
+    }) => client.post<void, typeof body, R>(urlcat(baseUrl, "models/:model", { model }), body),
   }),
 });
