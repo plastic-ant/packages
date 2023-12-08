@@ -16,11 +16,13 @@ npm install --save @plastic-ant/lightcast-api
 
 ## Currently supported endpoints
 
-- Skills
-- Classification
-- Job Postings (US|CA)
-- Career Pathways
-- Salary Boosting Skills
+- [Skills](https://docs.lightcast.dev/apis/skills)
+- [Classification](https://docs.lightcast.dev/apis/classification)
+- [US Job Postings](https://docs.lightcast.dev/apis/job-postings)
+- [Canadian Job Postings](https://docs.lightcast.dev/apis/canada-job-postings)
+- [Career Pathways](https://docs.lightcast.dev/apis/career-pathways)
+- [Salary Boosting Skills](https://docs.lightcast.dev/apis/salary-boosting-skills)
+- [DDN](https://docs.lightcast.dev/apis/ddn-api)
 
 ## Contributing
 
