@@ -20,6 +20,7 @@ npm install --save @plastic-ant/lightcast-api
 - Classification
 - Job Postings (US|CA)
 - Career Pathways
+- Salary Boosting Skills
 
 ## Contributing
 
