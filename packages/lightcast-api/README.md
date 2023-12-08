@@ -1,33 +1,25 @@
 # @plastic-ant/lightcast-api
 
-> The unofficial Node.js package for the Lightcast API endpoints.
+![maintenance-status](https://img.shields.io/badge/maintenance-experimental-blue.svg)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![Npm package version](https://badgen.net/npm/v/@plastic-ant/lightcast-api)](https://npmjs.com/package/@plastic-ant/lightcast-api)
 
-# PLEASE NOTE THIS PACKAGE CURRENTLY EXPERIMENTAL
+> An unofficial helper package for accessing the Lightcast API endpoints.
 
-This package currently overs the following endpoints:
+Official Lightcast API docs are available [here](https://docs.lightcast.dev/apis)
 
-- Skills
-- Classification
-- Job Postings (US|CA)
-- Career Pathways
-
-Official API docs are available [here](https://docs.lightcast.dev/apis)
-
-## Installing / Getting started
+## Install
 
 ```shell
 npm install --save @plastic-ant/lightcast-api
 ```
 
-or
+## Currently supported endpoints
 
-```shell
-yarn add @plastic-ant/lightcast-api
-```
-
-## Example
-
-## API
+- Skills
+- Classification
+- Job Postings (US|CA)
+- Career Pathways
 
 ## Contributing
 
