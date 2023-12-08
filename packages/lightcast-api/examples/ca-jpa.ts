@@ -1,7 +1,7 @@
 import apis from "./api";
 
 (async () => {
-  const t3 = await apis.cajpa.distributions.facets();
+  const t3 = await apis.cajpa.distributions.listAllDimensions();
   console.log(JSON.stringify(t3.result, null, " "));
 
   const t2 = await apis.cajpa.distributions.byFacet("salary", {

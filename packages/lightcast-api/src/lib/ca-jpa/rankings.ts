@@ -2,6 +2,7 @@ import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
+import type { ResponseType } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/rankings";
 
@@ -13,7 +14,7 @@ const timeseries = (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byFacet: <R = JsonObject>(facet: string, body: JsonObject, params?: QueryParameters) =>
+  byFacet: <R = ResponseType>(facet: string, body: JsonObject, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet/timeseries", { facet }), body, {
       queryParameters: { params },
     }),
@@ -32,7 +33,7 @@ export default (client: RestClient) => ({
    * Get a list of current available ranking facets.
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#get-rankings}
    */
-  facets: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, "")),
+  listAllFacets: <R = ResponseType<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
 
   /**
    * Group and rank postings by {facet}.
@@ -41,7 +42,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-rankings-rankingfacet-rankings-nestedrankingfacet}
    */
-  byNestedFacet: <R = JsonObject>(facet: string, nestedFacet: string, body: JsonObject, params?: QueryParameters) =>
+  byNestedFacet: <R = ResponseType>(facet: string, nestedFacet: string, body: JsonObject, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(
       urlcat(baseUrl, ":facet/rankings/:nestedFacet", { facet, nestedFacet }),
       body,
@@ -55,7 +56,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-rankings-rankingfacet}
    */
-  byFacet: <R = JsonObject>(facet: string, body: JsonObject, params?: QueryParameters) =>
+  byFacet: <R = ResponseType>(facet: string, body: JsonObject, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet", { facet }), body, {
       queryParameters: { params },
     }),

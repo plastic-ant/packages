@@ -2,6 +2,7 @@ import * as rm from "typed-rest-client/RestClient";
 import * as hm from "typed-rest-client/Handlers";
 import * as ht from "typed-rest-client/HttpClient";
 import * as ifm from "typed-rest-client/Interfaces";
+import type { ResponseType } from "./common-types";
 
 interface RequestQueryParams<Q> extends Omit<ifm.IRequestQueryParams, "params"> {
   readonly params: Q;
@@ -67,7 +68,7 @@ export class RestClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  override get = <Q = unknown, R = unknown>(resource: string, options?: RequestOptions<Q>) =>
+  override get = <Q = unknown, R = ResponseType>(resource: string, options?: RequestOptions<Q>) =>
     this.refreshToken().then(() => super.get<R>(resource, options as rm.IRequestOptions));
 
   /**
@@ -77,6 +78,6 @@ export class RestClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  post = <Q = unknown, B = unknown, R = unknown>(resource: string, body: B, options?: RequestOptions<Q>) =>
+  post = <Q = unknown, B = unknown, R = ResponseType>(resource: string, body: B, options?: RequestOptions<Q>) =>
     this.refreshToken().then(() => super.create<R>(resource, body, options as rm.IRequestOptions));
 }

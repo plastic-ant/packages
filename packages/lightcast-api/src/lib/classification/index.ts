@@ -3,7 +3,7 @@ import mappings from "./mappings";
 import taxonomies from "./taxonomies";
 import classifications from "./classifications";
 import urlcat from "urlcat";
-import type { Status } from "../types";
+import type { Status } from "../common-types";
 
 const baseUrl = "https://classification.emsicloud.com";
 

@@ -1,8 +1,7 @@
-import type { JsonObject } from "type-fest";
 import apis from "./api";
 
 apis
-  .post<JsonObject>(
+  .post(
     "https://emsiservices.com/ca-jpa/rankings/province_name",
     {
       filter: { when: { start: "2019-01", end: "2020-12" }, edulevels_name: ["High school or GED"] },

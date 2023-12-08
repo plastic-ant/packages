@@ -1,6 +1,6 @@
-import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
+import type { ResponseType } from "../common-types";
 
 const baseUrl = "https://classification.emsicloud.com/mappings";
 
@@ -11,7 +11,7 @@ export default (client: RestClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-mappings}
    */
-  names: <R = JsonObject>(params?: { filter?: string }) =>
+  meta: <R = ResponseType>(params?: { filter?: string }) =>
     client.get<typeof params, R>(urlcat(baseUrl, ""), { queryParameters: { params } }),
 
   /**
@@ -21,6 +21,6 @@ export default (client: RestClient) => ({
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#post-map-concepts}
    */
-  concepts: <R = JsonObject>(name: string, body: { ids: string[] }) =>
+  concepts: <R = ResponseType>(name: string, body: { ids: string[] }) =>
     client.post<void, typeof body, R>(urlcat(baseUrl, name), body),
 });
