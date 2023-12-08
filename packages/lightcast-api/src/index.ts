@@ -6,6 +6,7 @@ import skillsAPI from "./lib/skills";
 import careerPathwaysAPI from "./lib/career-pathways";
 import salaryBoostingSkillsAPI from "./lib/salary-boosting-skills";
 import ddnAPI from "./lib/ddn";
+import similarityAPI from "./lib/similarity";
 
 export class LightcastAPIs extends RestClient {
   readonly skills = skillsAPI(this);
@@ -15,4 +16,5 @@ export class LightcastAPIs extends RestClient {
   readonly careerPathways = careerPathwaysAPI(this);
   readonly salaryBoostingSkills = salaryBoostingSkillsAPI(this);
   readonly ddn = ddnAPI(this);
+  readonly similarity = similarityAPI(this);
 }

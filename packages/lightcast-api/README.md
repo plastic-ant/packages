@@ -23,6 +23,7 @@ npm install --save @plastic-ant/lightcast-api
 - [Career Pathways](https://docs.lightcast.dev/apis/career-pathways)
 - [Salary Boosting Skills](https://docs.lightcast.dev/apis/salary-boosting-skills)
 - [DDN](https://docs.lightcast.dev/apis/ddn-api)
+- [Similarity](https://docs.lightcast.dev/apis/similarity)
 
 ## Contributing
 
