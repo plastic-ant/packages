@@ -11,7 +11,7 @@ export default (client: RestClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-all-taxonomies}
    */
-  listAll: <R = unknown>(params?: { tags?: string }) =>
+  listAll: <R = JsonObject>(params?: { tags?: string }) =>
     client.get<typeof params, R>(urlcat(baseUrl, "taxonomies"), {
       queryParameters: { params },
     }),
@@ -21,14 +21,14 @@ export default (client: RestClient) => ({
    * @param facet
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy}
    */
-  meta: <R = unknown>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet", { facet })),
+  meta: <R = JsonObject>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet", { facet })),
 
   /**
    *
    * @param facet
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions}
    */
-  versions: <R = unknown>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
+  versions: <R = JsonObject>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
 
   version: (version: string) => ({
     /**
@@ -37,7 +37,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version}
      */
-    meta: <R = unknown>(facet: string) =>
+    meta: <R = JsonObject>(facet: string) =>
       client.get<void, R>(urlcat(baseUrl, ":facet/versions/:version", { facet, version })),
 
     /**
@@ -47,7 +47,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-concepts}
      */
-    concepts: <R = unknown>(
+    concepts: <R = JsonObject>(
       facet: string,
       params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
     ) =>
@@ -63,7 +63,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-concepts-id}
      */
-    conceptsById: <R = unknown>(
+    conceptsById: <R = JsonObject>(
       facet: string,
       id: string,
       params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
@@ -79,7 +79,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-relations}
      */
-    relations: <R = unknown>(
+    relations: <R = JsonObject>(
       facet: string,
       body: {
         relationType: "child" | "sibling" | "any";

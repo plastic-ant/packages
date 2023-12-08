@@ -1,3 +1,4 @@
+import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
 
@@ -10,7 +11,7 @@ export default (client: RestClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-mappings}
    */
-  names: <R = unknown>(params?: { filter?: string }) =>
+  names: <R = JsonObject>(params?: { filter?: string }) =>
     client.get<typeof params, R>(urlcat(baseUrl, ""), { queryParameters: { params } }),
 
   /**
@@ -20,6 +21,6 @@ export default (client: RestClient) => ({
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#post-map-concepts}
    */
-  concepts: <R = unknown>(name: string, body: { ids: string[] }) =>
+  concepts: <R = JsonObject>(name: string, body: { ids: string[] }) =>
     client.post<void, typeof body, R>(urlcat(baseUrl, name), body),
 });

@@ -1,6 +1,7 @@
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
-import { Status } from "../types";
+import type { Status } from "../types";
+import type { JsonObject } from "type-fest";
 
 const baseUrl = "https://emsiservices.com/career-pathways";
 
@@ -18,7 +19,7 @@ export default (client: RestClient) => {
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-get-service-metadata}
      */
-    meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "meta")),
+    meta: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, "meta")),
 
     dimensions: {
       /**
@@ -26,7 +27,7 @@ export default (client: RestClient) => {
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-list-all-dimensions}
        */
-      facets: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "")),
+      facets: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, "")),
 
       dimension: (facet: "soc" | "onet" | "lotocc" | "lotspecocc") => ({
         /**
@@ -34,7 +35,7 @@ export default (client: RestClient) => {
          * @returns
          * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension}
          */
-        meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, `dimensions/:dimension`, { dimension: facet })),
+        meta: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, `dimensions/:dimension`, { dimension: facet })),
 
         /**
          *
@@ -42,7 +43,7 @@ export default (client: RestClient) => {
          * @returns
          * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-feederjobs}
          */
-        feederJobs: <R = unknown>(body: {
+        feederJobs: <R = JsonObject>(body: {
           id: string;
           responseIds?: string[];
           categories?: string[];
@@ -60,7 +61,7 @@ export default (client: RestClient) => {
          * @returns
          * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-nextstepjobs}
          */
-        nextStepJobs: <R = unknown>(body: {
+        nextStepJobs: <R = JsonObject>(body: {
           id: string;
           responseIds?: string[];
           categories?: string[];
@@ -78,7 +79,7 @@ export default (client: RestClient) => {
          * @returns
          * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-skillgap}
          */
-        skillGap: <R = unknown>(body: {
+        skillGap: <R = JsonObject>(body: {
           sourceId: string;
           destinationId: string;
           limit?: number;
@@ -95,7 +96,7 @@ export default (client: RestClient) => {
          * @returns
          * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-bulk}
          */
-        bulk: <R = unknown>(body: {
+        bulk: <R = JsonObject>(body: {
           id: string;
           responseIds?: string[];
           categories?: string[];

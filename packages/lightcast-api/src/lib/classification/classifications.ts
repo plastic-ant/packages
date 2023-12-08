@@ -1,3 +1,4 @@
+import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
 
@@ -13,7 +14,7 @@ export default (client: RestClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-classifier-releases}
    */
-  classifierReleases: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "")),
+  classifierReleases: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, "")),
 
   release: (release: string) => ({
     /**
@@ -21,7 +22,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release}
      */
-    availableDataSourceTypes: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, release)),
+    availableDataSourceTypes: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, release)),
 
     /**
      * Returns a list of available operations for the given release and source.
@@ -29,7 +30,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release-source}
      */
-    operationsAvailableForSource: <R = unknown>(source: string) =>
+    operationsAvailableForSource: <R = JsonObject>(source: string) =>
       client.get<void, R>(urlcat(baseUrl, `:release/:source`, { release, source })),
 
     /**
@@ -38,7 +39,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release-lot-classify}
      */
-    lotClassify: <R = unknown>(body: { title: string; limit?: number; fields?: string[]; description?: string }) =>
+    lotClassify: <R = JsonObject>(body: { title: string; limit?: number; fields?: string[]; description?: string }) =>
       client.post<void, typeof body, R>(urlcat(baseUrl, `:release/lot/classify`, { release }), body),
 
     /**
@@ -47,7 +48,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release-postings-classify}
      */
-    postingClassify: <R = unknown>(body: {
+    postingClassify: <R = JsonObject>(body: {
       context: {
         company: string;
         title: string;
@@ -61,7 +62,8 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#get-extract-skills-metadata}
      */
-    extractSkillsMeta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, `:release/skills/extract`, { release })),
+    extractSkillsMeta: <R = JsonObject>() =>
+      client.get<void, R>(urlcat(baseUrl, `:release/skills/extract`, { release })),
 
     /**
      * Extract an array of Lightcast Skills from the provided text.
@@ -69,7 +71,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#post-extract-skills}
      */
-    extractSkills: <R = unknown>(body: {
+    extractSkills: <R = JsonObject>(body: {
       text: string;
       confidenceThreshold: number;
       trace: boolean;

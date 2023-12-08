@@ -1,6 +1,7 @@
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
-import { Status, Versions } from "../types";
+import type { Status, Versions } from "../types";
+import type { JsonObject } from "type-fest";
 
 const baseUrl = "https://emsiservices.com/skills";
 
@@ -17,7 +18,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-service-metadata}
    */
-  meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, "meta")),
+  meta: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, "meta")),
 
   /**
    *
@@ -38,7 +39,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-version-metadata}
      */
-    meta: <R = unknown>() => client.get<void, R>(urlcat(baseUrl, `versions/${version}`)),
+    meta: <R = JsonObject>() => client.get<void, R>(urlcat(baseUrl, `versions/${version}`)),
 
     /**
      *
@@ -46,7 +47,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-a-skill-by-id}
      */
-    byId: <R = unknown>(id: string) => client.get<void, R>(urlcat(baseUrl, `versions/${version}/skills/${id}`)),
+    byId: <R = JsonObject>(id: string) => client.get<void, R>(urlcat(baseUrl, `versions/${version}/skills/${id}`)),
 
     /**
      *
@@ -54,7 +55,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-list-all-skills}
      */
-    listAll: <R = unknown>(params?: { q?: string; limit?: number; typeIds?: string; fields?: string }) =>
+    listAll: <R = JsonObject>(params?: { q?: string; limit?: number; typeIds?: string; fields?: string }) =>
       client.get<typeof params, R>(urlcat(baseUrl, `/versions/${version}/skills`), {
         queryParameters: { params },
       }),
@@ -66,7 +67,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#post-list-requested-skills}
      */
-    listRequested: <R = unknown>(body: { ids: string[] }, params?: { typeIds?: string; fields?: string }) =>
+    listRequested: <R = JsonObject>(body: { ids: string[] }, params?: { typeIds?: string; fields?: string }) =>
       client.post<typeof params, typeof body, R>(urlcat(baseUrl, `versions/${version}/skills`), body, {
         queryParameters: { params },
       }),
@@ -78,7 +79,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#post-find-related-skills}
      */
-    findRelated: <R = unknown>(body: { ids: string[]; limit?: number; typeIds?: string; fields?: string }) =>
+    findRelated: <R = JsonObject>(body: { ids: string[]; limit?: number; typeIds?: string; fields?: string }) =>
       client.post<void, typeof body, R>(urlcat(baseUrl, `versions/${version}/skills`), body),
 
     /**
@@ -88,7 +89,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#versions-version-extract}
      */
-    extract: <R = unknown>(
+    extract: <R = JsonObject>(
       body: string | Buffer | { text: string; confidenceThreshold?: number },
       params?: { language?: string; confidenceThreshold?: number }
     ) =>

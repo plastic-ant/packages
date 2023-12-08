@@ -1,11 +1,11 @@
 import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
-import { QueryParameters } from "./common-types";
+import type { QueryParameters } from "./common-types";
 
 const baseUrl = "https://emsiservices.com/jpa/timeseries";
 
-export default <R = unknown>(client: RestClient) =>
+export default (client: RestClient) =>
   /**
    *
    * @param body
@@ -13,5 +13,5 @@ export default <R = unknown>(client: RestClient) =>
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/job-postings#post-timeseries}
    */
-  (body: JsonObject, params?: QueryParameters) =>
+  <R = JsonObject>(body: JsonObject, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(urlcat(baseUrl, ""), body, { queryParameters: { params } });

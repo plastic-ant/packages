@@ -6,7 +6,7 @@ import timeseries from "./timeseries";
 import distributions from "./distributions";
 import taxonomies from "./taxonomies";
 import urlcat from "urlcat";
-import { Status } from "../types";
+import type { Status } from "../types";
 
 export default (client: RestClient) => ({
   status: <R = Status>() => client.get<void, R>(urlcat("https://emsiservices.com/ca-jpa", "status")),
