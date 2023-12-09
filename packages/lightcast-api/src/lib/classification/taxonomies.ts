@@ -1,7 +1,7 @@
 import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
-import type { ResponseType } from "../common-types";
+import type { Response } from "../common-types";
 
 const baseUrl = "https://classification.emsicloud.com/taxonomies";
 
@@ -12,7 +12,7 @@ export default (client: RestClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-all-taxonomies}
    */
-  listAll: <R = ResponseType>(params?: { tags?: string }) =>
+  listAll: <R = Response>(params?: { tags?: string }) =>
     client.get<typeof params, R>(urlcat(baseUrl, "taxonomies"), {
       queryParameters: { params },
     }),
@@ -22,14 +22,14 @@ export default (client: RestClient) => ({
    * @param facet
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy}
    */
-  meta: <R = ResponseType>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet", { facet })),
+  meta: <R = Response>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet", { facet })),
 
   /**
    *
    * @param facet
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions}
    */
-  versions: <R = ResponseType>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
+  versions: <R = Response>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
 
   version: (version: string) => ({
     /**
@@ -38,7 +38,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version}
      */
-    meta: <R = ResponseType>(facet: string) =>
+    meta: <R = Response>(facet: string) =>
       client.get<void, R>(urlcat(baseUrl, ":facet/versions/:version", { facet, version })),
 
     /**
@@ -48,7 +48,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-concepts}
      */
-    concepts: <R = ResponseType>(
+    concepts: <R = Response>(
       facet: string,
       params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
     ) =>
@@ -64,7 +64,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-concepts-id}
      */
-    conceptsById: <R = ResponseType>(
+    conceptsById: <R = Response>(
       facet: string,
       id: string,
       params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
@@ -80,7 +80,7 @@ export default (client: RestClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-relations}
      */
-    relations: <R = ResponseType>(
+    relations: <R = Response>(
       facet: string,
       body: {
         relationType: "child" | "sibling" | "any";

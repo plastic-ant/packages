@@ -1,7 +1,7 @@
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
-import type { ResponseType } from "../common-types";
+import type { Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/jpa/taxonomies";
 
@@ -13,7 +13,7 @@ const lookup = (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-taxonomies-facet-lookup}
    */
-  byFacet: <R = ResponseType>(facet: string, body: { ids: (string | number)[] }, params?: QueryParameters) =>
+  byFacet: <R = Response>(facet: string, body: { ids: (string | number)[] }, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet/lookup", { facet }), body, {
       queryParameters: { params },
     }),
@@ -29,7 +29,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#get-taxonomies-facet}
    */
-  search: <R = ResponseType>(
+  search: <R = Response>(
     facet: string,
     params?: { q?: string; autocomplete?: boolean; limit?: number } & QueryParameters
   ) => client.get<typeof params, R>(urlcat(baseUrl, facet), { queryParameters: { params } }),
@@ -38,5 +38,5 @@ export default (client: RestClient) => ({
    * Get a list of current available taxonomy facets.
    * @see API docs {@link https://docs.lightcast.dev/apis/job-postings#get-taxonomies}
    */
-  listAllFacets: <R = ResponseType<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
+  listAllFacets: <R = Response<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
 });

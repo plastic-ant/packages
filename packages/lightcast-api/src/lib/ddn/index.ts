@@ -1,6 +1,6 @@
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
-import type { Status, ResponseType } from "../common-types";
+import type { Status, Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/ddn";
 
@@ -10,14 +10,14 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/ddn-api#get-get-service-status}
    */
-  status: <R = Status>() => client.get<void, R>(urlcat(baseUrl, "status")),
+  status: () => client.get<void, Response<Status>>(urlcat(baseUrl, "status")),
 
   /**
    * Get service metadata, including model taxonomy and dimension information along with attribution text.
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/ddn-api#get-get-service-metadata}
    */
-  meta: <R = ResponseType>() => client.get<void, R>(urlcat(baseUrl, "status")),
+  meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "status")),
 
   /**
    * Get a list of supported dimensions.
@@ -25,7 +25,7 @@ export default (client: RestClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/ddn-api#get-list-all-dimensions}
    */
-  listAllDimensions: <R = ResponseType<string[]>>(params?: { tags?: string }) =>
+  listAllDimensions: <R = Response<string[]>>(params?: { tags?: string }) =>
     client.get<typeof params, R>(urlcat(baseUrl, "dimensions"), {
       queryParameters: { params },
     }),
@@ -42,7 +42,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/ddn-api#get-get-dimension-metadata}
      */
-    meta: <R = ResponseType>() => client.get<void, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension })),
+    meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension })),
 
     /**
      * Get lists of DDN skills for an occupation.
@@ -51,7 +51,7 @@ export default (client: RestClient) => ({
      * @see API docs {@link https://docs.lightcast.dev/apis/ddn-api#post-get-ddn}
      */
 
-    ddn: <R = ResponseType>(body: { id: string; region?: { nation: string; level?: string; id?: string } }) =>
+    ddn: <R = Response>(body: { id: string; region?: { nation: string; level?: string; id?: string } }) =>
       client.post<void, typeof body, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension }), body),
   }),
 });

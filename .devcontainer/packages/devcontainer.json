@@ -1,8 +1,8 @@
 {
-  "name": "🐋@pas/packages",
+  "name": "🐋@plastic-ant/packages",
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "repo",
-  "workspaceFolder": "/pas-packages",
+  "workspaceFolder": "/packages",
   "remoteUser": "node",
   "initializeCommand": ".devcontainer/init-command.sh .devcontainer/packages",
   "postStartCommand": ".devcontainer/packages/post-start-command.sh",

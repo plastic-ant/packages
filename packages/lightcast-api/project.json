@@ -33,7 +33,9 @@
     "examples": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "skills",
-      "options": { "cwd": "packages/lightcast-api/examples" },
+      "options": {
+        "cwd": "packages/lightcast-api/examples"
+      },
       "configurations": {
         "salary-boosting-skills": { "command": "npx ts-node salary-boosting-skills.ts" },
         "raw": { "command": "npx ts-node raw.ts" },
@@ -43,10 +45,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/lightcast-api/**/*.ts", "packages/lightcast-api/package.json"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",

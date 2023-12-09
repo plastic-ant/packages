@@ -2,7 +2,7 @@ import type { JsonObject } from "type-fest";
 import { RestClient } from "../rest-client";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
-import type { ResponseType } from "../common-types";
+import type { Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/jpa/rankings";
 
@@ -14,7 +14,7 @@ const timeseries = (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byFacet: <R = ResponseType>(facet: string, body: JsonObject, params?: QueryParameters) =>
+  byFacet: <R = Response>(facet: string, body: JsonObject, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet/timeseries", { facet }), body, {
       queryParameters: { params },
     }),
@@ -30,7 +30,7 @@ export default (client: RestClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-distributions-distributionfacet}
      */
-    byFacet: <R = ResponseType>(facet: string, body: JsonObject, params?: QueryParameters) =>
+    byFacet: <R = Response>(facet: string, body: JsonObject, params?: QueryParameters) =>
       client.post<typeof params, typeof body, R>(
         urlcat(baseUrl, ":facet/distributions/:distributionFacet", { facet, distributionFacet }),
         body,
@@ -44,7 +44,7 @@ export default (client: RestClient) => ({
    * Get a list of current available ranking facets.
    * @see API docs {@link https://docs.lightcast.dev/apis/job-postings#get-rankings}
    */
-  listAllFacets: <R = ResponseType<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
+  listAllFacets: <R = Response<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
 
   /**
    * Group and rank postings by {facet}.
@@ -53,7 +53,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byNestedFacet: <R = ResponseType>(facet: string, nestedFacet: string, body: JsonObject, params?: QueryParameters) =>
+  byNestedFacet: <R = Response>(facet: string, nestedFacet: string, body: JsonObject, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(
       urlcat(baseUrl, ":facet/rankings/:nestedFacet", { facet, nestedFacet }),
       body,
@@ -67,7 +67,7 @@ export default (client: RestClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byFacet: <R = ResponseType>(facet: string, body: JsonObject, params?: QueryParameters) =>
+  byFacet: <R = Response>(facet: string, body: JsonObject, params?: QueryParameters) =>
     client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet", { facet }), body, {
       queryParameters: { params },
     }),
