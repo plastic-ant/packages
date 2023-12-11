@@ -10,9 +10,8 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "preset": "conventional",
-        "push": true,
         "tagPrefix": "{projectName}-",
-        "postTargets": ["lightcast-api:npm", "lightcast-api:github"]
+        "postTargets": ["npm", "github"]
       }
     },
     "github": {

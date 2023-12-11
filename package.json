@@ -5,14 +5,16 @@
     "prepare": "husky install"
   },
   "private": true,
-  "dependencies": {
+  "devDependencies": {
+    "@aws-cdk/cli-lib-alpha": "2.114.1-alpha.0",
+    "aws-cdk": "^2.114.1",
+    "aws-cdk-lib": "^2.114.1",
+    "change-case": "^5.3.0",
     "lodash": "^4.17.21",
     "tslib": "^2.3.0",
     "type-fest": "^4.8.3",
     "typed-rest-client": "^1.8.11",
-    "urlcat": "^3.1.0"
-  },
-  "devDependencies": {
+    "urlcat": "^3.1.0",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@jscutlery/semver": "^4.1.0",
@@ -39,6 +41,7 @@
     "jest": "^29.4.1",
     "jest-environment-node": "^29.4.1",
     "jsdom": "~22.1.0",
+    "json-schema-to-typescript": "^13.1.1",
     "ngx-deploy-npm": "^7.1.0",
     "nock": "^13.4.0",
     "nx": "17.2.0",
@@ -53,4 +56,3 @@
     "yaml-eslint-parser": "^1.2.2"
   }
 }
-

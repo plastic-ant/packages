@@ -1,0 +1,232 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "DeployExecutorOptions",
+  "description": "",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "definitions": {
+    "RequireApproval": {
+      "description": "In what scenarios should the CLI ask for approval",
+      "enum": ["any-change", "broadening", "never"],
+      "type": "string"
+    },
+    "StackActivityProgress": {
+      "description": "Supported display modes for stack deployment activity",
+      "enum": ["bar", "events"],
+      "type": "string"
+    }
+  },
+  "properties": {
+    "tsConfig": {
+      "type": "string",
+      "description": "The path to tsconfig file.",
+      "x-completion-type": "file",
+      "x-completion-glob": "tsconfig.*.json",
+      "x-priority": "important"
+    },
+    "app": {
+      "type": "string",
+      "description": "The path to the entry file, relative to project.",
+      "alias": "entryFile",
+      "x-completion-type": "file",
+      "x-completion-glob": "**/*@(.js|.ts)",
+      "x-priority": "important"
+    },
+    "postTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assetMetadata": {
+      "default": true,
+      "description": "Include \"aws:asset:*\" CloudFormation metadata for resources that use assets",
+      "type": "boolean"
+    },
+    "assetParallelism": {
+      "default": false,
+      "description": "Whether to build/publish assets in parallel.",
+      "type": "boolean"
+    },
+    "assetPrebuild": {
+      "default": true,
+      "description": "Whether to build all assets before deploying the first stack (useful for failing Docker builds)",
+      "type": "boolean"
+    },
+    "caBundlePath": {
+      "description": "Path to CA certificate to use when validating HTTPS\nrequests.",
+      "type": "string"
+    },
+    "changeSetName": {
+      "description": "Optional name to use for the CloudFormation change set.\nIf not provided, a name will be generated automatically.",
+      "type": "string"
+    },
+    "ci": {
+      "description": "Whether we are on a CI system",
+      "type": "boolean"
+    },
+    "color": {
+      "description": "Show colors and other style from console output",
+      "type": "boolean"
+    },
+    "concurrency": {
+      "default": 1,
+      "description": "Maximum number of simultaneous deployments (dependency permitting) to execute.",
+      "type": "number"
+    },
+    "context": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional context",
+      "type": "object"
+    },
+    "debug": {
+      "default": false,
+      "description": "enable emission of additional debugging information, such as creation stack\ntraces of tokens",
+      "type": "boolean"
+    },
+    "ec2Creds": {
+      "description": "Force trying to fetch EC2 instance credentials",
+      "type": "boolean"
+    },
+    "exclusively": {
+      "default": false,
+      "description": "Only perform action on the given stack",
+      "type": "boolean"
+    },
+    "execute": {
+      "default": true,
+      "description": "Whether to execute the ChangeSet\nNot providing `execute` parameter will result in execution of ChangeSet",
+      "type": "boolean"
+    },
+    "force": {
+      "default": false,
+      "description": "Always deploy, even if templates are identical.",
+      "type": "boolean"
+    },
+    "ignoreErrors": {
+      "default": false,
+      "description": "Ignores synthesis errors, which will likely produce an invalid output",
+      "type": "boolean"
+    },
+    "json": {
+      "default": false,
+      "description": "Use JSON output instead of YAML when templates are printed\nto STDOUT",
+      "type": "boolean"
+    },
+    "lookups": {
+      "default": true,
+      "description": "Perform context lookups.\n\nSynthesis fails if this is disabled and context lookups need\nto be performed",
+      "type": "boolean"
+    },
+    "notices": {
+      "default": true,
+      "description": "Show relevant notices",
+      "type": "boolean"
+    },
+    "notificationArns": {
+      "description": "ARNs of SNS topics that CloudFormation will notify with stack related events",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "outputsFile": {
+      "description": "Path to file where stack outputs will be written after a successful deploy as JSON",
+      "type": "string"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional parameters for CloudFormation at deploy time",
+      "type": "object"
+    },
+    "pathMetadata": {
+      "default": true,
+      "description": "Include \"aws:cdk:path\" CloudFormation metadata for each resource",
+      "type": "boolean"
+    },
+    "profile": {
+      "description": "Use the indicated AWS profile as the default environment",
+      "type": "string"
+    },
+    "progress": {
+      "$ref": "#/definitions/StackActivityProgress",
+      "default": "events",
+      "description": "Display mode for stack activity events\n\nThe default in the CLI is StackActivityProgress.BAR. But since this is an API\nit makes more sense to set the default to StackActivityProgress.EVENTS"
+    },
+    "proxy": {
+      "description": "Use the indicated proxy. Will read from\nHTTPS_PROXY environment if specified",
+      "type": "string"
+    },
+    "requireApproval": {
+      "$ref": "#/definitions/RequireApproval",
+      "default": "never",
+      "description": "What kind of security changes require approval"
+    },
+    "reuseAssets": {
+      "description": "Reuse the assets with the given asset IDs",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "roleArn": {
+      "description": "Role to pass to CloudFormation for deployment",
+      "type": "string"
+    },
+    "rollback": {
+      "default": true,
+      "description": "Rollback failed deployments",
+      "type": "boolean"
+    },
+    "stacks": {
+      "description": "List of stacks to deploy",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "staging": {
+      "default": false,
+      "description": "Copy assets to the output directory\n\nNeeded for local debugging the source files with SAM CLI",
+      "type": "boolean"
+    },
+    "strict": {
+      "default": false,
+      "description": "Do not construct stacks with warnings",
+      "type": "boolean"
+    },
+    "toolkitStackName": {
+      "description": "Name of the toolkit stack to use/deploy",
+      "type": "string"
+    },
+    "trace": {
+      "default": false,
+      "description": "Print trace for stack warnings",
+      "type": "boolean"
+    },
+    "usePreviousParameters": {
+      "default": true,
+      "description": "Use previous values for unspecified parameters\n\nIf not set, all parameters must be specified for every deployment.",
+      "type": "boolean"
+    },
+    "verbose": {
+      "default": false,
+      "description": "show debug logs",
+      "type": "boolean"
+    },
+    "versionReporting": {
+      "default": true,
+      "description": "Include \"AWS::CDK::Metadata\" resource in synthesized templates",
+      "type": "boolean"
+    },
+    "output": {
+      "description": "emits the synthesized cloud assembly into a directory (default: cdk.out)",
+      "type": "string"
+    }
+  }
+}
