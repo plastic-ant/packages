@@ -1,12 +1,13 @@
 {
   "name": "@plastic-ant/lightcast-api",
+  "description": "An unofficial helper package for accessing the Lightcast API endpoints",
   "version": "0.0.1-alpha.5",
   "type": "commonjs",
   "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/plastic-ant/packages/lightcast-api"
+    "url": "https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api"
   },
   "author": "Michael Devereux",
   "main": "./src/index.js",
