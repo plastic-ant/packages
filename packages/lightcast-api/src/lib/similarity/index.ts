@@ -26,9 +26,7 @@ export default (client: RestClient) => ({
    * @set API docs {@link https://docs.lightcast.dev/apis/similarity#get-get-available-models}
    */
   listAllModels: <R = Response<string[]>>(params?: { tags?: string }) =>
-    client.get<typeof params, R>(urlcat(baseUrl, "dimensions"), {
-      queryParameters: { params },
-    }),
+    client.get<typeof params, R>(urlcat(baseUrl, "dimensions"), { queryParameters: { params } }),
 
   /**
    *
@@ -46,10 +44,7 @@ export default (client: RestClient) => ({
 
     similarity: <R = Response>(body: {
       input: string | string[];
-      filter?: {
-        ids?: string[];
-        minScore?: number;
-      };
+      filter?: { ids?: string[]; minScore?: number };
       limit: number;
     }) => client.post<void, typeof body, R>(urlcat(baseUrl, "models/:model", { model }), body),
   }),

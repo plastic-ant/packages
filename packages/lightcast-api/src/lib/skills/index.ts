@@ -8,6 +8,7 @@ const baseUrl = "https://emsiservices.com/skills";
  * @see API docs {@link https://docs.lightcast.dev/apis/skills}
  */
 export default (client: RestClient) => ({
+  baseUrl,
   /**
    * Health check endpoint
    * @returns
@@ -63,7 +64,7 @@ export default (client: RestClient) => ({
       }),
 
     /**
-     *
+     * Returns a list of requested skills in {version}
      * @param params
      * @param body
      * @returns

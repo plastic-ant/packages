@@ -12,7 +12,7 @@
         "preset": "conventional",
         "push": true,
         "tagPrefix": "{projectName}-",
-        "postTargets": ["npm", "github"]
+        "postTargets": ["lightcast-api:npm", "lightcast-api:github"]
       }
     },
     "github": {
