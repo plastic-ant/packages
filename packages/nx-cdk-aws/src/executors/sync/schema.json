@@ -1,9 +1,8 @@
 {
-  "$schema": "http://json-schema.org/schema",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "SynthExecutorOptions",
   "description": "",
   "type": "object",
-  "required": [],
   "additionalProperties": false,
   "properties": {
     "build": {
@@ -13,16 +12,31 @@
       "description": "This package is highly experimental",
       "type": "boolean"
     },
-    "tsConfig": {
-      "type": "string",
-      "description": "The path to tsconfig file.",
-      "x-completion-type": "file",
-      "x-completion-glob": "tsconfig.*.json"
-    },
     "app": {
-      "type": "string",
-      "description": "The path to the entry file, relative to project.",
-      "x-completion-type": "file"
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "Using tsEntryFile and/or tsConfig will use ts-node to execute app code",
+          "properties": {
+            "tsEntryFile": {
+              "type": "string",
+              "description": "The path to the typescript entry file, relative to project.",
+              "x-completion-type": "file"
+            },
+            "tsConfig": {
+              "type": "string",
+              "description": "The path to tsconfig file.",
+              "x-completion-type": "file",
+              "x-completion-glob": "tsconfig.*.json"
+            }
+          }
+        },
+        {
+          "type": "string",
+          "description": "The path to the entry file, relative to project.",
+          "x-completion-type": "file"
+        }
+      ]
     },
     "postTargets": {
       "type": "array",
@@ -116,11 +130,18 @@
       "type": "string"
     },
     "stacks": {
-      "description": "List of stacks to deploy",
-      "items": {
-        "type": "string"
-      },
-      "type": "array"
+      "oneOf": [
+        {
+          "enum": ["all"]
+        },
+        {
+          "description": "List of stacks to deploy",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
     },
     "staging": {
       "default": false,

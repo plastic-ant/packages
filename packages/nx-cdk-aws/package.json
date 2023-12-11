@@ -15,6 +15,14 @@
   "generators": "./generators.json",
   "keywords": [
     "aws",
-    "cdk"
-  ]
+    "cdk",
+    "nx",
+    "plugin"
+  ],
+  "dependencies": {
+    "@nx/devkit": "17.2.0",
+    "change-case": "^5.3.0",
+    "nx": "17.2.0",
+    "tslib": "^2.3.0"
+  }
 }

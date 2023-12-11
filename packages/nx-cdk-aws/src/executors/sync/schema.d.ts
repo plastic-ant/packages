@@ -11,14 +11,19 @@ export interface SynthExecutorOptions {
    * This package is highly experimental
    */
   useCliLib?: boolean;
-  /**
-   * The path to tsconfig file.
-   */
-  tsConfig?: string;
-  /**
-   * The path to the entry file, relative to project.
-   */
-  app?: string;
+  app?:
+    | {
+        /**
+         * The path to the typescript entry file, relative to project.
+         */
+        tsEntryFile?: string;
+        /**
+         * The path to tsconfig file.
+         */
+        tsConfig?: string;
+        [k: string]: unknown;
+      }
+    | string;
   postTargets?: string[];
   /**
    * Include "aws:asset:*" CloudFormation metadata for resources that use assets
@@ -98,10 +103,7 @@ export interface SynthExecutorOptions {
    * Role to pass to CloudFormation for deployment
    */
   roleArn?: string;
-  /**
-   * List of stacks to deploy
-   */
-  stacks?: string[];
+  stacks?: "all" | string[];
   /**
    * Copy assets to the output directory
    *

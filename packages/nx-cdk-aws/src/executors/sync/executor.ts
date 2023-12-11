@@ -8,20 +8,31 @@ export default async function (options: SynthExecutorOptions, context: ExecutorC
   if (context.workspace && context.projectName) {
     const projectDir = context.workspace.projects[context.projectName].root;
 
-    if (options.app) {
-      const project = options.tsConfig ? `--project ${options.tsConfig}` : "";
+    if (typeof options.app !== "string") {
+      const project = options.app.tsConfig ? `--project ${options.app.tsConfig}` : "";
       const reg = "node_modules/tsconfig-paths/register";
-      options.app = `"ts-node ${project} --prefer-ts-exts -r ${reg} ${options.app}"`;
+      options.app = `"ts-node ${project} --prefer-ts-exts -r ${reg} ${options.app.tsEntryFile}"`;
     }
 
     const newOptions: Record<string, string | number | boolean | symbol> = {};
+    let stackOption = "--all";
+    const contextOption = [""];
 
-    Object.keys(options)
-      .filter((key) => key !== "postTargets" && key !== "tsConfig" && key !== "envFile")
-      .forEach((key) => {
+    Object.keys(options).forEach((k) => {
+      const key = k as keyof typeof options;
+      if (key === "stacks") {
+        if (Array.isArray(options["stacks"])) {
+          stackOption = options.stacks.join(" ");
+        }
+      } else if (key === "context") {
+        Object.entries((k, v) => {
+          contextOption.push(`--context ${k}=${v}`);
+        });
+      } else if (key !== "postTargets" && key !== "envFile") {
         const newKey = kebabCase(key);
         Object.assign(newOptions, { [newKey]: options[key] });
-      });
+      }
+    });
 
     const optionsString = Object.entries(newOptions)
       .map(([k, v]) => `--${k}=${v.toString()}`)
@@ -32,7 +43,7 @@ export default async function (options: SynthExecutorOptions, context: ExecutorC
         envFile: options.envFile,
         cwd: path.join(context.root, projectDir),
         color: true,
-        command: `cdk synth ${optionsString}`,
+        command: `cdk synth ${stackOption} ${optionsString} ${contextOption.join(" ")}`,
         __unparsed__: [],
       },
       context
@@ -40,7 +51,7 @@ export default async function (options: SynthExecutorOptions, context: ExecutorC
 
     if (result.success && options.postTargets) {
       for (const target of options.postTargets) {
-        const targetElements = target.split(":");
+        const targetElements = target.includes(":") ? target.split(":") : [context.projectName, target];
 
         for await (const s of await runExecutor(
           {
