@@ -1,0 +1,73 @@
+{
+  "name": "nx-cdk-terraform",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/nx-cdk-terraform/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nx-cdk-terraform",
+        "main": "packages/nx-cdk-terraform/src/index.ts",
+        "tsConfig": "packages/nx-cdk-terraform/tsconfig.lib.json",
+        "assets": [
+          "packages/nx-cdk-terraform/*.md",
+          {
+            "input": "./packages/nx-cdk-terraform/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/nx-cdk-terraform/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/nx-cdk-terraform",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/nx-cdk-terraform",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ],
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "generate-schemas": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "json2ts -i packages/nx-cdk-terraform/src/executors/sync/schema.json -o packages/cdk-aws/src/executors/sync/schema.d.ts",
+          "json2ts -i packages/nx-cdk-terraform/src/executors/bootstrap/schema.json -o packages/cdk-aws/src/executors/bootstrap/schema.d.ts",
+          "json2ts -i packages/nx-cdk-terraform/src/executors/deploy/schema.json -o packages/cdk-aws/src/executors/deploy/schema.d.ts"
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nx-cdk-terraform/**/*.ts", "packages/nx-cdk-terraform/package.json"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/nx-cdk-terraform/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
