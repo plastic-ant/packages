@@ -14,7 +14,12 @@
   "keywords": [
     "emsi",
     "lightcast",
-    "api"
+    "api",
+    "skills",
+    "job-postings",
+    "classification",
+    "careers",
+    "occupations"
   ],
   "dependencies": {
     "type-fest": "^4.8.3",

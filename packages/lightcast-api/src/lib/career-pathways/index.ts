@@ -1,10 +1,10 @@
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response, Status } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/career-pathways";
 
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    *
    * @returns

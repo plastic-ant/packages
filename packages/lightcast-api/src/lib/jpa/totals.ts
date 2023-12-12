@@ -1,12 +1,12 @@
 import type { JsonObject } from "type-fest";
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/jpa/totals";
 
-export default (client: RestClient) =>
+export default (client: LightcastAPIClient) =>
   /**
    * Get summary metrics on all postings matching the filters.
    * @param body

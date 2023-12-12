@@ -1,11 +1,11 @@
 import type { JsonObject } from "type-fest";
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response } from "../common-types";
 
 const baseUrl = "https://classification.emsicloud.com/taxonomies";
 
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    * A list of available taxonomies
    * @param params
@@ -29,7 +29,8 @@ export default (client: RestClient) => ({
    * @param facet
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions}
    */
-  versions: <R = Response>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
+  versions: <R = Response<string[]>>(facet: string) =>
+    client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
 
   version: (version: string) => ({
     /**

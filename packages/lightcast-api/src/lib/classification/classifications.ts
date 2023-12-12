@@ -1,4 +1,4 @@
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response } from "../common-types";
 
@@ -7,7 +7,7 @@ const baseUrl = "https://classification.emsicloud.com/classifications";
 /**
  * @see API docs {@link https://docs.lightcast.dev/apis/classification#overview}
  */
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    * Returns a list of available classifier releases with meta data listing the supported taxonomies and outputs.
    * @param params

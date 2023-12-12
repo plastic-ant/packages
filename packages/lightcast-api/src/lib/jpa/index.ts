@@ -1,4 +1,4 @@
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import totals from "./totals";
 import postings from "./postings";
 import rankings from "./rankings";
@@ -8,7 +8,7 @@ import taxonomies from "./taxonomies";
 import urlcat from "urlcat";
 import type { Response, Status } from "../common-types";
 
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   status: () => client.get<void, Response<Status>>(urlcat("https://emsiservices.com/jpa", "status")),
   meta: <R = Response>() => client.get<void, R>(urlcat("https://emsiservices.com/jpa", "meta")),
   postings: postings(client),

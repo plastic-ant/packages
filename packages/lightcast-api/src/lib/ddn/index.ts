@@ -1,10 +1,10 @@
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Status, Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/ddn";
 
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    * Get the health of the service. Be sure to check the healthy attribute of the response.
    * @returns

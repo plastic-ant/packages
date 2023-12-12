@@ -1,11 +1,11 @@
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/taxonomies";
 
-const lookup = (client: RestClient) => ({
+const lookup = (client: LightcastAPIClient) => ({
   /**
    * Look up taxonomy items by IDs.
    * @param body
@@ -22,7 +22,7 @@ const lookup = (client: RestClient) => ({
 /**
  * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#taxonomies}
  */
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   lookup: lookup(client),
 
   /**

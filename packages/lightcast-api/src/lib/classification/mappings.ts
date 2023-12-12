@@ -1,10 +1,10 @@
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response } from "../common-types";
 
 const baseUrl = "https://classification.emsicloud.com/mappings";
 
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    * Mapping meta data includes information about source and destination taxonomies.
    * @param params

@@ -1,12 +1,12 @@
 import type { JsonObject } from "type-fest";
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/postings";
 
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    * Get a single posting by its id.
    * @param id

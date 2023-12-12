@@ -1,12 +1,12 @@
 import type { JsonObject } from "type-fest";
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/ca-jpa/rankings";
 
-const timeseries = (client: RestClient) => ({
+const timeseries = (client: LightcastAPIClient) => ({
   /**
    * Group and rank postings by {facet} with a monthly or daily timeseries for each ranked group. Use YYYY-MM date format in the timeseries time-frame filter, timeseries.when, to get monthly summary of each ranked group, or use YYYY-MM-DD date format for daily summary.
    * @param body
@@ -23,7 +23,7 @@ const timeseries = (client: RestClient) => ({
 /**
  * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#rankings}
  */
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-timeseries}
    */

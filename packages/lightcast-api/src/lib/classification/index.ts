@@ -1,4 +1,4 @@
-import { RestClient } from "../rest-client";
+import { LightcastAPIClient } from "../..";
 import mappings from "./mappings";
 import taxonomies from "./taxonomies";
 import classifications from "./classifications";
@@ -7,7 +7,7 @@ import type { Status, Response } from "../common-types";
 
 const baseUrl = "https://classification.emsicloud.com";
 
-export default (client: RestClient) => ({
+export default (client: LightcastAPIClient) => ({
   /**
    *
    * @returns
