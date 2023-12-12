@@ -21,7 +21,14 @@
         "notes": "{notes}"
       }
     },
+    "npm-login": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm login"
+      }
+    },
     "npm": {
+      "dependsOn": ["npm-login"],
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "buildTarget": "build",
