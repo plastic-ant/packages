@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1-alpha.10](///compare/lightcast-api-0.0.1-alpha.9...lightcast-api-0.0.1-alpha.10) (2023-12-14)
+
+
+### Features
+
+* added basic optional caching interface 6bd4d43
+
 ## [0.0.1-alpha.9](///compare/lightcast-api-0.0.1-alpha.8...lightcast-api-0.0.1-alpha.9) (2023-12-14)
 
 ## [0.0.1-alpha.8](///compare/lightcast-api-0.0.1-alpha.7...lightcast-api-0.0.1-alpha.8) (2023-12-12)
