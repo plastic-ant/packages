@@ -1,4 +1,4 @@
-import { LightcastAPIClient } from "../..";
+import { ICacheInterface, LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response } from "../common-types";
 
@@ -11,8 +11,8 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-mappings}
    */
-  meta: <R = Response>(params?: { filter?: string }) =>
-    client.get<typeof params, R>(urlcat(baseUrl, ""), { queryParameters: { params } }),
+  meta: <R = Response>(params?: { filter?: string }, cache?: ICacheInterface<string>) =>
+    client.get<typeof params, R>(urlcat(baseUrl, ""), { cache, queryParameters: { params } }),
 
   /**
    * If there is no mapping for a concept (mappings may not include all source taxonomy concepts) or if the ID doesn't exist in the source taxonomy an empty set will be returned.
@@ -21,6 +21,6 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#post-map-concepts}
    */
-  concepts: <R = Response>(name: string, body: { ids: string[] }) =>
-    client.post<void, typeof body, R>(urlcat(baseUrl, name), body),
+  concepts: <R = Response>(name: string, body: { ids: string[] }, cache?: ICacheInterface<string>) =>
+    client.post<void, typeof body, R>(urlcat(baseUrl, name), body, { cache }),
 });

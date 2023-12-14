@@ -13,14 +13,24 @@ import ddnAPI from "./lib/ddn";
 import similarityAPI from "./lib/similarity";
 import occupations from "./lib/utils/occupations";
 
-import type { Response } from "./lib/common-types";
+import hash from "object-hash";
+import { JsonValue } from "type-fest";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ICacheInterface<KeyType = string, ValueType = any> = {
+  has: (key: KeyType) => Promise<boolean> | boolean;
+  get: (key: KeyType) => Promise<rm.IRestResponse<ValueType> | undefined> | rm.IRestResponse<ValueType> | undefined;
+  set: (key: KeyType, value: rm.IRestResponse<ValueType>) => Promise<unknown> | unknown;
+  del: (key: KeyType) => unknown;
+};
 
 interface RequestQueryParams<Q> extends Omit<ifm.IRequestQueryParams, "params"> {
   readonly params: Q;
 }
 
-export interface RequestOptions<Q> extends Omit<rm.IRequestOptions, "queryParameters"> {
+export interface RequestOptions<Q, T = JsonValue> extends Omit<rm.IRequestOptions, "queryParameters"> {
   readonly queryParameters?: RequestQueryParams<Q>;
+  readonly cache?: ICacheInterface<string, T>;
 }
 
 /**
@@ -99,8 +109,20 @@ export class LightcastAPIClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  override get = <Q = unknown, R = Response>(resource: string, options?: RequestOptions<Q>) =>
-    this.refreshToken().then(() => super.get<R>(resource, options as rm.IRequestOptions));
+  override async get<Q = unknown, R = JsonValue>(resource: string, options?: RequestOptions<Q, R>) {
+    await this.refreshToken();
+
+    const key = hash({ resource, ...options?.queryParameters });
+
+    if (options?.cache && (await options?.cache.has(key))) {
+      return (await options?.cache.get(key))!;
+    }
+
+    return super.get<R>(resource, options as rm.IRequestOptions).then((r) => {
+      options?.cache?.set(key, r);
+      return r;
+    });
+  }
 
   /**
    *
@@ -109,6 +131,18 @@ export class LightcastAPIClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  post = <Q = unknown, B = unknown, R = Response>(resource: string, body: B, options?: RequestOptions<Q>) =>
-    this.refreshToken().then(() => super.create<R>(resource, body, options as rm.IRequestOptions));
+  async post<Q = unknown, B = unknown, R = JsonValue>(resource: string, body: B, options?: RequestOptions<Q, R>) {
+    await this.refreshToken();
+
+    const key = hash({ resource, body, ...options?.queryParameters });
+
+    if (options?.cache && (await options?.cache.has(key))) {
+      return (await options?.cache.get(key))!;
+    }
+
+    return super.create<R>(resource, body, options as rm.IRequestOptions).then((r) => {
+      options?.cache?.set(key, r);
+      return r;
+    });
+  }
 }

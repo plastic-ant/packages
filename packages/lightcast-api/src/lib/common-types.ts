@@ -1,4 +1,10 @@
-import type { JsonObject } from "type-fest";
+import { JsonValue } from "type-fest";
 
-export type Response<D = JsonObject> = { data: D };
-export type Status = { healthy: boolean; message: string };
+export interface Status {
+  healthy: boolean;
+  message: string;
+}
+
+export type Response<R = JsonValue> = {
+  data: R;
+};

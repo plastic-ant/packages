@@ -28,7 +28,6 @@
       }
     },
     "npm": {
-      "dependsOn": ["npm-login"],
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "buildTarget": "build",
@@ -39,14 +38,12 @@
     "examples": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "skills",
-      "options": {
-        "cwd": "packages/lightcast-api/examples"
-      },
+      "options": { "cwd": "packages/lightcast-api/examples" },
       "configurations": {
-        "salary-boosting-skills": { "command": "npx ts-node salary-boosting-skills.ts" },
-        "raw": { "command": "npx ts-node raw.ts" },
-        "skills": { "command": "npx ts-node skills.ts" },
-        "ca-jpa": { "command": "npx ts-node ca-jpa.ts" }
+        "salary-boosting-skills": { "command": "npx ts-node --project ../tsconfig.lib.json salary-boosting-skills.ts" },
+        "raw": { "command": "npx ts-node --project ../tsconfig.lib.json raw.ts" },
+        "skills": { "command": "npx ts-node --project ../tsconfig.lib.json skills.ts" },
+        "ca-jpa": { "command": "npx ts-node --project ../tsconfig.lib.json ca-jpa.ts" }
       }
     },
     "lint": {

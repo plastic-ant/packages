@@ -1,4 +1,4 @@
-import { LightcastAPIClient } from "../..";
+import { ICacheInterface, LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Status, Response } from "../common-types";
 
@@ -17,7 +17,7 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/ddn-api#get-get-service-metadata}
    */
-  meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "status")),
+  meta: <R = Response>(cache?: ICacheInterface<string>) => client.get<void, R>(urlcat(baseUrl, "status"), { cache }),
 
   /**
    * Get a list of supported dimensions.
@@ -25,8 +25,9 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/ddn-api#get-list-all-dimensions}
    */
-  listAllDimensions: <R = Response<string[]>>(params?: { tags?: string }) =>
+  listAllDimensions: <R = Response<string[]>>(params?: { tags?: string }, cache?: ICacheInterface<string>) =>
     client.get<typeof params, R>(urlcat(baseUrl, "dimensions"), {
+      cache,
       queryParameters: { params },
     }),
 
@@ -42,7 +43,8 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/ddn-api#get-get-dimension-metadata}
      */
-    meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension })),
+    meta: <R = Response>(cache?: ICacheInterface<string>) =>
+      client.get<void, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension }), { cache }),
 
     /**
      * Get lists of DDN skills for an occupation.
@@ -51,7 +53,9 @@ export default (client: LightcastAPIClient) => ({
      * @see API docs {@link https://docs.lightcast.dev/apis/ddn-api#post-get-ddn}
      */
 
-    ddn: <R = Response>(body: { id: string; region?: { nation: string; level?: string; id?: string } }) =>
-      client.post<void, typeof body, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension }), body),
+    ddn: <R = Response>(
+      body: { id: string; region?: { nation: string; level?: string; id?: string } },
+      cache?: ICacheInterface<string>
+    ) => client.post<void, typeof body, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension }), body, { cache }),
   }),
 });

@@ -1,5 +1,5 @@
 import type { JsonObject } from "type-fest";
-import { LightcastAPIClient } from "../..";
+import { ICacheInterface, LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response } from "../common-types";
 
@@ -12,8 +12,9 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-all-taxonomies}
    */
-  listAll: <R = Response>(params?: { tags?: string }) =>
+  listAll: <R = Response>(params?: { tags?: string }, cache?: ICacheInterface<string>) =>
     client.get<typeof params, R>(urlcat(baseUrl, "taxonomies"), {
+      cache,
       queryParameters: { params },
     }),
 
@@ -22,15 +23,16 @@ export default (client: LightcastAPIClient) => ({
    * @param facet
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy}
    */
-  meta: <R = Response>(facet: string) => client.get<void, R>(urlcat(baseUrl, ":facet", { facet })),
+  meta: <R = Response>(facet: string, cache?: ICacheInterface<string>) =>
+    client.get<void, R>(urlcat(baseUrl, ":facet", { facet }), { cache }),
 
   /**
    *
    * @param facet
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions}
    */
-  versions: <R = Response<string[]>>(facet: string) =>
-    client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet })),
+  versions: <R = Response<string[]>>(facet: string, cache?: ICacheInterface<string>) =>
+    client.get<void, R>(urlcat(baseUrl, ":facet/versions", { facet }), { cache }),
 
   version: (version: string) => ({
     /**
@@ -39,8 +41,8 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version}
      */
-    meta: <R = Response>(facet: string) =>
-      client.get<void, R>(urlcat(baseUrl, ":facet/versions/:version", { facet, version })),
+    meta: <R = Response>(facet: string, cache?: ICacheInterface<string>) =>
+      client.get<void, R>(urlcat(baseUrl, ":facet/versions/:version", { facet, version }), { cache }),
 
     /**
      *
@@ -51,9 +53,11 @@ export default (client: LightcastAPIClient) => ({
      */
     concepts: <R = Response>(
       facet: string,
-      params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
+      params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string },
+      cache?: ICacheInterface<string>
     ) =>
       client.get<typeof params, R>(urlcat(baseUrl, ":facet/versions/:version/concepts", { facet, version }), {
+        cache,
         queryParameters: { params },
       }),
 
@@ -68,9 +72,11 @@ export default (client: LightcastAPIClient) => ({
     conceptsById: <R = Response>(
       facet: string,
       id: string,
-      params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string }
+      params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string },
+      cache?: ICacheInterface<string>
     ) =>
       client.get<typeof params, R>(urlcat(baseUrl, ":facet/versions/:version/concepts/:id", { facet, id, version }), {
+        cache,
         queryParameters: { params },
       }),
 
@@ -87,11 +93,13 @@ export default (client: LightcastAPIClient) => ({
         relationType: "child" | "sibling" | "any";
         ids: string[];
         filter?: JsonObject;
-      }
+      },
+      cache?: ICacheInterface<string>
     ) =>
       client.post<void, typeof body, R>(
         urlcat(baseUrl, ":facet/versions/:version/relations", { facet, version }),
-        body
+        body,
+        { cache }
       ),
   }),
 });
