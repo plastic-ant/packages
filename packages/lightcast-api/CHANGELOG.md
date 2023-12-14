@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1-alpha.9](///compare/lightcast-api-0.0.1-alpha.8...lightcast-api-0.0.1-alpha.9) (2023-12-14)
+
 ## [0.0.1-alpha.8](///compare/lightcast-api-0.0.1-alpha.7...lightcast-api-0.0.1-alpha.8) (2023-12-12)
 
 ## [0.0.1-alpha.7](///compare/lightcast-api-0.0.1-alpha.6...lightcast-api-0.0.1-alpha.7) (2023-12-11)
