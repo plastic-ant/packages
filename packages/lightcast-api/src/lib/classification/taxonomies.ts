@@ -1,4 +1,4 @@
-import type { JsonObject } from "type-fest";
+import type { JsonObject, JsonValue } from "type-fest";
 import { ICacheInterface, LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response } from "../common-types";
@@ -51,7 +51,7 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-concepts}
      */
-    concepts: <R = Response>(
+    concepts: <R = Response<JsonValue[]>>(
       facet: string,
       params?: { q?: string; fields?: string; filter?: string; limit?: number; after?: number; locale?: string },
       cache?: ICacheInterface<string>

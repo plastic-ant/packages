@@ -10,6 +10,7 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "preset": "conventional",
+        "push": true,
         "tagPrefix": "{projectName}-",
         "postTargets": ["npm", "github"]
       }
