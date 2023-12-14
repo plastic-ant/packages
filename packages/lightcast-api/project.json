@@ -69,6 +69,7 @@
         "compiler": "tsc",
         "project": "packages/lightcast-api/package.json",
         "format": ["cjs", "esm"],
+        "deleteOutputPath": true,
         "assets": [
           {
             "glob": "packages/lightcast-api/LICENSE",

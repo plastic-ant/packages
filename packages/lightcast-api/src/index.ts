@@ -109,7 +109,7 @@ export class LightcastAPIClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  override async get<Q = unknown, R = JsonValue>(resource: string, options?: RequestOptions<Q, R>) {
+  override async get<Q, R>(resource: string, options?: RequestOptions<Q, R>) {
     await this.refreshToken();
 
     const key = hash({ resource, ...options?.queryParameters });
@@ -131,7 +131,7 @@ export class LightcastAPIClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  async post<Q = unknown, B = unknown, R = JsonValue>(resource: string, body: B, options?: RequestOptions<Q, R>) {
+  async post<Q, B, R>(resource: string, body: B, options?: RequestOptions<Q, R>) {
     await this.refreshToken();
 
     const key = hash({ resource, body, ...options?.queryParameters });
