@@ -1,4 +1,3 @@
-import type { JsonObject } from "type-fest";
 import { ICacheInterface, LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
@@ -14,6 +13,6 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-timeseries}
    */
-  timeseries: <R = Response>(body: JsonObject, params?: QueryParameters, cache?: ICacheInterface<string>) =>
-    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ""), body, { cache, queryParameters: { params } }),
+  timeseries: <R = Response, B = unknown>(body: B, params?: QueryParameters, cache?: ICacheInterface<string>) =>
+    client.post<typeof params, B, R>(urlcat(baseUrl, ""), body, { cache, queryParameters: { params } }),
 });

@@ -21,6 +21,6 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/classification#post-map-concepts}
    */
-  concepts: <R = Response>(name: string, body: { ids: string[] }, cache?: ICacheInterface<string>) =>
-    client.post<void, typeof body, R>(urlcat(baseUrl, name), body, { cache }),
+  concepts: <R = Response, B = { ids: string[] }>(name: string, body: B, cache?: ICacheInterface<string>) =>
+    client.post<void, B, R>(urlcat(baseUrl, name), body, { cache }),
 });

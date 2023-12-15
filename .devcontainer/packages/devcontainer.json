@@ -84,6 +84,7 @@
       "extensions": [
         "aaron-bond.better-comments",
         "firsttris.vscode-jest-runner",
+        "42Crunch.vscode-openapi",
         "christian-kohler.path-intellisense",
         "nrwl.angular-console",
         "dbaeumer.vscode-eslint",

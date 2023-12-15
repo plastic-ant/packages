@@ -1,0 +1,21 @@
+openapi: "3.0.2"
+info:
+  title: Skills
+  version: "1.0"
+servers:
+  - url: https://emsiservices.com/skills
+paths:
+  /status:
+    get:
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          description: OK
+  /meta:
+    get:
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          description: OK

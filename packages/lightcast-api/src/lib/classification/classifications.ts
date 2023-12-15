@@ -41,10 +41,10 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release-lot-classify}
      */
-    lotClassify: <R = Response>(
-      body: { title: string; limit?: number; fields?: string[]; description?: string },
+    lotClassify: <R = Response, B = { title: string; limit?: number; fields?: string[]; description?: string }>(
+      body: B,
       cache?: ICacheInterface<string>
-    ) => client.post<void, typeof body, R>(urlcat(baseUrl, `:release/lot/classify`, { release }), body, { cache }),
+    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/lot/classify`, { release }), body, { cache }),
 
     /**
      * Performs the requested classification operation on postings related data, including company name, title, and job description. A range of classifications may be performed on the input based on the requested outputs.
@@ -52,17 +52,20 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release-postings-classify}
      */
-    postingClassify: <R = Response>(
-      body: {
+    postingClassify: <
+      R = Response,
+      B = {
         context: {
           company: string;
           title: string;
           body: string;
         };
         outputs: string[];
-      },
+      }
+    >(
+      body: B,
       cache?: ICacheInterface<string>
-    ) => client.post<void, typeof body, R>(urlcat(baseUrl, `:release/postings/classify`, { release }), body, { cache }),
+    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/postings/classify`, { release }), body, { cache }),
 
     /**
      * Get metadata for requested version of skills extractor.
@@ -78,15 +81,18 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#post-extract-skills}
      */
-    extractSkills: <R = Response>(
-      body: {
+    extractSkills: <
+      R = Response,
+      B = {
         text: string;
         confidenceThreshold: number;
         trace: boolean;
         inputLocale: string;
         outputLocale: string;
-      },
+      }
+    >(
+      body: B,
       cache?: ICacheInterface<string>
-    ) => client.post<void, typeof body, R>(urlcat(baseUrl, `:release/skills/classify`, { release }), body, { cache }),
+    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/skills/classify`, { release }), body, { cache }),
   }),
 });

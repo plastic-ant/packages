@@ -43,21 +43,22 @@ export default (client: LightcastAPIClient) => ({
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-feederjobs}
        */
-      feederJobs: <R = Response>(
-        body: {
+      feederJobs: <
+        R = Response,
+        B = {
           id: string;
           responseIds?: string[];
           categories?: string[];
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        },
+        }
+      >(
+        body: B,
         cache?: ICacheInterface<string>
       ) =>
-        client.post<void, typeof body, R>(
-          urlcat(baseUrl, `dimensions/:dimension/feederjobs`, { dimension: facet }),
-          body,
-          { cache }
-        ),
+        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/feederjobs`, { dimension: facet }), body, {
+          cache,
+        }),
 
       /**
        *
@@ -65,21 +66,22 @@ export default (client: LightcastAPIClient) => ({
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-nextstepjobs}
        */
-      nextStepJobs: <R = Response>(
-        body: {
+      nextStepJobs: <
+        R = Response,
+        B = {
           id: string;
           responseIds?: string[];
           categories?: string[];
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        },
+        }
+      >(
+        body: B,
         cache?: ICacheInterface<string>
       ) =>
-        client.post<void, typeof body, R>(
-          urlcat(baseUrl, `dimensions/:dimension/nextstepjobs`, { dimension: facet }),
-          body,
-          { cache }
-        ),
+        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/nextstepjobs`, { dimension: facet }), body, {
+          cache,
+        }),
 
       /**
        *
@@ -87,20 +89,21 @@ export default (client: LightcastAPIClient) => ({
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-skillgap}
        */
-      skillGap: <R = Response>(
-        body: {
+      skillGap: <
+        R = Response,
+        B = {
           sourceId: string;
           destinationId: string;
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        },
+        }
+      >(
+        body: B,
         cache?: ICacheInterface<string>
       ) =>
-        client.post<void, typeof body, R>(
-          urlcat(baseUrl, `dimensions/:dimension/skillgap`, { dimension: facet }),
-          body,
-          { cache }
-        ),
+        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/skillgap`, { dimension: facet }), body, {
+          cache,
+        }),
 
       /**
        * Get feeder and next step responses for a list of occupations.
@@ -108,17 +111,20 @@ export default (client: LightcastAPIClient) => ({
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension-bulk}
        */
-      bulk: <R = Response>(
-        body: {
+      bulk: <
+        R = Response,
+        B = {
           id: string;
           responseIds?: string[];
           categories?: string[];
           limit?: number;
           region?: { nation: string; level?: string; id?: string };
-        },
+        }
+      >(
+        body: B,
         cache?: ICacheInterface<string>
       ) =>
-        client.post<void, typeof body, R>(urlcat(baseUrl, `dimensions/:dimension/bulk`, { dimension: facet }), body, {
+        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/bulk`, { dimension: facet }), body, {
           cache,
         }),
     }),

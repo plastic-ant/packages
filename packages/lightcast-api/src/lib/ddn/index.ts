@@ -53,9 +53,9 @@ export default (client: LightcastAPIClient) => ({
      * @see API docs {@link https://docs.lightcast.dev/apis/ddn-api#post-get-ddn}
      */
 
-    ddn: <R = Response>(
-      body: { id: string; region?: { nation: string; level?: string; id?: string } },
+    ddn: <R = Response, B = { id: string; region?: { nation: string; level?: string; id?: string } }>(
+      body: B,
       cache?: ICacheInterface<string>
-    ) => client.post<void, typeof body, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension }), body, { cache }),
+    ) => client.post<void, B, R>(urlcat(baseUrl, "dimensions/:dimension", { dimension }), body, { cache }),
   }),
 });

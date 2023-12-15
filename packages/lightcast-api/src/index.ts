@@ -3,6 +3,9 @@ import * as hm from "typed-rest-client/Handlers";
 import * as ht from "typed-rest-client/HttpClient";
 import * as ifm from "typed-rest-client/Interfaces";
 
+import hash from "object-hash";
+import { JsonValue } from "type-fest";
+
 import jobPostingsAPI from "./lib/jpa";
 import canadaJobPostingsAPI from "./lib/ca-jpa";
 import classificationAPI from "./lib/classification";
@@ -13,14 +16,13 @@ import ddnAPI from "./lib/ddn";
 import similarityAPI from "./lib/similarity";
 import occupations from "./lib/utils/occupations";
 
-import hash from "object-hash";
-import { JsonValue } from "type-fest";
+export type RequestResponse<R> = rm.IRestResponse<R>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ICacheInterface<KeyType = string, ValueType = any> = {
   has: (key: KeyType) => Promise<boolean> | boolean;
-  get: (key: KeyType) => Promise<rm.IRestResponse<ValueType> | undefined> | rm.IRestResponse<ValueType> | undefined;
-  set: (key: KeyType, value: rm.IRestResponse<ValueType>) => Promise<unknown> | unknown;
+  get: (key: KeyType) => Promise<RequestResponse<ValueType> | undefined> | RequestResponse<ValueType> | undefined;
+  set: (key: KeyType, value: RequestResponse<ValueType>) => Promise<unknown> | unknown;
   del: (key: KeyType) => unknown;
 };
 
@@ -28,9 +30,9 @@ interface RequestQueryParams<Q> extends Omit<ifm.IRequestQueryParams, "params"> 
   readonly params: Q;
 }
 
-export interface RequestOptions<Q, T = JsonValue> extends Omit<rm.IRequestOptions, "queryParameters"> {
+export interface RequestOptions<Q, R = unknown> extends Omit<rm.IRequestOptions, "queryParameters"> {
   readonly queryParameters?: RequestQueryParams<Q>;
-  readonly cache?: ICacheInterface<string, T>;
+  readonly cache?: ICacheInterface<string, R>;
 }
 
 /**

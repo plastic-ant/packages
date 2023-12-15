@@ -46,13 +46,16 @@ export default (client: LightcastAPIClient) => ({
      * @see API docs {@link https://docs.lightcast.dev/apis/similarity#post-get-similarity-data-on-a-selected-item}
      */
 
-    similarity: <R = Response>(
-      body: {
+    similarity: <
+      R = Response,
+      B = {
         input: string | string[];
         filter?: { ids?: string[]; minScore?: number };
         limit: number;
-      },
+      }
+    >(
+      body: B,
       cache?: ICacheInterface<string>
-    ) => client.post<void, typeof body, R>(urlcat(baseUrl, "models/:model", { model }), body, { cache }),
+    ) => client.post<void, B, R>(urlcat(baseUrl, "models/:model", { model }), body, { cache }),
   }),
 });

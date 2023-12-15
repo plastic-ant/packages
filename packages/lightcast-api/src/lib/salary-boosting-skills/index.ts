@@ -52,7 +52,7 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/salary-boosting-skills#post-get-salary-boosting-skills}
      */
-    salaryBoostingSkills: <R = Response>(body: { id: string }, cache?: ICacheInterface<string>) =>
-      client.post<void, typeof body, R>(urlcat(baseUrl, ":dimension", { dimension }), body, { cache }),
+    salaryBoostingSkills: <R = Response, B = { id: string }>(body: B, cache?: ICacheInterface<string>) =>
+      client.post<void, B, R>(urlcat(baseUrl, ":dimension", { dimension }), body, { cache }),
   }),
 });

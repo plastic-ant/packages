@@ -1,4 +1,3 @@
-import type { JsonObject } from "type-fest";
 import { ICacheInterface, LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
@@ -14,8 +13,13 @@ const timeseries = (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byFacet: <R = Response>(facet: string, body: JsonObject, params?: QueryParameters, cache?: ICacheInterface<string>) =>
-    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet/timeseries", { facet }), body, {
+  byFacet: <R = Response, B = unknown>(
+    facet: string,
+    body: B,
+    params?: QueryParameters,
+    cache?: ICacheInterface<string>
+  ) =>
+    client.post<typeof params, B, R>(urlcat(baseUrl, ":facet/timeseries", { facet }), body, {
       cache,
       queryParameters: { params },
     }),
@@ -31,13 +35,13 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-distributions-distributionfacet}
      */
-    byFacet: <R = Response>(
+    byFacet: <R = Response, B = unknown>(
       facet: string,
-      body: JsonObject,
+      body: B,
       params?: QueryParameters,
       cache?: ICacheInterface<string>
     ) =>
-      client.post<typeof params, typeof body, R>(
+      client.post<typeof params, B, R>(
         urlcat(baseUrl, ":facet/distributions/:distributionFacet", { facet, distributionFacet }),
         body,
         {
@@ -61,18 +65,17 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byNestedFacet: <R = Response>(
+  byNestedFacet: <R = Response, B = unknown>(
     facet: string,
     nestedFacet: string,
-    body: JsonObject,
+    body: B,
     params?: QueryParameters,
     cache?: ICacheInterface<string>
   ) =>
-    client.post<typeof params, typeof body, R>(
-      urlcat(baseUrl, ":facet/rankings/:nestedFacet", { facet, nestedFacet }),
-      body,
-      { cache, queryParameters: { params } }
-    ),
+    client.post<typeof params, B, R>(urlcat(baseUrl, ":facet/rankings/:nestedFacet", { facet, nestedFacet }), body, {
+      cache,
+      queryParameters: { params },
+    }),
 
   /**
    * Group and rank postings by {facet}.
@@ -81,8 +84,13 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byFacet: <R = Response>(facet: string, body: JsonObject, params?: QueryParameters, cache?: ICacheInterface<string>) =>
-    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet", { facet }), body, {
+  byFacet: <R = Response, B = unknown>(
+    facet: string,
+    body: B,
+    params?: QueryParameters,
+    cache?: ICacheInterface<string>
+  ) =>
+    client.post<typeof params, B, R>(urlcat(baseUrl, ":facet", { facet }), body, {
       cache,
       queryParameters: { params },
     }),

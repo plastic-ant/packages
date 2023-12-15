@@ -44,6 +44,7 @@
     "node-cache": "^5.1.2",
     "nx": "17.2.0",
     "object-hash": "^3.0.0",
+    "openapi-client-axios-typegen": "^7.4.1",
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
@@ -57,5 +58,8 @@
     "vite-plugin-dts": "~2.3.0",
     "vitest": "0.34.6",
     "yaml-eslint-parser": "^1.2.2"
+  },
+  "dependencies": {
+    "openapi-client-axios": "^7.4.0"
   }
 }

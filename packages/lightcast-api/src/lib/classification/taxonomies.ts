@@ -87,19 +87,20 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#taxonomies-taxonomy-versions-version-relations}
      */
-    relations: <R = Response>(
-      facet: string,
-      body: {
+    relations: <
+      R = Response,
+      B = {
         relationType: "child" | "sibling" | "any";
         ids: string[];
         filter?: JsonObject;
-      },
+      }
+    >(
+      facet: string,
+      body: B,
       cache?: ICacheInterface<string>
     ) =>
-      client.post<void, typeof body, R>(
-        urlcat(baseUrl, ":facet/versions/:version/relations", { facet, version }),
-        body,
-        { cache }
-      ),
+      client.post<void, B, R>(urlcat(baseUrl, ":facet/versions/:version/relations", { facet, version }), body, {
+        cache,
+      }),
   }),
 });

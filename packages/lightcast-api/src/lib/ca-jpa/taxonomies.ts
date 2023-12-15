@@ -13,13 +13,13 @@ const lookup = (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-taxonomies-facet-lookup}
    */
-  byFacet: <R = Response>(
+  byFacet: <R = Response, B = { ids: (string | number)[] }>(
     facet: string,
-    body: { ids: (string | number)[] },
+    body: B,
     params?: QueryParameters,
     cache?: ICacheInterface<string>
   ) =>
-    client.post<typeof params, typeof body, R>(urlcat(baseUrl, ":facet/lookup", { facet }), body, {
+    client.post<typeof params, B, R>(urlcat(baseUrl, ":facet/lookup", { facet }), body, {
       cache,
       queryParameters: { params },
     }),
