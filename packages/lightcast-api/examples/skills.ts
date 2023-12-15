@@ -1,17 +1,18 @@
-import { ICacheInterface } from "../src";
 import apis from "./api";
-import NodeCache from "node-cache";
+import { setupCache, buildMemoryStorage } from "axios-cache-interceptor";
 
-const cache = new NodeCache({ stdTTL: 5000 });
-
-const toCache: ICacheInterface<string> = { set: cache.set, get: cache.get, has: cache.has, del: cache.del };
+setupCache(apis.client, {
+  storage: buildMemoryStorage(
+    /* cloneData default=*/ false,
+    /* cleanupInterval default=*/ false,
+    /* maxEntries default=*/ false
+  ),
+});
 
 (async () => {
-  const versions = await apis.skills.versions(toCache);
-
-  if (versions?.result) {
-    const latest = versions.result.data[0];
-    const data = await apis.skills.version(latest).byId("KS1200364C9C1LK3V5Q1");
-    console.log(JSON.stringify(data, null, " "));
-  }
+  const versions = await apis.skills.versions();
+  const versionsCached = await apis.skills.versions();
+  const latest = versions.data.data[0];
+  const data = await apis.skills.version(latest).byId("KS1200364C9C1LK3V5Q1");
+  console.log(JSON.stringify(data, null, " "));
 })();

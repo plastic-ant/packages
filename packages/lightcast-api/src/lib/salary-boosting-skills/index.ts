@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Status, Response } from "../common-types";
 
@@ -17,7 +17,7 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/salary-boosting-skills#get-get-service-metadata}
    */
-  meta: <R = Response>(cache?: ICacheInterface<string>) => client.get<void, R>(urlcat(baseUrl, "status"), { cache }),
+  meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "status")),
 
   /**
    * Get a list of supported dimensions.
@@ -25,10 +25,9 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/salary-boosting-skills#get-list-all-dimensions}
    */
-  listAllDimensions: <R = Response<string[]>>(params?: { tags?: string }, cache?: ICacheInterface<string>) =>
+  listAllDimensions: <R = Response<string[]>>(params?: { tags?: string }) =>
     client.get<typeof params, R>(urlcat(baseUrl, "dimensions"), {
-      cache,
-      queryParameters: { params },
+      params,
     }),
 
   /**
@@ -43,8 +42,7 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/salary-boosting-skills#get-get-dimension-metadata}
      */
-    meta: <R = Response>(cache?: ICacheInterface<string>) =>
-      client.get<void, R>(urlcat(baseUrl, ":dimension", { dimension }), { cache }),
+    meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, ":dimension", { dimension })),
 
     /**
      * Get a list of salary boosting skills for an occupation.
@@ -52,7 +50,7 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/salary-boosting-skills#post-get-salary-boosting-skills}
      */
-    salaryBoostingSkills: <R = Response, B = { id: string }>(body: B, cache?: ICacheInterface<string>) =>
-      client.post<void, B, R>(urlcat(baseUrl, ":dimension", { dimension }), body, { cache }),
+    salaryBoostingSkills: <R = Response, B = { id: string }>(body: B) =>
+      client.post<void, B, R>(urlcat(baseUrl, ":dimension", { dimension }), body),
   }),
 });

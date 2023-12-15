@@ -1,11 +1,3 @@
-import * as rm from "typed-rest-client/RestClient";
-import * as hm from "typed-rest-client/Handlers";
-import * as ht from "typed-rest-client/HttpClient";
-import * as ifm from "typed-rest-client/Interfaces";
-
-import hash from "object-hash";
-import { JsonValue } from "type-fest";
-
 import jobPostingsAPI from "./lib/jpa";
 import canadaJobPostingsAPI from "./lib/ca-jpa";
 import classificationAPI from "./lib/classification";
@@ -15,24 +7,11 @@ import salaryBoostingSkillsAPI from "./lib/salary-boosting-skills";
 import ddnAPI from "./lib/ddn";
 import similarityAPI from "./lib/similarity";
 import occupations from "./lib/utils/occupations";
+import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse } from "axios";
+//import axiosRetry, { IAxiosRetryConfig } from "axios-retry";
 
-export type RequestResponse<R> = rm.IRestResponse<R>;
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ICacheInterface<KeyType = string, ValueType = any> = {
-  has: (key: KeyType) => Promise<boolean> | boolean;
-  get: (key: KeyType) => Promise<RequestResponse<ValueType> | undefined> | RequestResponse<ValueType> | undefined;
-  set: (key: KeyType, value: RequestResponse<ValueType>) => Promise<unknown> | unknown;
-  del: (key: KeyType) => unknown;
-};
-
-interface RequestQueryParams<Q> extends Omit<ifm.IRequestQueryParams, "params"> {
-  readonly params: Q;
-}
-
-export interface RequestOptions<Q, R = unknown> extends Omit<rm.IRequestOptions, "queryParameters"> {
-  readonly queryParameters?: RequestQueryParams<Q>;
-  readonly cache?: ICacheInterface<string, R>;
+export interface RequestOptions<Q, R> extends Omit<AxiosRequestConfig<R>, "params"> {
+  params?: Q;
 }
 
 /**
@@ -48,7 +27,7 @@ export type CredentialsFunction = () => Promise<
   | string
 >;
 
-export class LightcastAPIClient extends rm.RestClient {
+export class LightcastAPIClient {
   readonly skills = skillsAPI(this);
   readonly jpa = jobPostingsAPI(this);
   readonly cajpa = canadaJobPostingsAPI(this);
@@ -59,22 +38,16 @@ export class LightcastAPIClient extends rm.RestClient {
   readonly similarity = similarityAPI(this);
   readonly utils = { occupations: occupations(this) };
 
-  private bearerCredentialHandler = new hm.BearerCredentialHandler("");
+  readonly client: AxiosInstance;
   private expiresIn: number = 0;
 
   /**
    *
-   * @param userAgent
-   * @param authKeys - Function to fetch lightcast access keys
-   * @param options
+   * @param credentials
+   * @param args - Axios constructor arguments
    */
-  constructor(
-    userAgent: string,
-    public credentials?: CredentialsFunction,
-    options: ifm.IRequestOptions = { keepAlive: true, allowRetries: true, maxRetries: 16 }
-  ) {
-    super(userAgent, undefined, [], options);
-    this.client.handlers.push(this.bearerCredentialHandler);
+  constructor(public credentials?: CredentialsFunction, ...args: Parameters<typeof axios.create>) {
+    this.client = axios.create({ responseType: "json", ...args });
   }
 
   setCredentials(creds: CredentialsFunction) {
@@ -88,19 +61,13 @@ export class LightcastAPIClient extends rm.RestClient {
 
     const value = await this.credentials();
     if (typeof value === "string") {
-      this.bearerCredentialHandler.token = value;
+      this.client.defaults.headers.common = { Authorization: `Bearer ${value}` };
     } else {
       if (Date.now() >= this.expiresIn) {
-        const params = new URLSearchParams(value).toString();
-
-        const response = await new ht.HttpClient(null).post("https://auth.emsicloud.com/connect/token", params, {
-          "Content-Type": "application/x-www-form-urlencoded",
-        });
-
-        const body = await response.readBody();
-        const { expires_in, access_token } = JSON.parse(body);
+        const response = await this.client.post("https://auth.emsicloud.com/connect/token", new URLSearchParams(value));
+        const { expires_in, access_token } = response.data;
         this.expiresIn = Date.now() + expires_in * 1000;
-        this.bearerCredentialHandler.token = access_token;
+        this.client.defaults.headers.common = { Authorization: `Bearer ${access_token}` };
       }
     }
   }
@@ -111,19 +78,9 @@ export class LightcastAPIClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  override async get<Q, R>(resource: string, options?: RequestOptions<Q, R>) {
+  async get<Q, R>(resource: string, options?: RequestOptions<Q, void>) {
     await this.refreshToken();
-
-    const key = hash({ resource, ...options?.queryParameters });
-
-    if (options?.cache && (await options?.cache.has(key))) {
-      return (await options?.cache.get(key))!;
-    }
-
-    return super.get<R>(resource, options as rm.IRequestOptions).then((r) => {
-      options?.cache?.set(key, r);
-      return r;
-    });
+    return this.client.get<R, AxiosResponse<R>>(resource, options);
   }
 
   /**
@@ -133,18 +90,8 @@ export class LightcastAPIClient extends rm.RestClient {
    * @param options
    * @returns
    */
-  async post<Q, B, R>(resource: string, body: B, options?: RequestOptions<Q, R>) {
+  async post<Q, B, R>(resource: string, body: B, options?: RequestOptions<Q, B>) {
     await this.refreshToken();
-
-    const key = hash({ resource, body, ...options?.queryParameters });
-
-    if (options?.cache && (await options?.cache.has(key))) {
-      return (await options?.cache.get(key))!;
-    }
-
-    return super.create<R>(resource, body, options as rm.IRequestOptions).then((r) => {
-      options?.cache?.set(key, r);
-      return r;
-    });
+    return this.client.post<R, AxiosResponse<R>>(resource, body, options);
   }
 }

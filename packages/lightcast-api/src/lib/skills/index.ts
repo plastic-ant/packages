@@ -1,4 +1,4 @@
-import { LightcastAPIClient, ICacheInterface } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Status, Response } from "../common-types";
 
@@ -22,15 +22,14 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-service-metadata}
    */
-  meta: (cache?: ICacheInterface<string>) => client.get<void, Response>(urlcat(baseUrl, "meta"), { cache }),
+  meta: () => client.get<void, Response>(urlcat(baseUrl, "meta")),
 
   /**
    * Version latest can be used as an alias to the latest skill version. See our Skills Taxonomy Changelog for the updates in each version.
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-list-all-versions}
    */
-  versions: (cache?: ICacheInterface<string>) =>
-    client.get<void, Response<string[]>>(urlcat(baseUrl, "versions"), { cache }),
+  versions: () => client.get<void, Response<string[]>>(urlcat(baseUrl, "versions")),
 
   /**
    *
@@ -44,8 +43,7 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-version-metadata}
      */
-    meta: <R = Response>(cache?: ICacheInterface<string>) =>
-      client.get<void, R>(urlcat(baseUrl, "versions/:version", { version }), { cache }),
+    meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "versions/:version", { version })),
 
     /**
      * Get version specific changes.
@@ -61,13 +59,9 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-list-all-skills}
      */
-    listAll: <R = Response>(
-      params?: { q?: string; limit?: number; typeIds?: string; fields?: string },
-      cache?: ICacheInterface<string>
-    ) =>
+    listAll: <R = Response, Q = { q?: string; limit?: number; typeIds?: string; fields?: string }>(params?: Q) =>
       client.get<typeof params, R>(urlcat(baseUrl, "versions/:version/skills", { version }), {
-        queryParameters: { params },
-        cache,
+        params,
       }),
 
     /**
@@ -77,14 +71,9 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#post-list-requested-skills}
      */
-    listRequested: <R = Response, B = { ids: string[] }>(
-      body: B,
-      params?: { typeIds?: string; fields?: string },
-      cache?: ICacheInterface<string>
-    ) =>
+    listRequested: <R = Response, B = { ids: string[] }>(body: B, params?: { typeIds?: string; fields?: string }) =>
       client.post<typeof params, B, R>(urlcat(baseUrl, "versions/:version/skills", { version }), body, {
-        cache,
-        queryParameters: { params },
+        params,
       }),
 
     /**
@@ -93,8 +82,8 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#get-get-a-skill-by-id}
      */
-    byId: <R = Response>(id: string, cache?: ICacheInterface<string>) =>
-      client.get<void, R>(urlcat(baseUrl, "versions/:version/skills/:id", { id, version }), { cache }),
+    byId: <R = Response>(id: string) =>
+      client.get<void, R>(urlcat(baseUrl, "versions/:version/skills/:id", { id, version })),
 
     /**
      * Returns a list of skills that are related to the requested skills.
@@ -103,10 +92,8 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @See API docs {@link https://docs.lightcast.dev/apis/skills#post-find-related-skills}
      */
-    findRelated: <R = Response, B = { ids: string[]; limit?: number; typeIds?: string; fields?: string }>(
-      body: B,
-      cache?: ICacheInterface<string>
-    ) => client.post<void, B, R>(urlcat(baseUrl, "versions/:version/skills", { version }), body, { cache }),
+    findRelated: <R = Response, B = { ids: string[]; limit?: number; typeIds?: string; fields?: string }>(body: B) =>
+      client.post<void, B, R>(urlcat(baseUrl, "versions/:version/skills", { version }), body),
 
     /**
      * Returns a list of skills found in a document.
@@ -117,12 +104,10 @@ export default (client: LightcastAPIClient) => ({
      */
     extract: <R = Response, B = string | Buffer | { text: string; confidenceThreshold?: number }>(
       body: B,
-      params?: { language?: string; confidenceThreshold?: number },
-      cache?: ICacheInterface<string>
+      params?: { language?: string; confidenceThreshold?: number }
     ) =>
       client.post<typeof params, B, R>(urlcat(baseUrl, "versions/:version/extract", { version }), body, {
-        cache,
-        queryParameters: { params },
+        params,
       }),
 
     /**
@@ -134,12 +119,10 @@ export default (client: LightcastAPIClient) => ({
      */
     extractTrace: <R = Response, B = string | Buffer | { text: string; confidenceThreshold?: number }>(
       body: B,
-      params?: { language?: string; includeNormalizedText: boolean },
-      cache?: ICacheInterface<string>
+      params?: { language?: string; includeNormalizedText: boolean }
     ) =>
       client.post<typeof params, B, R>(urlcat(baseUrl, "versions/:version/extract/trace", { version }), body, {
-        cache,
-        queryParameters: { params },
+        params,
       }),
   }),
 });

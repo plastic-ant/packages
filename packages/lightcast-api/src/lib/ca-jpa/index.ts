@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import totals from "./totals";
 import postings from "./postings";
 import rankings from "./rankings";
@@ -10,8 +10,7 @@ import type { Response, Status } from "../common-types";
 
 export default (client: LightcastAPIClient) => ({
   status: () => client.get<void, Response<Status>>(urlcat("https://emsiservices.com/ca-jpa", "status")),
-  meta: <R = Response>(cache?: ICacheInterface<string>) =>
-    client.get<void, R>(urlcat("https://emsiservices.com/ca-jpa", "meta"), { cache }),
+  meta: <R = Response>() => client.get<void, R>(urlcat("https://emsiservices.com/ca-jpa", "meta")),
   postings: postings(client),
   rankings: rankings(client),
   taxonomies: taxonomies(client),

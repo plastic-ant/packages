@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
@@ -12,8 +12,7 @@ export default (client: LightcastAPIClient) =>
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-totals}
    */
-  <R = Response, B = unknown>(body: B, params?: QueryParameters, cache?: ICacheInterface<string>) =>
+  <R = Response, B = unknown>(body: B, params?: QueryParameters) =>
     client.post<typeof params, B, R>(urlcat(baseUrl, ""), body, {
-      cache,
-      queryParameters: { params },
+      params,
     });

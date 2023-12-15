@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
@@ -13,15 +13,9 @@ const timeseries = (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/job-postings#post-rankings-rankingfacet-timeseries}
    */
-  byFacet: <R = Response, B = unknown>(
-    facet: string,
-    body: B,
-    params?: QueryParameters,
-    cache?: ICacheInterface<string>
-  ) =>
+  byFacet: <R = Response, B = unknown>(facet: string, body: B, params?: QueryParameters) =>
     client.post<typeof params, B, R>(urlcat(baseUrl, ":facet/timeseries", { facet }), body, {
-      cache,
-      queryParameters: { params },
+      params,
     }),
 });
 
@@ -38,8 +32,7 @@ export default (client: LightcastAPIClient) => ({
    * Get a list of current available ranking facets.
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#get-rankings}
    */
-  listAllFacets: <R = Response<string[]>>(cache?: ICacheInterface<string>) =>
-    client.get<void, R>(urlcat(baseUrl, ""), { cache }),
+  listAllFacets: <R = Response<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
 
   /**
    * Group and rank postings by {facet}.
@@ -48,16 +41,9 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-rankings-rankingfacet-rankings-nestedrankingfacet}
    */
-  byNestedFacet: <R = Response, B = unknown>(
-    facet: string,
-    nestedFacet: string,
-    body: B,
-    params?: QueryParameters,
-    cache?: ICacheInterface<string>
-  ) =>
+  byNestedFacet: <R = Response, B = unknown>(facet: string, nestedFacet: string, body: B, params?: QueryParameters) =>
     client.post<typeof params, B, R>(urlcat(baseUrl, ":facet/rankings/:nestedFacet", { facet, nestedFacet }), body, {
-      cache,
-      queryParameters: { params },
+      params,
     }),
 
   /**
@@ -67,14 +53,8 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-rankings-rankingfacet}
    */
-  byFacet: <R = Response, B = unknown>(
-    facet: string,
-    body: B,
-    params?: QueryParameters,
-    cache?: ICacheInterface<string>
-  ) =>
+  byFacet: <R = Response, B = unknown>(facet: string, body: B, params?: QueryParameters) =>
     client.post<typeof params, B, R>(urlcat(baseUrl, ":facet", { facet }), body, {
-      cache,
-      queryParameters: { params },
+      params,
     }),
 });

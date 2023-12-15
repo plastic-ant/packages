@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
@@ -13,8 +13,8 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#get-postings-postingid}
    */
-  byId: <R = Response>(id: string, params?: QueryParameters, cache?: ICacheInterface<string>) =>
-    client.get<typeof params, R>(urlcat(baseUrl, ":id", { id }), { cache, queryParameters: { params } }),
+  byId: <R = Response>(id: string, params?: QueryParameters) =>
+    client.get<typeof params, R>(urlcat(baseUrl, ":id", { id }), { params }),
 
   /**
    *
@@ -24,6 +24,6 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#post-postings}
    */
-  filtered: <R = Response, B = unknown>(body: B, params?: QueryParameters, cache?: ICacheInterface<string>) =>
-    client.post<typeof params, B, R>(urlcat(baseUrl, ""), body, { cache, queryParameters: { params } }),
+  filtered: <R = Response, B = unknown>(body: B, params?: QueryParameters) =>
+    client.post<typeof params, B, R>(urlcat(baseUrl, ""), body, { params }),
 });

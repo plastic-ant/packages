@@ -8,4 +8,4 @@ const creds = async () => ({
   grant_type: "client_credentials",
 });
 
-export default new LightcastAPIClient("example", creds);
+export default new LightcastAPIClient(creds);

@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response, Status } from "../common-types";
 
@@ -17,7 +17,7 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-get-service-metadata}
    */
-  meta: <R = Response>(cache?: ICacheInterface<string>) => client.get<void, R>(urlcat(baseUrl, "meta"), { cache }),
+  meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "meta")),
 
   dimensions: {
     /**
@@ -25,8 +25,7 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#get-list-all-dimensions}
      */
-    listAllFacets: <R = Response<string[]>>(cache?: ICacheInterface<string>) =>
-      client.get<void, R>(urlcat(baseUrl, ""), { cache }),
+    listAllFacets: <R = Response<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
 
     dimension: (facet: "soc" | "onet" | "lotocc" | "lotspecocc") => ({
       /**
@@ -34,8 +33,7 @@ export default (client: LightcastAPIClient) => ({
        * @returns
        * @see API docs {@link https://docs.lightcast.dev/apis/career-pathways#dimensions-dimension}
        */
-      meta: <R = Response>(cache?: ICacheInterface<string>) =>
-        client.get<void, R>(urlcat(baseUrl, `dimensions/:dimension`, { dimension: facet }), { cache }),
+      meta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, `dimensions/:dimension`, { dimension: facet })),
 
       /**
        *
@@ -53,12 +51,8 @@ export default (client: LightcastAPIClient) => ({
           region?: { nation: string; level?: string; id?: string };
         }
       >(
-        body: B,
-        cache?: ICacheInterface<string>
-      ) =>
-        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/feederjobs`, { dimension: facet }), body, {
-          cache,
-        }),
+        body: B
+      ) => client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/feederjobs`, { dimension: facet }), body),
 
       /**
        *
@@ -76,12 +70,8 @@ export default (client: LightcastAPIClient) => ({
           region?: { nation: string; level?: string; id?: string };
         }
       >(
-        body: B,
-        cache?: ICacheInterface<string>
-      ) =>
-        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/nextstepjobs`, { dimension: facet }), body, {
-          cache,
-        }),
+        body: B
+      ) => client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/nextstepjobs`, { dimension: facet }), body),
 
       /**
        *
@@ -98,12 +88,8 @@ export default (client: LightcastAPIClient) => ({
           region?: { nation: string; level?: string; id?: string };
         }
       >(
-        body: B,
-        cache?: ICacheInterface<string>
-      ) =>
-        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/skillgap`, { dimension: facet }), body, {
-          cache,
-        }),
+        body: B
+      ) => client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/skillgap`, { dimension: facet }), body),
 
       /**
        * Get feeder and next step responses for a list of occupations.
@@ -121,12 +107,8 @@ export default (client: LightcastAPIClient) => ({
           region?: { nation: string; level?: string; id?: string };
         }
       >(
-        body: B,
-        cache?: ICacheInterface<string>
-      ) =>
-        client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/bulk`, { dimension: facet }), body, {
-          cache,
-        }),
+        body: B
+      ) => client.post<void, B, R>(urlcat(baseUrl, `dimensions/:dimension/bulk`, { dimension: facet }), body),
     }),
   },
 });

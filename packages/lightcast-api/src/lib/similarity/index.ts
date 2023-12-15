@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Status } from "../common-types";
 import { JsonValue } from "type-fest";
@@ -18,7 +18,7 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @See API docs {@link https://docs.lightcast.dev/apis/similarity#get-get-service-meta-data}
    */
-  meta: <R = JsonValue>(cache?: ICacheInterface<string>) => client.get<void, R>(urlcat(baseUrl, "status"), { cache }),
+  meta: <R = JsonValue>() => client.get<void, R>(urlcat(baseUrl, "status")),
 
   /**
    * Get available models.
@@ -26,10 +26,9 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/similarity#get-get-available-models}
    */
-  listAllModels: (params?: { tags?: string }, cache?: ICacheInterface<string>) =>
+  listAllModels: (params?: { tags?: string }) =>
     client.get<typeof params, { data: string[] }>(urlcat(baseUrl, "dimensions"), {
-      cache,
-      queryParameters: { params },
+      params,
     }),
 
   /**
@@ -54,8 +53,7 @@ export default (client: LightcastAPIClient) => ({
         limit: number;
       }
     >(
-      body: B,
-      cache?: ICacheInterface<string>
-    ) => client.post<void, B, R>(urlcat(baseUrl, "models/:model", { model }), body, { cache }),
+      body: B
+    ) => client.post<void, B, R>(urlcat(baseUrl, "models/:model", { model }), body),
   }),
 });

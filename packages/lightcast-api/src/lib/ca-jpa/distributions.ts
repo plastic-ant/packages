@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { QueryParameters } from "./common-types";
 import type { Response } from "../common-types";
@@ -15,17 +15,12 @@ export default (client: LightcastAPIClient) => ({
    *
    * @see https://docs.lightcast.dev/apis/canada-job-postings#post-distributions-distributionfacet
    */
-  byFacet: <R = Response, B = unknown>(
-    facet: string,
-    body: B,
-    params?: QueryParameters,
-    cache?: ICacheInterface<string, R>
-  ) => client.post<typeof params, B, R>(urlcat(baseUrl, facet), body, { cache, queryParameters: { params } }),
+  byFacet: <R = Response, B = unknown>(facet: string, body: B, params?: QueryParameters) =>
+    client.post<typeof params, B, R>(urlcat(baseUrl, facet), body, { params }),
 
   /**
    * Get a list of available distribution facets.
    * @see API docs {@link https://docs.lightcast.dev/apis/canada-job-postings#get-distributions}
    */
-  listAllDimensions: <R = Response<string[]>>(cache?: ICacheInterface<string>) =>
-    client.get<void, R>(urlcat(baseUrl, ""), { cache }),
+  listAllDimensions: <R = Response<string[]>>() => client.get<void, R>(urlcat(baseUrl, "")),
 });

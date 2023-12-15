@@ -1,4 +1,4 @@
-import { ICacheInterface, LightcastAPIClient } from "../..";
+import { LightcastAPIClient } from "../..";
 import urlcat from "urlcat";
 import type { Response } from "../common-types";
 
@@ -14,8 +14,7 @@ export default (client: LightcastAPIClient) => ({
    * @returns
    * @set API docs {@link https://docs.lightcast.dev/apis/classification#get-list-classifier-releases}
    */
-  classifierReleases: <R = Response>(cache?: ICacheInterface<string>) =>
-    client.get<void, R>(urlcat(baseUrl, ""), { cache }),
+  classifierReleases: <R = Response>() => client.get<void, R>(urlcat(baseUrl, "")),
 
   release: (release: string) => ({
     /**
@@ -23,8 +22,7 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release}
      */
-    availableDataSourceTypes: <R = Response>(cache?: ICacheInterface<string>) =>
-      client.get<void, R>(urlcat(baseUrl, release), { cache }),
+    availableDataSourceTypes: <R = Response>() => client.get<void, R>(urlcat(baseUrl, release)),
 
     /**
      * Returns a list of available operations for the given release and source.
@@ -32,8 +30,8 @@ export default (client: LightcastAPIClient) => ({
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release-source}
      */
-    operationsAvailableForSource: <R = Response>(source: string, cache?: ICacheInterface<string>) =>
-      client.get<void, R>(urlcat(baseUrl, `:release/:source`, { release, source }), { cache }),
+    operationsAvailableForSource: <R = Response>(source: string) =>
+      client.get<void, R>(urlcat(baseUrl, `:release/:source`, { release, source })),
 
     /**
      * Classifies title and description to specialized occupation.
@@ -42,9 +40,8 @@ export default (client: LightcastAPIClient) => ({
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#classifications-release-lot-classify}
      */
     lotClassify: <R = Response, B = { title: string; limit?: number; fields?: string[]; description?: string }>(
-      body: B,
-      cache?: ICacheInterface<string>
-    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/lot/classify`, { release }), body, { cache }),
+      body: B
+    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/lot/classify`, { release }), body),
 
     /**
      * Performs the requested classification operation on postings related data, including company name, title, and job description. A range of classifications may be performed on the input based on the requested outputs.
@@ -63,17 +60,15 @@ export default (client: LightcastAPIClient) => ({
         outputs: string[];
       }
     >(
-      body: B,
-      cache?: ICacheInterface<string>
-    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/postings/classify`, { release }), body, { cache }),
+      body: B
+    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/postings/classify`, { release }), body),
 
     /**
      * Get metadata for requested version of skills extractor.
      * @returns
      * @see API docs {@link https://docs.lightcast.dev/apis/classification#get-extract-skills-metadata}
      */
-    extractSkillsMeta: <R = Response>(cache?: ICacheInterface<string>) =>
-      client.get<void, R>(urlcat(baseUrl, `:release/skills/extract`, { release }), { cache }),
+    extractSkillsMeta: <R = Response>() => client.get<void, R>(urlcat(baseUrl, `:release/skills/extract`, { release })),
 
     /**
      * Extract an array of Lightcast Skills from the provided text.
@@ -91,8 +86,7 @@ export default (client: LightcastAPIClient) => ({
         outputLocale: string;
       }
     >(
-      body: B,
-      cache?: ICacheInterface<string>
-    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/skills/classify`, { release }), body, { cache }),
+      body: B
+    ) => client.post<void, B, R>(urlcat(baseUrl, `:release/skills/classify`, { release }), body),
   }),
 });
