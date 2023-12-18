@@ -4,6 +4,13 @@ import type { Status, Response } from "../common-types";
 
 const baseUrl = "https://emsiservices.com/skills";
 
+import { Client as SkillsClient } from "./skills";
+import skillsDef from "./skills.json";
+import OpenAPIClientAxios, { Document } from "openapi-client-axios";
+
+const api = new OpenAPIClientAxios({ definition: skillsDef as Document });
+export const client = api.initSync<SkillsClient>();
+
 /**
  * @see API docs {@link https://docs.lightcast.dev/apis/skills}
  */

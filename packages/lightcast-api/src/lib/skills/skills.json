@@ -1,0 +1,481 @@
+{
+  "openapi": "3.0.2",
+  "info": { "title": "API Title", "version": "1.0" },
+  "servers": [{ "url": "https://emsiservices.com/skills" }],
+  "paths": {
+    "/status": {
+      "get": {
+        "operationId": "status",
+        "description": "Health check endpoint",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": ["healthy", "message"],
+                      "properties": {
+                        "healthy": { "type": "boolean" },
+                        "message": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta": {
+      "get": {
+        "operationId": "meta",
+        "description": "Get service metadata, including latest version, and attribution text. Caching is encouraged, but the metadata can change weekly.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": ["attribution"],
+                      "properties": {
+                        "attribution": {
+                          "type": "object",
+                          "required": ["title", "body", "latestVersion"],
+                          "properties": {
+                            "title": { "type": "string" },
+                            "body": { "type": "string" },
+                            "latestVersion": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions": {
+      "get": {
+        "operationId": "versions",
+        "description": "Version latest can be used as an alias to the latest skill version. See our Skills Taxonomy Changelog for the updates in each version.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "versionMeta",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/changes": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "versionChanges",
+        "description": "Get version specific changes.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/related": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "post": {
+        "operationId": "related",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["ids"],
+                "properties": {
+                  "ids": { "type": "array", "items": { "type": "string" } },
+                  "limit": { "type": "integer" },
+                  "fields": { "type": "array", "items": { "type": "string" } },
+                  "typeId": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/skills/{skill_id}": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        },
+        {
+          "name": "skill_id",
+          "in": "path",
+          "description": "Skill ID.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "byId",
+        "description": " Get a skill by ID.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/skills": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "listAll",
+        "description": "Returns a list of all skills in {version} sorted by skill name",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "A query string of skill names to search for.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "typeIds",
+            "in": "query",
+            "description": "A comma-separated list of type IDs to filter the skills list. See /versions/{version} for available filters. By default all types are included.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "A comma-separated list of items to include. See /versions/{version} for available keys that could be included. By default id, name, type, and infoUrl are included.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit the number of skills returned in the response.",
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": ["attributions", "data"],
+                      "properties": {
+                        "attributions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": ["name", "text"],
+                            "properties": {
+                              "name": { "type": "string" },
+                              "text": { "type": "string" }
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "object",
+                                "required": ["id", "name"],
+                                "properties": {
+                                  "id": { "type": "string" },
+                                  "name": { "type": "string" }
+                                }
+                              },
+                              "id": { "type": "string" },
+                              "name": { "type": "string" },
+                              "tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": ["key", "value"],
+                                  "properties": {
+                                    "key": { "type": "string" },
+                                    "value": { "type": "string" }
+                                  }
+                                }
+                              },
+                              "infoUrl": { "type": "string" },
+                              "isSoftware": { "type": "boolean" },
+                              "isLanguage": { "type": "boolean" },
+                              "description": { "type": "string", "nullable": true },
+                              "descriptionSource": { "type": "string", "nullable": true },
+                              "category": {
+                                "type": "object",
+                                "nullable": true,
+                                "required": ["id", "name"],
+                                "properties": {
+                                  "id": { "type": "integer" },
+                                  "name": { "type": "string" }
+                                }
+                              },
+                              "subcategory": {
+                                "type": "object",
+                                "nullable": true,
+                                "required": ["id", "name"],
+                                "properties": {
+                                  "id": { "type": "integer" },
+                                  "name": { "type": "string" }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "requested",
+        "description": "List requested skills",
+        "parameters": [
+          {
+            "name": "typeIds",
+            "in": "query",
+            "description": "A comma-separated list of type IDs to filter the skills list. See /versions/{version} for available filters. By default all types are included.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "A comma-separated list of items to include. See /versions/{version} for available keys that could be included. By default id, name, type, and infoUrl are included.",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": ["attributions", "data"],
+                      "properties": {
+                        "attributions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": ["name", "text"],
+                            "properties": {
+                              "name": { "type": "string" },
+                              "text": { "type": "string" }
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "object",
+                                "required": ["id", "name"],
+                                "properties": {
+                                  "id": { "type": "string" },
+                                  "name": { "type": "string" }
+                                }
+                              },
+                              "id": { "type": "string" },
+                              "name": { "type": "string" },
+                              "tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": ["key", "value"],
+                                  "properties": {
+                                    "key": { "type": "string" },
+                                    "value": { "type": "string" }
+                                  }
+                                }
+                              },
+                              "infoUrl": { "type": "string" },
+                              "isSoftware": { "type": "boolean" },
+                              "isLanguage": { "type": "boolean" },
+                              "description": { "type": "string", "nullable": true },
+                              "descriptionSource": { "type": "string", "nullable": true },
+                              "category": {
+                                "type": "object",
+                                "nullable": true,
+                                "required": ["id", "name"],
+                                "properties": {
+                                  "id": { "type": "integer" },
+                                  "name": { "type": "string" }
+                                }
+                              },
+                              "subcategory": {
+                                "type": "object",
+                                "nullable": true,
+                                "required": ["id", "name"],
+                                "properties": {
+                                  "id": { "type": "integer" },
+                                  "name": { "type": "string" }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

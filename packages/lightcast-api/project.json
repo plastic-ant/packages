@@ -58,6 +58,9 @@
         "jestConfig": "packages/lightcast-api/jest.config.ts"
       }
     },
+    "prebuild": {
+      "command": "npx typegen packages/lightcast-api/examples/openapi/skills.json > /packages/packages/lightcast-api/examples/openapi/skills.d.ts"
+    },
     "build": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],

@@ -17,11 +17,20 @@
   },
   "targetDefaults": {
     "generate-schemas": {
-      "dependsOn": ["generate-schemas", "^generate-schemas"],
+      "dependsOn": ["generate-schemas"],
       "inputs": ["production", "^production"]
     },
     "release": { "dependsOn": ["^release"] },
-    "build": { "cache": true, "dependsOn": ["generate-schemas", "^build"], "inputs": ["production", "^production"] },
+    "prebuild": {
+      "cache": true,
+      "dependsOn": ["generate-schemas", "^prebuild"],
+      "inputs": ["production", "^production"]
+    },
+    "build": {
+      "cache": true,
+      "dependsOn": ["prebuild", "^build"],
+      "inputs": ["production", "^production"]
+    },
     "lint": {
       "cache": true,
       "inputs": [
