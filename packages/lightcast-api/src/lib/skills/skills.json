@@ -161,6 +161,153 @@
         }
       }
     },
+    "/versions/{version}/extract": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "post": {
+        "description": "Extract skills from document",
+        "operationId": "extract",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Filter out skills with a confidence value lower than this threshold (this query param does not apply for JSON requests)",
+            "name": "confidenceThreshold",
+            "in": "query",
+            "schema": { "type": "number", "minimum": 0, "maximum": 1, "default": 0.5 }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { "type": "string", "description": "Document to be used in the skills extraction process" },
+                  "confidenceThreshold": {
+                    "type": "number",
+                    "description": "Filter out skills with a confidence value lower than this threshold",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": { "description": "Invalid request body" },
+          "404": { "description": "Invalid url" },
+          "413": { "description": "Request size too large" },
+          "415": {
+            "description": "Accepted Content-Type(s): 'application/json', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/extract/trace": {
+      "description": "Returns a list of skills found in a document with its trace information, including contextual classification data found in the document that resulted in a skill match, and optionally the normalized text from the document used to extract skills.",
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "post": {
+        "description": "Extract skills with source tracing",
+        "operationId": "extractTrace",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Include normalized text used in the extraction process in the response (this query param does not apply for JSON requests)",
+            "name": "includeNormalizedText",
+            "in": "query",
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { "type": "string", "description": "Document to be used in the skills extraction process" },
+                  "confidenceThreshold": {
+                    "type": "number",
+                    "description": "Filter out skills with a confidence value lower than this threshold",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": { "description": "Invalid request body" },
+          "404": { "description": "Invalid url" },
+          "413": { "description": "Request size too large" },
+          "415": {
+            "description": "Accepted Content-Type(s): 'application/json', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/versions/{version}/related": {
       "parameters": [
         {

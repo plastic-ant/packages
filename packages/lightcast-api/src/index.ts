@@ -1,7 +1,7 @@
 import jobPostingsAPI from "./lib/jpa";
 import canadaJobPostingsAPI from "./lib/ca-jpa";
 import classificationAPI from "./lib/classification";
-import skillsAPI, { client as SkillsClient } from "./lib/skills";
+import { client as SkillsClient } from "./lib/skills";
 import careerPathwaysAPI from "./lib/career-pathways";
 import salaryBoostingSkillsAPI from "./lib/salary-boosting-skills";
 import ddnAPI from "./lib/ddn";
@@ -28,8 +28,7 @@ export type CredentialsFunction = () => Promise<
 >;
 
 export class LightcastAPIClient {
-  readonly skills = skillsAPI(this);
-  readonly skillsv2 = SkillsClient;
+  readonly skills = SkillsClient;
   readonly jpa = jobPostingsAPI(this);
   readonly cajpa = canadaJobPostingsAPI(this);
   readonly classification = classificationAPI(this);
@@ -50,7 +49,7 @@ export class LightcastAPIClient {
    */
   constructor(public credentials?: CredentialsFunction, ...args: Parameters<typeof axios.create>) {
     this.client = axios.create({ responseType: "json", ...args });
-    this.applyInterceptors(this.skillsv2);
+    this.applyInterceptors(this.skills);
   }
 
   /**

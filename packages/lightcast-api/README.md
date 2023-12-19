@@ -30,6 +30,12 @@ npm install --save @plastic-ant/lightcast-api
 If you'd like to contribute, please fork the repository and use a feature
 branch. Pull requests are welcome.
 
+## OpenAPI / Swagger
+
+If just want the endpoint specs they can be found here:
+
+- [Skills](/packages/lightcast-api/src/lib/skills/skills.json)
+
 ## Links
 
 - Project homepage: https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api
