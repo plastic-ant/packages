@@ -1,10 +1,12 @@
 {
   "name": "lightcast-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/lightcast-api/src",
+  "sourceRoot": "{projectRoot}/src",
   "projectType": "library",
   "tags": [],
   "targets": {
+    "lint": {},
+    "test": {},
     "release": {
       "dependsOn": ["test", "lint"],
       "executor": "@jscutlery/semver:version",
@@ -32,14 +34,16 @@
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "buildTarget": "build",
-        "distFolderPath": "dist/packages/lightcast-api",
+        "distFolderPath": "dist/{projectRoot}",
         "access": "public"
       }
     },
     "examples": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "skills",
-      "options": { "cwd": "packages/lightcast-api/examples" },
+      "options": {
+        "cwd": "{projectRoot}/examples"
+      },
       "configurations": {
         "salary-boosting-skills": { "command": "npx ts-node --project ../tsconfig.lib.json salary-boosting-skills.ts" },
         "raw": { "command": "npx ts-node --project ../tsconfig.lib.json raw.ts" },
@@ -47,40 +51,37 @@
         "ca-jpa": { "command": "npx ts-node --project ../tsconfig.lib.json ca-jpa.ts" }
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "packages/lightcast-api/jest.config.ts"
-      }
-    },
     "prebuild": {
-      "command": "npx typegen packages/lightcast-api/examples/openapi/skills.json > /packages/packages/lightcast-api/examples/openapi/skills.d.ts"
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "npx typegen src/lib/ca-jpa/ca-jpa-postings.json > src/lib/ca-jpa/ca-jpa-postings.d.ts",
+          "npx typegen src/lib/skills/skills.json > src/lib/skills/skills.d.ts"
+        ]
+      }
     },
     "build": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "main": "packages/lightcast-api/src/index.ts",
-        "outputPath": "dist/packages/lightcast-api",
-        "tsConfig": "packages/lightcast-api/tsconfig.lib.json",
+        "main": "{projectRoot}/src/index.ts",
+        "outputPath": "dist/{projectRoot}",
+        "tsConfig": "{projectRoot}/tsconfig.lib.json",
         "compiler": "tsc",
-        "project": "packages/lightcast-api/package.json",
+        "project": "{projectRoot}/package.json",
         "format": ["cjs", "esm"],
         "deleteOutputPath": true,
+        "generateExportsField": true,
         "assets": [
           {
-            "glob": "packages/lightcast-api/LICENSE",
+            "glob": "{projectRoot}/LICENSE",
             "input": ".",
             "output": "."
           },
           {
-            "glob": "packages/lightcast-api/README.md",
+            "glob": "{projectRoot}/README.md",
             "input": ".",
             "output": "."
           }

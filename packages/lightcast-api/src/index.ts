@@ -1,7 +1,7 @@
 import jobPostingsAPI from "./lib/jpa";
 import canadaJobPostingsAPI from "./lib/ca-jpa";
 import classificationAPI from "./lib/classification";
-import { client as SkillsClient } from "./lib/skills";
+import { client as skillsClient } from "./lib/skills";
 import careerPathwaysAPI from "./lib/career-pathways";
 import salaryBoostingSkillsAPI from "./lib/salary-boosting-skills";
 import ddnAPI from "./lib/ddn";
@@ -28,7 +28,7 @@ export type CredentialsFunction = () => Promise<
 >;
 
 export class LightcastAPIClient {
-  readonly skills = SkillsClient;
+  readonly skills = skillsClient;
   readonly jpa = jobPostingsAPI(this);
   readonly cajpa = canadaJobPostingsAPI(this);
   readonly classification = classificationAPI(this);
@@ -40,7 +40,7 @@ export class LightcastAPIClient {
 
   readonly client: AxiosInstance;
   private token: string | undefined = undefined;
-  private expiresIn: number = 0;
+  //private expiresIn: number = 0;
 
   /**
    *
@@ -110,8 +110,8 @@ export class LightcastAPIClient {
       this.token = value;
     } else {
       const response = await this.client.post("https://auth.emsicloud.com/connect/token", new URLSearchParams(value));
-      const { expires_in, access_token } = response.data;
-      this.expiresIn = Date.now() + expires_in * 1000;
+      const { /*expires_in,*/ access_token } = response.data;
+      //this.expiresIn = Date.now() + expires_in * 1000;
       this.client.defaults.headers.common = { Authorization: `Bearer ${access_token}` };
       this.token = access_token;
       /*if (Date.now() >= this.expiresIn) {

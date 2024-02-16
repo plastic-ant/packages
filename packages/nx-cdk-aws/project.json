@@ -52,13 +52,12 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "packages/nx-cdk-aws/**/*.ts",
-          "packages/nx-cdk-aws/package.json",
-          "packages/nx-cdk-aws/executors.json",
-          "packages/nx-cdk-aws/generators.json"
+          "{projectRoot}/**/*.ts",
+          "{projectRoot}/package.json",
+          "{projectRoot}/executors.json",
+          "{projectRoot}/generators.json"
         ]
       }
     },

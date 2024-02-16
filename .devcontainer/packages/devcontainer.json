@@ -9,6 +9,7 @@
   "remoteEnv": { "NODE_ENV": "development", "TSS_REMOTE_DEBUG": "9229" },
   "containerEnv": {
     "IS_CONTAINER": "1",
+    "NX_ADD_PLUGINS": "false",
     "NX_VERBOSE_LOGGING": "false",
     "NX_NO_CLOUD": "true"
   },
@@ -20,12 +21,13 @@
       "settings": {
         // Misc
         "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
-        "eslint.validate": ["json", "typescriptreact", "typescript", "javascript", "javascriptreact"],
-        "eslint.experimental.useFlatConfig": false,
+        //"eslint.experimental.useFlatConfig": false,
         "typescript.tsdk": "./node_modules/typescript/lib",
         "typescript.tsserver.useSyntaxServer": "auto",
         "typescript.tsserver.log": "off",
         "explorer.compactFolders": false,
+        // Eslint
+        "eslint.validate": ["json", "jsonc", "javascript", "javascriptreact", "typescript", "typescriptreact"],
         // Git
         "[git-commit]": { "editor.rulers": [50, 72] },
         "git.commandsToLog": ["pull", "push", "post-merge", "pre-commit", "post-checkout"],
@@ -52,7 +54,12 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         // Npm
         "npm.scriptExplorerAction": "open",
-        "npm.packageManager": "pnpm",
+        "npm.packageManager": "yarn",
+        // Files:
+        "files.associations": {
+          "*.json": "jsonc",
+          "package.json": "json"
+        },
         "files.exclude": {
           "**/.git": true,
           "**/.svn": true,

@@ -5,7 +5,7 @@
 //const baseUrl = "https://emsiservices.com/skills";
 
 import { Client as SkillsClient } from "./skills";
-import skillsDef from "./skills.json";
+import * as skillsDef from "./skills.json";
 import OpenAPIClientAxios, { Document } from "openapi-client-axios";
 
 const api = new OpenAPIClientAxios({ definition: skillsDef as Document });
