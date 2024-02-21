@@ -7,37 +7,14 @@
   "targets": {
     "lint": {},
     "test": {},
-    "release": {
-      "dependsOn": ["test", "lint"],
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "preset": "conventional",
-        "push": true,
-        "tagPrefix": "{projectName}-",
-        "postTargets": ["npm", "github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "{tag}",
-        "notes": "{notes}"
-      }
-    },
-    "npm-login": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npm login"
-      }
-    },
-    "npm": {
+    /*"npm": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "buildTarget": "build",
         "distFolderPath": "dist/{projectRoot}",
         "access": "public"
       }
-    },
+    },*/
     "examples": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "skills",

@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "lightcast-api": ["packages/lightcast-api/src/index.ts"]
+      "lightcast-api": ["packages/lightcast-api/src/index.ts"],
+      "nx-cdk-aws": ["packages/nx-cdk-aws/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

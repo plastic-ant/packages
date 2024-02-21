@@ -20,6 +20,13 @@
       "!{projectRoot}/.eslintrc.json"
     ]
   },
+  "release": {
+    "releaseTagPattern": "{projectName}-{version}",
+    "projects": ["lightcast-api"],
+    "version": {
+      "conventionalCommits": true
+    }
+  },
   "targetDefaults": {
     "generate-schemas": {
       "dependsOn": ["generate-schemas"],
