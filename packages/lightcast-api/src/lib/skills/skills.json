@@ -1,0 +1,474 @@
+{
+  "openapi": "3.0.2",
+  "info": { "title": "Lightcast Skills API", "version": "1.0" },
+  "servers": [{ "url": "https://emsiservices.com/skills" }],
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/status": {
+      "get": {
+        "operationId": "status",
+        "description": "Health check endpoint",
+        "security": [{ "token": [] }],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": ["healthy", "message"],
+                      "properties": {
+                        "healthy": { "type": "boolean" },
+                        "message": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meta": {
+      "get": {
+        "operationId": "meta",
+        "description": "Get service metadata, including latest version, and attribution text. Caching is encouraged, but the metadata can change weekly.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions": {
+      "get": {
+        "operationId": "versions",
+        "description": "Version latest can be used as an alias to the latest skill version. See our Skills Taxonomy Changelog for the updates in each version.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "versionMeta",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/changes": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "versionChanges",
+        "description": "Get version specific changes.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/extract": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "post": {
+        "description": "Extract skills from document",
+        "operationId": "extract",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Filter out skills with a confidence value lower than this threshold (this query param does not apply for JSON requests)",
+            "name": "confidenceThreshold",
+            "in": "query",
+            "schema": { "type": "number", "minimum": 0, "maximum": 1, "default": 0.5 }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { "type": "string", "description": "Document to be used in the skills extraction process" },
+                  "confidenceThreshold": {
+                    "type": "number",
+                    "description": "Filter out skills with a confidence value lower than this threshold",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": { "description": "Invalid request body" },
+          "404": { "description": "Invalid url" },
+          "413": { "description": "Request size too large" },
+          "415": {
+            "description": "Accepted Content-Type(s): 'application/json', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/extract/trace": {
+      "description": "Returns a list of skills found in a document with its trace information, including contextual classification data found in the document that resulted in a skill match, and optionally the normalized text from the document used to extract skills.",
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "post": {
+        "description": "Extract skills with source tracing",
+        "operationId": "extractTrace",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Include normalized text used in the extraction process in the response (this query param does not apply for JSON requests)",
+            "name": "includeNormalizedText",
+            "in": "query",
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { "type": "string", "description": "Document to be used in the skills extraction process" },
+                  "confidenceThreshold": {
+                    "type": "number",
+                    "description": "Filter out skills with a confidence value lower than this threshold",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": { "description": "Invalid request body" },
+          "404": { "description": "Invalid url" },
+          "413": { "description": "Request size too large" },
+          "415": {
+            "description": "Accepted Content-Type(s): 'application/json', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/related": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "post": {
+        "operationId": "related",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["ids"],
+                "properties": {
+                  "ids": { "type": "array", "items": { "type": "string" } },
+                  "limit": { "type": "integer" },
+                  "fields": { "type": "array", "items": { "type": "string" } },
+                  "typeId": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/skills/{skill_id}": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        },
+        {
+          "name": "skill_id",
+          "in": "path",
+          "description": "Skill ID.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "byId",
+        "description": " Get a skill by ID.",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{version}/skills": {
+      "parameters": [
+        {
+          "name": "version",
+          "in": "path",
+          "description": "The skills taxonomy version.",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "operationId": "listAll",
+        "description": "Returns a list of all skills in {version} sorted by skill name",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "A query string of skill names to search for.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "typeIds",
+            "in": "query",
+            "description": "A comma-separated list of type IDs to filter the skills list. See /versions/{version} for available filters. By default all types are included.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "A comma-separated list of items to include. See /versions/{version} for available keys that could be included. By default id, name, type, and infoUrl are included.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit the number of skills returned in the response.",
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "requested",
+        "description": "List requested skills",
+        "parameters": [
+          {
+            "name": "typeIds",
+            "in": "query",
+            "description": "A comma-separated list of type IDs to filter the skills list. See /versions/{version} for available filters. By default all types are included.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "A comma-separated list of items to include. See /versions/{version} for available keys that could be included. By default id, name, type, and infoUrl are included.",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data"],
+                  "properties": {
+                    "data": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

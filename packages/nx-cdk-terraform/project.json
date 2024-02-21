@@ -49,9 +49,8 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/nx-cdk-terraform/**/*.ts", "packages/nx-cdk-terraform/package.json"]
+        "lintFilePatterns": ["{projectRoot}/**/*.ts", "{projectRoot}/package.json"]
       }
     },
     "test": {

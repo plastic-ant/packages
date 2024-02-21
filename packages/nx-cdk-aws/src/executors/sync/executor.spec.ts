@@ -33,7 +33,7 @@ describe("nx-cdk-aws:synth", () => {
 
     options = {
       app: path.join(projectConfiguration.root, "bin", "app.ts"),
-      tsConfig: path.join(projectConfiguration.root, "tsconfig.app.json"),
+      //tsconfig: path.join(projectConfiguration.root, "tsconfig.app.json"),
       debug: true,
       verbose: true,
       useCliLib: false,

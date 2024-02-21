@@ -4,6 +4,7 @@
     "christian-kohler.path-intellisense",
     "nrwl.angular-console",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "firsttris.vscode-jest-runner"
   ]
 }

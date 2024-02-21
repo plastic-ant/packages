@@ -2,9 +2,7 @@
   "name": "@plastic-ant/lightcast-api",
   "description": "An unofficial helper package for accessing the Lightcast API endpoints",
   "version": "0.0.1-alpha.14",
-  "type": "commonjs",
   "license": "MIT",
-  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api"
@@ -21,9 +19,17 @@
     "careers",
     "occupations"
   ],
+  "devDependencies": {
+    "openapi-client-axios-typegen": "^7.6.0",
+    "openapicmd": "^2.3.1"
+  },
   "dependencies": {
-    "type-fest": "^4.8.3",
-    "urlcat": "^3.1.0",
-    "axios": "^1.6.2"
+    "axios": "^1.6.7",
+    "axios-cache-interceptor": "^1.5.1",
+    "dotenv": "^16.4.5",
+    "env-var": "^7.4.1",
+    "openapi-client-axios": "^7.5.4",
+    "type-fest": "^4.10.2",
+    "urlcat": "^3.1.0"
   }
 }

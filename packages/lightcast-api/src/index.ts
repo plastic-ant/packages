@@ -1,7 +1,7 @@
 import jobPostingsAPI from "./lib/jpa";
 import canadaJobPostingsAPI from "./lib/ca-jpa";
 import classificationAPI from "./lib/classification";
-import skillsAPI from "./lib/skills";
+import { client as skillsClient } from "./lib/skills";
 import careerPathwaysAPI from "./lib/career-pathways";
 import salaryBoostingSkillsAPI from "./lib/salary-boosting-skills";
 import ddnAPI from "./lib/ddn";
@@ -28,7 +28,7 @@ export type CredentialsFunction = () => Promise<
 >;
 
 export class LightcastAPIClient {
-  readonly skills = skillsAPI(this);
+  readonly skills = skillsClient;
   readonly jpa = jobPostingsAPI(this);
   readonly cajpa = canadaJobPostingsAPI(this);
   readonly classification = classificationAPI(this);
@@ -39,7 +39,8 @@ export class LightcastAPIClient {
   readonly utils = { occupations: occupations(this) };
 
   readonly client: AxiosInstance;
-  private expiresIn: number = 0;
+  private token: string | undefined = undefined;
+  //private expiresIn: number = 0;
 
   /**
    *
@@ -48,12 +49,56 @@ export class LightcastAPIClient {
    */
   constructor(public credentials?: CredentialsFunction, ...args: Parameters<typeof axios.create>) {
     this.client = axios.create({ responseType: "json", ...args });
+    this.applyInterceptors(this.skills);
   }
 
+  /**
+   *
+   * @param instance
+   */
+  private applyInterceptors(instance: AxiosInstance) {
+    instance.interceptors.request.use(
+      async (config) => {
+        await this.refreshToken();
+        config.headers = config.headers.concat({ ...config.headers, Authorization: `Bearer ${this.token}` });
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+
+    instance.interceptors.response.use(
+      (res) => res,
+      async (err) => {
+        const originalConfig = err.config;
+
+        if (err.response) {
+          if (err.response.status === 401 && !originalConfig._retry) {
+            originalConfig._retry = true;
+            await this.refreshToken();
+            originalConfig.headers = originalConfig.headers.concat({
+              ...originalConfig.headers,
+              Authorization: `Bearer ${this.token}`,
+            });
+            return instance(originalConfig);
+          }
+        }
+
+        return Promise.reject(err);
+      }
+    );
+  }
+
+  /**
+   *
+   * @param creds
+   */
   setCredentials(creds: CredentialsFunction) {
     this.credentials = creds;
   }
 
+  /**
+   *
+   */
   private async refreshToken() {
     if (!this.credentials) {
       throw new Error(`Credentials function is missing. Use setCredentials() or pass through the constructor`);
@@ -62,13 +107,20 @@ export class LightcastAPIClient {
     const value = await this.credentials();
     if (typeof value === "string") {
       this.client.defaults.headers.common = { Authorization: `Bearer ${value}` };
+      this.token = value;
     } else {
-      if (Date.now() >= this.expiresIn) {
+      const response = await this.client.post("https://auth.emsicloud.com/connect/token", new URLSearchParams(value));
+      const { /*expires_in,*/ access_token } = response.data;
+      //this.expiresIn = Date.now() + expires_in * 1000;
+      this.client.defaults.headers.common = { Authorization: `Bearer ${access_token}` };
+      this.token = access_token;
+      /*if (Date.now() >= this.expiresIn) {
         const response = await this.client.post("https://auth.emsicloud.com/connect/token", new URLSearchParams(value));
         const { expires_in, access_token } = response.data;
         this.expiresIn = Date.now() + expires_in * 1000;
         this.client.defaults.headers.common = { Authorization: `Bearer ${access_token}` };
-      }
+        this.token = access_token;
+      }*/
     }
   }
 

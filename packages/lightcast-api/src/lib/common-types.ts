@@ -6,5 +6,5 @@ export interface Status {
 }
 
 export type Response<R = JsonValue> = {
-  data: R;
+  data: NonNullable<R>;
 };
