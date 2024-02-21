@@ -24,16 +24,9 @@
     }
   },
   "targetDefaults": {
-    "generate-schemas": {
-      "dependsOn": ["generate-schemas"],
-      "inputs": ["production", "^production"]
-    },
-    //"release": {
-    // "dependsOn": ["^release"]
-    //},
     "prebuild": {
       "cache": true,
-      "dependsOn": ["generate-schemas", "^prebuild"],
+      "dependsOn": ["^prebuild"],
       "inputs": ["production", "^production"]
     },
     "build": {
@@ -42,6 +35,7 @@
       "inputs": ["production", "^production"]
     },
     "lint": {
+      "dependsOn": ["prebuild"],
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json",
@@ -53,10 +47,14 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["{projectRoot}/**/*.{ts,tsx,jsx,mjs,cjs,js,svelte}", "{projectRoot}/**/*.json"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
       }
     },
     "test": {
-      "dependsOn": ["update-schemas"],
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true,
       "executor": "@nx/jest:jest",
