@@ -2,7 +2,11 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nx", "jsx-a11y"],
-  "env": { "browser": true, "node": true, "es2021": true },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -41,7 +45,9 @@
         "@typescript-eslint/no-empty-interface": "warn",
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/ban-ts-comment": "error",
-        "@typescript-eslint/no-explicit-any": "warn"
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     {
@@ -50,7 +56,9 @@
       "rules": {
         "prefer-const": ["error"],
         "no-var": ["error"],
-        "no-unused-vars": ["warn"]
+        "no-unused-vars": ["warn"],
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     {
@@ -75,7 +83,9 @@
     },
     {
       "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
-      "env": { "jest": true },
+      "env": {
+        "jest": true
+      },
       "rules": {}
     }
   ]

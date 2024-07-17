@@ -1,26 +1,27 @@
 {
   "name": "@plastic-ant/nx-cdk-aws",
-  "description": "",
-  "version": "0.0.1",
-  "type": "commonjs",
+  "version": "0.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/plastic-ant/packages/tree/main/packages/nx-cdk-aws"
   },
   "author": "Michael Devereux",
-  "main": "./src/index.js",
-  "executors": "./executors.json",
+  "main": "src/index.js",
   "generators": "./generators.json",
-  "keywords": [
-    "aws",
-    "cdk",
-    "nx",
-    "plugin"
-  ],
+  "executors": "./executors.json",
+  "devDependencies": {
+    "@aws-cdk/cli-lib-alpha": "^2.149.0-alpha.0",
+    "json-schema-to-typescript": "^14.1.0"
+  },
   "dependencies": {
-    "@nx/devkit": "18.0.4",
-    "change-case": "^5.4.3",
-    "tslib": "^2.3.0"
+    "@nx/devkit": "19.4.4",
+    "@nx/js": "19.4.4",
+    "nx": "19.4.4"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./plugin": "./plugin.js",
+    "./package.json": "./package.json"
   }
 }

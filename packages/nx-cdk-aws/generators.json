@@ -1,14 +1,5 @@
 {
-  "generators": {
-    "app": {
-      "factory": "./src/generators/app/generator",
-      "schema": "./src/generators/app/schema.json",
-      "description": "Generates basic CDK app"
-    },
-    "init": {
-      "factory": "./src/generators/init/generator",
-      "schema": "./src/generators/init/schema.json",
-      "description": "init generator"
-    }
-  }
+  "$schema": "http://json-schema.org/schema",
+  "version": "0.0.1",
+  "generators": {}
 }

@@ -20,16 +20,16 @@
     "occupations"
   ],
   "devDependencies": {
-    "openapi-client-axios-typegen": "^7.6.0",
-    "openapicmd": "^2.3.1"
+    "openapi-client-axios-typegen": "^7.6.2",
+    "openapicmd": "^2.3.2"
   },
   "dependencies": {
-    "axios": "^1.6.7",
-    "axios-cache-interceptor": "^1.5.1",
+    "axios": "^1.7.2",
+    "axios-cache-interceptor": "^1.5.3",
     "dotenv": "^16.4.5",
-    "env-var": "^7.4.1",
-    "openapi-client-axios": "^7.5.4",
-    "type-fest": "^4.10.2",
+    "env-var": "^7.5.0",
+    "openapi-client-axios": "^7.5.5",
+    "type-fest": "^4.22.0",
     "urlcat": "^3.1.0"
   }
 }

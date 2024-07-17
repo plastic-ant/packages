@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   repo:
-    env_file:
-      - .env.local
+    #env_file:
+    #  - .env.local
     build:
       context: ../
       dockerfile: ../.devcontainer/packages/dockerfile

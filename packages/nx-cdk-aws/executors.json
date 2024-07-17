@@ -1,19 +1,4 @@
 {
-  "executors": {
-    "sync": {
-      "implementation": "./src/executors/sync/executor",
-      "schema": "./src/executors/sync/schema.json",
-      "description": "sync executor"
-    },
-    "deploy": {
-      "implementation": "./src/executors/deploy/executor",
-      "schema": "./src/executors/deploy/schema.json",
-      "description": "deploy executor"
-    },
-    "bootstrap": {
-      "implementation": "./src/executors/bootstrap/executor",
-      "schema": "./src/executors/bootstrap/schema.json",
-      "description": "bootstrap executor"
-    }
-  }
+  "$schema": "http://json-schema.org/schema",
+  "executors": {}
 }

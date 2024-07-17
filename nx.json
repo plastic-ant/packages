@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "workspaceLayout": { "appsDir": "projects", "libsDir": "libs" },
+  "workspaceLayout": { "appsDir": "packages", "libsDir": "packages" },
   "cli": { "packageManager": "yarn" },
   "defaultProject": "none!",
   "namedInputs": {
@@ -18,11 +18,12 @@
   "release": {
     "projectsRelationship": "independent",
     "releaseTagPattern": "{projectName}-{version}",
-    "projects": ["lightcast-api"],
+    "projects": ["lightcast-api", "nx-cdk-aws"],
     "version": {
       "conventionalCommits": true
     }
   },
+  "plugins": [],
   "targetDefaults": {
     "prebuild": {
       "cache": true,

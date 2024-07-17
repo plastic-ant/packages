@@ -28,6 +28,7 @@ node_modules
 
 .pnpm-store
 .nx/cache
+.nx/workspace-data
 
 .pnp.*
 .yarn/*

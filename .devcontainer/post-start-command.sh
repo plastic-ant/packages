@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-npm i -g nx 
-#pnpm@latest-8
-#pnpm install
-yarn install
 
+sudo apt-get update && sudo apt-get -y upgrade
+
+yarn
+
+NX_VERSION=$(node -p "require('./node_modules/nx/package.json').version")
+
+npm i -g npm nx@$NX_VERSION
