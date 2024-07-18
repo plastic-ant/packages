@@ -24,6 +24,10 @@
     "projectsRelationship": "independent",
     "releaseTagPattern": "{projectName}-{version}",
     "projects": ["lightcast-api", "nx-cdk-aws"],
+    "git": {
+      "commit": true,
+      "commitMessage": "chore({projectName}): released version {version}"
+    },
     "version": {
       "conventionalCommits": true
     },
