@@ -20,8 +20,8 @@
     "occupations"
   ],
   "publishConfig": {
-     "access": "public"
-   },
+    "access": "public"
+  },
   "devDependencies": {
     "openapi-client-axios-typegen": "^7.6.2",
     "openapicmd": "^2.3.2"
