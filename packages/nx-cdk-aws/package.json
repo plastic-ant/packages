@@ -12,6 +12,9 @@
     "cdk",
     "cloud"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Michael Devereux",
   "main": "src/index.js",
   "generators": "./generators.json",
