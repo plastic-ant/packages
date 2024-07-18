@@ -26,6 +26,11 @@
     "projects": ["lightcast-api", "nx-cdk-aws"],
     "version": {
       "conventionalCommits": true
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
     }
   },
   "plugins": [
@@ -35,6 +40,11 @@
     }
   ],
   "targetDefaults": {
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    },
     "prebuild": {
       "cache": true,
       "dependsOn": ["^prebuild"],
