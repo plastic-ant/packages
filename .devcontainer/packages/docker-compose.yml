@@ -12,5 +12,5 @@ services:
     volumes:
       - ${HOME}${USERPROFILE}/.aws:/home/node/.aws
       - ${HOME}${USERPROFILE}/.ssh:/home/node/.ssh
-      - ../..:/packages:cached
+      - ../..:/pas-packages:cached
     command: sleep infinity

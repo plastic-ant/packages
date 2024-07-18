@@ -1,7 +1,12 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "workspaceLayout": { "appsDir": "packages", "libsDir": "packages" },
-  "cli": { "packageManager": "yarn" },
+  "workspaceLayout": {
+    "appsDir": "packages",
+    "libsDir": "packages"
+  },
+  "cli": {
+    "packageManager": "yarn"
+  },
   "defaultProject": "none!",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
@@ -23,7 +28,12 @@
       "conventionalCommits": true
     }
   },
-  "plugins": [],
+  "plugins": [
+    {
+      "plugin": "@plastic-ant/nx-cdk-aws",
+      "exclude": ["nx-cdk-aws"]
+    }
+  ],
   "targetDefaults": {
     "prebuild": {
       "cache": true,
@@ -74,7 +84,9 @@
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
-      "options": { "passWithNoTests": true },
+      "options": {
+        "passWithNoTests": true
+      },
       "configurations": {
         "ci": {
           "ci": true,

@@ -2,14 +2,14 @@
   "name": "🐋@plastic-ant/packages",
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "repo",
-  "workspaceFolder": "/packages",
+  "workspaceFolder": "/pas-packages",
   "remoteUser": "node",
   "initializeCommand": ".devcontainer/init-command.sh .devcontainer/packages",
   "postStartCommand": ".devcontainer/packages/post-start-command.sh",
   "remoteEnv": { "NODE_ENV": "development", "TSS_REMOTE_DEBUG": "9229" },
   "containerEnv": {
     "IS_CONTAINER": "1",
-    "NX_ADD_PLUGINS": "false",
+    "NX_ADD_PLUGINS": "true",
     "NX_VERBOSE_LOGGING": "false",
     "NX_NO_CLOUD": "true"
   },
