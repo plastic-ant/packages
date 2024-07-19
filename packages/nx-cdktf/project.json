@@ -1,10 +1,9 @@
 {
-  "name": "nx-cdk-aws",
+  "name": "nx-cdktf",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "{projectRoot}/src",
   "projectType": "library",
   "tags": ["#nx-plugin"],
-  //nx release publish -p=nx-cdk-aws
   "targets": {
     "test": {},
     "build": {

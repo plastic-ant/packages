@@ -44,6 +44,12 @@
     {
       "plugin": "@plastic-ant/nx-cdk-aws",
       "exclude": ["nx-cdk-aws"]
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
     }
   ],
   "targetDefaults": {

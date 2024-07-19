@@ -1,0 +1,31 @@
+{
+  "name": "@plastic-ant/nx-cdktf",
+  "version": "0.2.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plastic-ant/packages/tree/main/packages/nx-cdktf"
+  },
+  "keywords": [
+    "nx",
+    "aws",
+    "cdk",
+    "cloud"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Michael Devereux",
+  "main": "src/index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "devDependencies": {
+    "@aws-cdk/cli-lib-alpha": "^2.149.0-alpha.0",
+    "json-schema-to-typescript": "^14.1.0"
+  },
+  "dependencies": {
+    "@nx/devkit": "19.4.4",
+    "cdktf-cli": "^0.20.8",
+    "nx": "19.4.4"
+  }
+}

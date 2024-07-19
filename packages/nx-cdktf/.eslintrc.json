@@ -1,0 +1,30 @@
+{
+  "extends": ["../../.eslintrc.json"],
+  "ignorePatterns": ["!**/*", "node_modules"],
+  "overrides": [
+    {
+      "files": ["./package.json", "./generators.json", "./executors.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "@nx/nx-plugin-checks": "error"
+      }
+    },
+    {
+      "files": ["{package,project}.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "@nx/dependency-checks": [
+          "error",
+          {
+            "includeTransitiveDependencies": false,
+            "checkMissingDependencies": true,
+            "checkObsoleteDependencies": true,
+            "checkVersionMismatches": false,
+            "buildTargets": ["build"],
+            "ignoredDependencies": ["tslib", "cdktf-cli"]
+          }
+        ]
+      }
+    }
+  ]
+}
