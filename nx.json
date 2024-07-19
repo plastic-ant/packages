@@ -25,9 +25,6 @@
     "releaseTagPattern": "{projectName}-{version}",
     "projects": ["lightcast-api", "nx-cdk"],
     "version": {
-      "generatorOptions": {
-        "currentVersionResolver": "git-tag"
-      },
       "conventionalCommits": true,
       "git": {
         "commit": true,

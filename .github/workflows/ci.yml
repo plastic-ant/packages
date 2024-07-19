@@ -48,4 +48,4 @@ jobs:
       - name: Build
         run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
-      #- run: npx nx release
+      - run: npx nx release publish -p=nx-cdk --dry-run
