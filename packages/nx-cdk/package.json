@@ -20,11 +20,11 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "@aws-cdk/cli-lib-alpha": "^2.149.0-alpha.0",
     "json-schema-to-typescript": "^14.1.0"
   },
   "dependencies": {
     "@nx/devkit": "19.5.1",
+    "aws-cdk": "2.149.0",
     "nx": "19.5.1"
   }
 }

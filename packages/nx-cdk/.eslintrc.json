@@ -21,7 +21,7 @@
             "checkObsoleteDependencies": true,
             "checkVersionMismatches": false,
             "buildTargets": ["build"],
-            "ignoredDependencies": ["tslib"]
+            "ignoredDependencies": ["tslib", "aws-cdk"]
           }
         ]
       }

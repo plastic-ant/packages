@@ -22,11 +22,12 @@
   },
   "release": {
     "projectsRelationship": "independent",
-    "releaseTagPattern": "{projectName}-{version}",
+    "releaseTagPattern": "{projectName}-v{version}",
     "projects": ["lightcast-api", "nx-cdk"],
     "version": {
       "conventionalCommits": true,
       "git": {
+        "tag": true,
         "commit": true,
         "commitMessage": "chore({projectName}): released version {version}"
       }
