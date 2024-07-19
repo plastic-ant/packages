@@ -11,6 +11,7 @@ import { hashObject } from "nx/src/hasher/file-hasher";
 export interface CdktfPluginOptions {
   synthTargetName?: string;
   deployTargetName?: string;
+  getTargetName?: string;
   bootstrapTargetName?: string;
 }
 
@@ -20,6 +21,7 @@ function normalizeOptions(options: CdktfPluginOptions | undefined) {
   options ??= {};
   options.synthTargetName ??= "cdktf-synth";
   options.deployTargetName ??= "cdktf-deploy";
+  options.getTargetName ??= "cdktf-get";
   return options;
 }
 
@@ -113,6 +115,10 @@ function buildTargets(
     targets[options.deployTargetName] = deployTarget(options, projectRoot);
   }
 
+  if (options.getTargetName) {
+    targets[options.getTargetName] = getTarget(options, projectRoot);
+  }
+
   return { targets };
 }
 
@@ -136,6 +142,14 @@ function synthTarget(
 function deployTarget(options: CdktfPluginOptions, projectRoot: string): TargetConfiguration {
   return {
     command: `cdktf deploy`,
+    options: { cwd: joinPathFragments(projectRoot) },
+    inputs: [{ externalDependencies: ["cdktf-cli"] }],
+  };
+}
+
+function getTarget(options: CdktfPluginOptions, projectRoot: string): TargetConfiguration {
+  return {
+    command: `cdktf get --language=typescript`,
     options: { cwd: joinPathFragments(projectRoot) },
     inputs: [{ externalDependencies: ["cdktf-cli"] }],
   };
