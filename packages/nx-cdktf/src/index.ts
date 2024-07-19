@@ -18,9 +18,9 @@ type Targets = Awaited<ReturnType<typeof buildTargets>>;
 
 function normalizeOptions(options: CdktfPluginOptions | undefined) {
   options ??= {};
-  options.synthTargetName ??= "cdk-synth";
-  options.deployTargetName ??= "cdk-deploy";
-  options.bootstrapTargetName ??= "cdk-bootstrap";
+  options.synthTargetName ??= "cdktf-synth";
+  options.deployTargetName ??= "cdktf-deploy";
+  options.bootstrapTargetName ??= "cdktf-bootstrap";
   return options;
 }
 
@@ -142,7 +142,7 @@ function deployTarget(options: CdktfPluginOptions, projectRoot: string): TargetC
   return {
     command: `cdktf deploy`,
     options: { cwd: joinPathFragments(projectRoot) },
-    inputs: [{ externalDependencies: ["aws-cdk"] }],
+    inputs: [{ externalDependencies: ["cdktf-cli"] }],
   };
 }
 
@@ -150,7 +150,7 @@ function bootstrapTarget(projectRoot: string): TargetConfiguration {
   return {
     command: `cdktf bootstrap`,
     options: { cwd: joinPathFragments(projectRoot) },
-    inputs: [{ externalDependencies: ["aws-cdk"] }],
+    inputs: [{ externalDependencies: ["cdktf-cli"] }],
   };
 }
 
