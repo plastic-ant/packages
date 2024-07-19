@@ -24,8 +24,8 @@
     "json-schema-to-typescript": "^14.1.0"
   },
   "dependencies": {
-    "@nx/devkit": "19.4.4",
+    "@nx/devkit": "19.5.1",
     "cdktf-cli": "^0.20.8",
-    "nx": "19.4.4"
+    "nx": "19.5.1"
   }
 }
