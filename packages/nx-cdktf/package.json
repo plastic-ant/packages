@@ -8,7 +8,11 @@
   },
   "keywords": [
     "nx",
+    "terraform",
+    "azure",
     "aws",
+    "gcp",
+    "cdktf",
     "cdk",
     "cloud"
   ],
