@@ -1,10 +1,10 @@
 {
-  "name": "@plastic-ant/nx-cdk-aws",
+  "name": "@plastic-ant/nx-cdk",
   "version": "0.2.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/plastic-ant/packages/tree/main/packages/nx-cdk-aws"
+    "url": "https://github.com/plastic-ant/packages/tree/main/packages/nx-cdk"
   },
   "keywords": [
     "nx",

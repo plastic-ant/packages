@@ -23,7 +23,7 @@
   "release": {
     "projectsRelationship": "independent",
     "releaseTagPattern": "{projectName}-{version}",
-    "projects": ["lightcast-api", "nx-cdk-aws"],
+    "projects": ["lightcast-api", "nx-cdk"],
     "version": {
       "generatorOptions": {
         "currentVersionResolver": "git-tag"
@@ -42,8 +42,8 @@
   },
   "plugins": [
     {
-      "plugin": "@plastic-ant/nx-cdk-aws",
-      "exclude": ["nx-cdk-aws"]
+      "plugin": "@plastic-ant/nx-cdk",
+      "exclude": ["nx-cdk"]
     },
     {
       "plugin": "@nx/eslint/plugin",

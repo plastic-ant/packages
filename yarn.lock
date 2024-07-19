@@ -4288,9 +4288,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@plastic-ant/nx-cdk-aws@workspace:packages/nx-cdk-aws":
+"@plastic-ant/nx-cdk@workspace:packages/nx-cdk":
   version: 0.0.0-use.local
-  resolution: "@plastic-ant/nx-cdk-aws@workspace:packages/nx-cdk-aws"
+  resolution: "@plastic-ant/nx-cdk@workspace:packages/nx-cdk"
   dependencies:
     "@aws-cdk/cli-lib-alpha": "npm:^2.149.0-alpha.0"
     "@nx/devkit": "npm:19.5.1"

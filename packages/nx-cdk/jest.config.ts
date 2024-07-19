@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: "nx-cdk-aws",
+  displayName: "nx-cdk",
   preset: "../../jest.preset.js",
   globals: {},
   transform: {
