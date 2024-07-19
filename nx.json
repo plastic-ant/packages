@@ -44,6 +44,10 @@
       "exclude": ["nx-cdk"]
     },
     {
+      "plugin": "@plastic-ant/nx-cdktf",
+      "exclude": ["nx-cdktf"]
+    },
+    {
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
