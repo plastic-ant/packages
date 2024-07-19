@@ -33,7 +33,7 @@ function writeTargetsToCache(cachePath: string, results: Record<string, Targets>
 }
 
 export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
-  "**/cdk.json",
+  "**/cdktf.json",
   async (configFiles, options, context) => {
     const optionsHash = hashObject(options);
     const cachePath = join(workspaceDataDirectory, `pas-cdktf-${optionsHash}.hash`);
