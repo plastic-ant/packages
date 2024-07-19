@@ -4294,6 +4294,7 @@ __metadata:
   dependencies:
     "@nx/devkit": "npm:19.5.1"
     aws-cdk: "npm:2.149.0"
+    aws-cdk-lib: "npm:^2.149.0"
     json-schema-to-typescript: "npm:^14.1.0"
     nx: "npm:19.5.1"
   languageName: unknown

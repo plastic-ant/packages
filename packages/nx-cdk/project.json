@@ -4,8 +4,8 @@
   "sourceRoot": "{projectRoot}/src",
   "projectType": "library",
   "tags": ["#nx-plugin"],
-  //nx run nx-cdk:build
   //nx release version patch -p=nx-cdk --verbose --first-release
+  //nx run nx-cdk:build
   //nx release publish -p=nx-cdk --verbose --first-release
   "targets": {
     "test": {},

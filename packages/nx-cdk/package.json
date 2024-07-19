@@ -25,6 +25,7 @@
   "dependencies": {
     "@nx/devkit": "19.5.1",
     "aws-cdk": "2.149.0",
+    "aws-cdk-lib": "^2.149.0",
     "nx": "19.5.1"
   }
 }
