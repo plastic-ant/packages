@@ -20,7 +20,6 @@ function normalizeOptions(options: CdktfPluginOptions | undefined) {
   options ??= {};
   options.synthTargetName ??= "cdktf-synth";
   options.deployTargetName ??= "cdktf-deploy";
-  options.bootstrapTargetName ??= "cdktf-bootstrap";
   return options;
 }
 
@@ -57,7 +56,7 @@ export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
  * This function will change to the v2 function in Nx 20.
  */
 export const createNodes: CreateNodes<CdktfPluginOptions> = [
-  "**/cdk.json",
+  "**/cdktf.json",
   (...args) => {
     logger.warn(
       "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
@@ -114,10 +113,6 @@ function buildTargets(
     targets[options.deployTargetName] = deployTarget(options, projectRoot);
   }
 
-  if (options.bootstrapTargetName) {
-    targets[options.bootstrapTargetName] = bootstrapTarget(projectRoot);
-  }
-
   return { targets };
 }
 
@@ -141,14 +136,6 @@ function synthTarget(
 function deployTarget(options: CdktfPluginOptions, projectRoot: string): TargetConfiguration {
   return {
     command: `cdktf deploy`,
-    options: { cwd: joinPathFragments(projectRoot) },
-    inputs: [{ externalDependencies: ["cdktf-cli"] }],
-  };
-}
-
-function bootstrapTarget(projectRoot: string): TargetConfiguration {
-  return {
-    command: `cdktf bootstrap`,
     options: { cwd: joinPathFragments(projectRoot) },
     inputs: [{ externalDependencies: ["cdktf-cli"] }],
   };
