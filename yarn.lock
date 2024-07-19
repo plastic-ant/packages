@@ -111,7 +111,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-cdk/cli-lib-alpha@npm:2.149.0-alpha.0, @aws-cdk/cli-lib-alpha@npm:^2.149.0-alpha.0":
+"@aws-cdk/cli-lib-alpha@npm:2.149.0-alpha.0":
   version: 2.149.0-alpha.0
   resolution: "@aws-cdk/cli-lib-alpha@npm:2.149.0-alpha.0"
   checksum: 10/161fda8e3db497ccce95f78ddd6763fbb332f6a7efacf0ec656bcc03b32fcb61a7f46605971056858d3470c3bf7b905c3a2c950ce1d21736cf4cc0be95c6dc86
@@ -4304,7 +4304,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@plastic-ant/nx-cdktf@workspace:packages/nx-cdktf"
   dependencies:
-    "@aws-cdk/cli-lib-alpha": "npm:^2.149.0-alpha.0"
     "@nx/devkit": "npm:19.5.1"
     cdktf-cli: "npm:^0.20.8"
     json-schema-to-typescript: "npm:^14.1.0"
