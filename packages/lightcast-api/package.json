@@ -1,7 +1,7 @@
 {
   "name": "@plastic-ant/lightcast-api",
   "description": "An unofficial helper package for accessing the Lightcast API endpoints",
-  "version": "0.0.1-alpha.14",
+  "version": "0.0.1-alpha.15",
   "license": "MIT",
   "repository": {
     "type": "git",
