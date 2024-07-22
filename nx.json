@@ -22,8 +22,8 @@
   },
   "release": {
     "projectsRelationship": "independent",
-    //"releaseTagPattern": "{projectName}-v{version}",
     "releaseTagPattern": "releases/{projectName}/{version}",
+    //"releaseTagPattern": "{projectName}-v{version}",
     "projects": ["lightcast-api", "nx-cdk", "nx-cdktf"],
     "version": {
       "conventionalCommits": true,
