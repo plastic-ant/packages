@@ -22,7 +22,7 @@
   },
   "release": {
     "projectsRelationship": "independent",
-    "releaseTagPattern": "{projectName}-{version}",
+    "releaseTagPattern": "{projectName}-v{version}",
     "projects": ["packages/*"],
     "version": {
       "conventionalCommits": true,
