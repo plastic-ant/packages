@@ -15,7 +15,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "Michael Devereux",
+  "author": {
+    "name": "pas-mike",
+    "url": "https://github.com/pas-mike"
+  },
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",

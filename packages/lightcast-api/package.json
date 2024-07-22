@@ -7,7 +7,10 @@
     "type": "git",
     "url": "https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api"
   },
-  "author": "Michael Devereux",
+  "author": {
+    "name": "pas-mike",
+    "url": "https://github.com/pas-mike"
+  },
   "main": "./src/index.js",
   "keywords": [
     "emsi",
