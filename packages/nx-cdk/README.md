@@ -10,7 +10,6 @@ An Nx (Project Crystal) plugin for developing with the [aws-cdk](https://docs.aw
 
 - [Install](#install)
 - [Usage](#usage)
-- [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
 
