@@ -149,7 +149,7 @@ function deployTarget(options: CdktfPluginOptions, projectRoot: string): TargetC
 
 function getTarget(options: CdktfPluginOptions, projectRoot: string): TargetConfiguration {
   return {
-    command: `cdktf get --language=typescript`,
+    command: `cdktf get`, // --language=typescript`,
     options: { cwd: joinPathFragments(projectRoot) },
     inputs: [{ externalDependencies: ["cdktf-cli"] }],
   };
