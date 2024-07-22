@@ -4293,10 +4293,11 @@ __metadata:
   resolution: "@plastic-ant/nx-cdk@workspace:packages/nx-cdk"
   dependencies:
     "@nx/devkit": "npm:19.5.1"
-    aws-cdk: "npm:2.149.0"
-    aws-cdk-lib: "npm:^2.149.0"
     json-schema-to-typescript: "npm:^14.1.0"
     nx: "npm:19.5.1"
+  peerDependencies:
+    aws-cdk: ^2.149.0
+    aws-cdk-lib: ^2.149.0
   languageName: unknown
   linkType: soft
 
@@ -7309,7 +7310,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk@npm:2.149.0, aws-cdk@npm:^2.149.0":
+"aws-cdk@npm:^2.149.0":
   version: 2.149.0
   resolution: "aws-cdk@npm:2.149.0"
   dependencies:
