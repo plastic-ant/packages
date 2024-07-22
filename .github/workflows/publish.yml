@@ -3,10 +3,11 @@ name: Publish
 on:
   push:
     tags:
-      - v*.*.*-
+      - "*-v*.*.*"
+      - "*-v*.*.*.*"
 
 jobs:
-  test:
+  publish:
     name: Publish
     runs-on: ubuntu-latest
     env:
@@ -16,6 +17,7 @@ jobs:
       contents: read
       id-token: write
     timeout-minutes: 10
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
         with:
