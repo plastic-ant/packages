@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # NPM_CONFIG_PROVENANCE: true
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,6 +40,9 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
+      - name: Version
+        run: npx nx release version --projects=packages/* --dry-run --first-release
+
       - name: Test
         run: yarn exec nx affected --nx-bail --target=test --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
@@ -48,4 +52,4 @@ jobs:
       - name: Build
         run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
-      - run: npx nx release publish -p=nx-cdk --dry-run
+      - run: npx nx release publish --projects=packages/* --dry-run --first-release
