@@ -22,15 +22,15 @@
   },
   "release": {
     "projectsRelationship": "independent",
-    "releaseTagPattern": "{projectName}-v{version}",
+    "releaseTagPattern": "{projectName}-{version}",
     "projects": ["packages/*"],
-    "git": {
-      "tag": true,
-      "commit": true,
-      "commitMessage": "chore({projectName}): released version {version}"
-    },
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "git": {
+        "tag": true,
+        "commit": true,
+        "commitMessage": "chore(repo): released version {version}"
+      }
     },
     "changelog": {
       "workspaceChangelog": {
