@@ -21,13 +21,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-
-      - name: Restore cached npm Dependencies
-        id: cache-dependencies-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: node_modules
-          key: npm-dependencies-${{ hashFiles('yarn.lock') }}
+          cache: "yarn"
+          cache-dependency-path: "yarn.lock"
 
       - name: Install Dependencies
         run: SKIP_POSTINSTALL=1 yarn
