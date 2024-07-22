@@ -1,0 +1,45 @@
+name: Publish
+
+on:
+  push:
+    branches: ["main"]
+    tags:
+      - v*.*.*-
+
+jobs:
+  test:
+    name: Publish
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_CONFIG_PROVENANCE: true
+    permissions:
+      contents: read
+      id-token: write
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "yarn"
+          cache-dependency-path: "yarn.lock"
+          scope: "plastic-ant"
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependencies
+        run: SKIP_POSTINSTALL=1 yarn
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Build
+        run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
+
+      - name: Print Environment Info
+        run: yarn exec nx report
+
+      - name: Publish packages
+        run: yarn exec nx release publish
