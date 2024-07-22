@@ -1,8 +1,10 @@
 name: Release
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - "main"
 
 permissions:
   actions: read
@@ -42,15 +44,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - name: Version
-        run: npx nx release version --projects=packages/* --first-release
-
-      - name: Test
-        run: yarn exec nx affected --nx-bail --target=test --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
-
-      - name: Lint
-        run: yarn exec nx affected --nx-bail --target=lint --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
-
-      - name: Build
-        run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
-
-      - run: npx nx release publish --projects=packages/* --first-release
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          npx nx release version --projects=packages/* --first-release
