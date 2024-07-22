@@ -1,0 +1,42 @@
+name: Tests
+
+on:
+  workflow_call:
+  push:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Restore cached npm Dependencies
+        id: cache-dependencies-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: node_modules
+          key: npm-dependencies-${{ hashFiles('yarn.lock') }}
+
+      - name: Install Dependencies
+        run: SKIP_POSTINSTALL=1 yarn
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Test
+        run: yarn exec nx affected --nx-bail --target=test --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
+
+      - name: Lint
+        run: yarn exec nx affected --nx-bail --target=lint --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
+
+      - name: Build
+        run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
