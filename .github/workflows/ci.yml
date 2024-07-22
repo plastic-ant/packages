@@ -41,7 +41,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - name: Version
-        run: npx nx release version --projects=packages/* --dry-run --first-release
+        run: npx nx release version --projects=packages/* --first-release
 
       - name: Test
         run: yarn exec nx affected --nx-bail --target=test --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
@@ -52,4 +52,4 @@ jobs:
       - name: Build
         run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
-      - run: npx nx release publish --projects=packages/* --dry-run --first-release
+      - run: npx nx release publish --projects=packages/* --first-release
