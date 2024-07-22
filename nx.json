@@ -22,16 +22,15 @@
   },
   "release": {
     "projectsRelationship": "independent",
-    "releaseTagPattern": "releases/{projectName}/{version}",
-    //"releaseTagPattern": "{projectName}-v{version}",
-    "projects": ["lightcast-api", "nx-cdk", "nx-cdktf"],
+    "releaseTagPattern": "{projectName}-v{version}",
+    "projects": ["packages/*"],
+    "git": {
+      "tag": true,
+      "commit": true,
+      "commitMessage": "chore({projectName}): released version {version}"
+    },
     "version": {
-      "conventionalCommits": true,
-      "git": {
-        "tag": true,
-        "commit": true,
-        "commitMessage": "chore({projectName}): released version {version}"
-      }
+      "conventionalCommits": true
     },
     "changelog": {
       "workspaceChangelog": {

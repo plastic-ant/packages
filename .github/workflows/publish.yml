@@ -1,0 +1,42 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "*-v*.*.*"
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_CONFIG_PROVENANCE: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: "https://registry.npmjs.org"
+          scope: "plastic-ant"
+          cache: "yarn"
+          cache-dependency-path: "yarn.lock"
+
+      - name: Install Dependencies
+        run: SKIP_POSTINSTALL=1 yarn
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Build
+        run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
+
+      - name: Check NPM Credentials
+        run: npm whoami && echo "NPM credentials are valid" || (echo "NPM credentials are invalid or have expired." && exit 1)
+
+      - run: npx nx release publish --projects=packages/*
