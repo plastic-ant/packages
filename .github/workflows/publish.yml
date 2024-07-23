@@ -5,6 +5,10 @@ on:
     tags:
       - "*@*"
 
+concurrency:
+  group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
+  cancel-in-progress: false
+
 jobs:
   publish:
     name: Publish
