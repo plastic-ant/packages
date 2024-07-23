@@ -10,7 +10,7 @@ jobs:
     name: Version
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
     timeout-minutes: 10
     steps:
@@ -35,7 +35,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - name: Publish packages
-        run: yarn exec nx release version --dry-run
+        run: yarn exec nx release version
 
       - name: Push
         run: |
