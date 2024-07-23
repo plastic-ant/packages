@@ -4,9 +4,6 @@
   "sourceRoot": "{projectRoot}/src",
   "projectType": "library",
   "tags": ["#nx-plugin"],
-  //nx release version patch -p=nx-cdktf --verbose --first-release
-  //nx run nx-cdktf:build
-  //nx release publish -p=nx-cdktf --verbose --first-release
   "targets": {
     "test": {},
     "build": {
@@ -19,7 +16,7 @@
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
         "compiler": "tsc",
         "project": "{projectRoot}/package.json",
-        "format": ["cjs"], //, "esm"],
+        "format": ["cjs"],
         "deleteOutputPath": true,
         "generateExportsField": true,
         "assets": [

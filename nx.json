@@ -1,5 +1,4 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "workspaceLayout": {
     "appsDir": "packages",
     "libsDir": "packages"
@@ -22,22 +21,44 @@
   },
   "release": {
     "projectsRelationship": "independent",
-    "releaseTagPattern": "{projectName}-v{version}",
     "projects": ["packages/*"],
+    "releaseTagPattern": "{projectName}@{version}",
     "version": {
       "conventionalCommits": true,
       "git": {
-        "tag": true,
-        "commit": true,
-        "commitMessage": "chore(repo): released version {version}"
+        "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
       }
     },
     "changelog": {
-      "workspaceChangelog": {
+      "git": {
+        "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
+      },
+      "projectChangelogs": {
         "createRelease": "github"
       }
     }
   },
+  // "release": {
+  //   "projectsRelationship": "independent",
+  //   "releaseTagPattern": "{projectName}@{version}",
+  //   "projects": ["packages/*"],
+  //   "version": {
+  //     "conventionalCommits": true,
+  //     "generatorOptions": {
+  //       "packageRoot": "{workspaceRoot}/dist/{projectRoot}"
+  //     }
+  //   },
+  //   "git": {
+  //     "tag": true,
+  //     "commit": true,
+  //     "commitMessage": "chore(repo): released {projectName}@{version}"
+  //   },
+  //   "changelog": {
+  //     "projectChangelogs": {
+  //       "createRelease": "github"
+  //     }
+  //   }
+  // },
   "plugins": [
     {
       "plugin": "@plastic-ant/nx-cdk",
@@ -56,8 +77,9 @@
   ],
   "targetDefaults": {
     "nx-release-publish": {
+      "dependsOn": ["build"],
       "options": {
-        "packageRoot": "dist/{projectRoot}"
+        "packageRoot": "{workspaceRoot}/dist/packages/{projectName}"
       }
     },
     "prebuild": {
