@@ -3,13 +3,13 @@
   "description": "An unofficial helper package for accessing the Lightcast API endpoints",
   "version": "0.0.1-alpha.17",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api"
-  },
   "author": {
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plastic-ant/packages/tree/main/packages/lightcast-api"
   },
   "main": "./src/index.js",
   "keywords": [
