@@ -37,7 +37,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Publish packages
+      - name: Version Packages
         run: yarn exec nx release version
 
       - name: Push
