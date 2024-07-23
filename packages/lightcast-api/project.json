@@ -6,14 +6,6 @@
   "tags": [],
   "targets": {
     "test": {},
-    /*"npm": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "buildTarget": "build",
-        "distFolderPath": "dist/{projectRoot}",
-        "access": "public"
-      }
-    },*/
     "examples": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "skills",
@@ -21,10 +13,18 @@
         "cwd": "{projectRoot}/examples"
       },
       "configurations": {
-        "salary-boosting-skills": { "command": "npx ts-node --project ../tsconfig.lib.json salary-boosting-skills.ts" },
-        "raw": { "command": "npx ts-node --project ../tsconfig.lib.json raw.ts" },
-        "skills": { "command": "npx ts-node --project ../tsconfig.lib.json skills.ts" },
-        "ca-jpa": { "command": "npx ts-node --project ../tsconfig.lib.json ca-jpa.ts" }
+        "salary-boosting-skills": {
+          "command": "npx ts-node --project ../tsconfig.lib.json salary-boosting-skills.ts"
+        },
+        "raw": {
+          "command": "npx ts-node --project ../tsconfig.lib.json raw.ts"
+        },
+        "skills": {
+          "command": "npx ts-node --project ../tsconfig.lib.json skills.ts"
+        },
+        "ca-jpa": {
+          "command": "npx ts-node --project ../tsconfig.lib.json ca-jpa.ts"
+        }
       }
     },
     "prebuild": {
