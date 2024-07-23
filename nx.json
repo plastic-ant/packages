@@ -20,45 +20,20 @@
     ]
   },
   "release": {
-    "projectsRelationship": "independent",
     "projects": ["packages/*"],
+    "projectsRelationship": "independent",
     "releaseTagPattern": "{projectName}@{version}",
+    "changelog": {
+      "projectChangelogs": true
+    },
     "version": {
       "conventionalCommits": true,
       "git": {
-        "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
-      }
-    },
-    "changelog": {
-      "git": {
-        "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
-      },
-      "projectChangelogs": {
-        "createRelease": "github"
+        "tag": true,
+        "commitMessage": "chore({projectName}): version {version}"
       }
     }
   },
-  // "release": {
-  //   "projectsRelationship": "independent",
-  //   "releaseTagPattern": "{projectName}@{version}",
-  //   "projects": ["packages/*"],
-  //   "version": {
-  //     "conventionalCommits": true,
-  //     "generatorOptions": {
-  //       "packageRoot": "{workspaceRoot}/dist/{projectRoot}"
-  //     }
-  //   },
-  //   "git": {
-  //     "tag": true,
-  //     "commit": true,
-  //     "commitMessage": "chore(repo): released {projectName}@{version}"
-  //   },
-  //   "changelog": {
-  //     "projectChangelogs": {
-  //       "createRelease": "github"
-  //     }
-  //   }
-  // },
   "plugins": [
     {
       "plugin": "@plastic-ant/nx-cdk",
@@ -76,12 +51,6 @@
     }
   ],
   "targetDefaults": {
-    "nx-release-publish": {
-      "dependsOn": ["build"],
-      "options": {
-        "packageRoot": "{workspaceRoot}/dist/packages/{projectName}"
-      }
-    },
     "prebuild": {
       "cache": true,
       "dependsOn": ["^prebuild"],
