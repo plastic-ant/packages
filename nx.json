@@ -3,6 +3,7 @@
     "appsDir": "packages",
     "libsDir": "packages"
   },
+  "defaultBase": "main",
   "cli": {
     "packageManager": "yarn"
   },
