@@ -31,6 +31,7 @@
       "conventionalCommits": true,
       "git": {
         "tag": true,
+        "commit": true,
         "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
       }
     }
@@ -53,9 +54,8 @@
   ],
   "targetDefaults": {
     "nx-release-publish": {
-      "dependsOn": ["build"],
       "options": {
-        "packageRoot": "{workspaceRoot}/dist/packages/{projectName}"
+        "packageRoot": "dist/packages/{projectName}"
       }
     },
     "prebuild": {
