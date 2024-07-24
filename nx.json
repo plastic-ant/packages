@@ -24,13 +24,13 @@
     "projectsRelationship": "independent",
     "releaseTagPattern": "{projectName}@{version}",
     "changelog": {
-      "projectChangelogs": true
+      "workspaceChangelog": { "createRelease": "github" }
     },
     "version": {
       "conventionalCommits": true,
       "git": {
         "tag": true,
-        "commitMessage": "chore({projectName}): version {version}"
+        "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
       }
     }
   },
@@ -51,6 +51,12 @@
     }
   ],
   "targetDefaults": {
+    "nx-release-publish": {
+      "dependsOn": ["build"],
+      "options": {
+        "packageRoot": "{workspaceRoot}/dist/packages/{projectName}"
+      }
+    },
     "prebuild": {
       "cache": true,
       "dependsOn": ["^prebuild"],

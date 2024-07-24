@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "!CHANGELOG.md"
 
 concurrency:
   group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
@@ -34,8 +36,6 @@ jobs:
 
       - name: Install Dependencies
         run: SKIP_POSTINSTALL=1 yarn
-
-      - uses: nrwl/nx-set-shas@v4
 
       - name: Version Packages
         run: yarn exec nx release version
