@@ -25,7 +25,7 @@
     "projectsRelationship": "independent",
     "releaseTagPattern": "{projectName}@{version}",
     "changelog": {
-      "workspaceChangelog": { "createRelease": "github" }
+      "projectChangelogs": { "createRelease": "github" }
     },
     "git": {
       "tag": true,

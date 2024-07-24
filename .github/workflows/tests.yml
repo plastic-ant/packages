@@ -2,14 +2,9 @@ name: Tests
 
 on:
   push:
-    branches:
-      - "*"
-      - "*/*"
-      - "**"
-      - "!main"
 
 concurrency:
-  group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
+  group: ${{ github.head_ref }}
   cancel-in-progress: true
 
 jobs:
