@@ -8242,6 +8242,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^3.36.1":
+  version: 3.37.1
+  resolution: "core-js@npm:3.37.1"
+  checksum: 10/25d6bd15fcc6ffd2a0ec0be57a78ff3358b3e1fdffdb6800fc93dcfdb3854037aee41f3d101aed8c37905d107daf98218b3e7ee95cec383710d2a66a5d9e541b
+  languageName: node
+  linkType: hard
+
 "core-util-is@npm:1.0.2":
   version: 1.0.2
   resolution: "core-util-is@npm:1.0.2"
@@ -16772,6 +16779,7 @@ __metadata:
     aws-cdk-lib: "npm:^2.150.0"
     babel-jest: "npm:^29.4.1"
     change-case: "npm:^5.4.4"
+    core-js: "npm:^3.36.1"
     dotenv: "npm:^16.4.5"
     env-var: "npm:^7.5.0"
     esbuild: "npm:~0.19.2"
@@ -16791,6 +16799,7 @@ __metadata:
     node-cache: "npm:^5.1.2"
     nx: "npm:19.5.2"
     prettier: "npm:^2.6.2"
+    rollup: "npm:^4.14.0"
     ts-jest: "npm:^29.1.0"
     ts-node: "npm:10.9.1"
     tslib: "npm:^2.6.3"
