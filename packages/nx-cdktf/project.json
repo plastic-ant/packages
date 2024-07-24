@@ -21,6 +21,12 @@
           "tsConfig": "{projectRoot}/tsconfig.lib.prd.json"
         }
       }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventionalcommits"
+      }
     }
   }
 }
