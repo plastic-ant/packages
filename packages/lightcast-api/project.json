@@ -27,6 +27,29 @@
       }
     },
     "test": {},
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preid": "alpha",
+        "releaseAs": "prerelease",
+        "postTargets": ["npm", "github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "{tag}",
+        "notes": "{notes}"
+      }
+    },
+    "npm": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "buildTarget": "build",
+        "distFolderPath": "dist/packages/{projectName}",
+        "access": "public"
+      }
+    },
     "prebuild": {
       "executor": "nx:run-commands",
       "options": {
@@ -71,13 +94,6 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      }
-    },
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "preid": "alpha",
-        "releaseAs": "prerelease"
       }
     }
   }
