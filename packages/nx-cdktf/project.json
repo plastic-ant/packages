@@ -1,44 +1,24 @@
 {
   "name": "nx-cdktf",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "{projectRoot}/src",
+  "sourceRoot": "packages/nx-cdktf/src",
   "projectType": "library",
   "tags": ["#nx-plugin"],
   "targets": {
     "test": {},
     "build": {
-      "executor": "@nx/rollup:rollup",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "main": "{projectRoot}/src/index.ts",
         "outputPath": "dist/{projectRoot}",
+        "main": "{projectRoot}/src/index.ts",
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
-        "compiler": "tsc",
-        "project": "{projectRoot}/package.json",
-        "format": ["cjs"],
-        "deleteOutputPath": true,
-        "generateExportsField": true,
-        "assets": [
-          {
-            "glob": "{projectRoot}/LICENSE",
-            "input": ".",
-            "output": "."
-          },
-          {
-            "glob": "{projectRoot}/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "assets": ["{projectRoot}/LICENSE", "{projectRoot}/README.md"]
       },
       "configurations": {
         "production": {
-          "sourceMap": false,
-          "optimization": true,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
+          "tsConfig": "{projectRoot}/tsconfig.lib.prd.json"
         }
       }
     }

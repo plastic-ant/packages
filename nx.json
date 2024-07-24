@@ -25,7 +25,9 @@
     "projectsRelationship": "independent",
     "releaseTagPattern": "{projectName}@{version}",
     "changelog": {
-      "projectChangelogs": { "createRelease": "github" }
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
     },
     "git": {
       "tag": true,
@@ -49,6 +51,12 @@
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/rollup/plugin",
+      "options": {
+        "buildTargetName": "build"
       }
     }
   ],
@@ -120,11 +128,6 @@
     "@nx/eslint:lint": {
       "cache": true,
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
-    },
-    "@nx/esbuild:esbuild": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
     },
     "@nx/js:tsc": {
       "cache": true,
