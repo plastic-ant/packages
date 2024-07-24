@@ -153,8 +153,7 @@
       "options": {
         "preset": "conventionalcommits",
         "push": true,
-        "tagPrefix": "{projectName}@",
-        "postTargets": ["npm", "github"]
+        "tagPrefix": "{projectName}@"
       }
     }
   }
