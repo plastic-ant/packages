@@ -42,8 +42,5 @@ jobs:
       - name: Build
         run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
-      - name: Print Environment Info
-        run: yarn exec nx report
-
       - name: Publish packages
         run: yarn exec nx release publish
