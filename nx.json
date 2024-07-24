@@ -66,9 +66,6 @@
     //     "packageRoot": "dist/packages/{projectName}"
     //   }
     // },
-    "version": {
-      "executor": "@jscutlery/semver:version"
-    },
     "github": {
       "executor": "@jscutlery/semver:github",
       "options": {
@@ -156,8 +153,7 @@
       "options": {
         "preset": "conventionalcommits",
         "push": true,
-        "tagPrefix": "{projectName}@",
-        "postTargets": ["npm", "github"]
+        "tagPrefix": "{projectName}@"
       }
     }
   }

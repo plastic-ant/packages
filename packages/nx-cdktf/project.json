@@ -6,9 +6,27 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "test": {},
-    "version": {},
-    "github": {},
-    "npm": {},
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "postTargets": ["npm", "github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "{tag}",
+        "notes": "{notes}"
+      }
+    },
+    "npm": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "buildTarget": "build",
+        "distFolderPath": "dist/packages/{projectName}",
+        "access": "public"
+      }
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
