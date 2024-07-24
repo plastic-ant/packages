@@ -6,27 +6,6 @@
   "tags": [],
   "targets": {
     "test": {},
-    "examples": {
-      "executor": "nx:run-commands",
-      "defaultConfiguration": "skills",
-      "options": {
-        "cwd": "{projectRoot}/examples"
-      },
-      "configurations": {
-        "salary-boosting-skills": {
-          "command": "npx ts-node --project ../tsconfig.lib.json salary-boosting-skills.ts"
-        },
-        "raw": {
-          "command": "npx ts-node --project ../tsconfig.lib.json raw.ts"
-        },
-        "skills": {
-          "command": "npx ts-node --project ../tsconfig.lib.json skills.ts"
-        },
-        "ca-jpa": {
-          "command": "npx ts-node --project ../tsconfig.lib.json ca-jpa.ts"
-        }
-      }
-    },
     "prebuild": {
       "executor": "nx:run-commands",
       "options": {
@@ -70,6 +49,27 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        }
+      }
+    },
+    "examples": {
+      "executor": "nx:run-commands",
+      "defaultConfiguration": "skills",
+      "options": {
+        "cwd": "{projectRoot}/examples"
+      },
+      "configurations": {
+        "salary-boosting-skills": {
+          "command": "npx ts-node --project ../tsconfig.lib.json salary-boosting-skills.ts"
+        },
+        "raw": {
+          "command": "npx ts-node --project ../tsconfig.lib.json raw.ts"
+        },
+        "skills": {
+          "command": "npx ts-node --project ../tsconfig.lib.json skills.ts"
+        },
+        "ca-jpa": {
+          "command": "npx ts-node --project ../tsconfig.lib.json ca-jpa.ts"
         }
       }
     }
