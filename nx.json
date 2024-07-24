@@ -27,13 +27,13 @@
     "changelog": {
       "workspaceChangelog": { "createRelease": "github" }
     },
+    "git": {
+      "tag": true,
+      "commit": true,
+      "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
+    },
     "version": {
-      "conventionalCommits": true,
-      "git": {
-        "tag": true,
-        "commit": true,
-        "commitMessage": "chore({projectName}): release version {version} [skip-ci]"
-      }
+      "conventionalCommits": true
     }
   },
   "plugins": [

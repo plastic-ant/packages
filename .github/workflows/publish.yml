@@ -1,9 +1,12 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - "*@*"
+  workflow_dispatch:
+    inputs:
+      projectName:
+        type: string
+        description: Name of project to publish
+        required: true
 
 concurrency:
   group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
@@ -16,15 +19,16 @@ jobs:
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       NPM_CONFIG_PROVENANCE: true
-    permissions:
-      contents: read
-      id-token: write
-    timeout-minutes: 10
-    if: github.ref == 'refs/heads/main'
+    permissions: write-all
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - uses: actions/setup-node@v4
         with:
@@ -43,4 +47,9 @@ jobs:
         run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
       - name: Publish packages
-        run: yarn exec nx release publish
+        run: yarn exec nx release --project=${{ github.event.inputs.projectName }} --first-release --dry-run
+
+      - name: Push
+        run: |
+          git push
+          git push --tags
