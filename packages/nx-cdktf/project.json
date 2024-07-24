@@ -6,6 +6,9 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "test": {},
+    "version": {},
+    "github": {},
+    "npm": {},
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
@@ -20,12 +23,6 @@
         "production": {
           "tsConfig": "{projectRoot}/tsconfig.lib.prd.json"
         }
-      }
-    },
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "preset": "conventionalcommits"
       }
     }
   }

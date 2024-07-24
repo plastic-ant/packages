@@ -66,6 +66,9 @@
     //     "packageRoot": "dist/packages/{projectName}"
     //   }
     // },
+    "version": {
+      "executor": "@jscutlery/semver:version"
+    },
     "github": {
       "executor": "@jscutlery/semver:github",
       "options": {
