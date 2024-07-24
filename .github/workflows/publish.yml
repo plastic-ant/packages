@@ -1,12 +1,9 @@
 name: Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      projectName:
-        type: string
-        description: Name of project to publish
-        required: true
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
@@ -43,11 +40,17 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
+      - name: Test
+        run: yarn exec nx affected --nx-bail --target=test --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
+
+      - name: Lint
+        run: yarn exec nx affected --nx-bail --target=lint --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
+
       - name: Build
         run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
       - name: Publish packages
-        run: yarn exec nx release --projects=${{ github.event.inputs.projectName }} --first-release
+        run: yarn exec nx release --first-release
 
       - name: Push
         run: |
