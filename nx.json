@@ -20,24 +20,24 @@
       "!{projectRoot}/.eslintrc.json"
     ]
   },
-  "release": {
-    "projects": ["packages/*"],
-    "projectsRelationship": "independent",
-    "releaseTagPattern": "{projectName}@{version}",
-    "changelog": {
-      "projectChangelogs": {
-        "createRelease": "github"
-      }
-    },
-    "git": {
-      "tag": true,
-      "commit": true,
-      "commitMessage": "chore({projectName}): release {version} [skip-ci]"
-    },
-    "version": {
-      "conventionalCommits": true
-    }
-  },
+  // "release": {
+  //   "projects": ["packages/*"],
+  //   "projectsRelationship": "independent",
+  //   "releaseTagPattern": "{projectName}@{version}",
+  //   "changelog": {
+  //     "projectChangelogs": {
+  //       "createRelease": "github"
+  //     }
+  //   },
+  //   "version": {
+  //     "conventionalCommits": true,
+  //     "git": {
+  //       "tag": true,
+  //       "commit": true,
+  //       "commitMessage": "chore({projectName}): release {version} [skip-ci]"
+  //     }
+  //   }
+  // },
   "plugins": [
     {
       "plugin": "@plastic-ant/nx-cdk",
@@ -61,9 +61,24 @@
     }
   ],
   "targetDefaults": {
-    "nx-release-publish": {
+    // "nx-release-publish": {
+    //   "options": {
+    //     "packageRoot": "dist/packages/{projectName}"
+    //   }
+    // },
+    "github": {
+      "executor": "@jscutlery/semver:github",
       "options": {
-        "packageRoot": "dist/packages/{projectName}"
+        "tag": "{tag}",
+        "notes": "{notes}"
+      }
+    },
+    "npm": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "buildTarget": "build",
+        "distFolderPath": "dist/packages/{projectName}",
+        "access": "public"
       }
     },
     "prebuild": {
@@ -133,6 +148,14 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "@jscutlery/semver:version": {
+      "options": {
+        "preset": "conventionalcommits",
+        "push": true,
+        "tagPrefix": "{projectName}@",
+        "postTargets": ["npm", "github"]
+      }
     }
   }
 }
