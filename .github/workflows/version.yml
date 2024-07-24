@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  publish:
+  version:
     name: Version
     runs-on: ubuntu-latest
     permissions:
