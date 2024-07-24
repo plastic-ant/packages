@@ -72,6 +72,13 @@
           "vendorChunk": false
         }
       }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preid": "alpha",
+        "releaseAs": "prerelease"
+      }
     }
   }
 }
