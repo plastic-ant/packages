@@ -41,7 +41,7 @@ jobs:
         run: SKIP_POSTINSTALL=1 yarn
 
       - name: Version Packages
-        run: yarn exec nx release version
+        run: yarn exec nx release version --first-release
 
       - name: Push
         run: |
