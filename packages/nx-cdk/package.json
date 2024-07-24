@@ -23,14 +23,12 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "json-schema-to-typescript": "^15.0.0"
+    "@nx/devkit": "19.5.2",
+    "json-schema-to-typescript": "^15.0.0",
+    "nx": "19.5.2"
   },
   "peerDependencies": {
     "aws-cdk": "^2.149.0",
     "aws-cdk-lib": "^2.149.0"
-  },
-  "dependencies": {
-    "@nx/devkit": "19.5.2",
-    "nx": "19.5.2"
   }
 }
