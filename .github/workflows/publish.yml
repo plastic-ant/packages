@@ -47,7 +47,7 @@ jobs:
         run: yarn exec nx affected --nx-bail --target=build --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
 
       - name: Publish packages
-        run: yarn exec nx release --project=${{ github.event.inputs.projectName }} --first-release --dry-run
+        run: yarn exec nx release --projects=${{ github.event.inputs.projectName }} --first-release --dry-run
 
       - name: Push
         run: |
