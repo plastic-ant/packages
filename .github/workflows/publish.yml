@@ -1,26 +1,22 @@
-name: Version
+name: Publish
 
 on:
   workflow_dispatch:
     inputs:
-      version:
-        type: string
-        description: The version to use for the release.
-        default: ""
       dry-run:
         type: boolean
-        description: Dry run nx release
+        description: Dry run for nx release
         default: true
-  push:
-    branches:
-      - "main"
+  release:
+    types:
+      - published
 
 concurrency:
   group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
   cancel-in-progress: false
 
 jobs:
-  Version:
+  Publish:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
@@ -36,14 +32,20 @@ jobs:
         with:
           node-version: 18
           cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+          scope: "plastic-ant"
           cache-dependency-path: "yarn.lock"
+
+      - run: npm whoami && echo "NPM credentials are valid" || (echo "NPM credentials are invalid or have expired." && exit 1)
 
       - run: yarn install --immutable
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx release --skip-publish --dry-run=${{ env.DRY_RUN }} ${{ env.VERSION }}
+      - run: npx nx release publish --dry-run=${{ env.DRY_RUN }}
         env:
-          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
-          VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
+          # when it is not a tag (release) => dont publish
+          DRY_RUN: ${{ github.ref_type != 'tag' || (github.event_name == 'workflow_dispatch' && inputs.dry-run) }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
