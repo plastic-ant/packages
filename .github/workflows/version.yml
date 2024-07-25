@@ -40,7 +40,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - name: Version
-        run: yarn exec nx affected --nx-bail --base=last-release --target=version --parallel --configuration=ci
+        run: npx nx affected --nx-bail --base=last-release --target=version --parallel --configuration=ci
 
       - name: Tag
         run: |
