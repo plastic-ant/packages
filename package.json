@@ -34,6 +34,7 @@
     "@types/object-hash": "^3.0.6",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
+    "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
     "@typescript-eslint/type-utils": "^6.13.2",
@@ -75,7 +76,8 @@
     "vite": "5.0.7",
     "vite-plugin-dts": "~2.3.0",
     "vitest": "1.2.2",
-    "yaml-eslint-parser": "^1.2.3"
+    "yaml-eslint-parser": "^1.2.3",
+    "yargs": "^17.7.2"
   },
   "resolutions": {
     "@koa/cors": "^5.0.0",

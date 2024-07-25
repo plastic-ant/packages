@@ -42,7 +42,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx release --skip-publish --dry-run=${{ env.DRY_RUN }} ${{ env.VERSION }}
+      - run: npx nx release version --dry-run=${{ env.DRY_RUN }} ${{ env.VERSION }}
         env:
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
           VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
