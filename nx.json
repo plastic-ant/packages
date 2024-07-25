@@ -20,24 +20,6 @@
       "!{projectRoot}/.eslintrc.json"
     ]
   },
-  // "release": {
-  //   "projects": ["packages/*"],
-  //   "projectsRelationship": "independent",
-  //   "releaseTagPattern": "{projectName}@{version}",
-  //   "changelog": {
-  //     "projectChangelogs": {
-  //       "createRelease": "github"
-  //     }
-  //   },
-  //   "version": {
-  //     "conventionalCommits": true,
-  //     "git": {
-  //       "tag": true,
-  //       "commit": true,
-  //       "commitMessage": "chore({projectName}): release {version} [skip-ci]"
-  //     }
-  //   }
-  // },
   "plugins": [
     {
       "plugin": "@plastic-ant/nx-cdk",
@@ -61,26 +43,6 @@
     }
   ],
   "targetDefaults": {
-    // "nx-release-publish": {
-    //   "options": {
-    //     "packageRoot": "dist/packages/{projectName}"
-    //   }
-    // },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "{tag}",
-        "notes": "{notes}"
-      }
-    },
-    "npm": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "buildTarget": "build",
-        "distFolderPath": "dist/packages/{projectName}",
-        "access": "public"
-      }
-    },
     "prebuild": {
       "cache": true,
       "dependsOn": ["^prebuild"],
@@ -149,12 +111,25 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
-    "@jscutlery/semver:version": {
+    "nx-release-publish": {
       "options": {
-        "preset": "conventionalcommits",
-        "push": true,
-        "tagPrefix": "{projectName}@"
+        "packageRoot": "dist/packages/{projectName}"
       }
+    }
+  },
+  "release": {
+    "releaseTagPattern": "{projectName}@{version}",
+    "projects": ["packages/*"],
+    "projectsRelationship": "independent",
+    "version": { "conventionalCommits": true },
+    "git": {
+      "tag": true,
+      "commit": true,
+      "commitArgs": "--no-verify"
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "projectChangelogs": { "createRelease": "github" }
     }
   }
 }
