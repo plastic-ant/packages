@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.5.2](///compare/nx-cdktf@0.5.1...nx-cdktf@0.5.2) (2024-07-25)
+
+## [0.5.2](///compare/nx-cdktf@0.5.1...nx-cdktf@0.5.2) (2024-07-25)
+
 # 0.1.0 (2024-07-24)
 
 
