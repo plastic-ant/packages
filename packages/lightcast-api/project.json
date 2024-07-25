@@ -30,9 +30,12 @@
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
+        "preset": "conventionalcommits",
+        "push": true,
+        "tagPrefix": "{projectName}@",
         "preid": "alpha",
         "releaseAs": "prerelease",
-        "postTargets": ["npm", "github"]
+        "postTargets": ["build", "npm", "github"]
       }
     },
     "github": {
