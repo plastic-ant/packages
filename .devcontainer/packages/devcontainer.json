@@ -14,7 +14,8 @@
     "NX_NO_CLOUD": "true"
   },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker": "latest"
+    "ghcr.io/devcontainers/features/docker-in-docker": "latest",
+    "ghcr.io/devcontainers/features/github-cli": "latest"
   },
   "customizations": {
     "vscode": {
