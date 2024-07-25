@@ -12,7 +12,7 @@
         "preset": "conventionalcommits",
         "push": true,
         "tagPrefix": "{projectName}@",
-        "postTargets": ["npm", "github"]
+        "postTargets": ["build", "npm", "github"]
       }
     },
     "github": {
