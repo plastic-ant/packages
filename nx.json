@@ -43,21 +43,6 @@
     }
   ],
   "targetDefaults": {
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "{tag}",
-        "notes": "{notes}"
-      }
-    },
-    "npm": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "buildTarget": "build",
-        "distFolderPath": "dist/packages/{projectName}",
-        "access": "public"
-      }
-    },
     "prebuild": {
       "cache": true,
       "dependsOn": ["^prebuild"],
@@ -125,24 +110,26 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/packages/{projectName}"
+      }
     }
   },
   "release": {
     "releaseTagPattern": "{projectName}@{version}",
-    "projects": ["lightcast-api", "nx-cdk", "nx-cdktf"],
+    "projects": ["packages/*"],
     "projectsRelationship": "independent",
-    "version": {
-      "conventionalCommits": true
-    },
+    "version": { "conventionalCommits": true },
     "git": {
+      "tag": true,
       "commit": true,
       "commitArgs": "--no-verify"
     },
     "changelog": {
       "automaticFromRef": true,
-      "projectChangelogs": {
-        "createRelease": "github"
-      }
+      "projectChangelogs": { "createRelease": "github" }
     }
   }
 }
