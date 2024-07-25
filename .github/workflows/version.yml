@@ -1,0 +1,48 @@
+name: Version
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
+  cancel-in-progress: false
+
+jobs:
+  Version:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+          scope: "plastic-ant"
+          cache-dependency-path: "yarn.lock"
+
+      - name: Check NPM Credentials
+        run: npm whoami && echo "NPM credentials are valid" || (echo "NPM credentials are invalid or have expired." && exit 1)
+
+      - name: Install Dependencies
+        run: SKIP_POSTINSTALL=1 yarn
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Version
+        run: yarn exec nx affected --nx-bail --base=last-release --target=version --parallel --configuration=ci --head=${{ env.NX_HEAD }} --base=${{ env.NX_BASE }}
+
+      - name: Tag
+        run: |
+          git tag -f last-release
+          git push origin last-release --force

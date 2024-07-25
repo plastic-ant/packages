@@ -9,7 +9,10 @@
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "postTargets": ["npm", "github"]
+        "preset": "conventionalcommits",
+        "push": true,
+        "tagPrefix": "{projectName}@",
+        "postTargets": ["build", "npm", "github"]
       }
     },
     "github": {
