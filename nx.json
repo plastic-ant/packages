@@ -112,24 +112,32 @@
       "inputs": ["production", "^production"]
     },
     "nx-release-publish": {
+      "dependsOn": ["build"],
       "options": {
-        "packageRoot": "dist/packages/{projectName}"
+        "packageRoot": "{workspaceRoot}/packages/{projectName}"
       }
     }
   },
   "release": {
+    "projects": ["packages/**/*"],
     "releaseTagPattern": "{projectName}@{version}",
-    "projects": ["packages/*"],
-    "projectsRelationship": "independent",
-    "version": { "conventionalCommits": true },
     "git": {
-      "tag": true,
-      "commit": true,
-      "commitArgs": "--no-verify"
+      "commitMessage": "chore({projectName}): release {version} 🚀 [skip ci]"
+    },
+    "version": {
+      "conventionalCommits": true,
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk"
+      }
     },
     "changelog": {
       "automaticFromRef": true,
-      "projectChangelogs": { "createRelease": "github" }
+      "workspaceChangelog": {
+        "createRelease": "github",
+        "renderOptions": {
+          "authors": false
+        }
+      }
     }
   }
 }
