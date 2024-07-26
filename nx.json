@@ -30,10 +30,6 @@
       "exclude": ["nx-cdktf"]
     },
     {
-      "plugin": "@plastic-ant/nx-sveltekit",
-      "exclude": ["nx-sveltekit"]
-    },
-    {
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
