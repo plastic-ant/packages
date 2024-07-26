@@ -8,9 +8,7 @@
   },
   "keywords": [
     "nx",
-    "aws",
-    "cdk",
-    "cloud"
+    "sveltekit"
   ],
   "publishConfig": {
     "access": "public"

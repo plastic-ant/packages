@@ -42,6 +42,24 @@
       }
     }
   ],
+  "release": {
+    "projects": ["packages/**/*"],
+    "projectsRelationship": "independent",
+    "releaseTagPattern": "{projectName}@{version}",
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    },
+    "version": {
+      "conventionalCommits": true,
+      "git": {
+        "tag": true,
+        "commit": true,
+        "commitMessage": "chore({projectName}): release {version} [skip-ci]"
+      }
+    }
+  },
   "targetDefaults": {
     "prebuild": {
       "cache": true,
@@ -115,26 +133,6 @@
       "dependsOn": ["build"],
       "options": {
         "packageRoot": "{workspaceRoot}/packages/{projectName}"
-      }
-    }
-  },
-  "release": {
-    "projects": ["packages/*"],
-    "releaseTagPattern": "{projectName}@{version}",
-    "version": {
-      "conventionalCommits": true,
-      "git": {
-        "tag": true,
-        "commitMessage": "chore({projectName}): release {version} 🚀 [skip ci]"
-      }
-    },
-    "changelog": {
-      "automaticFromRef": true,
-      "projectChangelogs": {
-        "createRelease": "github",
-        "renderOptions": {
-          "authors": false
-        }
       }
     }
   }
