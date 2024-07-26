@@ -5,7 +5,6 @@
   "projectType": "library",
   "tags": ["#nx-plugin"],
   "targets": {
-    "test": {},
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
