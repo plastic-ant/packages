@@ -9,6 +9,12 @@
     "packages/**/*"
   ],
   "private": true,
+  "optionalDependencies": {
+    "@nx/nx-darwin-arm64": "19.5.3",
+    "@nx/nx-darwin-x64": "19.5.3",
+    "@nx/nx-linux-x64-gnu": "19.5.3",
+    "@nx/nx-win32-x64-msvc": "19.5.3"
+  },
   "devDependencies": {
     "@aws-cdk/cli-lib-alpha": "2.150.0-alpha.0",
     "@commitlint/cli": "^19.3.0",

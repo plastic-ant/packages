@@ -16820,6 +16820,10 @@ __metadata:
     "@nx/jest": "npm:19.5.3"
     "@nx/js": "npm:19.5.3"
     "@nx/next": "npm:19.5.3"
+    "@nx/nx-darwin-arm64": "npm:19.5.3"
+    "@nx/nx-darwin-x64": "npm:19.5.3"
+    "@nx/nx-linux-x64-gnu": "npm:19.5.3"
+    "@nx/nx-win32-x64-msvc": "npm:19.5.3"
     "@nx/plugin": "npm:19.5.3"
     "@nx/rollup": "npm:19.5.3"
     "@nx/workspace": "npm:19.5.3"
@@ -16877,6 +16881,15 @@ __metadata:
     vitest: "npm:1.2.2"
     yaml-eslint-parser: "npm:^1.2.3"
     yargs: "npm:^17.7.2"
+  dependenciesMeta:
+    "@nx/nx-darwin-arm64":
+      optional: true
+    "@nx/nx-darwin-x64":
+      optional: true
+    "@nx/nx-linux-x64-gnu":
+      optional: true
+    "@nx/nx-win32-x64-msvc":
+      optional: true
   languageName: unknown
   linkType: soft
 
