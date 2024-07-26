@@ -2,8 +2,7 @@
   "name": "plastic-ant",
   "license": "MIT",
   "scripts": {
-    "nx": "nx",
-    "prepare": "husky"
+    "nx": "nx"
   },
   "workspaces": [
     "packages/**/*"
