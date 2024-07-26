@@ -37,7 +37,7 @@ export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
   "**/cdktf.json",
   async (configFiles, options, context) => {
     const optionsHash = hashObject(options);
-    const cachePath = join(workspaceDataDirectory, `pas-cdktf-${optionsHash}.hash`);
+    const cachePath = join(workspaceDataDirectory, `pas-nx-cdktf-${optionsHash}.hash`);
     const targetsCache = readTargetsCache(cachePath);
 
     try {
