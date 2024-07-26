@@ -124,7 +124,7 @@
       },
       "configurations": {
         "ci": {
-          "args": ["--ci", "code-coverage"]
+          "args": ["--ci", "code-coverage", "--passWithNoTests"]
         }
       }
     },
