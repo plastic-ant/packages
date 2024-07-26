@@ -36,7 +36,7 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
   "**/cdk.json",
   async (configFiles, options, context) => {
     const optionsHash = hashObject(options);
-    const cachePath = join(workspaceDataDirectory, `pas-aws-cdk-${optionsHash}.hash`);
+    const cachePath = join(workspaceDataDirectory, `pas-nx-cdk-${optionsHash}.hash`);
     const targetsCache = readTargetsCache(cachePath);
 
     try {
