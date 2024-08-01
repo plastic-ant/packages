@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.6.1](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.6.0...nx-cdktf@0.6.1) (2024-08-01)
+
+
+### Bug Fixes
+
+* **repo:** version number mess ([9073235](https://github.com/plastic-ant/packages/commit/9073235aed6b2508f424eca65e62167495d63fbd))
+
 ## [0.5.6](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.5.5...nx-cdktf@0.5.6) (2024-08-01)
 
 

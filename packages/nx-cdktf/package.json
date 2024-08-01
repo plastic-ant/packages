@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-cdktf",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "license": "MIT",
   "repository": {
     "type": "git",
