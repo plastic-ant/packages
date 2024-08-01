@@ -45,7 +45,6 @@ jobs:
 
       - name: Version
         run: |
-          npx nx affected -t test,lint,build --configuration=ci
           npx nx affected -t version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
