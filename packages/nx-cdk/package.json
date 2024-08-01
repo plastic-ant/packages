@@ -1,8 +1,7 @@
 {
   "name": "@plastic-ant/nx-cdk",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "license": "MIT",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/nx-cdk.git"
