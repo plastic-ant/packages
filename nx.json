@@ -30,15 +30,15 @@
       "exclude": ["nx-cdktf"]
     },
     {
-      "plugin": "@nx/eslint/plugin",
+      "plugin": "@nx/jest/plugin",
       "options": {
-        "targetName": "lint"
+        "targetName": "test"
       }
     },
     {
-      "plugin": "@nx/rollup/plugin",
+      "plugin": "@nx/eslint/plugin",
       "options": {
-        "buildTargetName": "build"
+        "targetName": "lint"
       }
     }
   ],
@@ -62,43 +62,21 @@
         "{workspaceRoot}/tools/eslint-rules/**/*"
       ],
       "cache": true,
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["{projectRoot}/**/*.{ts,tsx,jsx,mjs,cjs,js,svelte}", "{projectRoot}/**/*.json"]
-      },
       "configurations": {
         "ci": {
-          "quiet": true
+          "args": ["--quiet"]
         }
       }
     },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true,
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "{projectRoot}/jest.config.ts",
-        "passWithNoTests": true
+        "args": ["--passWithNoTests"]
       },
       "configurations": {
         "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    },
-    "@nx/jest:jest": {
-      "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
-      "options": {
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
+          "args": ["--ci", "code-coverage", "--passWithNoTests"]
         }
       }
     },
@@ -110,34 +88,6 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
-    },
-    "nx-release-publish": {
-      "dependsOn": ["build"],
-      "options": {
-        "packageRoot": "{workspaceRoot}/packages/{projectName}"
-      }
-    }
-  },
-  "release": {
-    "projects": ["packages/**/*"],
-    "releaseTagPattern": "{projectName}@{version}",
-    "git": {
-      "commitMessage": "chore({projectName}): release {version} 🚀 [skip ci]"
-    },
-    "version": {
-      "conventionalCommits": true,
-      "generatorOptions": {
-        "fallbackCurrentVersionResolver": "disk"
-      }
-    },
-    "changelog": {
-      "automaticFromRef": true,
-      "workspaceChangelog": {
-        "createRelease": "github",
-        "renderOptions": {
-          "authors": false
-        }
-      }
     }
   }
 }
