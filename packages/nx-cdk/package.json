@@ -2,9 +2,10 @@
   "name": "@plastic-ant/nx-cdk",
   "version": "0.3.6",
   "license": "MIT",
+  "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/nx-cdk"
+    "url": "git+https://github.com/plastic-ant/nx-cdk.git"
   },
   "keywords": [
     "nx",
