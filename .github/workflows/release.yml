@@ -45,7 +45,7 @@ jobs:
 
       - name: Version
         run: |
-          npx nx affected -t version
+          npx nx affected -t=version --parallel=0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
