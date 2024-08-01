@@ -1,16 +1,19 @@
-name: release
+name: Release
 
 on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Tests"]
+    branches: [main]
+    types:
+      - completed
 
 concurrency:
   group: ${{ format('{0}-{1}-{2}', github.workflow, github.job, github.event.ref) }}
   cancel-in-progress: false
 
 jobs:
-  release:
+  Release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions: write-all
     env:
@@ -42,7 +45,7 @@ jobs:
 
       - name: Version
         run: |
-          npx nx affected -t lint test build
+          npx nx affected -t test,lint,build --configuration=ci
           npx nx affected -t version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
