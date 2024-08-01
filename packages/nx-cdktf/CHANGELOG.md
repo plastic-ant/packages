@@ -2,22 +2,39 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
-## [0.5.4](///compare/nx-cdktf@0.5.3...nx-cdktf@0.5.4) (2024-07-25)
+## [0.3.7](https://github.com/plastic-ant/nx-cdktf/compare/nx-cdktf@0.3.6...nx-cdktf@0.3.7) (2024-08-01)
 
-## [0.5.3](///compare/nx-cdktf@0.5.2...nx-cdktf@0.5.3) (2024-07-25)
+## [0.3.6](https://github.com/plastic-ant/nx-cdktf/compare/nx-cdktf@0.3.5...nx-cdktf@0.3.6) (2024-07-31)
 
-## [0.5.2](///compare/nx-cdktf@0.5.1...nx-cdktf@0.5.2) (2024-07-25)
+## [0.3.5](https://github.com/plastic-ant/nx-cdktf/compare/nx-cdktf@0.3.4...nx-cdktf@0.3.5) (2024-07-31)
 
-## [0.5.2](///compare/nx-cdktf@0.5.1...nx-cdktf@0.5.2) (2024-07-25)
+## 0.0.1 (2024-07-31)
 
-# 0.1.0 (2024-07-24)
 
 ### Bug Fixes
 
-- **nx-cdktf:** wrong config glob aca5841
+* **nx-cdktf:** allow for target gen without project.json ([e433a9a](https://github.com/plastic-ant/nx-cdktf/commit/e433a9a66d1821799648c7b26d0ec5232cac83b7))
 
-### Features
+## 0.3.6 (2024-07-31)
 
-- **nx-cdktf:** added get command daac77e
 
-## [0.5.1](///compare/nx-cdktf@0.5.0...nx-cdktf@0.5.1) (2024-07-24)
+### 🩹 Fixes
+
+- **nx-cdktf:** allow for target gen without project.json
+
+
+### ❤️  Thank You
+
+- pas-mike
+
+## 0.3.5 (2024-07-31)
+
+
+### 🩹 Fixes
+
+- **nx-cdktf:** allow for target gen without project.json
+
+
+### ❤️  Thank You
+
+- pas-mike

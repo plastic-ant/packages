@@ -41,31 +41,7 @@
         "targetName": "lint"
       }
     }
-    // {
-    //   "plugin": "@nx/rollup/plugin",
-    //   "options": {
-    //     "buildTargetName": "build"
-    //   }
-    // }
   ],
-  "release": {
-    "projects": ["packages/**/*"],
-    "projectsRelationship": "independent",
-    "releaseTagPattern": "{projectName}@{version}",
-    "changelog": {
-      "projectChangelogs": {
-        "createRelease": "github"
-      }
-    },
-    "version": {
-      "conventionalCommits": true,
-      "git": {
-        "tag": true,
-        "commit": true,
-        "commitMessage": "chore({projectName}): release {version} [skip-ci]"
-      }
-    }
-  },
   "targetDefaults": {
     "prebuild": {
       "cache": true,
@@ -77,26 +53,6 @@
       "dependsOn": ["prebuild", "^build"],
       "inputs": ["production", "^production"]
     },
-    // "lint": {
-    //   "dependsOn": ["prebuild"],
-    //   "inputs": [
-    //     "default",
-    //     "{workspaceRoot}/.eslintrc.json",
-    //     "{workspaceRoot}/tools/eslint-rules/**/*",
-    //     "{workspaceRoot}/tools/eslint-rules/**/*"
-    //   ],
-    //   "cache": true,
-    //   "executor": "@nx/eslint:lint",
-    //   "outputs": ["{options.outputFile}"],
-    //   "options": {
-    //     "lintFilePatterns": ["{projectRoot}/**/*.{ts,tsx,jsx,mjs,cjs,js,svelte}", "{projectRoot}/**/*.json"]
-    //   },
-    //   "configurations": {
-    //     "ci": {
-    //       "quiet": true
-    //     }
-    //   }
-    // },
     "lint": {
       "dependsOn": ["prebuild"],
       "inputs": [
@@ -132,12 +88,6 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
-    },
-    "nx-release-publish": {
-      "dependsOn": ["build"],
-      "options": {
-        "packageRoot": "{workspaceRoot}/packages/{projectName}"
-      }
     }
   }
 }

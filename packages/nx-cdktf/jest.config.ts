@@ -2,6 +2,7 @@
 export default {
   displayName: "nx-cdktf",
   preset: "../../jest.preset.js",
+  moduleFileExtensions: ["ts", "js", "html"],
   globals: {},
   transform: {
     "^.+\\.[tj]s$": [
@@ -11,6 +12,4 @@ export default {
       },
     ],
   },
-  moduleFileExtensions: ["ts", "js", "html"],
-  //coverageDirectory: "../../../coverage/packages/libs/nx-plugins/cdk-aws-plugin",
 };

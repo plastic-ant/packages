@@ -45,7 +45,7 @@ export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
         (configFile, options, context) => createNodesInternal(configFile, options, context, targetsCache),
         configFiles,
         options,
-        context
+        context,
       );
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
@@ -61,7 +61,7 @@ export const createNodes: CreateNodes<CdktfPluginOptions> = [
   "**/cdktf.json",
   (...args) => {
     logger.warn(
-      "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
+      "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API.",
     );
     return createNodesInternal(...args, {});
   },
@@ -71,7 +71,7 @@ async function createNodesInternal(configFilePath, options, context, targetsCach
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
 
-  if (!siblingFiles.includes("project.json")) {
+  if (!siblingFiles.includes("package.json") && !siblingFiles.includes("project.json")) {
     return {};
   }
 
@@ -97,7 +97,7 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: CdktfPluginOptions,
-  context: CreateNodesContext
+  context: CreateNodesContext,
 ) {
   //const absoluteConfigFilePath = joinPathFragments(context.workspaceRoot, configFilePath);
 
@@ -126,7 +126,7 @@ function synthTarget(
   options: CdktfPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: `cdktf synth`,

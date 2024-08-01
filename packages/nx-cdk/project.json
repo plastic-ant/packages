@@ -20,6 +20,32 @@
           "tsConfig": "{projectRoot}/tsconfig.lib.prd.json"
         }
       }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "push": true,
+        "preset": "conventionalcommits",
+        "baseBranch": "main",
+        "tagPrefix": "{projectName}@",
+        "commitMessageFormat": "chore({projectName}): release version {version} [skip ci]",
+        "postTargets": ["build", "npm", "github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "{tag}",
+        "notes": "{notes}"
+      }
+    },
+    "npm": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "scope": "plastic-ant",
+        "distFolderPath": "dist/{projectRoot}"
+      }
     }
   }
 }
