@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/nx-cdk.git"
+    "url": "git+https://github.com/plastic-ant/packages"
   },
   "keywords": [
     "nx",
