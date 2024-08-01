@@ -1,8 +1,7 @@
 {
   "name": "@plastic-ant/nx-cdktf",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "license": "MIT",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages"

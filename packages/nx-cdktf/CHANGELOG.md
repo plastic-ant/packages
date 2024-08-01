@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.5.6](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.5.5...nx-cdktf@0.5.6) (2024-08-01)
+
+
+### Bug Fixes
+
+* **nx-cdktf:** repo url ([558d851](https://github.com/plastic-ant/packages/commit/558d8517f710826fad945bf367fdb67be65c8f3f))
+
 ## [0.5.5](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.5.4...nx-cdktf@0.5.5) (2024-08-01)
 
 
