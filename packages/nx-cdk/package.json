@@ -5,7 +5,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/nx-cdk.git"
+    "url": "https://github.com/plastic-ant/nx-cdk.git"
   },
   "keywords": [
     "nx",
