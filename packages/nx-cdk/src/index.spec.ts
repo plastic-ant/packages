@@ -9,11 +9,10 @@ jest.mock("node:fs", () => ({
 describe("nx-cdk", () => {
   const createNodesFunction = createNodesV2[1];
   let context: CreateNodesContext;
-  const outputPath = "../../../dist/cdk.out";
 
   beforeEach(async () => {
     vol.fromJSON({
-      "proj/cdk.json": `{ "output": "${outputPath}"}`,
+      "proj/cdk.json": `{ "output": "../../cdk2.out" }`,
       "proj/project.json": "{}",
     });
 
@@ -83,7 +82,7 @@ describe("nx-cdk", () => {
                       "cwd": "proj",
                     },
                     "outputs": [
-                      "${outputPath}",
+                      "{projectRoot}/cdk.out",
                     ],
                   },
                   "synth-test": {
@@ -115,7 +114,7 @@ describe("nx-cdk", () => {
                       "cwd": "proj",
                     },
                     "outputs": [
-                      "${outputPath}",
+                      "{projectRoot}/cdk.out",
                     ],
                   },
                 },

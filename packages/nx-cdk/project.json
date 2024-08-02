@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/packages/nx-cdk",
         "tsConfig": "packages/nx-cdk/tsconfig.lib.json",
-        "main": "packages/nx-cdk/index.ts",
+        "main": "packages/nx-cdk/src/index.ts",
         "assets": [
           {
             "input": "packages/nx-cdk",

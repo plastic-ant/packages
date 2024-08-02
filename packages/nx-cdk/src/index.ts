@@ -1,7 +1,7 @@
 import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles } from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
 import { getPackageManagerCommand } from "@nx/devkit";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash-for-create-nodes";
@@ -14,7 +14,6 @@ const pmc = getPackageManagerCommand();
 export interface CdkAwsPluginOptions {
   synthTargetName?: string;
   deployTargetName?: string;
-  //bootstrapTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
@@ -23,7 +22,6 @@ function normalizeOptions(options: CdkAwsPluginOptions | undefined) {
   options ??= {};
   options.synthTargetName ??= "cdk-synth";
   options.deployTargetName ??= "cdk-deploy";
-  //options.bootstrapTargetName ??= "cdk-bootstrap";
   return options;
 }
 
@@ -55,10 +53,6 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
   },
 ];
 
-/**
- * @deprecated This is replaced with {@link createNodesV2}. Update your plugin to export its own `createNodesV2` function that wraps this one instead.
- * This function will change to the v2 function in Nx 20.
- */
 export const createNodes: CreateNodes<CdkAwsPluginOptions> = [
   "**/cdk.json",
   (...args) => {
@@ -101,8 +95,6 @@ function buildTargets(
   options: CdkAwsPluginOptions,
   context: CreateNodesContext
 ) {
-  //const absoluteConfigFilePath = joinPathFragments(context.workspaceRoot, configFilePath);
-
   const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
 
   const namedInputs = getNamedInputs(projectRoot, context);
@@ -116,10 +108,6 @@ function buildTargets(
   if (options.deployTargetName) {
     targets[options.deployTargetName] = deployTarget(options, namedInputs, configOutputs, projectRoot);
   }
-
-  // if (options.bootstrapTargetName) {
-  //   targets[options.bootstrapTargetName] = bootstrapTarget(projectRoot);
-  // }
 
   return { targets };
 }
@@ -186,23 +174,8 @@ function deployTarget(
   };
 }
 
-// function bootstrapTarget(projectRoot: string): TargetConfiguration {
-//   return {
-//     command: `cdk bootstrap`,
-//     options: { cwd: joinPathFragments(projectRoot) },
-//     inputs: [{ externalDependencies: ["aws-cdk"] }],
-//     metadata: {
-//       technologies: ["cdk"],
-//       help: {
-//         command: `${pmc.exec} cdk bootstrap --help`,
-//         example: {},
-//       },
-//     },
-//   };
-// }
-
 function getOutputs(workspaceRoot: string, projectRoot: string, configPath: string) {
   const cdkConfig = JSON.parse(readFileSync(configPath, "utf-8"));
   const outputs: string[] = [];
-  return outputs.concat(cdkConfig.output ? [cdkConfig.output] : ["cdk.out"]);
+  return outputs.concat([join("{projectRoot}", cdkConfig.output ?? "cdk.out")]);
 }

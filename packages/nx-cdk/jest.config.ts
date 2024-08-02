@@ -3,6 +3,7 @@ export default {
   displayName: "nx-cdk",
   preset: "../../jest.preset.js",
   moduleFileExtensions: ["ts", "js", "html"],
+  testEnvironment: "node",
   globals: {},
   transform: {
     "^.+\\.[tj]s$": [

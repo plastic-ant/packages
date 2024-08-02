@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/packages/nx-cdktf",
         "tsConfig": "packages/nx-cdktf/tsconfig.lib.json",
-        "main": "packages/nx-cdktf/index.ts",
+        "main": "packages/nx-cdktf/src/index.ts",
         "assets": [
           {
             "input": "packages/nx-cdktf",
