@@ -23,6 +23,7 @@
     },
     "version": {
       "executor": "@jscutlery/semver:version",
+      "parallelism": false,
       "options": {
         "push": true,
         "preset": "conventionalcommits",

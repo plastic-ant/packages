@@ -25,13 +25,13 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "@nx/devkit": "19.5.4",
+    "@nx/devkit": "19.5.6",
     "json-schema-to-typescript": "^15.0.0",
-    "nx": "19.5.4"
+    "nx": "19.5.6"
   },
   "dependencies": {
-    "@nx/devkit": "19.5.4",
-    "nx": "19.5.4"
+    "@nx/devkit": "19.5.6",
+    "nx": "19.5.6"
   },
   "peerDependencies": {
     "cdktf-cli": "^0.20.8"
