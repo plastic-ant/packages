@@ -4,7 +4,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages"
+    "url": "git+https://github.com/plastic-ant/packages",
+    "directory": "packages/nx-cdktf"
   },
   "keywords": [
     "nx",
@@ -31,6 +32,7 @@
   },
   "dependencies": {
     "@nx/devkit": "19.5.6",
+    "@swc/helpers": "0.5.11",
     "nx": "19.5.6"
   },
   "peerDependencies": {

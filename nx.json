@@ -21,14 +21,14 @@
     ]
   },
   "plugins": [
-    {
-      "plugin": "@plastic-ant/nx-cdk",
-      "exclude": ["nx-cdk"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-cdktf",
-      "exclude": ["nx-cdktf"]
-    },
+    // {
+    //   "plugin": "@plastic-ant/nx-cdk",
+    //   "exclude": ["nx-cdk"]
+    // },
+    // {
+    //   "plugin": "@plastic-ant/nx-cdktf",
+    //   "exclude": ["nx-cdktf"]
+    // },
     {
       "plugin": "@nx/jest/plugin",
       "options": {

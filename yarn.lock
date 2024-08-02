@@ -3828,6 +3828,7 @@ __metadata:
   resolution: "@plastic-ant/nx-cdk@workspace:packages/nx-cdk"
   dependencies:
     "@nx/devkit": "npm:19.5.6"
+    "@swc/helpers": "npm:0.5.11"
     json-schema-to-typescript: "npm:^15.0.0"
     nx: "npm:19.5.6"
   peerDependencies:
@@ -3841,6 +3842,7 @@ __metadata:
   resolution: "@plastic-ant/nx-cdktf@workspace:packages/nx-cdktf"
   dependencies:
     "@nx/devkit": "npm:19.5.6"
+    "@swc/helpers": "npm:0.5.11"
     json-schema-to-typescript: "npm:^15.0.0"
     nx: "npm:19.5.6"
   peerDependencies:
