@@ -2,20 +2,13 @@ import { CreateNodesContext } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
 
-jest.mock("node:fs", () => ({
-  ...jest.requireActual("memfs"),
-}));
+jest.mock("node:fs", () => ({ ...jest.requireActual("memfs") }));
 
 describe("nx-cdk", () => {
   const createNodesFunction = createNodesV2[1];
   let context: CreateNodesContext;
 
   beforeEach(async () => {
-    vol.fromJSON({
-      "proj/cdk.json": `{ "output": "../../cdk2.out" }`,
-      "proj/project.json": "{}",
-    });
-
     context = {
       workspaceRoot: ".",
       configFiles: [],
@@ -34,6 +27,74 @@ describe("nx-cdk", () => {
   });
 
   it("should create nodes based on cdk.json", async () => {
+    vol.fromJSON({
+      "proj/cdk.json": `{}`,
+      "proj/project.json": "{}",
+    });
+
+    const results = await createNodesFunction(
+      ["proj/cdk.json"],
+      { synthTargetName: "synth-test", deployTargetName: "deploy-test" },
+      context
+    );
+
+    expect(results).toMatchObject([
+      [
+        "proj/cdk.json",
+        {
+          projects: {
+            proj: {
+              metadata: undefined,
+              root: "proj",
+              targets: {
+                "deploy-test": {
+                  cache: true,
+                  command: "cdk deploy",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    help: {
+                      command: "yarn cdk deploy --help",
+                      example: {
+                        options: { "require-approval": "never" },
+                      },
+                    },
+                    technologies: ["cdk"],
+                  },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.out"],
+                },
+                "synth-test": {
+                  cache: true,
+                  command: "cdk synth",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    help: {
+                      command: "yarn cdk synth --help",
+                      example: {
+                        options: {
+                          strict: true,
+                        },
+                      },
+                    },
+                    technologies: ["cdk"],
+                  },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.out"],
+                },
+              },
+            },
+          },
+        },
+      ],
+    ]);
+  });
+
+  it("should create nodes based on cdk.json with output cache", async () => {
+    vol.fromJSON({
+      "proj/cdk.json": `{ "output": "cdk.test.out" }`,
+      "proj/project.json": "{}",
+    });
+
     const results = await createNodesFunction(
       ["proj/cdk.json"],
       {
@@ -43,86 +104,56 @@ describe("nx-cdk", () => {
       context
     );
 
-    expect(results).toMatchInlineSnapshot(`
+    expect(results).toMatchObject([
       [
-        [
-          "proj/cdk.json",
-          {
-            "projects": {
-              "proj": {
-                "metadata": undefined,
-                "root": "proj",
-                "targets": {
-                  "deploy-test": {
-                    "cache": true,
-                    "command": "cdk deploy",
-                    "inputs": [
-                      "production",
-                      "^production",
-                      {
-                        "externalDependencies": [
-                          "aws-cdk",
-                        ],
-                      },
-                    ],
-                    "metadata": {
-                      "help": {
-                        "command": "yarn cdk deploy --help",
-                        "example": {
-                          "options": {
-                            "require-approval": "never",
-                          },
+        "proj/cdk.json",
+        {
+          projects: {
+            proj: {
+              metadata: undefined,
+              root: "proj",
+              targets: {
+                "deploy-test": {
+                  cache: true,
+                  command: "cdk deploy",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    help: {
+                      command: "yarn cdk deploy --help",
+                      example: {
+                        options: {
+                          "require-approval": "never",
                         },
                       },
-                      "technologies": [
-                        "cdk",
-                      ],
                     },
-                    "options": {
-                      "cwd": "proj",
-                    },
-                    "outputs": [
-                      "{projectRoot}/cdk.out",
-                    ],
+                    technologies: ["cdk"],
                   },
-                  "synth-test": {
-                    "cache": true,
-                    "command": "cdk synth",
-                    "inputs": [
-                      "production",
-                      "^production",
-                      {
-                        "externalDependencies": [
-                          "aws-cdk",
-                        ],
-                      },
-                    ],
-                    "metadata": {
-                      "help": {
-                        "command": "yarn cdk synth --help",
-                        "example": {
-                          "options": {
-                            "strict": true,
-                          },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.test.out"],
+                },
+                "synth-test": {
+                  cache: true,
+                  command: "cdk synth",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    help: {
+                      command: "yarn cdk synth --help",
+                      example: {
+                        options: {
+                          strict: true,
                         },
                       },
-                      "technologies": [
-                        "cdk",
-                      ],
                     },
-                    "options": {
-                      "cwd": "proj",
-                    },
-                    "outputs": [
-                      "{projectRoot}/cdk.out",
-                    ],
+                    technologies: ["cdk"],
                   },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.test.out"],
                 },
               },
             },
           },
-        ],
-      ]
-    `);
+        },
+      ],
+    ]);
   });
 });
