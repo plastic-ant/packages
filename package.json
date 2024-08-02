@@ -64,6 +64,7 @@
     "json-schema-to-typescript": "^15.0.0",
     "jsonc-eslint-parser": "^2.4.0",
     "lodash": "^4.17.21",
+    "memfs": "^4.11.1",
     "ngx-deploy-npm": "^8.2.0",
     "nock": "^13.5.4",
     "node-cache": "^5.1.2",
