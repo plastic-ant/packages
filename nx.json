@@ -1,7 +1,8 @@
 {
-  "workspaceLayout": { "appsDir": "packages", "libsDir": "packages" },
   "defaultBase": "main",
-  "cli": { "packageManager": "yarn" },
+  "cli": {
+    "packageManager": "yarn"
+  },
   "defaultProject": "none!",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
@@ -67,9 +68,13 @@
     },
     "test": {
       "dependsOn": ["prebuild"],
-      "options": { "args": ["--passWithNoTests"] },
+      "options": {
+        "args": ["--passWithNoTests"]
+      },
       "configurations": {
-        "ci": { "args": ["--ci", "--coverage", "--passWithNoTests"] }
+        "ci": {
+          "args": ["--ci", "--coverage", "--passWithNoTests"]
+        }
       }
     }
   }

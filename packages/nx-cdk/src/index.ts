@@ -1,7 +1,7 @@
 import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles } from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
 import { getPackageManagerCommand } from "@nx/devkit";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash-for-create-nodes";

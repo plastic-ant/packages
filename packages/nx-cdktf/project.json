@@ -16,16 +16,6 @@
         "assets": [
           {
             "input": "packages/nx-cdktf",
-            "glob": "**/files/**",
-            "output": "/"
-          },
-          {
-            "input": "packages/nx-cdktf",
-            "glob": "**/files/**/.gitkeep",
-            "output": "/"
-          },
-          {
-            "input": "packages/nx-cdktf",
             "glob": "**/*.json",
             "ignore": ["**/tsconfig*.json", "project.json", ".eslintrc.json"],
             "output": "/"
