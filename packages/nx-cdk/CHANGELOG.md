@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.7.0](https://github.com/plastic-ant/packages/compare/nx-cdk@0.6.1...nx-cdk@0.7.0) (2024-08-05)
+
+
+### Features
+
+* **nx-cdk:** added cdk output as cache output ([4dd33a4](https://github.com/plastic-ant/packages/commit/4dd33a474ddc83ed17c189973a239b5660769e57))
+* **nx-cdk:** added help ([5bef2d3](https://github.com/plastic-ant/packages/commit/5bef2d3beaf1a28ada35d412c3fde3ef2d34265e))
+* **repo:** added new nx parallelism flag for versioning ([0e62c2b](https://github.com/plastic-ant/packages/commit/0e62c2b707c848e29575d375347db7c76dc331b9))
+
 ## [0.6.1](https://github.com/plastic-ant/packages/compare/nx-cdk@0.6.0...nx-cdk@0.6.1) (2024-08-01)
 
 
