@@ -10,6 +10,20 @@
     "strapi": "strapi",
     "deploy": "strapi deploy"
   },
+  "nx": {
+    "targets": {
+      "strapi-develop": {
+        "options": {
+          "args": [
+            "--open"
+          ]
+        }
+      },
+      "start-local-db": {
+        "command": "docker run --name postgresql-container -p 5432:5432 -e POSTGRES_DB=$DATABASE_NAME -e POSTGRES_PASSWORD=$DATABASE_PASSWORD -d postgres"
+      }
+    }
+  },
   "dependencies": {
     "@strapi/plugin-cloud": "4.25.6",
     "@strapi/plugin-i18n": "4.25.6",
