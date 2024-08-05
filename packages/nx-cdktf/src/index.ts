@@ -1,12 +1,15 @@
+import { getPackageManagerCommand } from "@nx/devkit";
 import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles } from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
-import { existsSync, readdirSync } from "fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash-for-create-nodes";
 import { workspaceDataDirectory } from "nx/src/utils/cache-directory";
 import { InputDefinition } from "nx/src/config/workspace-json-project-json";
 import { hashObject } from "nx/src/hasher/file-hasher";
+
+const pmc = getPackageManagerCommand();
 
 export interface CdktfPluginOptions {
   synthTargetName?: string;
@@ -45,7 +48,7 @@ export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
         (configFile, options, context) => createNodesInternal(configFile, options, context, targetsCache),
         configFiles,
         options,
-        context,
+        context
       );
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
@@ -61,7 +64,7 @@ export const createNodes: CreateNodes<CdktfPluginOptions> = [
   "**/cdktf.json",
   (...args) => {
     logger.warn(
-      "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API.",
+      "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
     );
     return createNodesInternal(...args, {});
   },
@@ -97,26 +100,26 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: CdktfPluginOptions,
-  context: CreateNodesContext,
+  context: CreateNodesContext
 ) {
   //const absoluteConfigFilePath = joinPathFragments(context.workspaceRoot, configFilePath);
 
-  const { buildOutputs } = getOutputs(context.workspaceRoot, projectRoot);
+  const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
 
   const namedInputs = getNamedInputs(projectRoot, context);
 
   const targets: Record<string, TargetConfiguration> = {};
 
   if (options.synthTargetName) {
-    targets[options.synthTargetName] = synthTarget(options, namedInputs, buildOutputs, projectRoot);
+    targets[options.synthTargetName] = synthTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
   if (options.deployTargetName) {
-    targets[options.deployTargetName] = deployTarget(options, projectRoot);
+    targets[options.deployTargetName] = deployTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
   if (options.getTargetName) {
-    targets[options.getTargetName] = getTarget(options, projectRoot);
+    targets[options.getTargetName] = getTarget(options, namedInputs, projectRoot);
   }
 
   return { targets };
@@ -126,10 +129,40 @@ function synthTarget(
   options: CdktfPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string,
+  projectRoot: string
 ): TargetConfiguration {
   return {
+    cache: true,
     command: `cdktf synth`,
+    options: { cwd: joinPathFragments(projectRoot) },
+    metadata: {
+      technologies: ["cdktf"],
+      help: {
+        command: `${pmc.exec} cdktf synth --help`,
+        example: {
+          options: {
+            output: "cdktf.custom.out",
+          },
+        },
+      },
+    },
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      { externalDependencies: ["cdktf-cli"] },
+    ],
+    outputs,
+  };
+}
+
+function deployTarget(
+  options: CdktfPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  outputs: string[],
+  projectRoot: string
+): TargetConfiguration {
+  return {
+    cache: true,
+    command: `cdktf deploy`,
     options: { cwd: joinPathFragments(projectRoot) },
     inputs: [
       ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
@@ -139,27 +172,24 @@ function synthTarget(
   };
 }
 
-function deployTarget(options: CdktfPluginOptions, projectRoot: string): TargetConfiguration {
+function getTarget(
+  options: CdktfPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  projectRoot: string
+): TargetConfiguration {
   return {
-    command: `cdktf deploy`,
+    cache: false,
+    command: `cdktf get`,
     options: { cwd: joinPathFragments(projectRoot) },
-    inputs: [{ externalDependencies: ["cdktf-cli"] }],
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      { externalDependencies: ["cdktf-cli"] },
+    ],
   };
 }
 
-function getTarget(options: CdktfPluginOptions, projectRoot: string): TargetConfiguration {
-  return {
-    command: `cdktf get`, // --language=typescript`,
-    options: { cwd: joinPathFragments(projectRoot) },
-    inputs: [{ externalDependencies: ["cdktf-cli"] }],
-  };
-}
-
-// cdk bootstrap aws://${options.account}/${options.region} --cloudformation-execution-policies=arn:aws:iam::aws:policy/AdministratorAccess
-
-function getOutputs(_workspaceRoot: string, _projectRoot: string) {
-  const buildOutputs: string[] = [];
-  return {
-    buildOutputs,
-  };
+function getOutputs(workspaceRoot: string, projectRoot: string, configPath: string) {
+  const cdkConfig = JSON.parse(readFileSync(configPath, "utf-8"));
+  const outputs: string[] = [];
+  return outputs.concat([join("{projectRoot}", cdkConfig.output ?? "cdktf.out")]);
 }

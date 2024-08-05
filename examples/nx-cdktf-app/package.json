@@ -1,0 +1,44 @@
+{
+  "name": "nx-cdktf-app",
+  "version": "1.0.0",
+  "main": "main.js",
+  "types": "main.ts",
+  "license": "MPL-2.0",
+  "private": true,
+  "scripts": {
+    "get": "cdktf get",
+    "build": "tsc",
+    "synth": "cdktf synth",
+    "compile": "tsc --pretty",
+    "watch": "tsc -w",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "nx": {
+    "targets": {
+      "cdktf-get": {
+        "options": {
+          "args": [
+            "--language=typescript"
+          ]
+        }
+      }
+    }
+  },
+  "engines": {
+    "node": ">=18.0"
+  },
+  "dependencies": {
+    "cdktf": "^0.20.8",
+    "constructs": "^10.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.0.0",
+    "cdktf-cli": "^0.20.8",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

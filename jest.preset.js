@@ -2,7 +2,13 @@ const path = require("path");
 const nxPreset = require("@nx/jest/preset").default;
 
 /** @type {import('jest').Config} */
-const globalConf = {
+const config = {
+  ...nxPreset,
+  testMatch: ["**/+(*.)+(spec|test).+(ts|js)?(x)"],
+  transform: { "^.+\\.(ts|js|html)$": "ts-jest" },
+  resolver: "@nx/jest/plugins/resolver",
+  moduleFileExtensions: ["ts", "js", "html"],
+  coverageReporters: ["html"],
   collectCoverage: true,
   bail: true,
   testTimeout: 70000,
@@ -10,4 +16,4 @@ const globalConf = {
   setupFiles: [path.join(__dirname, "./tools/scripts/nx-unit-tests-setup.js")],
 };
 
-module.exports = { ...nxPreset, ...globalConf };
+module.exports = config;

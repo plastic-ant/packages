@@ -1,8 +1,4 @@
 {
-  "workspaceLayout": {
-    "appsDir": "packages",
-    "libsDir": "packages"
-  },
   "defaultBase": "main",
   "cli": {
     "packageManager": "yarn"
@@ -15,6 +11,7 @@
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.preset.[jt]s",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
       "!{projectRoot}/.eslintrc.json"
@@ -58,6 +55,7 @@
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
         "{workspaceRoot}/tools/eslint-rules/**/*",
         "{workspaceRoot}/tools/eslint-rules/**/*"
       ],
@@ -69,25 +67,15 @@
       }
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "cache": true,
+      "dependsOn": ["prebuild"],
       "options": {
         "args": ["--passWithNoTests"]
       },
       "configurations": {
         "ci": {
-          "args": ["--ci", "code-coverage", "--passWithNoTests"]
+          "args": ["--ci", "--coverage", "--passWithNoTests"]
         }
       }
-    },
-    "@nx/eslint:lint": {
-      "cache": true,
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
-    },
-    "@nx/js:tsc": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
     }
   }
 }
