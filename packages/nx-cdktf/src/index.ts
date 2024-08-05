@@ -2,7 +2,7 @@ import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles } 
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
 import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash-for-create-nodes";
 import { workspaceDataDirectory } from "nx/src/utils/cache-directory";
 import { InputDefinition } from "nx/src/config/workspace-json-project-json";
@@ -156,7 +156,7 @@ function getTarget(options: CdktfPluginOptions, projectRoot: string): TargetConf
 }
 
 function getOutputs(workspaceRoot: string, projectRoot: string, configPath: string) {
-  const cdkConfig = readJsonFile(configPath);
-  const outputs: string[] = [cdkConfig.output];
-  return outputs;
+  const cdkConfig = JSON.parse(readFileSync(configPath, "utf-8"));
+  const outputs: string[] = [];
+  return outputs.concat([join("{projectRoot}", cdkConfig.output ?? "cdktf.out")]);
 }
