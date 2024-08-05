@@ -1,0 +1,31 @@
+{
+  "name": "@plastic-ant/nx-strapi",
+  "version": "0.6.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plastic-ant/packages",
+    "directory": "packages/nx-strapi"
+  },
+  "keywords": [
+    "nx",
+    "crystal",
+    "strapi"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "pas-mike",
+    "url": "https://github.com/pas-mike"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@nx/devkit": "19.5.6",
+    "@swc/helpers": "0.5.11",
+    "nx": "19.5.6"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^4.20.5"
+  }
+}

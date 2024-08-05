@@ -1,7 +1,7 @@
 {
-  "name": "nx-cdk",
+  "name": "nx-strapi",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/nx-cdk/src",
+  "sourceRoot": "packages/nx-strapi/src",
   "projectType": "library",
   "tags": ["#nx-plugin"],
   "targets": {
@@ -10,29 +10,29 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/packages/nx-cdk",
-        "tsConfig": "packages/nx-cdk/tsconfig.lib.json",
-        "main": "packages/nx-cdk/src/index.ts",
+        "outputPath": "dist/packages/nx-strapi",
+        "tsConfig": "packages/nx-strapi/tsconfig.lib.json",
+        "main": "packages/nx-strapi/src/index.ts",
         "assets": [
           {
-            "input": "packages/nx-cdk",
+            "input": "packages/nx-strapi",
             "glob": "**/*.json",
             "ignore": ["**/tsconfig*.json", "project.json", ".eslintrc.json"],
             "output": "/"
           },
           {
-            "input": "packages/nx-cdk",
+            "input": "packages/nx-strapi",
             "glob": "**/*.js",
             "ignore": ["**/jest.config.js"],
             "output": "/"
           },
           {
-            "input": "packages/nx-cdk",
+            "input": "packages/nx-strapi",
             "glob": "**/*.d.ts",
             "output": "/"
           },
           {
-            "input": "packages/nx-cdk",
+            "input": "packages/nx-strapi",
             "glob": "{LICENSE,README.md}",
             "output": "/"
           }

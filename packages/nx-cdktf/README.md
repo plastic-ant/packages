@@ -10,6 +10,7 @@ An Nx (Project Crystal) plugin for developing with the [cdktf](https://developer
 
 - [Install](#install)
 - [Usage](#usage)
+- [Example App](https://github.com/plastic-ant/packages/tree/main/examples/nx-cdktf-app)
 - [Contributing](#contributing)
 - [License](#license)
 

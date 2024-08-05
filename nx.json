@@ -19,6 +19,10 @@
   },
   "plugins": [
     {
+      "plugin": "@plastic-ant/nx-strapi",
+      "exclude": ["nx-strapi"]
+    },
+    {
       "plugin": "@plastic-ant/nx-cdk",
       "exclude": ["nx-cdk"]
     },
