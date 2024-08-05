@@ -4,7 +4,7 @@
 [![Npm package version](https://badgen.net/npm/v/@plastic-ant/nx-strapi)](https://npmjs.com/package/@plastic-ant/nx-strapi)
 [![Downloads](https://img.shields.io/npm/dm/@plastic-ant/nx-strapi.svg)](https://npmjs.com/package/@plastic-ant/nx-strapi)
 
-An Nx (Project Crystal) plugin for developing with the [Strapi](https://strapi.io/)
+An Nx (Project Crystal) plugin for developing with the [Strapi](https://strapi.io/) CLI
 
 ## Table of Contents
 
@@ -38,8 +38,10 @@ Add this plugin to your `nx.json` config:
 
 ```
 options:
-  buildTargetName        (optional) generated target synth, default strapi-build
-  serveTargetName       (optional) generated target deploy, default strapi-serve
+  buildTargetName       (optional) target name for 'strapi build', default strapi-build
+  deployTargetName      (optional) target name for 'strapi deploy', default strapi-deploy
+  developTargetName     (optional) target name for 'strapi develop', default strapi-develop
+  startTargetName       (optional) target name for 'strapi start', default strapi-start
 ```
 
 ## License
@@ -49,3 +51,4 @@ This project is MIT licensed 2024 Plastic Ant Software
 ## Links
 
 - [Nx](https://github.com/nrwl/nx)
+- [Strapi](https://strapi.io/)
