@@ -16,10 +16,10 @@
   },
   "nx": {
     "targets": {
-      "cdktf-synth": {
+      "cdktf-get": {
         "options": {
           "args": [
-            "--strict"
+            "--language=typescript"
           ]
         }
       }
