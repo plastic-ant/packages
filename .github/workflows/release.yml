@@ -50,7 +50,7 @@ jobs:
 
       - name: Version
         run: |
-          npx nx affected -t=version
+          npx nx affected -t=version --configuration=ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

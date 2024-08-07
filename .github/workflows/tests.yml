@@ -22,9 +22,9 @@ jobs:
           cache: "yarn"
           cache-dependency-path: "yarn.lock"
 
-      - run: |
-          yarn install --immutable
-          yarn npm audit -R -A --severity high
+      - run: yarn install --immutable
+
+      - run: yarn npm audit -R -A --severity high
 
       - uses: nrwl/nx-set-shas@v4
 
