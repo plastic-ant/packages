@@ -62,7 +62,7 @@
       }
     },
     {
-      "files": ["*.json"],
+      "files": ["*.json", ".swcrc"],
       "parser": "jsonc-eslint-parser"
     },
     {
