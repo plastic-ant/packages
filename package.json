@@ -91,6 +91,7 @@
     "webpack-dev-middleware": "^5.3.4",
     "express": "^4.19.2",
     "vite": "5.0.13",
+    "axios": "^1.7.4",
     "braces": "^3.0.3",
     "elliptic": "^6.5.6",
     "uuid": "^7",
