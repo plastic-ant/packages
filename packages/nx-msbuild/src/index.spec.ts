@@ -4,7 +4,7 @@ import { vol } from "memfs";
 
 jest.mock("node:fs", () => ({ ...jest.requireActual("memfs") }));
 
-describe("nx-cdk", () => {
+describe("nx-msbuild", () => {
   const createNodesFunction = createNodesV2[1];
   let context: CreateNodesContext;
 
@@ -26,7 +26,7 @@ describe("nx-cdk", () => {
     vol.reset();
   });
 
-  it("should create nodes based on cdk.json", async () => {
+  it("should create nodes based on project.vcxproj", async () => {
     vol.fromJSON({
       "proj/project.vcxproj": `{}`,
       "proj/project.json": "{}",
@@ -50,7 +50,7 @@ describe("nx-cdk", () => {
                 "msbuild-test": {
                   cache: true,
                   command: "./msbuild",
-                  inputs: ["production", "^production", { externalDependencies: ["msbuild"] }],
+                  inputs: ["production", "^production"],
                   //options: { cwd: "proj" },
                   //outputs: ["{projectRoot}/cdk.out"],
                 },

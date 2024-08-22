@@ -19,6 +19,10 @@
   },
   "plugins": [
     {
+      "plugin": "@plastic-ant/nx-msbuild",
+      "exclude": ["nx-msbuild"]
+    },
+    {
       "plugin": "@plastic-ant/nx-strapi",
       "exclude": ["nx-strapi"]
     },

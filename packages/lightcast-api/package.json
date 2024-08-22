@@ -30,12 +30,12 @@
     "openapicmd": "^2.3.2"
   },
   "dependencies": {
-    "axios": "^1.7.3",
+    "axios": "^1.7.4",
     "axios-cache-interceptor": "^1.5.3",
     "dotenv": "^16.4.5",
     "env-var": "^7.5.0",
     "openapi-client-axios": "^7.5.5",
-    "type-fest": "^4.24.0",
+    "type-fest": "^4.25.0",
     "urlcat": "^3.1.0"
   }
 }

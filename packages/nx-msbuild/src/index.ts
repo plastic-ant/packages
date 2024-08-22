@@ -115,12 +115,7 @@ function buildTarget(
     command: options.msbuildPath,
     cache: true,
     options: { cwd: joinPathFragments(projectRoot) },
-    inputs: [
-      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
-      {
-        externalDependencies: ["msbuild"],
-      },
-    ],
+    inputs: [...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"])],
     outputs,
   };
 }

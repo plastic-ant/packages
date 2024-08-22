@@ -25,12 +25,12 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "json-schema-to-typescript": "^15.0.0"
+    "json-schema-to-typescript": "^15.0.1"
   },
   "dependencies": {
-    "@nx/devkit": "19.5.7",
+    "@nx/devkit": "19.6.2",
     "@swc/helpers": "0.5.11",
-    "nx": "19.5.7"
+    "nx": "19.6.2"
   },
   "peerDependencies": {
     "aws-cdk": "^2.151.0",
