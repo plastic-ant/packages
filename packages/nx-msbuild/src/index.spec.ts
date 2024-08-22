@@ -40,7 +40,7 @@ describe("nx-cdk", () => {
 
     expect(results).toMatchObject([
       [
-        "proj/cdk.json",
+        "proj/project.vcxproj",
         {
           projects: {
             proj: {
@@ -51,19 +51,10 @@ describe("nx-cdk", () => {
                   cache: true,
                   command: "./msbuild",
                   inputs: ["production", "^production", { externalDependencies: ["msbuild"] }],
-                  metadata: {
-                    help: {
-                      command: "./msbuild --help",
-                      example: {
-                        options: { "require-approval": "never" },
-                      },
-                    },
-                    technologies: ["msbuild"],
-                  },
                   //options: { cwd: "proj" },
                   //outputs: ["{projectRoot}/cdk.out"],
-                }
-              }
+                },
+              },
             },
           },
         },
