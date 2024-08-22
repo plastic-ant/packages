@@ -1,18 +1,17 @@
 {
-  "name": "@plastic-ant/nx-cdk",
-  "version": "0.6.1",
+  "name": "@plastic-ant/nx-msbuild",
+  "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages",
-    "directory": "packages/nx-cdk"
+    "directory": "packages/nx-msbuild"
   },
   "keywords": [
     "nx",
     "crystal",
-    "aws",
-    "cdk",
-    "cloud"
+    "msbuild",
+    "visual studio"
   ],
   "publishConfig": {
     "access": "public"
@@ -31,9 +30,5 @@
     "@nx/devkit": "19.5.7",
     "@swc/helpers": "0.5.11",
     "nx": "19.5.7"
-  },
-  "peerDependencies": {
-    "aws-cdk": "^2.151.0",
-    "aws-cdk-lib": "^2.151.0"
   }
 }

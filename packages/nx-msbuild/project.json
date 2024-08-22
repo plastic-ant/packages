@@ -1,0 +1,70 @@
+{
+  "name": "nx-msbuild",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/nx-msbuild/src",
+  "projectType": "library",
+  "tags": ["#nx-plugin"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/packages/nx-msbuild",
+        "tsConfig": "packages/nx-msbuild/tsconfig.lib.json",
+        "main": "packages/nx-msbuild/src/index.ts",
+        "assets": [
+          {
+            "input": "packages/nx-msbuild",
+            "glob": "**/*.json",
+            "ignore": ["**/tsconfig*.json", "project.json", ".eslintrc.json"],
+            "output": "/"
+          },
+          {
+            "input": "packages/nx-msbuild",
+            "glob": "**/*.js",
+            "ignore": ["**/jest.config.js"],
+            "output": "/"
+          },
+          {
+            "input": "packages/nx-msbuild",
+            "glob": "**/*.d.ts",
+            "output": "/"
+          },
+          {
+            "input": "packages/nx-msbuild",
+            "glob": "{LICENSE,README.md}",
+            "output": "/"
+          }
+        ]
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "parallelism": false,
+      "options": {
+        "push": true,
+        "preset": "conventionalcommits",
+        "baseBranch": "main",
+        "tagPrefix": "{projectName}@",
+        "commitMessageFormat": "chore({projectName}): release version {version} [skip ci]",
+        "postTargets": ["build", "npm", "github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "{tag}",
+        "notes": "{notes}"
+      }
+    },
+    "npm": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "scope": "plastic-ant",
+        "distFolderPath": "dist/{projectRoot}"
+      }
+    }
+  }
+}

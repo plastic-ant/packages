@@ -21,9 +21,9 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@nx/devkit": "19.5.6",
+    "@nx/devkit": "19.5.7",
     "@swc/helpers": "0.5.11",
-    "nx": "19.5.6"
+    "nx": "19.5.7"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.20.5"
