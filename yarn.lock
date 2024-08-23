@@ -97,10 +97,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-cdk/cli-lib-alpha@npm:2.154.0-alpha.0":
-  version: 2.154.0-alpha.0
-  resolution: "@aws-cdk/cli-lib-alpha@npm:2.154.0-alpha.0"
-  checksum: 10/74d77ed859262e8a1f2dbda2b6f7b6f210dc16209f69b71d682c89e60139f1d1cf48d43b679d919aa239600ad9a23f01cde19e5926062a171dc798dc057e8512
+"@aws-cdk/cli-lib-alpha@npm:2.154.1-alpha.0":
+  version: 2.154.1-alpha.0
+  resolution: "@aws-cdk/cli-lib-alpha@npm:2.154.1-alpha.0"
+  checksum: 10/c8337126c469306821866ffb4794ca1ddaf72145b430df3de61060a1ebf8d93f95d439ab522ed43a784ea1f29edf1080f71ef7dc702aa632235705a9ef455a5f
   languageName: node
   linkType: hard
 
@@ -9588,9 +9588,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk-lib@npm:2.154.0":
-  version: 2.154.0
-  resolution: "aws-cdk-lib@npm:2.154.0"
+"aws-cdk-lib@npm:2.154.1":
+  version: 2.154.1
+  resolution: "aws-cdk-lib@npm:2.154.1"
   dependencies:
     "@aws-cdk/asset-awscli-v1": "npm:^2.2.202"
     "@aws-cdk/asset-kubectl-v20": "npm:^2.1.2"
@@ -9609,13 +9609,13 @@ __metadata:
     yaml: "npm:1.10.2"
   peerDependencies:
     constructs: ^10.0.0
-  checksum: 10/2276083c0e0be245a3574f62104e01862acc55762105b7ad5d44a46d116e05f2d97c62b2f6346ccaff910b272b17f4ddc7c5e4ea77901cc92e4b4d5f5dc06b7f
+  checksum: 10/828f0751e2aeff3c2b4b837cecec8e1d1e40aca72e2162558e391d75f9e32398c7c7973fdf00513aaba8d63f253c4d2412560daf6dac602b2ebc669537ce2b53
   languageName: node
   linkType: hard
 
-"aws-cdk@npm:2.154.0":
-  version: 2.154.0
-  resolution: "aws-cdk@npm:2.154.0"
+"aws-cdk@npm:2.154.1":
+  version: 2.154.1
+  resolution: "aws-cdk@npm:2.154.1"
   dependencies:
     fsevents: "npm:2.3.2"
   dependenciesMeta:
@@ -9623,7 +9623,7 @@ __metadata:
       optional: true
   bin:
     cdk: bin/cdk
-  checksum: 10/ab9d56ce19c845495a2a3bbbc32e5ae2468e2ea647a7790bf093638bfbcad256ed264c55b38f477c9602789441429c9cccd3df2ba9a643380fd14a4905406bce
+  checksum: 10/3c537541d511d2dd9323cd20267bd901325ac9ebc610d2961fe4b2c997c8a34fd5551d9952d6618dfcd912ce1c5e42a96c9e3454dc8e450d7d29e1b196fc0393
   languageName: node
   linkType: hard
 
@@ -21095,8 +21095,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nx-cdk-app@workspace:examples/nx-cdk-app"
   dependencies:
-    aws-cdk: "npm:2.154.0"
-    aws-cdk-lib: "npm:2.154.0"
+    aws-cdk: "npm:2.154.1"
+    aws-cdk-lib: "npm:2.154.1"
     constructs: "npm:^10.3.0"
     source-map-support: "npm:^0.5.21"
     ts-node: "npm:10.9.2"
@@ -22667,7 +22667,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "plastic-ant@workspace:."
   dependencies:
-    "@aws-cdk/cli-lib-alpha": "npm:2.154.0-alpha.0"
+    "@aws-cdk/cli-lib-alpha": "npm:2.154.1-alpha.0"
     "@commitlint/cli": "npm:^19.4.0"
     "@commitlint/config-conventional": "npm:^19.2.2"
     "@jscutlery/semver": "npm:^5.3.1"
