@@ -11,7 +11,6 @@ An Nx (Project Crystal) plugin for developing with the [msbuild](https://learn.m
 - [Install](#install)
 - [Usage](#usage)
 - [Example App](https://github.com/plastic-ant/packages/tree/main/examples/nx-msbuild-app)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Install
