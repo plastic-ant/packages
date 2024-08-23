@@ -1,16 +1,17 @@
 {
-  "name": "@plastic-ant/nx-strapi",
+  "name": "@plastic-ant/nx-msbuild",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages",
-    "directory": "packages/nx-strapi"
+    "directory": "packages/nx-msbuild"
   },
   "keywords": [
     "nx",
     "crystal",
-    "strapi"
+    "msbuild",
+    "visual studio"
   ],
   "publishConfig": {
     "access": "public"
@@ -20,12 +21,14 @@
     "url": "https://github.com/pas-mike"
   },
   "main": "src/index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "devDependencies": {
+    "json-schema-to-typescript": "^15.0.1"
+  },
   "dependencies": {
     "@nx/devkit": "19.6.2",
     "@swc/helpers": "0.5.11",
     "nx": "19.6.2"
-  },
-  "peerDependencies": {
-    "@strapi/strapi": "^4.20.5"
   }
 }

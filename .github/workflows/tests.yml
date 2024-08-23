@@ -24,6 +24,8 @@ jobs:
 
       - run: yarn install --immutable
 
+      - run: yarn npm audit -R -A --severity high
+
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx affected -t test,lint,build --configuration=ci
+      - run: npx nx affected -t test,lint,build --configuration=ci --verbose --nxBail
