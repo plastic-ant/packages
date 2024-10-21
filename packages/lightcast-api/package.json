@@ -26,16 +26,16 @@
     "access": "public"
   },
   "devDependencies": {
-    "openapi-client-axios-typegen": "^7.6.2",
-    "openapicmd": "^2.3.2"
+    "openapi-client-axios-typegen": "^7.7.0",
+    "openapicmd": "^2.6.0"
   },
   "dependencies": {
-    "axios": "^1.7.4",
-    "axios-cache-interceptor": "^1.5.3",
+    "axios": "^1.7.7",
+    "axios-cache-interceptor": "^1.6.0",
     "dotenv": "^16.4.5",
     "env-var": "^7.5.0",
     "openapi-client-axios": "^7.5.5",
-    "type-fest": "^4.25.0",
+    "type-fest": "^4.26.1",
     "urlcat": "^3.1.0"
   }
 }

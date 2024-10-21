@@ -15,27 +15,25 @@
     "cdk",
     "cloud"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "author": {
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
   },
   "main": "src/index.js",
-  "generators": "./generators.json",
-  "executors": "./executors.json",
   "devDependencies": {
-    "@nx/devkit": "19.6.2",
-    "json-schema-to-typescript": "^15.0.1",
-    "nx": "19.6.2"
+    "json-schema-to-typescript": "^15.0.2"
   },
   "dependencies": {
-    "@nx/devkit": "19.6.2",
-    "@swc/helpers": "0.5.11",
-    "nx": "19.6.2"
+    "@swc/helpers": "0.5.11"
   },
   "peerDependencies": {
-    "cdktf-cli": "^0.20.8"
-  }
+    "@nx/devkit": "^19.0.0 || ^20.0.0",
+    "cdktf-cli": "^0.20.8",
+    "nx": "^19.0.0 || ^20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json"
 }
