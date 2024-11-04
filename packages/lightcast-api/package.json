@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "openapi-client-axios-typegen": "^7.7.0",
-    "openapicmd": "^2.6.0"
+    "openapicmd": "^2.6.1"
   },
   "dependencies": {
     "axios": "^1.7.7",

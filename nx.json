@@ -35,6 +35,12 @@
       "exclude": ["nx-cdktf"]
     },
     {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "test"
+      }
+    },
+    {
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
@@ -85,5 +91,6 @@
         }
       }
     }
-  }
+  },
+  "useLegacyCache": true
 }

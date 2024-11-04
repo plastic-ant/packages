@@ -27,8 +27,8 @@
     "json-schema-to-typescript": "^15.0.2"
   },
   "dependencies": {
-    "@nx/devkit": "19.7.4",
+    "@nx/devkit": "20.0.3",
     "@swc/helpers": "0.5.11",
-    "nx": "19.7.4"
+    "nx": "20.0.3"
   }
 }

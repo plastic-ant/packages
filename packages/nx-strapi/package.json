@@ -1,19 +1,24 @@
 {
   "name": "@plastic-ant/nx-strapi",
   "version": "0.0.2",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages",
     "directory": "packages/nx-strapi"
   },
+  "license": "MIT",
   "author": {
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
   },
   "main": "src/index.js",
+  "devDependencies": {
+    "memfs": "^4.12.0"
+  },
   "dependencies": {
-    "@swc/helpers": "0.5.11"
+    "@nx/vite": "^20.0.3",
+    "@swc/helpers": "0.5.11",
+    "vite": "5.0.7"
   },
   "peerDependencies": {
     "@nx/devkit": "^19.0.0 || ^20.0.0",
