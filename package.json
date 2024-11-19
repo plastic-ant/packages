@@ -9,23 +9,25 @@
     "packages/**/*"
   ],
   "private": true,
+  "optionalDependencies": {
+    "@nx/nx-darwin-arm64": "19.6.2",
+    "@nx/nx-darwin-x64": "19.6.2",
+    "@nx/nx-linux-x64-gnu": "19.6.2",
+    "@nx/nx-win32-x64-msvc": "19.6.2"
+  },
   "devDependencies": {
     "@aws-cdk/cli-lib-alpha": "2.154.1-alpha.0",
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@jscutlery/semver": "^5.3.1",
-    "@nx/devkit": "19.6.2",
-    "@nx/eslint": "19.6.2",
-    "@nx/eslint-plugin": "19.6.2",
-    "@nx/jest": "19.6.2",
-    "@nx/js": "19.6.2",
-    "@nx/nx-darwin-arm64": "19.6.2",
-    "@nx/nx-darwin-x64": "19.6.2",
-    "@nx/nx-linux-x64-gnu": "19.6.2",
-    "@nx/nx-win32-x64-msvc": "19.6.2",
-    "@nx/plugin": "19.6.2",
-    "@nx/rollup": "19.6.2",
-    "@nx/workspace": "19.6.2",
+    "@nx/devkit": "19.8.11",
+    "@nx/eslint": "19.8.11",
+    "@nx/eslint-plugin": "19.8.11",
+    "@nx/jest": "19.8.11",
+    "@nx/js": "19.8.11",
+    "@nx/plugin": "19.8.11",
+    "@nx/rollup": "19.8.11",
+    "@nx/workspace": "19.8.11",
     "@swc-node/register": "1.9.2",
     "@swc/cli": "0.3.12",
     "@swc/core": "1.5.7",
@@ -63,7 +65,7 @@
     "ngx-deploy-npm": "^8.2.0",
     "nock": "^13.5.5",
     "node-cache": "^5.1.2",
-    "nx": "19.6.2",
+    "nx": "19.8.11",
     "prettier": "^2.6.2",
     "rollup": "^4.14.0",
     "ts-jest": "^29.1.0",
@@ -97,5 +99,5 @@
     "uuid": "^7",
     "request": "^2.88.2"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.5.1"
 }
