@@ -44,8 +44,6 @@ describe("nx-cdktf", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
-              root: "proj",
               targets: {
                 "get-test": {
                   cache: false,
@@ -108,8 +106,6 @@ describe("nx-cdktf", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
-              root: "proj",
               targets: {
                 "get-test": {
                   cache: false,

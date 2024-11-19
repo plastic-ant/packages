@@ -1,4 +1,4 @@
-import { getPackageManagerCommand } from "@nx/devkit";
+import { CreateNodesResult, getPackageManagerCommand } from "@nx/devkit";
 import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles } from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
 import { dirname, join } from "node:path";
@@ -18,8 +18,6 @@ export interface CdktfPluginOptions {
   bootstrapTargetName?: string;
 }
 
-type Targets = Awaited<ReturnType<typeof buildTargets>>;
-
 function normalizeOptions(options: CdktfPluginOptions | undefined) {
   options ??= {};
   options.synthTargetName ??= "cdktf-synth";
@@ -28,12 +26,19 @@ function normalizeOptions(options: CdktfPluginOptions | undefined) {
   return options;
 }
 
-function readTargetsCache(cachePath: string): Record<string, Targets> {
+function readTargetsCache(cachePath: string): Record<string, Record<string, TargetConfiguration<CdktfPluginOptions>>> {
   return existsSync(cachePath) ? readJsonFile(cachePath) : {};
 }
 
-function writeTargetsToCache(cachePath: string, results: Record<string, Targets>) {
-  writeJsonFile(cachePath, results);
+function writeTargetsToCache(
+  cachePath: string,
+  targetsCache: Record<string, Record<string, TargetConfiguration<CdktfPluginOptions>>>
+) {
+  const oldCache = readTargetsCache(cachePath);
+  writeJsonFile(cachePath, {
+    ...oldCache,
+    targetsCache,
+  });
 }
 
 export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
@@ -56,21 +61,27 @@ export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
   },
 ];
 
-/**
- * @deprecated This is replaced with {@link createNodesV2}. Update your plugin to export its own `createNodesV2` function that wraps this one instead.
- * This function will change to the v2 function in Nx 20.
- */
 export const createNodes: CreateNodes<CdktfPluginOptions> = [
   "**/cdktf.json",
-  (...args) => {
+  async (configFilePath, options, context) => {
     logger.warn(
       "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
     );
-    return createNodesInternal(...args, {});
+
+    const optionsHash = hashObject(options);
+    const cachePath = join(workspaceDataDirectory, `expo-${optionsHash}.hash`);
+    const targetsCache = readTargetsCache(cachePath);
+
+    return createNodesInternal(configFilePath, options, context, targetsCache);
   },
 ];
 
-async function createNodesInternal(configFilePath, options, context, targetsCache) {
+async function createNodesInternal(
+  configFilePath: string,
+  options: CdktfPluginOptions,
+  context: CreateNodesContext,
+  targetsCache: Record<string, Record<string, TargetConfiguration<CdktfPluginOptions>>>
+): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
 
@@ -83,14 +94,12 @@ async function createNodesInternal(configFilePath, options, context, targetsCach
   const hash = await calculateHashForCreateNodes(projectRoot, options, context);
   targetsCache[hash] ??= buildTargets(configFilePath, projectRoot, options, context);
 
-  const { targets, metadata } = targetsCache[hash];
+  const targets = targetsCache[hash];
 
   return {
     projects: {
       [projectRoot]: {
-        root: projectRoot,
         targets,
-        metadata,
       },
     },
   };
@@ -122,7 +131,7 @@ function buildTargets(
     targets[options.getTargetName] = getTarget(options, namedInputs, projectRoot);
   }
 
-  return { targets };
+  return targets;
 }
 
 function synthTarget(
