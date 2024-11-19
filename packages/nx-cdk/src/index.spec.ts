@@ -44,8 +44,6 @@ describe("nx-cdk", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
-              root: "proj",
               targets: {
                 "deploy-test": {
                   cache: true,
@@ -110,8 +108,6 @@ describe("nx-cdk", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
-              root: "proj",
               targets: {
                 "deploy-test": {
                   cache: true,

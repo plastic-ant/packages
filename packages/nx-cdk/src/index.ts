@@ -1,4 +1,4 @@
-import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles } from "@nx/devkit";
+import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles, CreateNodesResult } from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
 import { getPackageManagerCommand } from "@nx/devkit";
 import { dirname, join } from "node:path";
@@ -16,8 +16,6 @@ export interface CdkAwsPluginOptions {
   deployTargetName?: string;
 }
 
-type Targets = Awaited<ReturnType<typeof buildTargets>>;
-
 function normalizeOptions(options: CdkAwsPluginOptions | undefined) {
   options ??= {};
   options.synthTargetName ??= "cdk-synth";
@@ -25,12 +23,27 @@ function normalizeOptions(options: CdkAwsPluginOptions | undefined) {
   return options;
 }
 
-function readTargetsCache(cachePath: string): Record<string, Targets> {
+// function readTargetsCache(cachePath: string): Record<string, Targets> {
+//   return existsSync(cachePath) ? readJsonFile(cachePath) : {};
+// }
+
+// function writeTargetsToCache(cachePath: string, results: Record<string, Targets>) {
+//   writeJsonFile(cachePath, results);
+// }
+
+function readTargetsCache(cachePath: string): Record<string, Record<string, TargetConfiguration<CdkAwsPluginOptions>>> {
   return existsSync(cachePath) ? readJsonFile(cachePath) : {};
 }
 
-function writeTargetsToCache(cachePath: string, results: Record<string, Targets>) {
-  writeJsonFile(cachePath, results);
+function writeTargetsToCache(
+  cachePath: string,
+  targetsCache: Record<string, Record<string, TargetConfiguration<CdkAwsPluginOptions>>>
+) {
+  const oldCache = readTargetsCache(cachePath);
+  writeJsonFile(cachePath, {
+    ...oldCache,
+    targetsCache,
+  });
 }
 
 export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
@@ -55,15 +68,25 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
 
 export const createNodes: CreateNodes<CdkAwsPluginOptions> = [
   "**/cdk.json",
-  (...args) => {
+  async (configFilePath, options, context) => {
     logger.warn(
       "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
     );
-    return createNodesInternal(...args, {});
+
+    const optionsHash = hashObject(options);
+    const cachePath = join(workspaceDataDirectory, `expo-${optionsHash}.hash`);
+    const targetsCache = readTargetsCache(cachePath);
+
+    return createNodesInternal(configFilePath, options, context, targetsCache);
   },
 ];
 
-async function createNodesInternal(configFilePath, options, context, targetsCache) {
+async function createNodesInternal(
+  configFilePath: string,
+  options: CdkAwsPluginOptions,
+  context: CreateNodesContext,
+  targetsCache: Record<string, Record<string, TargetConfiguration<CdkAwsPluginOptions>>>
+): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
 
@@ -76,14 +99,12 @@ async function createNodesInternal(configFilePath, options, context, targetsCach
   const hash = await calculateHashForCreateNodes(projectRoot, options, context);
   targetsCache[hash] ??= buildTargets(configFilePath, projectRoot, options, context);
 
-  const { targets, metadata } = targetsCache[hash];
+  const targets = targetsCache[hash];
 
   return {
     projects: {
       [projectRoot]: {
-        root: projectRoot,
         targets,
-        metadata,
       },
     },
   };
@@ -109,7 +130,7 @@ function buildTargets(
     targets[options.deployTargetName] = deployTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
-  return { targets };
+  return targets;
 }
 
 function synthTarget(

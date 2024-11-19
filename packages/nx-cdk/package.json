@@ -25,7 +25,7 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "json-schema-to-typescript": "^15.0.1"
+    "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
     "@nx/devkit": "19.6.2",
