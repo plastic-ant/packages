@@ -1,6 +1,6 @@
 {
   "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*", "node_modules"],
+  "ignorePatterns": ["!**/*", "node_modules", "dist"],
   "overrides": [
     {
       "files": ["./package.json", "./generators.json", "./executors.json"],
@@ -21,7 +21,8 @@
             "checkObsoleteDependencies": true,
             "checkVersionMismatches": false,
             "buildTargets": ["build"],
-            "ignoredDependencies": ["tslib", "cdktf-cli"]
+            "ignoredDependencies": ["tslib", "cdktf-cli"],
+            "ignoredFiles": ["{projectRoot}/*.config.{js,ts,mjs,mts}"]
           }
         ]
       }

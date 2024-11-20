@@ -1,12 +1,11 @@
 {
   "defaultBase": "main",
-  "cli": {
-    "packageManager": "yarn"
-  },
+  "useLegacyCache": true,
+  "cli": { "packageManager": "yarn" },
   "defaultProject": "none!",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": ["{workspaceRoot}/tsconfig.base.json"],
+    "sharedGlobals": ["{workspaceRoot}/tsconfig.json", "{workspaceRoot}/tsconfig.base.json"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -19,31 +18,47 @@
   },
   "plugins": [
     {
-      "plugin": "@plastic-ant/nx-msbuild",
-      "exclude": ["nx-msbuild"]
+      "plugin": "./packages/nx-cdktf/src/index.ts"
     },
     {
-      "plugin": "@plastic-ant/nx-strapi",
-      "exclude": ["nx-strapi"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-cdk",
-      "exclude": ["nx-cdk"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-cdktf",
-      "exclude": ["nx-cdktf"]
-    },
-    {
-      "plugin": "@nx/jest/plugin",
+      "plugin": "@nx/js/typescript",
       "options": {
-        "targetName": "test"
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "configName": "tsconfig.lib.json"
+        }
       }
     },
     {
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/rollup/plugin",
+      "options": {
+        "buildTargetName": "build"
+      }
+    },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck"
+      }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
       }
     }
   ],
@@ -57,6 +72,11 @@
       "cache": true,
       "dependsOn": ["prebuild", "^build"],
       "inputs": ["production", "^production"]
+    },
+    "release": {
+      "version": {
+        "preVersionCommand": "yarn dlx nx run-many -t build"
+      }
     },
     "lint": {
       "dependsOn": ["prebuild"],

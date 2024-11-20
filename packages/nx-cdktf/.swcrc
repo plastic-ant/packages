@@ -1,7 +1,7 @@
 {
   "minify": true,
   "jsc": {
-    "target": "es2017",
+    "target": "es2022",
     "parser": {
       "syntax": "typescript",
       "decorators": true,
@@ -16,9 +16,7 @@
     "loose": true
   },
   "module": {
-    "type": "commonjs",
-    "strict": true,
-    "noInterop": true
+    "type": "es6"
   },
   "sourceMaps": false,
   "exclude": [

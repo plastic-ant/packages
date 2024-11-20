@@ -2,6 +2,21 @@
   "name": "@plastic-ant/nx-cdktf",
   "version": "0.7.2",
   "license": "MIT",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.esm.js",
+      "default": "./index.cjs.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages",
@@ -22,16 +37,11 @@
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
   },
-  "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "devDependencies": {
-    "json-schema-to-typescript": "^15.0.3"
-  },
   "dependencies": {
-    "@nx/devkit": "19.6.2",
-    "@swc/helpers": "0.5.11",
-    "nx": "19.6.2"
+    "@nx/devkit": "20.1.2",
+    "nx": "20.1.2"
   },
   "peerDependencies": {
     "cdktf-cli": "^0.20.8"

@@ -99,7 +99,8 @@
       },
       "extensions": [
         "aaron-bond.better-comments",
-        "firsttris.vscode-jest-runner",
+        //"firsttris.vscode-jest-runner",
+        "vitest.explorer",
         "42Crunch.vscode-openapi",
         "christian-kohler.path-intellisense",
         "nrwl.angular-console",

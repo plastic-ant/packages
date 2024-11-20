@@ -44,7 +44,7 @@ function writeTargetsToCache(
 export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
   "**/cdktf.json",
   async (configFiles, options, context) => {
-    const optionsHash = hashObject(options);
+    const optionsHash = options ? hashObject(options) : hashObject({ configFiles });
     const cachePath = join(workspaceDataDirectory, `pas-nx-cdktf-${optionsHash}.hash`);
     const targetsCache = readTargetsCache(cachePath);
 
@@ -68,7 +68,7 @@ export const createNodes: CreateNodes<CdktfPluginOptions> = [
       "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
     );
 
-    const optionsHash = hashObject(options);
+    const optionsHash = options ? hashObject(options) : hashObject({ configFilePath });
     const cachePath = join(workspaceDataDirectory, `expo-${optionsHash}.hash`);
     const targetsCache = readTargetsCache(cachePath);
 
@@ -78,7 +78,7 @@ export const createNodes: CreateNodes<CdktfPluginOptions> = [
 
 async function createNodesInternal(
   configFilePath: string,
-  options: CdktfPluginOptions,
+  options: CdktfPluginOptions | undefined,
   context: CreateNodesContext,
   targetsCache: Record<string, Record<string, TargetConfiguration<CdktfPluginOptions>>>
 ): Promise<CreateNodesResult> {

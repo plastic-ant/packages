@@ -10,7 +10,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/packages/nx-cdk",
+        "outputPath": "packages/nx-cdk/dist",
         "tsConfig": "packages/nx-cdk/tsconfig.lib.json",
         "main": "packages/nx-cdk/src/index.ts",
         "assets": [
@@ -63,7 +63,7 @@
       "options": {
         "access": "public",
         "scope": "plastic-ant",
-        "distFolderPath": "dist/{projectRoot}"
+        "distFolderPath": "{projectRoot}/dist"
       }
     }
   }

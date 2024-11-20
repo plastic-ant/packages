@@ -2,7 +2,10 @@ import { CreateNodesContext } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
 
-jest.mock("node:fs", () => ({ ...jest.requireActual("memfs") }));
+vi.mock("fs", async () => {
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
+  return { default: memfs.fs, ...memfs.fs };
+});
 
 describe("nx-cdktf", () => {
   const createNodesFunction = createNodesV2[1];
@@ -22,7 +25,6 @@ describe("nx-cdktf", () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
     vol.reset();
   });
 
