@@ -37,7 +37,6 @@ describe("nx-strapi", () => {
         buildTargetName: "build-test",
         developTargetName: "dev-test",
         startTargetName: "start-test",
-        deployTargetName: "deploy-test",
       },
       context
     );
@@ -70,39 +69,6 @@ describe("nx-strapi", () => {
                         "example": {
                           "options": {
                             "strict": true,
-                          },
-                        },
-                      },
-                      "technologies": [
-                        "strapi",
-                      ],
-                    },
-                    "options": {
-                      "cwd": "proj",
-                    },
-                    "outputs": [
-                      "{projectRoot}/dist",
-                      "{projectRoot}/.strapi",
-                    ],
-                  },
-                  "deploy-test": {
-                    "cache": false,
-                    "command": "strapi deploy",
-                    "inputs": [
-                      "production",
-                      "^production",
-                      {
-                        "externalDependencies": [
-                          "@strapi/strapi",
-                        ],
-                      },
-                    ],
-                    "metadata": {
-                      "help": {
-                        "command": "npx strapi deploy --help",
-                        "example": {
-                          "options": {
-                            "debug": true,
                           },
                         },
                       },

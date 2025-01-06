@@ -15,7 +15,6 @@ export interface StrapiPluginOptions {
   buildTargetName?: string;
   startTargetName?: string;
   developTargetName?: string;
-  deployTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
@@ -25,7 +24,6 @@ function normalizeOptions(options: StrapiPluginOptions | undefined) {
   options.buildTargetName ??= "strapi-build";
   options.startTargetName ??= "strapi-start";
   options.developTargetName ??= "strapi-develop";
-  options.deployTargetName ??= "strapi-deploy";
   return options;
 }
 
@@ -116,10 +114,6 @@ function buildTargets(
     targets[options.developTargetName] = developTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
-  if (options.deployTargetName) {
-    targets[options.deployTargetName] = deployTarget(options, namedInputs, configOutputs, projectRoot);
-  }
-
   return { targets };
 }
 
@@ -195,37 +189,6 @@ function startTarget(
     command: `strapi start`,
     cache: false,
     options: { cwd: joinPathFragments(projectRoot) },
-    inputs: [
-      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
-      {
-        externalDependencies: ["@strapi/strapi"],
-      },
-    ],
-    outputs,
-  };
-}
-
-function deployTarget(
-  options: StrapiPluginOptions,
-  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
-  outputs: string[],
-  projectRoot: string
-): TargetConfiguration {
-  return {
-    command: `strapi deploy`,
-    cache: false,
-    options: { cwd: joinPathFragments(projectRoot) },
-    metadata: {
-      technologies: ["strapi"],
-      help: {
-        command: `${pmc.exec} strapi deploy --help`,
-        example: {
-          options: {
-            debug: true,
-          },
-        },
-      },
-    },
     inputs: [
       ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
       {
