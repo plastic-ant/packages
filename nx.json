@@ -59,7 +59,7 @@
       "inputs": ["production", "^production"]
     },
     "lint": {
-      "dependsOn": ["prebuild"],
+      "dependsOn": ["build"],
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json",
