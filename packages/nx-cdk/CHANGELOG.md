@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.8.0](https://github.com/plastic-ant/packages/compare/nx-cdk@0.7.2...nx-cdk@0.8.0) (2025-01-06)
+
+
+### Features
+
+* **nx-cdk:** added bootstrap target ([24eb2ce](https://github.com/plastic-ant/packages/commit/24eb2cedf00df510f46280d873c49e821498dabd))
+
 ## [0.7.2](https://github.com/plastic-ant/packages/compare/nx-cdk@0.7.1...nx-cdk@0.7.2) (2024-08-23)
 
 ## [0.7.1](https://github.com/plastic-ant/packages/compare/nx-cdk@0.7.0...nx-cdk@0.7.1) (2024-08-05)
