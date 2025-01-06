@@ -1,6 +1,11 @@
-import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles } from "@nx/devkit";
+import {
+  CreateNodes,
+  CreateNodesV2,
+  CreateNodesContext,
+  createNodesFromFiles,
+  getPackageManagerCommand,
+} from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
-import { getPackageManagerCommand } from "@nx/devkit";
 import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
@@ -14,6 +19,7 @@ const pmc = getPackageManagerCommand();
 export interface CdkAwsPluginOptions {
   synthTargetName?: string;
   deployTargetName?: string;
+  bootstrapTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
@@ -22,6 +28,7 @@ function normalizeOptions(options: CdkAwsPluginOptions | undefined) {
   options ??= {};
   options.synthTargetName ??= "cdk-synth";
   options.deployTargetName ??= "cdk-deploy";
+  options.bootstrapTargetName ??= "cdk-bootstrap";
   return options;
 }
 
@@ -109,6 +116,10 @@ function buildTargets(
     targets[options.deployTargetName] = deployTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
+  if (options.bootstrapTargetName) {
+    targets[options.bootstrapTargetName] = bootstrapTarget(options, namedInputs, configOutputs, projectRoot);
+  }
+
   return { targets };
 }
 
@@ -163,6 +174,29 @@ function deployTarget(
           },
         },
       },
+    },
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      {
+        externalDependencies: ["aws-cdk"],
+      },
+    ],
+    outputs,
+  };
+}
+
+function bootstrapTarget(
+  options: CdkAwsPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  outputs: string[],
+  projectRoot: string
+): TargetConfiguration {
+  return {
+    command: `cdk bootstrap`,
+    cache: true,
+    options: { cwd: joinPathFragments(projectRoot) },
+    metadata: {
+      technologies: ["cdk"],
     },
     inputs: [
       ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
