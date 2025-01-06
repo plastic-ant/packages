@@ -66,7 +66,7 @@ describe("nx-cdktf", () => {
                   inputs: ["production", "^production", { externalDependencies: ["cdktf-cli"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdktf synth --help",
+                      command: "npx cdktf synth --help",
                       example: {
                         options: {
                           output: "cdktf.custom.out",
@@ -130,7 +130,7 @@ describe("nx-cdktf", () => {
                   inputs: ["production", "^production", { externalDependencies: ["cdktf-cli"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdktf synth --help",
+                      command: "npx cdktf synth --help",
                       example: {
                         options: {
                           output: "cdktf.custom.out",

@@ -66,7 +66,7 @@ describe("nx-strapi", () => {
                     ],
                     "metadata": {
                       "help": {
-                        "command": "yarn strapi build --help",
+                        "command": "npx strapi build --help",
                         "example": {
                           "options": {
                             "strict": true,
@@ -99,7 +99,7 @@ describe("nx-strapi", () => {
                     ],
                     "metadata": {
                       "help": {
-                        "command": "yarn strapi deploy --help",
+                        "command": "npx strapi deploy --help",
                         "example": {
                           "options": {
                             "debug": true,
@@ -132,7 +132,7 @@ describe("nx-strapi", () => {
                     ],
                     "metadata": {
                       "help": {
-                        "command": "yarn strapi develop --help",
+                        "command": "npx strapi develop --help",
                         "example": {
                           "options": {
                             "debug": true,

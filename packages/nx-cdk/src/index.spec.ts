@@ -10,9 +10,10 @@ describe("nx-cdk", () => {
 
   beforeEach(async () => {
     context = {
-      workspaceRoot: ".",
+      workspaceRoot: `.`,
       configFiles: [],
       nxJsonConfiguration: {
+        cli: { packageManager: "npm" },
         namedInputs: {
           default: ["{projectRoot}/**/*"],
           production: ["!{projectRoot}/**/*.spec.ts"],
@@ -28,13 +29,14 @@ describe("nx-cdk", () => {
 
   it("should create nodes based on cdk.json", async () => {
     vol.fromJSON({
+      "yarn.lock": "",
       "proj/cdk.json": `{}`,
       "proj/project.json": "{}",
     });
 
     const results = await createNodesFunction(
       ["proj/cdk.json"],
-      { synthTargetName: "synth-test", deployTargetName: "deploy-test" },
+      { synthTargetName: "synth-test", deployTargetName: "deploy-test", bootstrapTargetName: "bootstrap-test" },
       context
     );
 
@@ -47,13 +49,23 @@ describe("nx-cdk", () => {
               metadata: undefined,
               root: "proj",
               targets: {
+                "bootstrap-test": {
+                  cache: true,
+                  command: "cdk bootstrap",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    technologies: ["cdk"],
+                  },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.out"],
+                },
                 "deploy-test": {
                   cache: true,
                   command: "cdk deploy",
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk deploy --help",
+                      command: "npx cdk deploy --help",
                       example: {
                         options: { "require-approval": "never" },
                       },
@@ -69,7 +81,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk synth --help",
+                      command: "npx cdk synth --help",
                       example: {
                         options: {
                           strict: true,
@@ -100,6 +112,7 @@ describe("nx-cdk", () => {
       {
         synthTargetName: "synth-test",
         deployTargetName: "deploy-test",
+        bootstrapTargetName: "bootstrap-test",
       },
       context
     );
@@ -113,13 +126,23 @@ describe("nx-cdk", () => {
               metadata: undefined,
               root: "proj",
               targets: {
+                "bootstrap-test": {
+                  cache: true,
+                  command: "cdk bootstrap",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    technologies: ["cdk"],
+                  },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.test.out"],
+                },
                 "deploy-test": {
                   cache: true,
                   command: "cdk deploy",
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk deploy --help",
+                      command: "npx cdk deploy --help",
                       example: {
                         options: {
                           "require-approval": "never",
@@ -137,7 +160,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk synth --help",
+                      command: "npx cdk synth --help",
                       example: {
                         options: {
                           strict: true,
