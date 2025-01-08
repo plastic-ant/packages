@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.3](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.2...nx-msbuild@0.0.3) (2025-01-08)
+
+
+### Bug Fixes
+
+* **repo:** plugin entry function names ([bfab11c](https://github.com/plastic-ant/packages/commit/bfab11c76f377adf1713711877fa89bfa530d0e1))
+
 ## [0.0.2](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.1...nx-msbuild@0.0.2) (2025-01-06)
 
 ## 0.0.1 (2024-08-23)
