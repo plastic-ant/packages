@@ -30,7 +30,7 @@ function writeTargetsToCache(cachePath: string, results: Record<string, Targets>
   writeJsonFile(cachePath, results);
 }
 
-export const createNodes: CreateNodesV2<MSBuildPluginOptions> = [
+export const createNodesV2: CreateNodesV2<MSBuildPluginOptions> = [
   "**/*.{vcxproj,sln}",
   async (configFiles, opts, context) => {
     const options = normalizeOptions(opts);

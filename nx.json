@@ -41,22 +41,22 @@
         }
       }
     },
-    // {
-    //   "plugin": "@plastic-ant/nx-msbuild",
-    //   "exclude": ["nx-msbuild"]
-    // },
-    // {
-    //   "plugin": "@plastic-ant/nx-strapi",
-    //   "exclude": ["nx-strapi"]
-    // },
-    // {
-    //   "plugin": "@plastic-ant/nx-cdk",
-    //   "exclude": ["nx-cdk"]
-    // },
-    // {
-    //   "plugin": "@plastic-ant/nx-cdktf",
-    //   "exclude": ["nx-cdktf"]
-    // },
+    {
+      "plugin": "@plastic-ant/nx-msbuild",
+      "exclude": ["nx-msbuild"]
+    },
+    {
+      "plugin": "@plastic-ant/nx-strapi",
+      "exclude": ["nx-strapi"]
+    },
+    {
+      "plugin": "@plastic-ant/nx-cdk",
+      "exclude": ["nx-cdk"]
+    },
+    {
+      "plugin": "@plastic-ant/nx-cdktf",
+      "exclude": ["nx-cdktf"]
+    },
     {
       "plugin": "@nx/vite/plugin",
       "options": {

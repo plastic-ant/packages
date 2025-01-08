@@ -40,7 +40,7 @@ function writeTargetsToCache(cachePath: string, results: Record<string, Targets>
   writeJsonFile(cachePath, results);
 }
 
-export const createNodes: CreateNodesV2<CdkAwsPluginOptions> = [
+export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
   "**/cdk.json",
   async (configFiles, opts, context) => {
     const options = normalizeOptions(opts);

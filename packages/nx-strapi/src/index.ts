@@ -35,7 +35,7 @@ function writeTargetsToCache(cachePath: string, results: Record<string, Targets>
   writeJsonFile(cachePath, results);
 }
 
-export const createNodes: CreateNodesV2<StrapiPluginOptions> = [
+export const createNodesV2: CreateNodesV2<StrapiPluginOptions> = [
   "**/package.json",
   async (configFiles, opts, context) => {
     const options = normalizeOptions(opts);

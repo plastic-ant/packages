@@ -36,7 +36,7 @@ function writeTargetsToCache(cachePath: string, results: Record<string, Targets>
   writeJsonFile(cachePath, results);
 }
 
-export const createNodes: CreateNodesV2<CdktfPluginOptions> = [
+export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
   "**/cdktf.json",
   async (configFiles, opts, context) => {
     const options = normalizeOptions(opts);

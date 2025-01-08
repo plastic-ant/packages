@@ -1,5 +1,5 @@
 import { CreateNodesContext } from "@nx/devkit";
-import { createNodes } from "./index";
+import { createNodesV2 } from "./index";
 import { vol } from "memfs";
 import { vi, describe, expect, beforeEach, afterEach } from "vitest";
 
@@ -9,7 +9,7 @@ vi.mock("node:fs", async () => {
 });
 
 describe("nx-cdk", () => {
-  const createNodesFunction = createNodes[1];
+  const createNodesFunction = createNodesV2[1];
   let context: CreateNodesContext;
 
   beforeEach(async () => {
