@@ -1,11 +1,11 @@
 import {
-  CreateNodes,
   CreateNodesV2,
   CreateNodesContext,
   createNodesFromFiles,
   getPackageManagerCommand,
+  CreateNodesResult,
 } from "@nx/devkit";
-import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
+import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile } from "@nx/devkit";
 import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
@@ -42,14 +42,16 @@ function writeTargetsToCache(cachePath: string, results: Record<string, Targets>
 
 export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
   "**/cdk.json",
-  async (configFiles, options, context) => {
+  async (configFiles, opts, context) => {
+    const options = normalizeOptions(opts);
     const optionsHash = hashObject(options);
     const cachePath = join(workspaceDataDirectory, `pas-nx-cdk-${optionsHash}.hash`);
     const targetsCache = readTargetsCache(cachePath);
 
     try {
       return await createNodesFromFiles(
-        (configFile, options, context) => createNodesInternal(configFile, options, context, targetsCache),
+        (configFile, options, context) =>
+          createNodesInternal(configFile, normalizeOptions(options), context, targetsCache),
         configFiles,
         options,
         context
@@ -60,17 +62,22 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
   },
 ];
 
-export const createNodes: CreateNodes<CdkAwsPluginOptions> = [
-  "**/cdk.json",
-  (...args) => {
-    logger.warn(
-      "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
-    );
-    return createNodesInternal(...args, {});
-  },
-];
+// export const createNodes: CreateNodes<CdkAwsPluginOptions> = [
+//   "**/cdk.json",
+//   (...args) => {
+//     logger.warn(
+//       "`createNodes` is deprecated. Update your plugin to utilize createNodesV2 instead. In Nx 20, this will change to the createNodesV2 API."
+//     );
+//     return createNodesInternal(...args, {});
+//   },
+// ];
 
-async function createNodesInternal(configFilePath, options, context, targetsCache) {
+async function createNodesInternal(
+  configFilePath: string,
+  options: CdkAwsPluginOptions,
+  context: CreateNodesContext,
+  targetsCache: Record<string, Record<string, TargetConfiguration>>
+): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
 
@@ -78,19 +85,16 @@ async function createNodesInternal(configFilePath, options, context, targetsCach
     return {};
   }
 
-  options = normalizeOptions(options);
-
   const hash = await calculateHashForCreateNodes(projectRoot, options, context);
   targetsCache[hash] ??= buildTargets(configFilePath, projectRoot, options, context);
 
-  const { targets, metadata } = targetsCache[hash];
+  const targets = targetsCache[hash];
 
   return {
     projects: {
       [projectRoot]: {
         root: projectRoot,
         targets,
-        metadata,
       },
     },
   };
@@ -120,7 +124,7 @@ function buildTargets(
     targets[options.bootstrapTargetName] = bootstrapTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
-  return { targets };
+  return targets;
 }
 
 function synthTarget(

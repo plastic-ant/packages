@@ -21,6 +21,7 @@
             "checkObsoleteDependencies": true,
             "checkVersionMismatches": false,
             "buildTargets": ["build"],
+            "ignoredFiles": ["**/*.config.{ts,js,cjs,mjs,mts}"],
             "ignoredDependencies": ["tslib", "aws-cdk", "aws-cdk-lib"]
           }
         ]

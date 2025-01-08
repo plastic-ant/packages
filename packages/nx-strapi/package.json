@@ -2,6 +2,9 @@
   "name": "@plastic-ant/nx-strapi",
   "version": "0.0.4",
   "license": "MIT",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages",
@@ -9,6 +12,7 @@
   },
   "keywords": [
     "nx",
+    "plugin",
     "crystal",
     "strapi"
   ],
@@ -19,11 +23,12 @@
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
   },
-  "main": "src/index.js",
+  "devDependencies": {
+    "@strapi/strapi": "^4.20.5"
+  },
   "dependencies": {
-    "@nx/devkit": "19.8.14",
-    "@swc/helpers": "0.5.11",
-    "nx": "19.8.14"
+    "@nx/devkit": "20.3.1",
+    "nx": "20.3.1"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.20.5"

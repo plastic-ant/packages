@@ -1,8 +1,12 @@
 import { CreateNodesContext } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
+import { vi, describe, expect, beforeEach, afterEach } from "vitest";
 
-jest.mock("node:fs", () => ({ ...jest.requireActual("memfs") }));
+vi.mock("node:fs", async () => {
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
+  return { default: memfs.fs, ...memfs.fs };
+});
 
 describe("nx-cdk", () => {
   const createNodesFunction = createNodesV2[1];
@@ -23,7 +27,7 @@ describe("nx-cdk", () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    vi.resetModules();
     vol.reset();
   });
 
@@ -46,7 +50,6 @@ describe("nx-cdk", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
               root: "proj",
               targets: {
                 "bootstrap-test": {
@@ -65,7 +68,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "npx cdk deploy --help",
+                      command: "yarn cdk deploy --help",
                       example: {
                         options: { "require-approval": "never" },
                       },
@@ -81,7 +84,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "npx cdk synth --help",
+                      command: "yarn cdk synth --help",
                       example: {
                         options: {
                           strict: true,
@@ -123,7 +126,6 @@ describe("nx-cdk", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
               root: "proj",
               targets: {
                 "bootstrap-test": {
@@ -142,7 +144,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "npx cdk deploy --help",
+                      command: "yarn cdk deploy --help",
                       example: {
                         options: {
                           "require-approval": "never",
@@ -160,7 +162,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "npx cdk synth --help",
+                      command: "yarn cdk synth --help",
                       example: {
                         options: {
                           strict: true,

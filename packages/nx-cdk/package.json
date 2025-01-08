@@ -2,6 +2,9 @@
   "name": "@plastic-ant/nx-cdk",
   "version": "0.8.0",
   "license": "MIT",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages",
@@ -10,6 +13,7 @@
   "keywords": [
     "nx",
     "crystal",
+    "plugin",
     "aws",
     "cdk",
     "cloud"
@@ -21,16 +25,16 @@
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
   },
-  "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
+    "aws-cdk": "^2.174.1",
+    "aws-cdk-lib": "^2.174.1",
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "19.8.14",
-    "@swc/helpers": "0.5.11",
-    "nx": "19.8.14"
+    "@nx/devkit": "20.3.1",
+    "nx": "20.3.1"
   },
   "peerDependencies": {
     "aws-cdk": "^2.151.0",

@@ -1,8 +1,12 @@
 import { CreateNodesContext } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
+import { vi, describe, expect, beforeEach, afterEach } from "vitest";
 
-jest.mock("node:fs", () => ({ ...jest.requireActual("memfs") }));
+vi.mock("node:fs", async () => {
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
+  return { default: memfs.fs, ...memfs.fs };
+});
 
 describe("nx-msbuild", () => {
   const createNodesFunction = createNodesV2[1];
@@ -22,7 +26,7 @@ describe("nx-msbuild", () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    vi.resetModules();
     vol.reset();
   });
 
@@ -44,7 +48,6 @@ describe("nx-msbuild", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
               root: "proj",
               targets: {
                 "msbuild-test": {
