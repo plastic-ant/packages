@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.7.4](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.7.3...nx-cdktf@0.7.4) (2025-01-08)
+
+
+### Bug Fixes
+
+* **repo:** plugin entry function names ([bfab11c](https://github.com/plastic-ant/packages/commit/bfab11c76f377adf1713711877fa89bfa530d0e1))
+
 ## [0.7.3](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.7.2...nx-cdktf@0.7.3) (2025-01-06)
 
 ## [0.7.2](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.7.1...nx-cdktf@0.7.2) (2024-08-23)
