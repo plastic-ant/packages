@@ -63,7 +63,7 @@
       "options": {
         "access": "public",
         "scope": "plastic-ant",
-        "distFolderPath": "dist/{projectRoot}"
+        "distFolderPath": "{projectRoot}/dist"
       }
     }
   }
