@@ -37,6 +37,7 @@
     "@typescript-eslint/type-utils": "^6.13.2",
     "@typescript-eslint/typescript-estree": "^6.20.0",
     "@typescript-eslint/utils": "7.16.1",
+    "@vitest/coverage-v8": "^2.1.8",
     "@vitest/ui": "2.1.8",
     "change-case": "^5.4.4",
     "core-js": "^3.40.0",
