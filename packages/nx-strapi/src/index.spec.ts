@@ -1,11 +1,15 @@
 import { CreateNodesContext } from "@nx/devkit";
-import { createNodesV2 } from "./index";
+import { createNodes } from "./index";
 import { vol } from "memfs";
+import { vi, describe, expect, beforeEach, afterEach } from "vitest";
 
-jest.mock("node:fs", () => ({ ...jest.requireActual("memfs") }));
+vi.mock("node:fs", async () => {
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
+  return { default: memfs.fs, ...memfs.fs };
+});
 
 describe("nx-strapi", () => {
-  const createNodesFunction = createNodesV2[1];
+  const createNodesFunction = createNodes[1];
   let context: CreateNodesContext;
 
   beforeEach(async () => {
@@ -22,7 +26,7 @@ describe("nx-strapi", () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    vi.resetModules();
     vol.reset();
   });
 
@@ -41,190 +45,86 @@ describe("nx-strapi", () => {
       context
     );
 
-    expect(results).toMatchInlineSnapshot(`
+    expect(results).toMatchObject([
       [
-        [
-          "proj/package.json",
-          {
-            "projects": {
-              "proj": {
-                "metadata": undefined,
-                "root": "proj",
-                "targets": {
-                  "build-test": {
-                    "cache": true,
-                    "command": "strapi build",
-                    "inputs": [
-                      "production",
-                      "^production",
-                      {
-                        "externalDependencies": [
-                          "@strapi/strapi",
-                        ],
-                      },
-                    ],
-                    "metadata": {
-                      "help": {
-                        "command": "npx strapi build --help",
-                        "example": {
-                          "options": {
-                            "strict": true,
-                          },
+        "proj/package.json",
+        {
+          projects: {
+            proj: {
+              root: "proj",
+              targets: {
+                "build-test": {
+                  cache: true,
+                  command: "strapi build",
+                  inputs: [
+                    "production",
+                    "^production",
+                    {
+                      externalDependencies: ["@strapi/strapi"],
+                    },
+                  ],
+                  metadata: {
+                    help: {
+                      command: "yarn strapi build --help",
+                      example: {
+                        options: {
+                          strict: true,
                         },
                       },
-                      "technologies": [
-                        "strapi",
-                      ],
                     },
-                    "options": {
-                      "cwd": "proj",
-                    },
-                    "outputs": [
-                      "{projectRoot}/dist",
-                      "{projectRoot}/.strapi",
-                    ],
+                    technologies: ["strapi"],
                   },
-                  "dev-test": {
-                    "cache": true,
-                    "command": "strapi develop",
-                    "inputs": [
-                      "production",
-                      "^production",
-                      {
-                        "externalDependencies": [
-                          "@strapi/strapi",
-                        ],
-                      },
-                    ],
-                    "metadata": {
-                      "help": {
-                        "command": "npx strapi develop --help",
-                        "example": {
-                          "options": {
-                            "debug": true,
-                          },
+                  options: {
+                    cwd: "proj",
+                  },
+                  outputs: ["{projectRoot}/dist", "{projectRoot}/.strapi"],
+                },
+                "dev-test": {
+                  cache: true,
+                  command: "strapi develop",
+                  inputs: [
+                    "production",
+                    "^production",
+                    {
+                      externalDependencies: ["@strapi/strapi"],
+                    },
+                  ],
+                  metadata: {
+                    help: {
+                      command: "yarn strapi develop --help",
+                      example: {
+                        options: {
+                          debug: true,
                         },
                       },
-                      "technologies": [
-                        "strapi",
-                      ],
                     },
-                    "options": {
-                      "cwd": "proj",
-                    },
-                    "outputs": [
-                      "{projectRoot}/dist",
-                      "{projectRoot}/.strapi",
-                    ],
+                    technologies: ["strapi"],
                   },
-                  "start-test": {
-                    "cache": false,
-                    "command": "strapi start",
-                    "inputs": [
-                      "production",
-                      "^production",
-                      {
-                        "externalDependencies": [
-                          "@strapi/strapi",
-                        ],
-                      },
-                    ],
-                    "options": {
-                      "cwd": "proj",
-                    },
-                    "outputs": [
-                      "{projectRoot}/dist",
-                      "{projectRoot}/.strapi",
-                    ],
+                  options: {
+                    cwd: "proj",
                   },
+                  outputs: ["{projectRoot}/dist", "{projectRoot}/.strapi"],
+                },
+                "start-test": {
+                  cache: false,
+                  command: "strapi start",
+                  inputs: [
+                    "production",
+                    "^production",
+                    {
+                      externalDependencies: ["@strapi/strapi"],
+                    },
+                  ],
+                  options: {
+                    cwd: "proj",
+                  },
+                  outputs: ["{projectRoot}/dist", "{projectRoot}/.strapi"],
                 },
               },
             },
           },
-        ],
-      ]
-    `);
-
-    // expect(results).toMatchInlineSnapshot(`[
-    //   [
-    //     "proj/package.json",
-    //     {
-    //       "projects": {
-    //         "proj": {
-    //           "metadata": undefined,
-    //           "root": "proj",
-    //           "targets": {
-    //           "build-test": {
-    //               "cache": true,
-    //               "command": "strapi build",
-    //               "inputs": [
-    //                 "production",
-    //                 "^production",
-    //                 {
-    //                   "externalDependencies": [
-    //                     "@strapi/strapi",
-    //                   ],
-    //                 },
-    //               ],
-    //               "metadata": {
-    //                 "help": {
-    //                   "command": "yarn strapi build --help",
-    //                   "example": {
-    //                     "options": {
-    //                       "strict": true,
-    //                     },
-    //                   },
-    //                 },
-    //                 "technologies": [
-    //                   "strapi",
-    //                 ],
-    //               },
-    //               "options": {
-    //                 "cwd": "proj",
-    //               },
-    //               "outputs": [
-    //                 "{projectRoot}/dist",
-    //                 "{projectRoot}/.strapi",
-    //               ],
-    //             },
-    //             "deploy-test": {
-    //               "cache": false,
-    //               "command": "strapi deploy",
-    //               "inputs": [
-    //                 "production",
-    //                 "^production",
-    //                 {
-    //                   externalDependencies: [
-    //                     "@strapi/strapi",
-    //                   ],
-    //                 },
-    //               ],
-    //               "metadata": {
-    //                 "help": {
-    //                   "command": "yarn strapi deploy --help",
-    //                   "example": {
-    //                     "options": {
-    //                       "debug": true,
-    //                     },
-    //                   },
-    //                 },
-    //                 "technologies": [
-    //                   "strapi",
-    //                 ],
-    //               },
-    //               options: {
-    //                 cwd: "proj",
-    //               },
-    //               outputs: [
-    //                 "{projectRoot}/dist",
-    //                 "{projectRoot}/.strapi",
-    //               ],
-    //             },
-    //           },
-    //         },
-    //       },
-    //     },
-    //   ],
-    // ]`);
+        },
+      ],
+    ]);
   });
 });

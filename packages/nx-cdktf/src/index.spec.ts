@@ -1,11 +1,15 @@
 import { CreateNodesContext } from "@nx/devkit";
-import { createNodesV2 } from "./index";
+import { createNodes } from "./index";
 import { vol } from "memfs";
+import { vi, describe, expect, beforeEach, afterEach } from "vitest";
 
-jest.mock("node:fs", () => ({ ...jest.requireActual("memfs") }));
+vi.mock("node:fs", async () => {
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
+  return { default: memfs.fs, ...memfs.fs };
+});
 
 describe("nx-cdktf", () => {
-  const createNodesFunction = createNodesV2[1];
+  const createNodesFunction = createNodes[1];
   let context: CreateNodesContext;
 
   beforeEach(async () => {
@@ -22,7 +26,7 @@ describe("nx-cdktf", () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    vitest.resetModules();
     vol.reset();
   });
 
@@ -44,7 +48,6 @@ describe("nx-cdktf", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
               root: "proj",
               targets: {
                 "get-test": {
@@ -66,7 +69,7 @@ describe("nx-cdktf", () => {
                   inputs: ["production", "^production", { externalDependencies: ["cdktf-cli"] }],
                   metadata: {
                     help: {
-                      command: "npx cdktf synth --help",
+                      command: "yarn cdktf synth --help",
                       example: {
                         options: {
                           output: "cdktf.custom.out",
@@ -108,7 +111,6 @@ describe("nx-cdktf", () => {
         {
           projects: {
             proj: {
-              metadata: undefined,
               root: "proj",
               targets: {
                 "get-test": {
@@ -130,7 +132,7 @@ describe("nx-cdktf", () => {
                   inputs: ["production", "^production", { externalDependencies: ["cdktf-cli"] }],
                   metadata: {
                     help: {
-                      command: "npx cdktf synth --help",
+                      command: "yarn cdktf synth --help",
                       example: {
                         options: {
                           output: "cdktf.custom.out",

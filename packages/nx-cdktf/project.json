@@ -6,13 +6,8 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "build": {
-      "executor": "@nx/js:swc",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@nx/js:tsc",
       "options": {
-        "outputPath": "dist/packages/nx-cdktf",
-        "tsConfig": "packages/nx-cdktf/tsconfig.lib.json",
-        "main": "packages/nx-cdktf/src/index.ts",
         "assets": [
           {
             "input": "packages/nx-cdktf",
@@ -23,7 +18,7 @@
           {
             "input": "packages/nx-cdktf",
             "glob": "**/*.js",
-            "ignore": ["**/jest.config.js"],
+            "ignore": ["**/*.config.{ts,js,cjs,mjs,mts}"],
             "output": "/"
           },
           {
@@ -32,8 +27,13 @@
             "output": "/"
           },
           {
-            "input": "packages/nx-cdktf",
-            "glob": "{LICENSE,README.md}",
+            "input": "",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": "",
+            "glob": "LICENSE",
             "output": "/"
           }
         ]

@@ -22,6 +22,9 @@
     "careers",
     "occupations"
   ],
+  "nx": {
+    "ignore": true
+  },
   "publishConfig": {
     "access": "public"
   },

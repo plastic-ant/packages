@@ -6,13 +6,8 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "build": {
-      "executor": "@nx/js:swc",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@nx/js:tsc",
       "options": {
-        "outputPath": "dist/packages/nx-strapi",
-        "tsConfig": "packages/nx-strapi/tsconfig.lib.json",
-        "main": "packages/nx-strapi/src/index.ts",
         "assets": [
           {
             "input": "packages/nx-strapi",
@@ -23,7 +18,7 @@
           {
             "input": "packages/nx-strapi",
             "glob": "**/*.js",
-            "ignore": ["**/jest.config.js"],
+            "ignore": ["**/*.config.{ts,js,cjs,mjs,mts}"],
             "output": "/"
           },
           {
@@ -32,8 +27,13 @@
             "output": "/"
           },
           {
-            "input": "packages/nx-strapi",
-            "glob": "{LICENSE,README.md}",
+            "input": "",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": "",
+            "glob": "LICENSE",
             "output": "/"
           }
         ]

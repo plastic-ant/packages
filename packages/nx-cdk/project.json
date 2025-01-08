@@ -6,13 +6,8 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "build": {
-      "executor": "@nx/js:swc",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@nx/js:tsc",
       "options": {
-        "outputPath": "dist/packages/nx-cdk",
-        "tsConfig": "packages/nx-cdk/tsconfig.lib.json",
-        "main": "packages/nx-cdk/src/index.ts",
         "assets": [
           {
             "input": "packages/nx-cdk",
@@ -23,7 +18,7 @@
           {
             "input": "packages/nx-cdk",
             "glob": "**/*.js",
-            "ignore": ["**/jest.config.js"],
+            "ignore": ["**/*.config.{ts,js,cjs,mjs,mts}"],
             "output": "/"
           },
           {
@@ -32,8 +27,13 @@
             "output": "/"
           },
           {
-            "input": "packages/nx-cdk",
-            "glob": "{LICENSE,README.md}",
+            "input": "",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": "",
+            "glob": "LICENSE",
             "output": "/"
           }
         ]

@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/lightcast-api"
+    },
+    {
+      "path": "./packages/nx-msbuild"
+    },
+    {
+      "path": "./packages/nx-strapi"
+    },
+    {
+      "path": "./packages/nx-cdktf"
+    },
+    {
+      "path": "./packages/nx-cdk"
+    }
+  ]
+  // "paths": {
+  //   "@plastic-ant/nx-cdk": ["packages/nx-cdk/src/index.ts"],
+  //   "@plastic-ant/nx-cdktf": ["packages/nx-cdktf/src/index.ts"],
+  //   "@plastic-ant/nx-strapi": ["packages/nx-strapi/src/index.ts"],
+  //   "@plastic-ant/nx-msbuild": ["packages/nx-msbuild/src/index.ts"],
+  //   "lightcast-api": ["packages/lightcast-api/src/index.ts"],
+  //   "nx-cdk": ["packages/nx-cdk/src/index.ts"],
+  //   "nx-cdktf": ["packages/nx-cdktf/src/index.ts"],
+  //   "nx-strapi": ["packages/nx-strapi/src/index.ts"],
+  //   "nx-msbuild": ["packages/nx-msbuild/src/index.ts"]
+  // }
+}
