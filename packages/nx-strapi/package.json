@@ -3,12 +3,11 @@
   "version": "0.0.6",
   "license": "MIT",
   "type": "commonjs",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages",
-    "directory": "packages/nx-strapi"
+    "url": "git+https://github.com/plastic-ant/packages/nx-strapi"
   },
   "keywords": [
     "nx",
