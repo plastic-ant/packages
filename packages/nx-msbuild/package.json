@@ -7,7 +7,12 @@
   "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages/nx-msbuild"
+    "url": "git+https://github.com/plastic-ant/packages",
+    "directory": "packages/nx-msbuild"
+  },
+  "homepage": "https://github.com/plastic-ant/packages/blob/main/packages/nx-msbuild",
+  "bugs": {
+    "url": "https://github.com/plastic-ant/packages/issues"
   },
   "keywords": [
     "nx",
@@ -21,6 +26,10 @@
   "author": {
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
+  },
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://buymeacoffee.com/plasticant"
   },
   "generators": "./generators.json",
   "executors": "./executors.json",

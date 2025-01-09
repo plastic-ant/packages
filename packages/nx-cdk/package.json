@@ -1,13 +1,18 @@
 {
   "name": "@plastic-ant/nx-cdk",
-  "version": "0.8.2",
+  "version": "0.8.0",
   "license": "MIT",
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages/nx-cdk"
+    "url": "git+https://github.com/plastic-ant/packages",
+    "directory": "packages/nx-cdk"
+  },
+  "homepage": "https://github.com/plastic-ant/packages/blob/main/packages/nx-cdk",
+  "bugs": {
+    "url": "https://github.com/plastic-ant/packages/issues"
   },
   "keywords": [
     "nx",
@@ -23,6 +28,10 @@
   "author": {
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
+  },
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://buymeacoffee.com/plasticant"
   },
   "generators": "./generators.json",
   "executors": "./executors.json",
