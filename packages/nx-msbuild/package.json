@@ -7,8 +7,7 @@
   "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages",
-    "directory": "packages/nx-msbuild"
+    "url": "git+https://github.com/plastic-ant/packages/nx-msbuild"
   },
   "keywords": [
     "nx",
