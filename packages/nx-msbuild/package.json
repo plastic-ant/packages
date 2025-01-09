@@ -2,6 +2,9 @@
   "name": "@plastic-ant/nx-msbuild",
   "version": "0.0.2",
   "license": "MIT",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plastic-ant/packages",
@@ -20,8 +23,6 @@
     "name": "pas-mike",
     "url": "https://github.com/pas-mike"
   },
-  "type": "commonjs",
-  "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
