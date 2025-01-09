@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-cdktf",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "license": "MIT",
   "type": "commonjs",
   "main": "./src/index.js",
