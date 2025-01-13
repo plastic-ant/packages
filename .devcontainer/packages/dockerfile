@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/devcontainers/typescript-node:${NODE_VARIANT}-bookworm
 
 RUN apt-get update && apt-get -y upgrade
 
-RUN npm uninstall -g pnpm
+RUN npm uninstall -g pnpm,eslint,typescript
 
 RUN corepack enable && corepack prepare pnpm@10 --activate
 ENV PNPM_HOME=/usr/local/bin
