@@ -63,7 +63,6 @@ export default [
           checkObsoleteDependencies: true,
           checkVersionMismatches: true,
           buildTargets: ["build"],
-          ignoredDependencies: ["tslib"],
           ignoredFiles: ["**/*.config.{ts,js,cjs,mjs,mts}"],
         },
       ],

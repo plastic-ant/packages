@@ -1,10 +1,25 @@
 {
-  "name": "plastic-ant",
+  "name": "packages",
   "license": "MIT",
   "private": true,
   "scripts": {
     "prepare": "is-ci || husky",
     "upgrade-interactive": "pnpm up -i -r --latest"
+  },
+  "nx": {
+    "targets": {
+      "test": {
+        "executor": "nx:noop"
+      },
+      "local-registry": {
+        "executor": "@nx/js:verdaccio",
+        "options": {
+          "port": 4873,
+          "config": ".verdaccio/config.yml",
+          "storage": "tmp/local-registry/storage"
+        }
+      }
+    }
   },
   "devDependencies": {
     "@aws-cdk/cli-lib-alpha": "2.175.1-alpha.0",
@@ -42,16 +57,13 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-publint": "^0.0.5",
-    "jsonc-eslint-parser": "^2.4.0",
-    "typescript-eslint": "^8.13.0",
-    "vite-plugin-eslint": "^1.8.1",
-    "yaml-eslint-parser": "^1.2.3",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
-    "is-ci": "^3.0.0",
+    "is-ci": "^4.1.0",
     "js-yaml": "4.1.0",
     "jsdom": "~22.1.0",
     "json-schema-to-typescript": "^15.0.3",
+    "jsonc-eslint-parser": "^2.4.0",
     "lodash": "^4.17.21",
     "memfs": "^4.15.3",
     "ngx-deploy-npm": "^8.4.0",
@@ -64,11 +76,14 @@
     "tslib": "^2.3.0",
     "type-fest": "^4.31.0",
     "typescript": "~5.6.2",
+    "typescript-eslint": "^8.13.0",
     "urlcat": "^3.1.0",
     "verdaccio": "^5.0.4",
     "vite": "^5.0.0",
     "vite-plugin-dts": "~3.8.1",
+    "vite-plugin-eslint": "^1.8.1",
     "vitest": "^1.3.1",
+    "yaml-eslint-parser": "^1.2.3",
     "yargs": "^17.7.2"
   },
   "resolutions": {
