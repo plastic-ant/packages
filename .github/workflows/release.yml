@@ -27,8 +27,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
-          cache-dependency-path: "yarn.lock"
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
           registry-url: "https://registry.npmjs.org"
           scope: "plastic-ant"
 
@@ -44,13 +44,13 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-      - run: yarn install --immutable
+      - run: pnpm install --frozen-lockfile
 
       - uses: nrwl/nx-set-shas@v4
 
       - name: Version
         run: |
-          npx nx affected -t=version --configuration=ci
+          pnpm exec nx affected -t=version --configuration=ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

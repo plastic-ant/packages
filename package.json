@@ -1,18 +1,13 @@
 {
   "name": "plastic-ant",
   "license": "MIT",
-  "scripts": {
-    "nx": "nx"
-  },
-  "workspaces": [
-    "!**/dist",
-    "examples/**/*",
-    "packages/**/*",
-    "!packges/lightcast-api"
-  ],
   "private": true,
+  "scripts": {
+    "prepare": "is-ci || husky",
+    "upgrade-interactive": "pnpm up -i -r --latest"
+  },
   "devDependencies": {
-    "@aws-cdk/cli-lib-alpha": "2.174.1-alpha.0",
+    "@aws-cdk/cli-lib-alpha": "2.175.1-alpha.0",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@jscutlery/semver": "^5.5.1",
@@ -21,6 +16,7 @@
     "@nx/eslint-plugin": "20.3.1",
     "@nx/js": "20.3.1",
     "@nx/plugin": "20.3.1",
+    "is-ci": "^3.0.0",
     "@nx/rollup": "20.3.1",
     "@nx/vite": "^20.3.1",
     "@nx/workspace": "20.3.1",
@@ -91,5 +87,5 @@
     "micromatch": "^4.0.8",
     "uuid": "^7"
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
 }

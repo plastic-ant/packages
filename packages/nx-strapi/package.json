@@ -7,10 +7,9 @@
   "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages",
+    "url": "https://github.com/plastic-ant/packages.git",
     "directory": "packages/nx-strapi"
   },
-  "homepage": "https://github.com/plastic-ant/packages/blob/main/packages/nx-strapi",
   "bugs": {
     "url": "https://github.com/plastic-ant/packages/issues"
   },

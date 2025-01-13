@@ -1,3 +1,11 @@
-ARG NODE_VARIANT=18-bullseye
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${NODE_VARIANT}
+ARG NODE_VARIANT=20
+FROM mcr.microsoft.com/devcontainers/typescript-node:${NODE_VARIANT}-bookworm
+
+RUN apt-get update && apt-get -y upgrade
+
+RUN npm uninstall -g pnpm
+
+RUN corepack enable && corepack prepare pnpm@10 --activate
+ENV PNPM_HOME=/usr/local/bin
+
 CMD ["/bin/bash"]

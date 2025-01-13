@@ -1,7 +1,7 @@
 {
   "defaultBase": "main",
   "useLegacyCache": false,
-  "cli": { "packageManager": "yarn" },
+  "cli": { "packageManager": "pnpm" },
   "defaultProject": "none!",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],

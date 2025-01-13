@@ -33,7 +33,7 @@ describe("nx-cdk", () => {
 
   it("should create nodes based on cdk.json", async () => {
     vol.fromJSON({
-      "yarn.lock": "",
+      "pnpm exec.lock": "",
       "proj/cdk.json": `{}`,
       "proj/project.json": "{}",
     });
@@ -68,7 +68,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk deploy --help",
+                      command: "pnpm exec cdk deploy --help",
                       example: {
                         options: { "require-approval": "never" },
                       },
@@ -84,7 +84,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk synth --help",
+                      command: "pnpm exec cdk synth --help",
                       example: {
                         options: {
                           strict: true,
@@ -144,7 +144,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk deploy --help",
+                      command: "pnpm exec cdk deploy --help",
                       example: {
                         options: {
                           "require-approval": "never",
@@ -162,7 +162,7 @@ describe("nx-cdk", () => {
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
                   metadata: {
                     help: {
-                      command: "yarn cdk synth --help",
+                      command: "pnpm exec cdk synth --help",
                       example: {
                         options: {
                           strict: true,

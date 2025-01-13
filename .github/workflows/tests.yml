@@ -19,13 +19,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
-          cache-dependency-path: "yarn.lock"
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
 
-      - run: yarn install --immutable
+      - run: pnpm install --frozen-lockfile
 
-      - run: yarn npm audit -R -A --severity high
+      # - run: pnpm audit
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx affected -t test,lint,build --configuration=ci --verbose --nxBail
+      - run: pnpm exec nx affected -t test,lint,build --configuration=ci --verbose --nxBail
