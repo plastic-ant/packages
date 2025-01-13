@@ -10,6 +10,7 @@
     "url": "https://github.com/plastic-ant/packages.git",
     "directory": "packages/nx-strapi"
   },
+  "homepage": "https://github.com/plastic-ant/packages/tree/main/packages/nx-strapi#readme",
   "bugs": {
     "url": "https://github.com/plastic-ant/packages/issues"
   },
