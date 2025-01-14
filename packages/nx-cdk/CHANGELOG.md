@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.8.5](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.4...nx-cdk@0.8.5) (2025-01-14)
+
+
+### Bug Fixes
+
+* **repo:** missing packages dir in pnpm workspace file ([0cfdbde](https://github.com/plastic-ant/packages/commit/0cfdbde0bdda4aa4f903a0c05735aa5543d53808))
+
 ## [0.8.4](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.3...nx-cdk@0.8.4) (2025-01-09)
 
 ## [0.8.3](https://github.com/plastic-ant/packages/nx-cdk/compare/nx-cdk@0.8.2...nx-cdk@0.8.3) (2025-01-09)
