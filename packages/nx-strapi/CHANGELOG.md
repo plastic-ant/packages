@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.9](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.8...nx-strapi@0.0.9) (2025-01-14)
+
+
+### Bug Fixes
+
+* **repo:** missing packages dir in pnpm workspace file ([0cfdbde](https://github.com/plastic-ant/packages/commit/0cfdbde0bdda4aa4f903a0c05735aa5543d53808))
+
 ## [0.0.8](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.7...nx-strapi@0.0.8) (2025-01-09)
 
 ## [0.0.7](https://github.com/plastic-ant/packages/nx-strapi/compare/nx-strapi@0.0.6...nx-strapi@0.0.7) (2025-01-09)
