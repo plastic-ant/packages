@@ -1,14 +1,11 @@
 services:
   repo:
-    #env_file:
-    #  - .env.local
     build:
       context: ../
       dockerfile: ../.devcontainer/packages/dockerfile
       args:
         NODE_VARIANT: 20
     volumes:
-      - ${HOME}${USERPROFILE}/.aws:/home/root/.aws
-      - ${HOME}${USERPROFILE}/.ssh:/home/root/.ssh
+      - ${HOME}${USERPROFILE}/.ssh:/home/node/.ssh:ro
       - ../..:/pas-packages:cached
     command: sleep infinity

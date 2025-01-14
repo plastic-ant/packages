@@ -3,7 +3,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prepare": "is-ci || husky",
     "upgrade-interactive": "pnpm up -i -r --latest"
   },
   "nx": {
@@ -20,6 +19,14 @@
         }
       }
     }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "nx",
+      "core-js",
+      "@swc/core",
+      "esbuild"
+    ]
   },
   "devDependencies": {
     "@aws-cdk/cli-lib-alpha": "2.175.1-alpha.0",
@@ -43,10 +50,6 @@
     "@types/node": "^20.17.12",
     "@types/object-hash": "^3.0.6",
     "@types/yargs": "^17.0.32",
-    "@typescript-eslint/parser": "^8.18.1",
-    "@typescript-eslint/type-utils": "^8.18.1",
-    "@typescript-eslint/typescript-estree": "^8.18.1",
-    "@typescript-eslint/utils": "8.18.1",
     "@vitest/coverage-v8": "^1.0.4",
     "@vitest/ui": "^1.0.4",
     "change-case": "^5.4.4",
@@ -54,7 +57,7 @@
     "dotenv": "^16.4.7",
     "env-var": "^7.5.0",
     "eslint": "^9.8.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-publint": "^0.0.5",
     "globals": "^15.14.0",
@@ -105,6 +108,5 @@
     "elliptic": "^6.5.6",
     "micromatch": "^4.0.8",
     "uuid": "^7"
-  },
-  "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
+  }
 }

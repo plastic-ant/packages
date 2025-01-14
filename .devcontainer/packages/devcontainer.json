@@ -3,20 +3,20 @@
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "repo",
   "workspaceFolder": "/pas-packages",
-  "remoteUser": "root",
+  "remoteUser": "node",
+  "containerUser": "root",
   "initializeCommand": ".devcontainer/init-command.sh .devcontainer/packages",
   "postStartCommand": ".devcontainer/packages/post-start-command.sh",
   "remoteEnv": { "NODE_ENV": "development", "TSS_REMOTE_DEBUG": "9229" },
   "containerEnv": {
     "IS_CONTAINER": "1",
-    //"PNPM_HOME": "/usr/local/share/npm-global/bin/pnpm",
     "NX_ADD_PLUGINS": "true",
     "NX_VERBOSE_LOGGING": "false",
     "NX_NO_CLOUD": "true"
   },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker": "latest"
-    //"ghcr.io/devcontainers-extra/features/pnpm": "10.x"
+    "ghcr.io/devcontainers/features/docker-in-docker": "latest",
+    "ghcr.io/devcontainers-extra/features/pnpm": "10"
   },
   "customizations": {
     "vscode": {
