@@ -6,6 +6,13 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "lint": {},
+    "prebuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/nx-strapi/src",
+        "commands": ["json2ts -i generators/app/schema.json -o generators/app/schema.d.ts"]
+      }
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "options": {

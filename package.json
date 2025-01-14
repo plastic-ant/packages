@@ -3,7 +3,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "upgrade-interactive": "pnpm up -i -r --latest"
+    "up": "ncu -i --format group --deep -p pnpm --peer",
+    "upgrade-interactive": "pnpm up -i -r -L"
   },
   "nx": {
     "targets": {
@@ -24,6 +25,7 @@
     "onlyBuiltDependencies": [
       "nx",
       "core-js",
+      "@strapi/strapi",
       "@swc/core",
       "esbuild"
     ]
@@ -81,6 +83,7 @@
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.13.0",
     "urlcat": "^3.1.0",
+    "uuid": "^11.0.5",
     "verdaccio": "^5.0.4",
     "vite": "^5.0.0",
     "vite-plugin-dts": "~3.8.1",

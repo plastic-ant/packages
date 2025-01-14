@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "AppGeneratorOptions",
+  "title": "",
+  "type": "object",
+  "required": ["directory", "name"],
+  "properties": {
+    "directory": {
+      "description": "The directory of the new application.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Which directory do you want to create the application in?"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the application."
+    },
+    "name": {
+      "description": "The name of the application.",
+      "type": "string",
+      "pattern": "^[a-zA-Z][^:]*$",
+      "x-priority": "important"
+    },
+    "rootProject": {
+      "description": "Create node application at the root of the workspace",
+      "type": "boolean",
+      "default": false,
+      "hidden": true,
+      "x-priority": "internal"
+    },
+    "docker": {
+      "type": "boolean",
+      "description": "Add a docker build target"
+    }
+  }
+}

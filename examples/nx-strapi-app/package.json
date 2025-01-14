@@ -18,26 +18,26 @@
     }
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "4.25.18",
-    "@strapi/plugin-i18n": "4.25.18",
-    "@strapi/plugin-users-permissions": "4.25.18",
-    "@strapi/strapi": "4.25.18",
-    "@strapi/typescript-utils": "4.25.18",
-    "pg": "8.13.1",
+    "@strapi/plugin-cloud": "5.7.0",
+    "@strapi/plugin-users-permissions": "5.7.0",
+    "@strapi/strapi": "5.7.0",
+    "pg": "8.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "5.3.4",
-    "styled-components": "5.3.3"
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
   },
-  "author": {
-    "name": "A Strapi developer"
-  },
-  "strapi": {
-    "uuid": "1186d9f9-e759-43de-8dc8-513ce7f96279"
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
   },
   "engines": {
-    "node": ">=18.0.0 <=20.x.x",
+    "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "cbe60171-b3f4-45c2-aa95-6d99db2cf827"
+  }
 }

@@ -1,7 +1,6 @@
 packages:
-  - "tools/plugins"
-  - "!**/dist"
-  - "examples"
-  - "packages"
+  - "tools/plugins/**"
+  - "!**/dist/**"
+  - "examples/**"
+  - "packages/**"
   - "!packges/lightcast-api"
-

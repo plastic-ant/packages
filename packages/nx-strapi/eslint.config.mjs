@@ -14,7 +14,7 @@ export default [
           checkObsoleteDependencies: true,
           checkVersionMismatches: true,
           buildTargets: ["build"],
-          ignoredDependencies: ["tslib", "@strapi/strapi"],
+          ignoredDependencies: ["tslib", "@strapi/strapi", "create-strapi"],
           ignoredFiles: ["**/*.config.{ts,js,cjs,mjs,mts}"],
         },
       ],

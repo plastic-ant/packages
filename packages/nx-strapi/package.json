@@ -5,6 +5,8 @@
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
   "repository": {
     "type": "git",
     "url": "https://github.com/plastic-ant/packages.git",
@@ -32,13 +34,15 @@
     "url": "https://buymeacoffee.com/plasticant"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.20.5"
+    "@strapi/strapi": "^5.7.0",
+    "create-strapi": "^5.7.0"
   },
   "dependencies": {
     "@nx/devkit": "20.3.1",
     "nx": "20.3.1"
   },
   "peerDependencies": {
-    "@strapi/strapi": "^4.20.5"
+    "create-strapi": "^5.7.0",
+    "@strapi/strapi": "^5.7.0"
   }
 }

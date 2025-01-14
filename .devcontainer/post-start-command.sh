@@ -2,7 +2,7 @@
 
 sudo apt-get update && sudo apt-get -y upgrade
 
-npm install -g npm@latest
+npm install -g npm@latest npm-check-updates
 npm uninstall -g eslint typescript yarn
 
 pnpm install
