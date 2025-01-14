@@ -1,10 +1,4 @@
 {
   "version": "0.0.1",
-  "generators": {
-    "app": {
-      "factory": "./dist/src/generators/app/index",
-      "schema": "./dist/src/generators/app/schema.json",
-      "description": "App generator"
-    }
-  }
+  "generators": {}
 }
