@@ -1,16 +1,11 @@
-version: "3.8"
-
 services:
   repo:
-    #env_file:
-    #  - .env.local
     build:
       context: ../
       dockerfile: ../.devcontainer/packages/dockerfile
       args:
-        NODE_VARIANT: 20-bullseye
+        NODE_VARIANT: 20
     volumes:
-      - ${HOME}${USERPROFILE}/.aws:/home/node/.aws
-      - ${HOME}${USERPROFILE}/.ssh:/home/node/.ssh
+      - ${HOME}${USERPROFILE}/.ssh:/home/node/.ssh:ro
       - ../..:/pas-packages:cached
     command: sleep infinity

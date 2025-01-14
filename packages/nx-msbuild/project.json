@@ -5,6 +5,7 @@
   "projectType": "library",
   "tags": ["#nx-plugin"],
   "targets": {
+    "lint": {},
     "build": {
       "executor": "@nx/js:tsc",
       "options": {

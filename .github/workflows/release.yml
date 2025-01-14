@@ -27,10 +27,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
-          cache-dependency-path: "yarn.lock"
           registry-url: "https://registry.npmjs.org"
           scope: "plastic-ant"
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
 
       - run: |
           npm config set registry https://npm.pkg.github.com
@@ -44,13 +64,13 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-      - run: yarn install --immutable
+      - run: pnpm install --frozen-lockfile
 
       - uses: nrwl/nx-set-shas@v4
 
       - name: Version
         run: |
-          npx nx affected -t=version --configuration=ci
+          pnpm exec nx affected -t=version --configuration=ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

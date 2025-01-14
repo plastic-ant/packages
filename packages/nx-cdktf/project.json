@@ -6,6 +6,7 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "build": {
+      "lint": {},
       "executor": "@nx/js:tsc",
       "options": {
         "assets": [

@@ -1,5 +1,3 @@
-///import nxScopes from "@commitlint/config-nx-scopes";
-//import { RuleConfigSeverity } from "@commitlint/types";
 import { getProjects } from "nx/src/generators/utils/project-configuration.js";
 import { FsTree } from "nx/src/generators/tree.js";
 

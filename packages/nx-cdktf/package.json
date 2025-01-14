@@ -7,10 +7,10 @@
   "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages",
+    "url": "https://github.com/plastic-ant/packages.git",
     "directory": "packages/nx-cdktf"
   },
-  "homepage": "https://github.com/plastic-ant/packages/blob/main/packages/nx-cdktf",
+  "homepage": "https://github.com/plastic-ant/packages/tree/main/packages/nx-cdktf#readme",
   "bugs": {
     "url": "https://github.com/plastic-ant/packages/issues"
   },

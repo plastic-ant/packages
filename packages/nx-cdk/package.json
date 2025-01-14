@@ -7,10 +7,10 @@
   "typings": "./src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plastic-ant/packages",
+    "url": "https://github.com/plastic-ant/packages.git",
     "directory": "packages/nx-cdk"
   },
-  "homepage": "https://github.com/plastic-ant/packages/blob/main/packages/nx-cdk",
+  "homepage": "https://github.com/plastic-ant/packages/tree/main/packages/nx-cdk#readme",
   "bugs": {
     "url": "https://github.com/plastic-ant/packages/issues"
   },
@@ -36,8 +36,8 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "aws-cdk": "^2.174.1",
-    "aws-cdk-lib": "^2.174.1",
+    "aws-cdk": "^2.175.1",
+    "aws-cdk-lib": "^2.175.1",
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {

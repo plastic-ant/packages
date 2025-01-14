@@ -65,7 +65,7 @@ describe("nx-strapi", () => {
                   ],
                   metadata: {
                     help: {
-                      command: "yarn strapi build --help",
+                      command: "pnpm exec strapi build --help",
                       example: {
                         options: {
                           strict: true,
@@ -91,7 +91,7 @@ describe("nx-strapi", () => {
                   ],
                   metadata: {
                     help: {
-                      command: "yarn strapi develop --help",
+                      command: "pnpm exec strapi develop --help",
                       example: {
                         options: {
                           debug: true,

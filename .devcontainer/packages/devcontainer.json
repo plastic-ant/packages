@@ -4,6 +4,7 @@
   "service": "repo",
   "workspaceFolder": "/pas-packages",
   "remoteUser": "node",
+  "containerUser": "root",
   "initializeCommand": ".devcontainer/init-command.sh .devcontainer/packages",
   "postStartCommand": ".devcontainer/packages/post-start-command.sh",
   "remoteEnv": { "NODE_ENV": "development", "TSS_REMOTE_DEBUG": "9229" },
@@ -14,7 +15,8 @@
     "NX_NO_CLOUD": "true"
   },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker": "latest"
+    "ghcr.io/devcontainers/features/docker-in-docker": "latest",
+    "ghcr.io/devcontainers-extra/features/pnpm": "10"
   },
   "customizations": {
     "vscode": {
@@ -49,7 +51,7 @@
         "debug.node.autoattach": true,
         "debug.javascript.terminalOptions": { "sourceMaps": true },
         "debug.javascript.autoAttachSmartPattern": [
-          "!**/{node_modules,npm-global,.yarn,.nvm}/**",
+          "!**/{node_modules,npm-global,.yarn,.nvm,.pnpm-store}/**",
           "**/$KNOWN_TOOLS$/**"
         ],
         // Editor
@@ -58,7 +60,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         // Npm
         "npm.scriptExplorerAction": "open",
-        "npm.packageManager": "yarn",
+        "npm.packageManager": "pnpm",
         // Files:
         "json.schemaDownload.enable": true,
         // Schemas

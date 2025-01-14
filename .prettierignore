@@ -8,6 +8,7 @@ node_modules
 /.fleet
 /coverage
 /.yarn
+/.pnpm-store
 /.verdaccio/build/local-registry
 /dist
 /.env

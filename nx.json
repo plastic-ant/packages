@@ -1,7 +1,9 @@
 {
   "defaultBase": "main",
   "useLegacyCache": false,
-  "cli": { "packageManager": "yarn" },
+  "cli": {
+    "packageManager": "pnpm"
+  },
   "defaultProject": "none!",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
@@ -13,7 +15,8 @@
       "!{projectRoot}/jest.preset.[jt]s",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/.eslintrc.json"
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.cjs"
     ]
   },
   "plugins": [
@@ -62,13 +65,14 @@
       "options": {
         "testTargetName": "test"
       }
-    },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
     }
+    // TODO: Replace this with the nx plugin once they support .mjs!
+    // {
+    //   "plugin": "@nx/eslint/plugin",
+    //   "options": {
+    //     "targetName": "lint"
+    //   }
+    // }
   ],
   "targetDefaults": {
     "prebuild": {
@@ -94,18 +98,23 @@
       }
     },
     "lint": {
-      "dependsOn": ["build"],
+      // TODO: Replace this with the nx plugin once they support .mjs!
+      "executor": "nx:run-commands",
+      "dependsOn": ["prebuild"],
       "inputs": [
         "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
         "{workspaceRoot}/tools/eslint-rules/**/*",
-        "{workspaceRoot}/tools/eslint-rules/**/*"
+        "{workspaceRoot}/eslint.config.[m]js",
+        "{projectRoot}/eslint.config.[m]js"
       ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "eslint . --quiet=false"
+      },
       "cache": true,
       "configurations": {
         "ci": {
-          "args": ["--quiet"]
+          "command": "eslint . --quiet=true"
         }
       }
     },
