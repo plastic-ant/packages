@@ -3,7 +3,6 @@
   "compilerOptions": {
     "rootDir": "src",
     "emitDeclarationOnly": false,
-    "tsBuildInfoFile": "out-tsc/tsconfig.lib.tsbuildinfo",
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],

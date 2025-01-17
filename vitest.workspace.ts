@@ -1,1 +1,1 @@
-export default ["**/*/vitest.config.{ts,mts,js,mjs}"];
+export default ["**/*/vitest.config.*"];

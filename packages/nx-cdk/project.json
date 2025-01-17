@@ -19,7 +19,7 @@
           {
             "input": "packages/nx-cdk",
             "glob": "**/*.js",
-            "ignore": ["**/*.config.{ts,js,cjs,mjs,mts}"],
+            "ignore": ["**/*.config.*"],
             "output": "/"
           },
           {

@@ -1,3 +1,75 @@
 {
-  "eslint.validate": ["json"]
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#006eff",
+    "titleBar.activeForeground": "#ffffff"
+  },
+  "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.tsserver.useSyntaxServer": "auto",
+  "typescript.tsserver.log": "off",
+  "explorer.compactFolders": false,
+  // Eslint
+  "eslint.validate": ["json", "jsonc", "javascript", "javascriptreact", "typescript", "typescriptreact"],
+  // Git
+  "[git-commit]": { "editor.rulers": [50, 72] },
+  "git.commandsToLog": ["pull", "push", "post-merge", "pre-commit", "post-checkout"],
+  // Terminal
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.cwd": "${workspaceFolder}",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  // Nx
+  "nxConsole.projectViewingStyle": "list",
+  // Debug
+  "debug.terminal.clearBeforeReusing": true,
+  "debug.allowBreakpointsEverywhere": true,
+  "debug.openDebug": "openOnDebugBreak",
+  "debug.javascript.terminalOptions": { "sourceMaps": true },
+  "debug.javascript.autoAttachSmartPattern": [
+    "!**/{node_modules,npm-global,.yarn,.nvm,.pnpm-store}/**",
+    "**/$KNOWN_TOOLS$/**"
+  ],
+  // Editor
+  "editor.formatOnSave": true,
+  "editor.rulers": [130],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Npm
+  "npm.scriptExplorerAction": "open",
+  "npm.packageManager": "pnpm",
+  // Files:
+  "json.schemaDownload.enable": true,
+  // Schemas
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
+  },
+  "files.associations": {
+    "*.json": "jsonc",
+    "package.json": "json"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "pnpm-lock.yaml": true,
+    "**/.pnpm-store": true,
+    "**/*.code-search": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.nx": true
+  },
+  "files.watcherExclude": {
+    "**/.git": true,
+    "**/.pnpm-store": true,
+    "**/.nx": true,
+    "**/.yarn/*/**": true,
+    "**/dist/*/**": true,
+    "**/tmp/*/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true
+  }
 }

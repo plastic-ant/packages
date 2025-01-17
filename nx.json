@@ -12,11 +12,10 @@
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/jest.preset.[jt]s",
-      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/vite.config.*",
+      "!{projectRoot}/vitest.config.*",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.cjs"
+      "!{projectRoot}/eslint.config.*"
     ]
   },
   "plugins": [

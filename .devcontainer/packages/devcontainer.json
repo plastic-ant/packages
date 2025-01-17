@@ -1,5 +1,5 @@
 {
-  "name": "🐋@plastic-ant/packages",
+  "name": "🐋pas-packages",
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "repo",
   "workspaceFolder": "/pas-packages",
@@ -7,7 +7,10 @@
   "containerUser": "root",
   "initializeCommand": ".devcontainer/init-command.sh .devcontainer/packages",
   "postStartCommand": ".devcontainer/packages/post-start-command.sh",
-  "remoteEnv": { "NODE_ENV": "development", "TSS_REMOTE_DEBUG": "9229" },
+  "remoteEnv": {
+    "NODE_ENV": "development",
+    "TSS_REMOTE_DEBUG": "9229"
+  },
   "containerEnv": {
     "IS_CONTAINER": "1",
     "NX_ADD_PLUGINS": "true",
@@ -26,7 +29,9 @@
           "titleBar.activeBackground": "#006eff",
           "titleBar.activeForeground": "#ffffff"
         },
-        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+        "workbench.editorAssociations": {
+          "*.md": "vscode.markdown.preview.editor"
+        },
         //"eslint.experimental.useFlatConfig": false,
         "typescript.tsdk": "./node_modules/typescript/lib",
         "typescript.tsserver.useSyntaxServer": "auto",
@@ -35,7 +40,9 @@
         // Eslint
         "eslint.validate": ["json", "jsonc", "javascript", "javascriptreact", "typescript", "typescriptreact"],
         // Git
-        "[git-commit]": { "editor.rulers": [50, 72] },
+        "[git-commit]": {
+          "editor.rulers": [50, 72]
+        },
         "git.commandsToLog": ["pull", "push", "post-merge", "pre-commit", "post-checkout"],
         // Terminal
         "terminal.integrated.defaultProfile.windows": "PowerShell",
@@ -49,7 +56,9 @@
         "debug.allowBreakpointsEverywhere": true,
         "debug.openDebug": "openOnDebugBreak",
         "debug.node.autoattach": true,
-        "debug.javascript.terminalOptions": { "sourceMaps": true },
+        "debug.javascript.terminalOptions": {
+          "sourceMaps": true
+        },
         "debug.javascript.autoAttachSmartPattern": [
           "!**/{node_modules,npm-global,.yarn,.nvm,.pnpm-store}/**",
           "**/$KNOWN_TOOLS$/**"
@@ -57,6 +66,7 @@
         // Editor
         "editor.formatOnSave": true,
         "editor.rulers": [130],
+        "prettier.configPath": "",
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         // Npm
         "npm.scriptExplorerAction": "open",
@@ -73,13 +83,12 @@
         },
         "files.exclude": {
           "**/.git": true,
-          "**/.svn": true,
-          "**/.hg": true,
           "**/CVS": true,
           "**/.DS_Store": true,
           "**/Thumbs.db": true
         },
         "search.exclude": {
+          "**/.git": true,
           "pnpm-lock.yaml": true,
           "**/.pnpm-store": true,
           "**/*.code-search": true,
@@ -88,6 +97,7 @@
           "**/.nx": true
         },
         "files.watcherExclude": {
+          "**/.git": true,
           "**/.pnpm-store": true,
           "**/.nx": true,
           "**/.yarn/*/**": true,

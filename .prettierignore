@@ -3,7 +3,6 @@ tmp
 /build
 node_modules
 /pnpm-lock.yaml
-/.vscode
 /.idea
 /.fleet
 /coverage
