@@ -17,6 +17,18 @@
             "--strict"
           ]
         }
+      },
+      "cdk-bootstrap-exe": {
+        "executor": "@plastic-ant/nx-cdk:bootstrap",
+        "options": {}
+      },
+      "cdk-synth-exe": {
+        "executor": "@plastic-ant/nx-cdk:synth",
+        "options": {}
+      },
+      "cdk-deploy-exe": {
+        "executor": "@plastic-ant/nx-cdk:deploy",
+        "options": {}
       }
     }
   },

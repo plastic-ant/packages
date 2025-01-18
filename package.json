@@ -46,7 +46,6 @@
     "@types/yargs": "^17.0.32",
     "@vitest/coverage-v8": "^1.0.4",
     "@vitest/ui": "^1.0.4",
-    "change-case": "^5.4.4",
     "core-js": "^3.40.0",
     "dotenv": "^16.4.7",
     "env-var": "^7.5.0",

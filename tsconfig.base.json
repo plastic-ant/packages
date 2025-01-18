@@ -4,6 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "composite": true,
     "declaration": true,
+    "inlineSourceMap": false,
     "declarationMap": false,
     "emitDeclarationOnly": true,
     "emitDecoratorMetadata": false,
@@ -15,7 +16,7 @@
     "isolatedModules": true,
     "outDir": "${configDir}/dist",
     "baseUrl": ".",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["esnext", "DOM"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "noEmitOnError": true,
@@ -29,9 +30,9 @@
     "noUnusedLocals": false,
     "skipLibCheck": true,
     "checkJs": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "strict": true,
-    "target": "ESNext",
+    "target": "esnext",
     "verbatimModuleSyntax": false
   }
 }

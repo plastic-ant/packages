@@ -3,6 +3,8 @@
   "compilerOptions": {
     "rootDir": "src",
     "emitDeclarationOnly": false,
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "tsBuildInfoFile": "out-tsc/tsconfig.lib.tsbuildinfo",
     "types": ["node"]
   },

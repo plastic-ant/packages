@@ -1,5 +1,5 @@
 import { CreateNodesContext } from "@nx/devkit";
-import { createNodesV2 } from "./index";
+import { createNodesV2 } from "./index.js";
 import { vol } from "memfs";
 import { vi, describe, expect, beforeEach, afterEach } from "vitest";
 

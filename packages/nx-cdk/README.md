@@ -37,11 +37,41 @@ Add this plugin to your `nx.json` config:
 ]
 ```
 
+Inferred tasks options (Project Crystal)
+
 ```
 options:
   synthTargetName        (optional) generated target synth, default cdk-synth
   deployTargetName       (optional) generated target deploy, default cdk-deploy
   bootstrapTargetName    (optional) generated target bootstrap, default cdk-bootstrap
+```
+
+Executors
+
+Each executor takes the same CLI options with the addtional of `postTargets` to be run synchronously.
+
+```
+"targets": {
+      "bootstrap": {
+        "executor": "@plastic-ant/nx-cdk:bootstrap",
+        "options": {
+          "postTargets": []
+        }
+      },
+      "synth": {
+        "executor": "@plastic-ant/nx-cdk:synth",
+        "options": {
+          "postTargets": ["{projectName}:postSynth"]
+        }
+      },
+      "deploy": {
+        "executor": "@plastic-ant/nx-cdk:deploy",
+        "options": {
+          "postTargets": ["sendSQS"]
+        }
+      }
+    }
+    ...
 ```
 
 ## License
