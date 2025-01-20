@@ -3,8 +3,8 @@
   "version": "0.8.5",
   "license": "MIT",
   "type": "commonjs",
-  "main": "./src/index.js",
-  "typings": "./src/index.d.ts",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/plastic-ant/packages.git",
@@ -22,6 +22,14 @@
     "cdk",
     "cloud"
   ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "executors.json",
+    "generators.json",
+    "!**/*.map"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -36,11 +44,14 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "aws-cdk": "^2.175.1",
-    "aws-cdk-lib": "^2.175.1",
+    "@aws-cdk/cli-lib-alpha": "2.176.0-alpha.0",
+    "aws-cdk": "^2.176.0",
+    "aws-cdk-lib": "^2.176.0",
+    "typescript-json-schema": "0.65.1",
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
+    "change-case": "4.1.2",
     "@nx/devkit": "20.3.1",
     "nx": "20.3.1"
   },

@@ -12,11 +12,10 @@
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/jest.preset.[jt]s",
-      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/vite.config.*",
+      "!{projectRoot}/vitest.config.*",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.cjs"
+      "!{projectRoot}/eslint.config.*"
     ]
   },
   "plugins": [
@@ -45,27 +44,15 @@
       }
     },
     {
-      "plugin": "@plastic-ant/nx-msbuild",
-      "exclude": ["nx-msbuild"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-strapi",
-      "exclude": ["nx-strapi"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-cdk",
-      "exclude": ["nx-cdk"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-cdktf",
-      "exclude": ["nx-cdktf"]
-    },
-    {
       "plugin": "@nx/vite/plugin",
       "options": {
         "testTargetName": "test"
       }
-    }
+    },
+    "./packages/nx-cdk/src/index.ts",
+    "./packages/nx-cdktf/src/index.ts",
+    "./packages/nx-strapi/src/index.ts",
+    "./packages/nx-msbuild/src/index.ts"
     // TODO: Replace this with the nx plugin once they support .mjs!
     // {
     //   "plugin": "@nx/eslint/plugin",
@@ -92,6 +79,7 @@
       "inputs": ["production", "^production"],
       "outputs": ["{options.outputPath}"],
       "options": {
+        "generatePackageJson": false,
         "outputPath": "{projectRoot}/dist",
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
         "main": "{projectRoot}/src/index.ts"

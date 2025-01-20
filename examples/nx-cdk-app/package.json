@@ -17,16 +17,30 @@
             "--strict"
           ]
         }
+      },
+      "cdk-bootstrap-executor": {
+        "executor": "@plastic-ant/nx-cdk:bootstrap",
+        "options": {}
+      },
+      "cdk-synth-executor": {
+        "executor": "@plastic-ant/nx-cdk:synth",
+        "options": {
+          "debug": true
+        }
+      },
+      "cdk-deploy-executor": {
+        "executor": "@plastic-ant/nx-cdk:deploy",
+        "options": {}
       }
     }
   },
   "devDependencies": {
-    "aws-cdk": "2.175.1",
+    "aws-cdk": "^2.176.0",
     "ts-node": "10.9.2",
     "typescript": "5.5.3"
   },
   "dependencies": {
-    "aws-cdk-lib": "2.175.1",
+    "aws-cdk-lib": "^2.176.0",
     "constructs": "^10.4.2",
     "source-map-support": "^0.5.21"
   }

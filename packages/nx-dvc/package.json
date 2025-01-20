@@ -1,0 +1,42 @@
+{
+  "name": "@plastic-ant/nx-dvc",
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plastic-ant/packages.git",
+    "directory": "packages/nx-dvc"
+  },
+  "homepage": "https://github.com/plastic-ant/packages/tree/main/packages/nx-dvc#readme",
+  "bugs": {
+    "url": "https://github.com/plastic-ant/packages/issues"
+  },
+  "keywords": [
+    "nx",
+    "crystal",
+    "dvc"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "pas-mike",
+    "url": "https://github.com/pas-mike"
+  },
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://buymeacoffee.com/plasticant"
+  },
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "devDependencies": {
+    "json-schema-to-typescript": "^15.0.3"
+  },
+  "dependencies": {
+    "@nx/devkit": "20.3.1",
+    "nx": "20.3.1"
+  }
+}

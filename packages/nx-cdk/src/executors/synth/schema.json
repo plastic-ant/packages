@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "SynthExecutorOptions",
+  "description": "Options to use with cdk synth",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "postTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assetMetadata": {
+      "default": true,
+      "description": "Include \"aws:asset:*\" CloudFormation metadata for resources that use assets",
+      "type": "boolean"
+    },
+    "caBundlePath": {
+      "default": "- read from AWS_CA_BUNDLE environment variable",
+      "description": "Path to CA certificate to use when validating HTTPS\nrequests.",
+      "type": "string"
+    },
+    "color": {
+      "default": "- `true` unless the environment variable `NO_COLOR` is set",
+      "description": "Show colors and other style from console output",
+      "type": "boolean"
+    },
+    "context": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": "- no additional context",
+      "description": "Additional context",
+      "type": "object"
+    },
+    "debug": {
+      "default": false,
+      "description": "enable emission of additional debugging information, such as creation stack\ntraces of tokens",
+      "type": "boolean"
+    },
+    "ec2Creds": {
+      "default": "- guess EC2 instance status",
+      "description": "Force trying to fetch EC2 instance credentials",
+      "type": "boolean"
+    },
+    "exclusively": {
+      "default": false,
+      "description": "Only synthesize the given stack",
+      "type": "boolean"
+    },
+    "ignoreErrors": {
+      "default": false,
+      "description": "Ignores synthesis errors, which will likely produce an invalid output",
+      "type": "boolean"
+    },
+    "json": {
+      "default": false,
+      "description": "Use JSON output instead of YAML when templates are printed\nto STDOUT",
+      "type": "boolean"
+    },
+    "lookups": {
+      "default": true,
+      "description": "Perform context lookups.\n\nSynthesis fails if this is disabled and context lookups need\nto be performed",
+      "type": "boolean"
+    },
+    "notices": {
+      "default": true,
+      "description": "Show relevant notices",
+      "type": "boolean"
+    },
+    "pathMetadata": {
+      "default": true,
+      "description": "Include \"aws:cdk:path\" CloudFormation metadata for each resource",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "- no profile is used",
+      "description": "Use the indicated AWS profile as the default environment",
+      "type": "string"
+    },
+    "proxy": {
+      "default": "- no proxy",
+      "description": "Use the indicated proxy. Will read from\nHTTPS_PROXY environment if specified",
+      "type": "string"
+    },
+    "quiet": {
+      "default": "false;",
+      "description": "Do not output CloudFormation Template to stdout",
+      "type": "boolean"
+    },
+    "roleArn": {
+      "default": "- use the bootstrap cfn-exec role",
+      "description": "Role to pass to CloudFormation for deployment",
+      "type": "string"
+    },
+    "stacks": {
+      "default": "- all stacks",
+      "description": "List of stacks to deploy",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "staging": {
+      "default": false,
+      "description": "Copy assets to the output directory\n\nNeeded for local debugging the source files with SAM CLI",
+      "type": "boolean"
+    },
+    "strict": {
+      "default": false,
+      "description": "Do not construct stacks with warnings",
+      "type": "boolean"
+    },
+    "trace": {
+      "default": false,
+      "description": "Print trace for stack warnings",
+      "type": "boolean"
+    },
+    "validation": {
+      "default": "true;",
+      "description": "After synthesis, validate stacks with the \"validateOnSynth\"\nattribute set (can also be controlled with CDK_VALIDATION)",
+      "type": "boolean"
+    },
+    "verbose": {
+      "default": false,
+      "description": "show debug logs",
+      "type": "boolean"
+    },
+    "versionReporting": {
+      "default": true,
+      "description": "Include \"AWS::CDK::Metadata\" resource in synthesized templates",
+      "type": "boolean"
+    }
+  }
+}

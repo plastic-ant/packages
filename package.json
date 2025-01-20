@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "up": "ncu -i --format group --deep -p pnpm --peer",
-    "upgrade-interactive": "pnpm up -i -r -L"
+    "upgrade-interactive": "pnpm up -i -r -L",
+    "prepare": "is-ci || husky"
   },
   "nx": {
     "targets": {
@@ -21,17 +22,8 @@
       }
     }
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "nx",
-      "core-js",
-      "@strapi/strapi",
-      "@swc/core",
-      "esbuild"
-    ]
-  },
   "devDependencies": {
-    "@aws-cdk/cli-lib-alpha": "2.175.1-alpha.0",
+    "@aws-cdk/cli-lib-alpha": "2.176.0-alpha.0",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/eslintrc": "^2.1.1",
@@ -54,12 +46,11 @@
     "@types/yargs": "^17.0.32",
     "@vitest/coverage-v8": "^1.0.4",
     "@vitest/ui": "^1.0.4",
-    "change-case": "^5.4.4",
     "core-js": "^3.40.0",
     "dotenv": "^16.4.7",
     "env-var": "^7.5.0",
     "eslint": "^9.8.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-publint": "^0.0.5",
     "globals": "^15.14.0",
@@ -75,7 +66,7 @@
     "nock": "^13.5.6",
     "node-cache": "^5.1.2",
     "nx": "20.3.1",
-    "prettier": "^2.8.8",
+    "prettier": "^2.8.0",
     "rollup": "^4.14.0",
     "ts-node": "10.9.2",
     "tslib": "^2.3.0",

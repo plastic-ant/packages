@@ -2,8 +2,6 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: "../../node_modules/.vite/packages/nx-cdk",
-  plugins: [],
   test: {
     watch: false,
     globals: true,
