@@ -1,0 +1,19 @@
+{
+  "executors": {
+    "bootstrap": {
+      "implementation": "./dist/src/executors/bootstrap/index",
+      "schema": "./dist/src/executors/bootstrap/schema.json",
+      "description": "bootstrap executor"
+    },
+    "synth": {
+      "implementation": "./dist/src/executors/synth/index",
+      "schema": "./dist/src/executors/synth/schema.json",
+      "description": "synth executor"
+    },
+    "deploy": {
+      "implementation": "./dist/src/executors/deploy/index",
+      "schema": "./dist/src/executors/deploy/schema.json",
+      "description": "deploy executor"
+    }
+  }
+}

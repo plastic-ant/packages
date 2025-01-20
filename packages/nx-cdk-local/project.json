@@ -1,0 +1,54 @@
+{
+  "name": "nx-cdk-local",
+  "targets": {
+    "lint": {},
+    "prebuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/nx-cdk-local/src",
+        "commands": [
+          "json2ts -i executors/bootstrap/schema.json -o executors/bootstrap/schema.d.ts",
+          "json2ts -i executors/synth/schema.json -o executors/synth/schema.d.ts",
+          "json2ts -i executors/deploy/schema.json -o executors/deploy/schema.d.ts"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "assets": [
+          "packages/nx-cdk-local/src/executors/bootstrap/schema.json",
+          "packages/nx-cdk-local/src/executors/synth/schema.json",
+          "packages/nx-cdk-local/src/executors/deploy/schema.json"
+        ]
+      }
+    }
+    // "version": {
+    //   "executor": "@jscutlery/semver:version",
+    //   "parallelism": false,
+    //   "options": {
+    //     "push": true,
+    //     "preset": "conventionalcommits",
+    //     "baseBranch": "main",
+    //     "tagPrefix": "{projectName}@",
+    //     "commitMessageFormat": "chore({projectName}): release version {version} [skip ci]",
+    //     "postTargets": ["build", "npm", "github"]
+    //   }
+    // },
+    // "github": {
+    //   "executor": "@jscutlery/semver:github",
+    //   "options": {
+    //     "tag": "{tag}",
+    //     "notes": "{notes}"
+    //   }
+    // },
+    // "npm": {
+    //   "executor": "ngx-deploy-npm:deploy",
+    //   "options": {
+    //     "access": "public",
+    //     "scope": "plastic-ant",
+    //     "distFolderPath": "{projectRoot}"
+    //   }
+    // }
+  }
+}

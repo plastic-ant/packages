@@ -1,7 +1,7 @@
 import { CreateNodesContext } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
-import { vi, describe, expect, beforeEach, afterEach } from "vitest";
+import { vi, describe, expect, beforeEach, afterEach, it } from "vitest";
 
 vi.mock("node:fs", async () => {
   const memfs = await vi.importActual<typeof import("memfs")>("memfs");
