@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.9](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.8...nx-msbuild@0.0.9) (2025-01-20)
+
+
+### Bug Fixes
+
+* **nx-cdk:** stack property handling for the cli ([86d5dd8](https://github.com/plastic-ant/packages/commit/86d5dd8d674fdd39a4bbe23feeab685f38b8aef1))
+
 ## [0.0.8](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.7...nx-msbuild@0.0.8) (2025-01-20)
 
 ## [0.0.7](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.6...nx-msbuild@0.0.7) (2025-01-14)
