@@ -26,29 +26,24 @@ yarn add --dev @plastic-ant/nx-cdk
 
 ## Usage
 
-Add this plugin to your `nx.json` config:
+For using the inferred tasks (Project Crystal) add the plugin to your `nx.json` config:
 
 ```
 "plugins": [
     {
       "plugin": "@plastic-ant/nx-cdk",
-      "options": { ... }
+      "options": {
+          synthTargetName     (optional) generated target synth, default cdk-synth
+          deployTargetName    (optional) generated target deploy, default cdk-deploy
+          bootstrapTargetName (optional) generated target bootstrap, default cdk-bootstrap
+       }
     }
 ]
 ```
 
-Inferred tasks options (Project Crystal)
+Included executors
 
-```
-options:
-  synthTargetName        (optional) generated target synth, default cdk-synth
-  deployTargetName       (optional) generated target deploy, default cdk-deploy
-  bootstrapTargetName    (optional) generated target bootstrap, default cdk-bootstrap
-```
-
-Executors
-
-Each executor takes the same CLI options with the addtional of `postTargets` to be run synchronously.
+Each executor has options that mirror the same cdk CLI command with the addtional of `postTargets` to be run synchronously.
 
 ```
 "targets": {

@@ -5,12 +5,11 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+/**
+ * Options to use with cdk synth
+ */
 export interface SynthExecutorOptions {
   postTargets?: string[];
-  /**
-   * Command-line for executing your app or a cloud assembly directory e.g. 'node bin/my-app.js'
-   */
-  app?: string;
   /**
    * Include "aws:asset:*" CloudFormation metadata for resources that use assets
    */
@@ -23,13 +22,11 @@ export interface SynthExecutorOptions {
   /**
    * Show colors and other style from console output
    */
-  color?: boolean;
+  color?: boolean & string;
   /**
    * Additional context
    */
-  context?: {
-    [k: string]: string;
-  };
+  context?: string;
   /**
    * enable emission of additional debugging information, such as creation stack
    * traces of tokens
@@ -38,7 +35,7 @@ export interface SynthExecutorOptions {
   /**
    * Force trying to fetch EC2 instance credentials
    */
-  ec2Creds?: boolean;
+  ec2Creds?: boolean & string;
   /**
    * Only synthesize the given stack
    */
@@ -79,7 +76,7 @@ export interface SynthExecutorOptions {
   /**
    * Do not output CloudFormation Template to stdout
    */
-  quiet?: boolean;
+  quiet?: boolean & string;
   /**
    * Role to pass to CloudFormation for deployment
    */
@@ -87,7 +84,7 @@ export interface SynthExecutorOptions {
   /**
    * List of stacks to deploy
    */
-  stacks?: string[];
+  stacks?: string & string[];
   /**
    * Copy assets to the output directory
    *
@@ -106,7 +103,7 @@ export interface SynthExecutorOptions {
    * After synthesis, validate stacks with the "validateOnSynth"
    * attribute set (can also be controlled with CDK_VALIDATION)
    */
-  validation?: boolean;
+  validation?: boolean & string;
   /**
    * show debug logs
    */
@@ -115,8 +112,4 @@ export interface SynthExecutorOptions {
    * Include "AWS::CDK::Metadata" resource in synthesized templates
    */
   versionReporting?: boolean;
-  /**
-   * emits the synthesized cloud assembly into a directory (default: cdk.out)
-   */
-  output?: string;
 }

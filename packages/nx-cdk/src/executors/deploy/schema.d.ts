@@ -5,12 +5,13 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type HotswapMode = "fall-back" | "hotswap-only" | "full-deployment";
+
+/**
+ * Options to use with cdk deploy
+ */
 export interface DeployExecutorOptions {
   postTargets?: string[];
-  /**
-   * Command-line for executing your app or a cloud assembly directory e.g. 'node bin/my-app.js'
-   */
-  app?: string;
   /**
    * Include "aws:asset:*" CloudFormation metadata for resources that use assets
    */
@@ -36,11 +37,11 @@ export interface DeployExecutorOptions {
   /**
    * Whether we are on a CI system
    */
-  ci?: boolean;
+  ci?: boolean & string;
   /**
    * Show colors and other style from console output
    */
-  color?: boolean;
+  color?: boolean & string;
   /**
    * Maximum number of simultaneous deployments (dependency permitting) to execute.
    */
@@ -48,9 +49,7 @@ export interface DeployExecutorOptions {
   /**
    * Additional context
    */
-  context?: {
-    [k: string]: string;
-  };
+  context?: string;
   /**
    * enable emission of additional debugging information, such as creation stack
    * traces of tokens
@@ -59,7 +58,7 @@ export interface DeployExecutorOptions {
   /**
    * Force trying to fetch EC2 instance credentials
    */
-  ec2Creds?: boolean;
+  ec2Creds?: boolean & string;
   /**
    * Only perform action on the given stack
    */
@@ -73,6 +72,7 @@ export interface DeployExecutorOptions {
    * Always deploy, even if templates are identical.
    */
   force?: boolean;
+  hotswap?: HotswapMode;
   /**
    * Ignores synthesis errors, which will likely produce an invalid output
    */
@@ -96,7 +96,7 @@ export interface DeployExecutorOptions {
   /**
    * ARNs of SNS topics that CloudFormation will notify with stack related events
    */
-  notificationArns?: string[];
+  notificationArns?: string & string[];
   /**
    * Path to file where stack outputs will be written after a successful deploy as JSON
    */
@@ -130,11 +130,11 @@ export interface DeployExecutorOptions {
   /**
    * What kind of security changes require approval
    */
-  requireApproval?: "any-change" | "broadening" | "never";
+  requireApproval?: "never" | "any-change" | "broadening";
   /**
    * Reuse the assets with the given asset IDs
    */
-  reuseAssets?: string[];
+  reuseAssets?: string & string[];
   /**
    * Role to pass to CloudFormation for deployment
    */
@@ -146,7 +146,7 @@ export interface DeployExecutorOptions {
   /**
    * List of stacks to deploy
    */
-  stacks?: string[];
+  stacks?: string & string[];
   /**
    * Copy assets to the output directory
    *
@@ -179,8 +179,4 @@ export interface DeployExecutorOptions {
    * Include "AWS::CDK::Metadata" resource in synthesized templates
    */
   versionReporting?: boolean;
-  /**
-   * emits the synthesized cloud assembly into a directory (default: cdk.out)
-   */
-  output?: string;
 }

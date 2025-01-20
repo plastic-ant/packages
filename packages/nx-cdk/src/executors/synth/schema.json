@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "title": "SynthExecutorOptions",
-  "description": "",
+  "description": "Options to use with cdk synth",
   "type": "object",
   "required": [],
   "additionalProperties": false,
@@ -12,20 +12,18 @@
         "type": "string"
       }
     },
-    "app": {
-      "description": "Command-line for executing your app or a cloud assembly directory e.g. 'node bin/my-app.js'",
-      "type": "string"
-    },
     "assetMetadata": {
       "default": true,
       "description": "Include \"aws:asset:*\" CloudFormation metadata for resources that use assets",
       "type": "boolean"
     },
     "caBundlePath": {
+      "default": "- read from AWS_CA_BUNDLE environment variable",
       "description": "Path to CA certificate to use when validating HTTPS\nrequests.",
       "type": "string"
     },
     "color": {
+      "default": "- `true` unless the environment variable `NO_COLOR` is set",
       "description": "Show colors and other style from console output",
       "type": "boolean"
     },
@@ -33,6 +31,7 @@
       "additionalProperties": {
         "type": "string"
       },
+      "default": "- no additional context",
       "description": "Additional context",
       "type": "object"
     },
@@ -42,6 +41,7 @@
       "type": "boolean"
     },
     "ec2Creds": {
+      "default": "- guess EC2 instance status",
       "description": "Force trying to fetch EC2 instance credentials",
       "type": "boolean"
     },
@@ -76,23 +76,27 @@
       "type": "boolean"
     },
     "profile": {
+      "default": "- no profile is used",
       "description": "Use the indicated AWS profile as the default environment",
       "type": "string"
     },
     "proxy": {
+      "default": "- no proxy",
       "description": "Use the indicated proxy. Will read from\nHTTPS_PROXY environment if specified",
       "type": "string"
     },
     "quiet": {
-      "default": false,
+      "default": "false;",
       "description": "Do not output CloudFormation Template to stdout",
       "type": "boolean"
     },
     "roleArn": {
+      "default": "- use the bootstrap cfn-exec role",
       "description": "Role to pass to CloudFormation for deployment",
       "type": "string"
     },
     "stacks": {
+      "default": "- all stacks",
       "description": "List of stacks to deploy",
       "items": {
         "type": "string"
@@ -115,6 +119,7 @@
       "type": "boolean"
     },
     "validation": {
+      "default": "true;",
       "description": "After synthesis, validate stacks with the \"validateOnSynth\"\nattribute set (can also be controlled with CDK_VALIDATION)",
       "type": "boolean"
     },
@@ -127,10 +132,6 @@
       "default": true,
       "description": "Include \"AWS::CDK::Metadata\" resource in synthesized templates",
       "type": "boolean"
-    },
-    "output": {
-      "description": "emits the synthesized cloud assembly into a directory (default: cdk.out)",
-      "type": "string"
     }
   }
 }

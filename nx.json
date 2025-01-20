@@ -44,27 +44,15 @@
       }
     },
     {
-      "plugin": "@plastic-ant/nx-msbuild",
-      "exclude": ["nx-msbuild"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-strapi",
-      "exclude": ["nx-strapi"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-cdk",
-      "exclude": ["nx-cdk"]
-    },
-    {
-      "plugin": "@plastic-ant/nx-cdktf",
-      "exclude": ["nx-cdktf"]
-    },
-    {
       "plugin": "@nx/vite/plugin",
       "options": {
         "testTargetName": "test"
       }
-    }
+    },
+    "./packages/nx-cdk/src/index.ts",
+    "./packages/nx-cdktf/src/index.ts",
+    "./packages/nx-strapi/src/index.ts",
+    "./packages/nx-msbuild/src/index.ts"
     // TODO: Replace this with the nx plugin once they support .mjs!
     // {
     //   "plugin": "@nx/eslint/plugin",

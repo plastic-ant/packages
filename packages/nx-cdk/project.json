@@ -2,6 +2,17 @@
   "name": "nx-cdk",
   "targets": {
     "lint": {},
+    "make-cli-schemas": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/nx-cdk",
+        "commands": [
+          "typescript-json-schema ./node_modules/@aws-cdk/cli-lib-alpha/lib/commands/bootstrap.d.ts BootstrapOptions -o ./src/executors/bootstrap/cli-schema.json",
+          "typescript-json-schema ./node_modules/@aws-cdk/cli-lib-alpha/lib/commands/deploy.d.ts DeployOptions -o ./src/executors/deploy/cli-schema.json",
+          "typescript-json-schema ./node_modules/@aws-cdk/cli-lib-alpha/lib/commands/synth.d.ts SynthOptions -o ./src/executors/synth/cli-schema.json"
+        ]
+      }
+    },
     "prebuild": {
       "executor": "nx:run-commands",
       "options": {

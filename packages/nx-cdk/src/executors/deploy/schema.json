@@ -1,14 +1,17 @@
 {
   "$schema": "http://json-schema.org/schema",
   "title": "DeployExecutorOptions",
-  "description": "",
   "type": "object",
   "required": [],
   "additionalProperties": false,
   "definitions": {
+    "HotswapMode": {
+      "enum": ["fall-back", "hotswap-only", "full-deployment"],
+      "type": "string"
+    },
     "RequireApproval": {
       "description": "In what scenarios should the CLI ask for approval",
-      "enum": ["any-change", "broadening", "never"],
+      "enum": ["never", "any-change", "broadening"],
       "type": "string"
     },
     "StackActivityProgress": {
@@ -17,16 +20,13 @@
       "type": "string"
     }
   },
+  "description": "Options to use with cdk deploy",
   "properties": {
     "postTargets": {
       "type": "array",
       "items": {
         "type": "string"
       }
-    },
-    "app": {
-      "description": "Command-line for executing your app or a cloud assembly directory e.g. 'node bin/my-app.js'",
-      "type": "string"
     },
     "assetMetadata": {
       "default": true,
@@ -44,18 +44,22 @@
       "type": "boolean"
     },
     "caBundlePath": {
+      "default": "- read from AWS_CA_BUNDLE environment variable",
       "description": "Path to CA certificate to use when validating HTTPS\nrequests.",
       "type": "string"
     },
     "changeSetName": {
+      "default": "- auto generate a name",
       "description": "Optional name to use for the CloudFormation change set.\nIf not provided, a name will be generated automatically.",
       "type": "string"
     },
     "ci": {
+      "default": "- `false` unless the environment variable `CI` is set",
       "description": "Whether we are on a CI system",
       "type": "boolean"
     },
     "color": {
+      "default": "- `true` unless the environment variable `NO_COLOR` is set",
       "description": "Show colors and other style from console output",
       "type": "boolean"
     },
@@ -68,6 +72,7 @@
       "additionalProperties": {
         "type": "string"
       },
+      "default": "- no additional context",
       "description": "Additional context",
       "type": "object"
     },
@@ -77,6 +82,7 @@
       "type": "boolean"
     },
     "ec2Creds": {
+      "default": "- guess EC2 instance status",
       "description": "Force trying to fetch EC2 instance credentials",
       "type": "boolean"
     },
@@ -94,6 +100,9 @@
       "default": false,
       "description": "Always deploy, even if templates are identical.",
       "type": "boolean"
+    },
+    "hotswap": {
+      "$ref": "#/definitions/HotswapMode"
     },
     "ignoreErrors": {
       "default": false,
@@ -116,6 +125,7 @@
       "type": "boolean"
     },
     "notificationArns": {
+      "default": "- no notifications",
       "description": "ARNs of SNS topics that CloudFormation will notify with stack related events",
       "items": {
         "type": "string"
@@ -123,6 +133,7 @@
       "type": "array"
     },
     "outputsFile": {
+      "default": "- Outputs are not written to any file",
       "description": "Path to file where stack outputs will be written after a successful deploy as JSON",
       "type": "string"
     },
@@ -130,6 +141,7 @@
       "additionalProperties": {
         "type": "string"
       },
+      "default": {},
       "description": "Additional parameters for CloudFormation at deploy time",
       "type": "object"
     },
@@ -139,24 +151,27 @@
       "type": "boolean"
     },
     "profile": {
+      "default": "- no profile is used",
       "description": "Use the indicated AWS profile as the default environment",
       "type": "string"
     },
     "progress": {
       "$ref": "#/definitions/StackActivityProgress",
-      "default": "events",
+      "default": "StackActivityProgress.EVENTS",
       "description": "Display mode for stack activity events\n\nThe default in the CLI is StackActivityProgress.BAR. But since this is an API\nit makes more sense to set the default to StackActivityProgress.EVENTS"
     },
     "proxy": {
+      "default": "- no proxy",
       "description": "Use the indicated proxy. Will read from\nHTTPS_PROXY environment if specified",
       "type": "string"
     },
     "requireApproval": {
       "$ref": "#/definitions/RequireApproval",
-      "default": "never",
+      "default": "RequireApproval.Never",
       "description": "What kind of security changes require approval"
     },
     "reuseAssets": {
+      "default": "- do not reuse assets",
       "description": "Reuse the assets with the given asset IDs",
       "items": {
         "type": "string"
@@ -164,6 +179,7 @@
       "type": "array"
     },
     "roleArn": {
+      "default": "- use the bootstrap cfn-exec role",
       "description": "Role to pass to CloudFormation for deployment",
       "type": "string"
     },
@@ -173,6 +189,7 @@
       "type": "boolean"
     },
     "stacks": {
+      "default": "- all stacks",
       "description": "List of stacks to deploy",
       "items": {
         "type": "string"
@@ -190,6 +207,7 @@
       "type": "boolean"
     },
     "toolkitStackName": {
+      "default": "CDKToolkit",
       "description": "Name of the toolkit stack to use/deploy",
       "type": "string"
     },
@@ -212,10 +230,6 @@
       "default": true,
       "description": "Include \"AWS::CDK::Metadata\" resource in synthesized templates",
       "type": "boolean"
-    },
-    "output": {
-      "description": "emits the synthesized cloud assembly into a directory (default: cdk.out)",
-      "type": "string"
     }
   }
 }

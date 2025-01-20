@@ -3,15 +3,14 @@
   "title": "BootstrapExecutorOptions",
   "description": "",
   "type": "object",
-  "required": ["account", "region", "trust"],
   "additionalProperties": false,
+  "required": ["region", "account"],
   "properties": {
-    "skipOnCI": {
-      "type": "boolean"
-    },
-    "envFile": {
-      "type": "string",
-      "x-completion-type": "file"
+    "postTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "region": {
       "type": "string"
@@ -19,25 +18,38 @@
     "account": {
       "type": "string"
     },
-    "trust": {
-      "type": "string"
-    },
-    "postTargets": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
     "assetMetadata": {
       "default": true,
       "description": "Include \"aws:asset:*\" CloudFormation metadata for resources that use assets",
       "type": "boolean"
     },
+    "bootstrapBucketName": {
+      "default": "- auto-generated CloudFormation name",
+      "description": "The name of the CDK toolkit bucket; bucket will be created and\nmust not exist",
+      "type": "string"
+    },
+    "bootstrapCustomerKey": {
+      "default": "undefined",
+      "description": "Create a Customer Master Key (CMK) for the bootstrap\nbucket (you will be charged but can customize\npermissions, modern bootstrapping only)",
+      "type": "string"
+    },
+    "bootstrapKmsKeyId": {
+      "default": "undefined",
+      "description": "AWS KMS master key ID used for the SSE-KMS encryption",
+      "type": "string"
+    },
     "caBundlePath": {
+      "default": "- read from AWS_CA_BUNDLE environment variable",
       "description": "Path to CA certificate to use when validating HTTPS\nrequests.",
       "type": "string"
     },
+    "cfnExecutionPolicy": {
+      "default": "- none",
+      "description": "The Managed Policy ARNs that should be attached to the\nrole performing deployments into this environment (may be repeated, modern bootstrapping only)",
+      "type": "string"
+    },
     "color": {
+      "default": "- `true` unless the environment variable `NO_COLOR` is set",
       "description": "Show colors and other style from console output",
       "type": "boolean"
     },
@@ -45,8 +57,14 @@
       "additionalProperties": {
         "type": "string"
       },
+      "default": "- no additional context",
       "description": "Additional context",
       "type": "object"
+    },
+    "customPermissionsBoundary": {
+      "default": "undefined",
+      "description": "Use the permissions boundary specified by name.",
+      "type": "string"
     },
     "debug": {
       "default": false,
@@ -54,12 +72,31 @@
       "type": "boolean"
     },
     "ec2Creds": {
+      "default": "- guess EC2 instance status",
       "description": "Force trying to fetch EC2 instance credentials",
       "type": "boolean"
     },
-    "exclusively": {
+    "environments": {
+      "default": "- Bootstrap all environments referenced in the CDK app or determine an environment from local configuration.",
+      "description": "The target AWS environments to deploy the bootstrap stack to.\nUses the following format: `aws://<account-id>/<region>`",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "examplePermissionsBoundary": {
+      "default": "undefined",
+      "description": "Use the example permissions boundary.",
+      "type": "boolean"
+    },
+    "execute": {
+      "default": true,
+      "description": "Whether to execute ChangeSet (--no-execute will NOT execute\nthe ChangeSet)",
+      "type": "boolean"
+    },
+    "force": {
       "default": false,
-      "description": "Only synthesize the given stack",
+      "description": "Always bootstrap even if it would downgrade template version",
       "type": "boolean"
     },
     "ignoreErrors": {
@@ -88,23 +125,37 @@
       "type": "boolean"
     },
     "profile": {
+      "default": "- no profile is used",
       "description": "Use the indicated AWS profile as the default environment",
       "type": "string"
     },
     "proxy": {
+      "default": "- no proxy",
       "description": "Use the indicated proxy. Will read from\nHTTPS_PROXY environment if specified",
       "type": "string"
     },
-    "quiet": {
-      "default": false,
-      "description": "Do not output CloudFormation Template to stdout",
-      "type": "boolean"
+    "publicAccessBlockConfiguration": {
+      "default": "undefined",
+      "description": "Block public access configuration on CDK toolkit\nbucket (enabled by default)",
+      "type": "string"
+    },
+    "qualifier": {
+      "default": "undefined",
+      "description": "String which must be unique for each bootstrap stack. You\nmust configure it on your CDK app if you change this\nfrom the default.",
+      "type": "string"
     },
     "roleArn": {
+      "default": "- use the bootstrap cfn-exec role",
       "description": "Role to pass to CloudFormation for deployment",
       "type": "string"
     },
+    "showTemplate": {
+      "default": false,
+      "description": "Instead of actual bootstrapping, print the current\nCLI\\'s bootstrapping template to stdout for customization",
+      "type": "boolean"
+    },
     "stacks": {
+      "default": "- all stacks",
       "description": "List of stacks to deploy",
       "items": {
         "type": "string"
@@ -121,13 +172,37 @@
       "description": "Do not construct stacks with warnings",
       "type": "boolean"
     },
+    "template": {
+      "description": "Use the template from the given file instead of the\nbuilt-in one (use --show-template to obtain an example)",
+      "type": "string"
+    },
+    "terminationProtection": {
+      "default": false,
+      "description": "Toggle CloudFormation termination protection on the\nbootstrap stacks",
+      "type": "boolean"
+    },
+    "toolkitStackName": {
+      "description": "The name of the CDK toolkit stack to create",
+      "type": "string"
+    },
     "trace": {
       "default": false,
       "description": "Print trace for stack warnings",
       "type": "boolean"
     },
-    "validation": {
-      "description": "After synthesis, validate stacks with the \"validateOnSynth\"\nattribute set (can also be controlled with CDK_VALIDATION)",
+    "trust": {
+      "default": "undefined",
+      "description": "The AWS account IDs that should be trusted to perform\ndeployments into this environment (may be repeated,\nmodern bootstrapping only)",
+      "type": "string"
+    },
+    "trustForLookup": {
+      "default": "undefined",
+      "description": "The AWS account IDs that should be trusted to look\nup values in this environment (may be repeated,\nmodern bootstrapping only)",
+      "type": "string"
+    },
+    "usePreviousParameters": {
+      "default": true,
+      "description": "Use previous values for existing parameters (you must specify\nall parameters on every deployment if this is disabled)",
       "type": "boolean"
     },
     "verbose": {
@@ -139,10 +214,6 @@
       "default": true,
       "description": "Include \"AWS::CDK::Metadata\" resource in synthesized templates",
       "type": "boolean"
-    },
-    "output": {
-      "description": "emits the synthesized cloud assembly into a directory (default: cdk.out)",
-      "type": "string"
     }
   }
 }

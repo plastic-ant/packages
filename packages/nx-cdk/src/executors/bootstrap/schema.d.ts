@@ -6,31 +6,50 @@
  */
 
 export interface BootstrapExecutorOptions {
-  skipOnCI?: boolean;
-  envFile?: string;
+  postTargets?: string[];
   region: string;
   account: string;
-  trust: string;
-  postTargets?: string[];
   /**
    * Include "aws:asset:*" CloudFormation metadata for resources that use assets
    */
   assetMetadata?: boolean;
+  /**
+   * The name of the CDK toolkit bucket; bucket will be created and
+   * must not exist
+   */
+  bootstrapBucketName?: string;
+  /**
+   * Create a Customer Master Key (CMK) for the bootstrap
+   * bucket (you will be charged but can customize
+   * permissions, modern bootstrapping only)
+   */
+  bootstrapCustomerKey?: string;
+  /**
+   * AWS KMS master key ID used for the SSE-KMS encryption
+   */
+  bootstrapKmsKeyId?: string;
   /**
    * Path to CA certificate to use when validating HTTPS
    * requests.
    */
   caBundlePath?: string;
   /**
+   * The Managed Policy ARNs that should be attached to the
+   * role performing deployments into this environment (may be repeated, modern bootstrapping only)
+   */
+  cfnExecutionPolicy?: string;
+  /**
    * Show colors and other style from console output
    */
-  color?: boolean;
+  color?: boolean & string;
   /**
    * Additional context
    */
-  context?: {
-    [k: string]: string;
-  };
+  context?: string;
+  /**
+   * Use the permissions boundary specified by name.
+   */
+  customPermissionsBoundary?: string;
   /**
    * enable emission of additional debugging information, such as creation stack
    * traces of tokens
@@ -39,11 +58,25 @@ export interface BootstrapExecutorOptions {
   /**
    * Force trying to fetch EC2 instance credentials
    */
-  ec2Creds?: boolean;
+  ec2Creds?: boolean & string;
   /**
-   * Only synthesize the given stack
+   * The target AWS environments to deploy the bootstrap stack to.
+   * Uses the following format: `aws://<account-id>/<region>`
    */
-  exclusively?: boolean;
+  environments?: string & string[];
+  /**
+   * Use the example permissions boundary.
+   */
+  examplePermissionsBoundary?: boolean & string;
+  /**
+   * Whether to execute ChangeSet (--no-execute will NOT execute
+   * the ChangeSet)
+   */
+  execute?: boolean;
+  /**
+   * Always bootstrap even if it would downgrade template version
+   */
+  force?: boolean;
   /**
    * Ignores synthesis errors, which will likely produce an invalid output
    */
@@ -78,17 +111,29 @@ export interface BootstrapExecutorOptions {
    */
   proxy?: string;
   /**
-   * Do not output CloudFormation Template to stdout
+   * Block public access configuration on CDK toolkit
+   * bucket (enabled by default)
    */
-  quiet?: boolean;
+  publicAccessBlockConfiguration?: string;
+  /**
+   * String which must be unique for each bootstrap stack. You
+   * must configure it on your CDK app if you change this
+   * from the default.
+   */
+  qualifier?: string;
   /**
    * Role to pass to CloudFormation for deployment
    */
   roleArn?: string;
   /**
+   * Instead of actual bootstrapping, print the current
+   * CLI\'s bootstrapping template to stdout for customization
+   */
+  showTemplate?: boolean;
+  /**
    * List of stacks to deploy
    */
-  stacks?: string[];
+  stacks?: string & string[];
   /**
    * Copy assets to the output directory
    *
@@ -100,14 +145,40 @@ export interface BootstrapExecutorOptions {
    */
   strict?: boolean;
   /**
+   * Use the template from the given file instead of the
+   * built-in one (use --show-template to obtain an example)
+   */
+  template?: string;
+  /**
+   * Toggle CloudFormation termination protection on the
+   * bootstrap stacks
+   */
+  terminationProtection?: boolean;
+  /**
+   * The name of the CDK toolkit stack to create
+   */
+  toolkitStackName?: string;
+  /**
    * Print trace for stack warnings
    */
   trace?: boolean;
   /**
-   * After synthesis, validate stacks with the "validateOnSynth"
-   * attribute set (can also be controlled with CDK_VALIDATION)
+   * The AWS account IDs that should be trusted to perform
+   * deployments into this environment (may be repeated,
+   * modern bootstrapping only)
    */
-  validation?: boolean;
+  trust?: string;
+  /**
+   * The AWS account IDs that should be trusted to look
+   * up values in this environment (may be repeated,
+   * modern bootstrapping only)
+   */
+  trustForLookup?: string;
+  /**
+   * Use previous values for existing parameters (you must specify
+   * all parameters on every deployment if this is disabled)
+   */
+  usePreviousParameters?: boolean;
   /**
    * show debug logs
    */
@@ -116,8 +187,4 @@ export interface BootstrapExecutorOptions {
    * Include "AWS::CDK::Metadata" resource in synthesized templates
    */
   versionReporting?: boolean;
-  /**
-   * emits the synthesized cloud assembly into a directory (default: cdk.out)
-   */
-  output?: string;
 }
