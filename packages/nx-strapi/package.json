@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@nx/devkit": "20.3.1",
-    "nx": "20.3.1"
+    "nx": "20.3.2"
   },
   "peerDependencies": {
     "@strapi/strapi": "^5.7.0",

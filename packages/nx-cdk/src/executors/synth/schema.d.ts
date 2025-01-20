@@ -22,11 +22,13 @@ export interface SynthExecutorOptions {
   /**
    * Show colors and other style from console output
    */
-  color?: boolean & string;
+  color?: boolean;
   /**
    * Additional context
    */
-  context?: string;
+  context?: {
+    [k: string]: string;
+  };
   /**
    * enable emission of additional debugging information, such as creation stack
    * traces of tokens
@@ -35,7 +37,7 @@ export interface SynthExecutorOptions {
   /**
    * Force trying to fetch EC2 instance credentials
    */
-  ec2Creds?: boolean & string;
+  ec2Creds?: boolean;
   /**
    * Only synthesize the given stack
    */
@@ -76,7 +78,7 @@ export interface SynthExecutorOptions {
   /**
    * Do not output CloudFormation Template to stdout
    */
-  quiet?: boolean & string;
+  quiet?: boolean;
   /**
    * Role to pass to CloudFormation for deployment
    */
@@ -84,7 +86,7 @@ export interface SynthExecutorOptions {
   /**
    * List of stacks to deploy
    */
-  stacks?: string & string[];
+  stacks?: string[];
   /**
    * Copy assets to the output directory
    *
@@ -103,7 +105,7 @@ export interface SynthExecutorOptions {
    * After synthesis, validate stacks with the "validateOnSynth"
    * attribute set (can also be controlled with CDK_VALIDATION)
    */
-  validation?: boolean & string;
+  validation?: boolean;
   /**
    * show debug logs
    */

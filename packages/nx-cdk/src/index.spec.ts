@@ -1,7 +1,6 @@
 import { CreateNodesContext } from "@nx/devkit";
-import { createNodesV2 } from "./index.js";
+import { createNodesV2, makeOptionsString } from "./index.js";
 import { vol } from "memfs";
-import { vi, describe, expect, beforeEach, afterEach, it } from "vitest";
 
 vi.mock("node:fs", async () => {
   const memfs = await vi.importActual<typeof import("memfs")>("memfs");
@@ -29,6 +28,30 @@ describe("nx-cdk", () => {
   afterEach(() => {
     vi.resetModules();
     vol.reset();
+  });
+
+  it("options: can handle no stacks passed", async () => {
+    expect(
+      makeOptionsString(
+        {
+          region: "us-east-2",
+          account: "12345678",
+        },
+        []
+      )
+    ).toEqual("--region=us-east-2 --account=12345678 --all");
+  });
+
+  it("options: can handle mutiple stacks", async () => {
+    expect(
+      makeOptionsString(
+        {
+          region: "us-east-2",
+          account: "12345678",
+        },
+        ["test-1", "test-2"]
+      )
+    ).toEqual("--region=us-east-2 --account=12345678 test-1 test-2");
   });
 
   it("should create nodes based on cdk.json", async () => {

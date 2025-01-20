@@ -37,11 +37,11 @@ export interface DeployExecutorOptions {
   /**
    * Whether we are on a CI system
    */
-  ci?: boolean & string;
+  ci?: boolean;
   /**
    * Show colors and other style from console output
    */
-  color?: boolean & string;
+  color?: boolean;
   /**
    * Maximum number of simultaneous deployments (dependency permitting) to execute.
    */
@@ -49,7 +49,9 @@ export interface DeployExecutorOptions {
   /**
    * Additional context
    */
-  context?: string;
+  context?: {
+    [k: string]: string;
+  };
   /**
    * enable emission of additional debugging information, such as creation stack
    * traces of tokens
@@ -58,7 +60,7 @@ export interface DeployExecutorOptions {
   /**
    * Force trying to fetch EC2 instance credentials
    */
-  ec2Creds?: boolean & string;
+  ec2Creds?: boolean;
   /**
    * Only perform action on the given stack
    */
@@ -96,7 +98,7 @@ export interface DeployExecutorOptions {
   /**
    * ARNs of SNS topics that CloudFormation will notify with stack related events
    */
-  notificationArns?: string & string[];
+  notificationArns?: string[];
   /**
    * Path to file where stack outputs will be written after a successful deploy as JSON
    */
@@ -134,7 +136,7 @@ export interface DeployExecutorOptions {
   /**
    * Reuse the assets with the given asset IDs
    */
-  reuseAssets?: string & string[];
+  reuseAssets?: string[];
   /**
    * Role to pass to CloudFormation for deployment
    */
@@ -146,7 +148,7 @@ export interface DeployExecutorOptions {
   /**
    * List of stacks to deploy
    */
-  stacks?: string & string[];
+  stacks?: string[];
   /**
    * Copy assets to the output directory
    *

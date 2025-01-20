@@ -13,8 +13,29 @@ import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash
 import { workspaceDataDirectory } from "nx/src/utils/cache-directory";
 import { InputDefinition } from "nx/src/config/workspace-json-project-json";
 import { hashObject } from "nx/src/hasher/file-hasher";
+import { paramCase } from "change-case";
+import { BootstrapExecutorOptions } from "./executors/bootstrap/schema";
+import { DeployExecutorOptions } from "./executors/deploy/schema";
+import { SynthExecutorOptions } from "./executors/synth/schema";
 
 const pmc = getPackageManagerCommand();
+
+export function makeOptionsString(
+  options: BootstrapExecutorOptions | Omit<DeployExecutorOptions | SynthExecutorOptions, "stacks">,
+  stacks?: string[]
+) {
+  const str = Object.entries(options)
+    .filter(([k]) => k != "postTargets" && k != "stacks")
+    .map(([k, v]) => `--${paramCase(k)}=${v.toString()}`);
+
+  if (stacks?.length) {
+    str.push(stacks.join(" "));
+  } else {
+    str.push(`--all`);
+  }
+
+  return str.join(" ");
+}
 
 export interface CdkAwsPluginOptions {
   synthTargetName?: string;
