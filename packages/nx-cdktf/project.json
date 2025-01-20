@@ -6,38 +6,9 @@
   "tags": ["#nx-plugin"],
   "targets": {
     "build": {
-      "lint": {},
       "executor": "@nx/js:tsc",
       "options": {
-        "assets": [
-          {
-            "input": "packages/nx-cdktf",
-            "glob": "**/*.json",
-            "ignore": ["**/tsconfig*.json", "project.json", ".eslintrc.json"],
-            "output": "/"
-          },
-          {
-            "input": "packages/nx-cdktf",
-            "glob": "**/*.js",
-            "ignore": ["**/*.config.{ts,js,cjs,mjs,mts}"],
-            "output": "/"
-          },
-          {
-            "input": "packages/nx-cdktf",
-            "glob": "**/*.d.ts",
-            "output": "/"
-          },
-          {
-            "input": "",
-            "glob": "README.md",
-            "output": "/"
-          },
-          {
-            "input": "",
-            "glob": "LICENSE",
-            "output": "/"
-          }
-        ]
+        "assets": []
       }
     },
     "version": {
@@ -64,7 +35,7 @@
       "options": {
         "access": "public",
         "scope": "plastic-ant",
-        "distFolderPath": "{projectRoot}/dist"
+        "distFolderPath": "{projectRoot}"
       }
     }
   }

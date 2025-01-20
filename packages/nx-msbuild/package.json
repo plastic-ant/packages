@@ -3,8 +3,8 @@
   "version": "0.0.9",
   "license": "MIT",
   "type": "commonjs",
-  "main": "./src/index.js",
-  "typings": "./src/index.d.ts",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/plastic-ant/packages.git",
@@ -19,6 +19,14 @@
     "crystal",
     "msbuild",
     "visual studio"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "executors.json",
+    "generators.json",
+    "!**/*.map"
   ],
   "publishConfig": {
     "access": "public"
@@ -37,7 +45,7 @@
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "20.3.1",
+    "@nx/devkit": "20.3.2",
     "nx": "20.3.2"
   }
 }

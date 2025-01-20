@@ -15,7 +15,9 @@
       "!{projectRoot}/vite.config.*",
       "!{projectRoot}/vitest.config.*",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/eslint.config.*"
+      "!{projectRoot}/eslint.config.*",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.cjs"
     ]
   },
   "plugins": [
@@ -49,17 +51,16 @@
         "testTargetName": "test"
       }
     },
-    "./packages/nx-cdk/src/index.ts",
-    "./packages/nx-cdktf/src/index.ts",
-    "./packages/nx-strapi/src/index.ts",
-    "./packages/nx-msbuild/src/index.ts"
-    // TODO: Replace this with the nx plugin once they support .mjs!
     // {
     //   "plugin": "@nx/eslint/plugin",
     //   "options": {
     //     "targetName": "lint"
     //   }
-    // }
+    // },
+    "./packages/nx-cdk/src/index.ts",
+    "./packages/nx-cdktf/src/index.ts",
+    "./packages/nx-strapi/src/index.ts",
+    "./packages/nx-msbuild/src/index.ts"
   ],
   "targetDefaults": {
     "prebuild": {
@@ -86,7 +87,6 @@
       }
     },
     "lint": {
-      // TODO: Replace this with the nx plugin once they support .mjs!
       "executor": "nx:run-commands",
       "dependsOn": ["prebuild"],
       "inputs": [
