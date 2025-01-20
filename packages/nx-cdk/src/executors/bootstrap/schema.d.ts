@@ -41,11 +41,13 @@ export interface BootstrapExecutorOptions {
   /**
    * Show colors and other style from console output
    */
-  color?: boolean & string;
+  color?: boolean;
   /**
    * Additional context
    */
-  context?: string;
+  context?: {
+    [k: string]: string;
+  };
   /**
    * Use the permissions boundary specified by name.
    */
@@ -58,16 +60,16 @@ export interface BootstrapExecutorOptions {
   /**
    * Force trying to fetch EC2 instance credentials
    */
-  ec2Creds?: boolean & string;
+  ec2Creds?: boolean;
   /**
    * The target AWS environments to deploy the bootstrap stack to.
    * Uses the following format: `aws://<account-id>/<region>`
    */
-  environments?: string & string[];
+  environments?: string[];
   /**
    * Use the example permissions boundary.
    */
-  examplePermissionsBoundary?: boolean & string;
+  examplePermissionsBoundary?: boolean;
   /**
    * Whether to execute ChangeSet (--no-execute will NOT execute
    * the ChangeSet)
@@ -130,10 +132,6 @@ export interface BootstrapExecutorOptions {
    * CLI\'s bootstrapping template to stdout for customization
    */
   showTemplate?: boolean;
-  /**
-   * List of stacks to deploy
-   */
-  stacks?: string & string[];
   /**
    * Copy assets to the output directory
    *

@@ -1,15 +1,12 @@
 import { PromiseExecutor } from "@nx/devkit";
 import { DeployExecutorOptions } from "./schema";
-import { paramCase } from "change-case";
 import runCommands from "nx/src/executors/run-commands/run-commands.impl";
+import { makeOptionsString } from "../..";
 
 const runExecutor: PromiseExecutor<DeployExecutorOptions> = async (options, context) => {
   if (context.projectName) {
     const projectDir = context.projectsConfigurations.projects[context.projectName].root;
-    const optionsString = Object.entries(options)
-      .map(([k, v]) => `--${paramCase(k)}=${v.toString()}`)
-      .filter((v) => v != "postTargets")
-      .join(" ");
+    const optionsString = makeOptionsString(options, options.stacks);
 
     // --require-approval=never
 
@@ -17,7 +14,7 @@ const runExecutor: PromiseExecutor<DeployExecutorOptions> = async (options, cont
       {
         cwd: projectDir,
         color: true,
-        command: `cdk deploy ${options.stacks?.join(" ") ?? ""} ${optionsString}`,
+        command: `cdk deploy ${optionsString}`,
         __unparsed__: [],
       },
       context

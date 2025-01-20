@@ -1,16 +1,12 @@
 import { PromiseExecutor } from "@nx/devkit";
 import { SynthExecutorOptions } from "./schema";
-import { paramCase } from "change-case";
 import runCommands from "nx/src/executors/run-commands/run-commands.impl";
+import { makeOptionsString } from "../..";
 
 const runExecutor: PromiseExecutor<SynthExecutorOptions> = async (options, context) => {
   if (context.projectName) {
     const projectDir = context.projectsConfigurations.projects[context.projectName].root;
-
-    const optionsString = Object.entries(options)
-      .map(([k, v]) => `--${paramCase(k)}=${v.toString()}`)
-      .filter((v) => v != "postTargets")
-      .join(" ");
+    const optionsString = makeOptionsString(options, options.stacks);
 
     const result = await runCommands(
       {

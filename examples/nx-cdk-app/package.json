@@ -20,7 +20,10 @@
       },
       "cdk-bootstrap-executor": {
         "executor": "@plastic-ant/nx-cdk:bootstrap",
-        "options": {}
+        "options": {
+          "account": "123456789",
+          "region": "us-east-2"
+        }
       },
       "cdk-synth-executor": {
         "executor": "@plastic-ant/nx-cdk:synth",
