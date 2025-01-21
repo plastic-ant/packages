@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.10](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.9...nx-msbuild@0.0.10) (2025-01-21)
+
+
+### Bug Fixes
+
+* **repo:** dist paths in package.json(s) ([12abf05](https://github.com/plastic-ant/packages/commit/12abf05216cda9b4de78324f0c895947b52f245c))
+
 ## [0.0.9](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.8...nx-msbuild@0.0.9) (2025-01-20)
 
 
