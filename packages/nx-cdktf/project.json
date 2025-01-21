@@ -11,8 +11,9 @@
       "options": {
         "cwd": "packages/nx-cdktf/src",
         "commands": [
-          "json2ts -i executors/synth/schema.json -o executors/synth/schema.d.ts",
-          "json2ts -i executors/deploy/schema.json -o executors/deploy/schema.d.ts"
+          "json2ts -i executors/get/schema.json -o executors/get/schema.d.ts --format",
+          "json2ts -i executors/synth/schema.json -o executors/synth/schema.d.ts --format",
+          "json2ts -i executors/deploy/schema.json -o executors/deploy/schema.d.ts --format"
         ]
       }
     },
@@ -20,6 +21,7 @@
       "executor": "@nx/js:tsc",
       "options": {
         "assets": [
+          "packages/nx-cdktf/src/executors/get/schema.json",
           "packages/nx-cdktf/src/executors/synth/schema.json",
           "packages/nx-cdktf/src/executors/deploy/schema.json"
         ]

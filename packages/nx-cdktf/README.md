@@ -33,8 +33,9 @@ For using the inferred tasks (Project Crystal) add the plugin to your `nx.json` 
     {
       "plugin": "@plastic-ant/nx-cdktf",
       "options": {
-          synthTargetName     (optional) generated target synth, default cdktf-synth
-          deployTargetName    (optional) generated target deploy, default cdktf-deploy
+          synthTargetName  (optional) generated target synth, default cdktf-synth
+          deployTargetName (optional) generated target deploy, default cdktf-deploy
+          getTargetName    (optional) generated target get, default cdktf-get
        }
     }
 ]
@@ -46,6 +47,12 @@ Each executor has options that mirror the same cdktf CLI command with the addtio
 
 ```
 "targets": {
+      "get": {
+        "executor": "@plastic-ant/nx-cdktf:get",
+        "options": {
+          "postTargets": []
+        }
+      },
       "synth": {
         "executor": "@plastic-ant/nx-cdktf:synth",
         "options": {

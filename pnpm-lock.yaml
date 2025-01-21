@@ -22,7 +22,7 @@ overrides:
   braces: ^3.0.3
   elliptic: ^6.5.6
   micromatch: ^4.0.8
-  uuid: ^7
+  uuid@<7: '>=7'
 
 importers:
 
@@ -176,8 +176,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       uuid:
-        specifier: ^7
-        version: 7.0.3
+        specifier: ^11.0.5
+        version: 11.0.5
       verdaccio:
         specifier: ^6.0.5
         version: 6.0.5(typanion@3.14.0)
@@ -11042,8 +11042,16 @@ packages:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
-  uuid@7.0.3:
-    resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
+  uuid@11.0.5:
+    resolution: {integrity: sha512-508e6IcKLrhxKdBbcA2b4KQZlLVp2+J5UwQ6F7Drckkc5N9ZJwFa4TgWtsww9UG8fGHbm6gbV19TdM5pQ4GaIA==}
+    hasBin: true
+
+  uuid@8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+
+  uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
 
   v8-compile-cache-lib@3.0.1:
@@ -12422,7 +12430,7 @@ snapshots:
       stream-buffers: 3.0.3
       strip-ansi: 6.0.1
       tunnel-agent: 0.6.0
-      uuid: 7.0.3
+      uuid: 8.3.2
       xml-js: 1.6.11
       xstate: 4.38.3
       yargs: 17.7.2
@@ -12448,7 +12456,7 @@ snapshots:
       fs-extra: 11.2.0
       log4js: 6.9.1
       strip-ansi: 6.0.1
-      uuid: 7.0.3
+      uuid: 9.0.1
       validator: 13.12.0
     transitivePeerDependencies:
       - constructs
@@ -12709,7 +12717,7 @@ snapshots:
       safe-buffer: 5.2.1
       tough-cookie: 4.1.4
       tunnel-agent: 0.6.0
-      uuid: 7.0.3
+      uuid: 8.3.2
 
   '@dabh/diagnostics@2.0.3':
     dependencies:
@@ -22522,7 +22530,7 @@ snapshots:
       crc: 3.8.0
       debug: 4.3.4
       is-type-of: 1.4.0
-      uuid: 7.0.3
+      uuid: 8.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -24695,13 +24703,13 @@ snapshots:
       isstream: 0.1.2
       mime-types: 2.1.35
       multistream: 4.1.0
-      uuid: 7.0.3
+      uuid: 8.3.2
 
   request-oauth@1.0.1:
     dependencies:
       oauth-sign: 0.9.0
       qs: 6.14.0
-      uuid: 7.0.3
+      uuid: 8.3.2
 
   request@2.88.2:
     dependencies:
@@ -24724,7 +24732,7 @@ snapshots:
       safe-buffer: 5.2.1
       tough-cookie: 4.1.4
       tunnel-agent: 0.6.0
-      uuid: 7.0.3
+      uuid: 11.0.5
 
   require-directory@2.1.1: {}
 
@@ -26157,7 +26165,11 @@ snapshots:
 
   utils-merge@1.0.1: {}
 
-  uuid@7.0.3: {}
+  uuid@11.0.5: {}
+
+  uuid@8.3.2: {}
+
+  uuid@9.0.1: {}
 
   v8-compile-cache-lib@3.0.1: {}
 

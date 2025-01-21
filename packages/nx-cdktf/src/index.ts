@@ -31,7 +31,6 @@ export interface CdktfPluginOptions {
   synthTargetName?: string;
   deployTargetName?: string;
   getTargetName?: string;
-  bootstrapTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
