@@ -26,22 +26,40 @@ yarn add --dev @plastic-ant/nx-cdktf
 
 ## Usage
 
-Add this plugin to your `nx.json` config:
+For using the inferred tasks (Project Crystal) add the plugin to your `nx.json` config:
 
 ```
 "plugins": [
     {
       "plugin": "@plastic-ant/nx-cdktf",
-      "options": { ... }
+      "options": {
+          synthTargetName     (optional) generated target synth, default cdktf-synth
+          deployTargetName    (optional) generated target deploy, default cdktf-deploy
+       }
     }
 ]
 ```
 
+Included executors
+
+Each executor has options that mirror the same cdktf CLI command with the addtional of `postTargets` to be run synchronously.
+
 ```
-options:
-  synthTargetName      (optional) generated target synth, default cdktf-synth
-  deployTargetName     (optional) generated target deploy, default cdktf-deploy
-  getTargetName        (optional) generated target synth, default cdktf-synth
+"targets": {
+      "synth": {
+        "executor": "@plastic-ant/nx-cdktf:synth",
+        "options": {
+          "postTargets": ["{projectName}:postSynth"]
+        }
+      },
+      "deploy": {
+        "executor": "@plastic-ant/nx-cdktf:deploy",
+        "options": {
+          "postTargets": ["sendSQS"]
+        }
+      }
+    }
+    ...
 ```
 
 ## License
