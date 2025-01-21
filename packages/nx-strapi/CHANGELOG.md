@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.12](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.11...nx-strapi@0.0.12) (2025-01-21)
+
+
+### Bug Fixes
+
+* **repo:** dist paths in package.json(s) ([12abf05](https://github.com/plastic-ant/packages/commit/12abf05216cda9b4de78324f0c895947b52f245c))
+
 ## [0.0.11](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.10...nx-strapi@0.0.11) (2025-01-20)
 
 
