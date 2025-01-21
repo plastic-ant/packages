@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "SynthExecutorOptions",
+  "description": "Options to use with cdktf synth",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "postTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "app": {
+      "description": "Command to use in order to execute cdktf app",
+      "type": "string"
+    },
+    "output": {
+      "description": "Output directory for the synthesized Terraform config",
+      "type": "string"
+    },
+    "checkCodeMakerOutput": {
+      "description": "Should `codeMakerOutput` existence check be performed? By default it will be checked if providers or modules are configured.",
+      "type": "boolean"
+    },
+    "hcl": {
+      "description": "Should the output be in HCL format?",
+      "type": "string"
+    },
+    "stacks": {
+      "description": "List of stacks to deploy",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  }
+}

@@ -5,10 +5,24 @@
   "projectType": "library",
   "tags": ["#nx-plugin"],
   "targets": {
+    "lint": {},
+    "prebuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/nx-cdktf/src",
+        "commands": [
+          "json2ts -i executors/synth/schema.json -o executors/synth/schema.d.ts",
+          "json2ts -i executors/deploy/schema.json -o executors/deploy/schema.d.ts"
+        ]
+      }
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "options": {
-        "assets": []
+        "assets": [
+          "packages/nx-cdktf/src/executors/synth/schema.json",
+          "packages/nx-cdktf/src/executors/deploy/schema.json"
+        ]
       }
     },
     "version": {

@@ -19,7 +19,8 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker": "latest",
-    "ghcr.io/devcontainers-extra/features/pnpm": "10"
+    "ghcr.io/devcontainers-extra/features/pnpm": "10",
+    "ghcr.io/devcontainers/features/terraform": "latest"
   },
   "customizations": {
     "vscode": {

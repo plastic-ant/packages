@@ -21,6 +21,25 @@
             "--language=typescript"
           ]
         }
+      },
+      "postTarget": {
+        "command": "#### Done! ####"
+      },
+      "cdktf-deploy-executor": {
+        "executor": "@plastic-ant/nx-cdktf:deploy",
+        "options": {
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
+        }
+      },
+      "cdktf-synth-executor": {
+        "executor": "@plastic-ant/nx-cdktf:synth",
+        "options": {
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
+        }
       }
     }
   },

@@ -10,6 +10,12 @@
   },
   "nx": {
     "targets": {
+      "synth": {
+        "dependsOn": [
+          "cdk-synth"
+        ],
+        "command": "#### Done! (inferred) ####"
+      },
       "cdk-synth": {
         "options": {
           "args": [
@@ -18,22 +24,35 @@
           ]
         }
       },
+      "postTarget": {
+        "command": "#### Done! ####"
+      },
       "cdk-bootstrap-executor": {
         "executor": "@plastic-ant/nx-cdk:bootstrap",
         "options": {
           "account": "123456789",
-          "region": "us-east-2"
+          "region": "us-east-2",
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
         }
       },
       "cdk-synth-executor": {
         "executor": "@plastic-ant/nx-cdk:synth",
         "options": {
-          "debug": true
+          "debug": true,
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
         }
       },
       "cdk-deploy-executor": {
         "executor": "@plastic-ant/nx-cdk:deploy",
-        "options": {}
+        "options": {
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
+        }
       }
     }
   },
