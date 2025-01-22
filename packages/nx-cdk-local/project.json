@@ -1,6 +1,9 @@
 {
   "name": "nx-cdk-local",
   "targets": {
+    // "version": {},
+    // "github": {},
+    // "npm": {},
     "lint": {},
     "prebuild": {
       "executor": "nx:run-commands",
@@ -23,32 +26,5 @@
         ]
       }
     }
-    // "version": {
-    //   "executor": "@jscutlery/semver:version",
-    //   "parallelism": false,
-    //   "options": {
-    //     "push": true,
-    //     "preset": "conventionalcommits",
-    //     "baseBranch": "main",
-    //     "tagPrefix": "{projectName}@",
-    //     "commitMessageFormat": "chore({projectName}): release version {version} [skip ci]",
-    //     "postTargets": ["build", "npm", "github"]
-    //   }
-    // },
-    // "github": {
-    //   "executor": "@jscutlery/semver:github",
-    //   "options": {
-    //     "tag": "{tag}",
-    //     "notes": "{notes}"
-    //   }
-    // },
-    // "npm": {
-    //   "executor": "ngx-deploy-npm:deploy",
-    //   "options": {
-    //     "access": "public",
-    //     "scope": "plastic-ant",
-    //     "distFolderPath": "{projectRoot}"
-    //   }
-    // }
   }
 }

@@ -57,6 +57,7 @@
     //     "targetName": "lint"
     //   }
     // },
+    "./tools/plugins/version.ts",
     "./packages/nx-cdk/src/index.ts",
     "./packages/nx-cdktf/src/index.ts",
     "./packages/nx-strapi/src/index.ts",
@@ -88,7 +89,7 @@
     },
     "lint": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
+      "dependsOn": ["prebuild"],
       "inputs": [
         "default",
         "{workspaceRoot}/tools/eslint-rules/**/*",

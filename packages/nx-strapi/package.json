@@ -31,7 +31,8 @@
     "!**/*.map"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "scope": "@plastic-ant"
   },
   "author": {
     "name": "pas-mike",
