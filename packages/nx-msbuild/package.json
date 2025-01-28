@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-msbuild",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "license": "MIT",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",
