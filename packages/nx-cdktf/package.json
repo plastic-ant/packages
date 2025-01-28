@@ -50,7 +50,7 @@
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "20.3.2",
+    "@nx/devkit": "20.4.0",
     "change-case": "4.1.2",
     "nx": "20.3.2"
   },

@@ -1,7 +1,6 @@
 {
   "name": "nx-cdk",
   "targets": {
-    "lint": {},
     "make-cli-schemas": {
       "executor": "nx:run-commands",
       "options": {

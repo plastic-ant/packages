@@ -8,7 +8,6 @@
     "version": {},
     "github": {},
     "npm": {},
-    "lint": {},
     "build": {
       "executor": "@nx/js:tsc",
       "options": {

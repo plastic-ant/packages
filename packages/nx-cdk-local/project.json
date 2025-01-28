@@ -4,7 +4,6 @@
     // "version": {},
     // "github": {},
     // "npm": {},
-    "lint": {},
     "prebuild": {
       "executor": "nx:run-commands",
       "options": {
