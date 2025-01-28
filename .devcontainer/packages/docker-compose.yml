@@ -1,5 +1,6 @@
 services:
   repo:
+    container_name: pas-packages
     build:
       context: ../
       dockerfile: ../.devcontainer/packages/dockerfile

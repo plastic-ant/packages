@@ -31,7 +31,8 @@
     "!**/*.map"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "scope": "@plastic-ant"
   },
   "author": {
     "name": "pas-mike",
@@ -43,10 +44,10 @@
   },
   "devDependencies": {
     "@strapi/strapi": "^5.8.0",
-    "create-strapi": "^5.8.0"
+    "create-strapi": "^5.8.1"
   },
   "dependencies": {
-    "@nx/devkit": "20.3.2",
+    "@nx/devkit": "20.4.0",
     "nx": "20.3.2"
   },
   "peerDependencies": {

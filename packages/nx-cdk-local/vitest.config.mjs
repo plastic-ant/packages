@@ -2,7 +2,6 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: "../../node_modules/.vite/packages/nx-cdk",
   plugins: [],
   test: {
     watch: false,
@@ -10,9 +9,5 @@ export default defineConfig({
     environment: "node",
     include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     reporters: ["default"],
-    coverage: {
-      reportsDirectory: "../../coverage/packages/nx-cdk",
-      provider: "v8",
-    },
   },
 });

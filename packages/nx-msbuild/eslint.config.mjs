@@ -4,6 +4,9 @@ import jsoncEslintParser from "jsonc-eslint-parser";
 export default [
   ...baseConfig,
   {
+    ignores: ["**/schema.d.ts"],
+  },
+  {
     files: ["**/{project,package}.json"],
     rules: {
       "@nx/dependency-checks": [

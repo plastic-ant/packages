@@ -5,20 +5,39 @@
   "types": "main.ts",
   "license": "MPL-2.0",
   "private": true,
-  "scripts": {
-    "get": "cdktf get",
-    "build": "tsc",
-    "synth": "cdktf synth",
-    "compile": "tsc --pretty",
-    "watch": "tsc -w",
-    "test": "node --test"
-  },
   "nx": {
     "targets": {
       "cdktf-get": {
         "options": {
           "args": [
             "--language=typescript"
+          ]
+        }
+      },
+      "postTarget": {
+        "command": "#### Done! ####"
+      },
+      "cdktf-deploy-executor": {
+        "executor": "@plastic-ant/nx-cdktf:deploy",
+        "options": {
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
+        }
+      },
+      "cdktf-synth-executor": {
+        "executor": "@plastic-ant/nx-cdktf:synth",
+        "options": {
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
+        }
+      },
+      "cdktf-get-executor": {
+        "executor": "@plastic-ant/nx-cdktf:get",
+        "options": {
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
           ]
         }
       }

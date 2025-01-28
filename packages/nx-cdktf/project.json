@@ -5,37 +5,28 @@
   "projectType": "library",
   "tags": ["#nx-plugin"],
   "targets": {
+    "version": {},
+    "github": {},
+    "npm": {},
+    "prebuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/nx-cdktf/src",
+        "commands": [
+          "json2ts -i executors/get/schema.json -o executors/get/schema.d.ts --format",
+          "json2ts -i executors/synth/schema.json -o executors/synth/schema.d.ts --format",
+          "json2ts -i executors/deploy/schema.json -o executors/deploy/schema.d.ts --format"
+        ]
+      }
+    },
     "build": {
       "executor": "@nx/js:tsc",
       "options": {
-        "assets": []
-      }
-    },
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "parallelism": false,
-      "options": {
-        "push": true,
-        "preset": "conventionalcommits",
-        "baseBranch": "main",
-        "tagPrefix": "{projectName}@",
-        "commitMessageFormat": "chore({projectName}): release version {version} [skip ci]",
-        "postTargets": ["build", "npm", "github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "{tag}",
-        "notes": "{notes}"
-      }
-    },
-    "npm": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "access": "public",
-        "scope": "plastic-ant",
-        "distFolderPath": "{projectRoot}"
+        "assets": [
+          "packages/nx-cdktf/src/executors/get/schema.json",
+          "packages/nx-cdktf/src/executors/synth/schema.json",
+          "packages/nx-cdktf/src/executors/deploy/schema.json"
+        ]
       }
     }
   }

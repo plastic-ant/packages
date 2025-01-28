@@ -1,14 +1,13 @@
 import { CreateNodesContext } from "@nx/devkit";
 import { createNodesV2 } from "./index.js";
 import { vol } from "memfs";
-import { vi, describe, expect, beforeEach, afterEach, it } from "vitest";
 
 vi.mock("node:fs", async () => {
   const memfs = await vi.importActual<typeof import("memfs")>("memfs");
   return { default: memfs.fs, ...memfs.fs };
 });
 
-describe("nx-cdk", () => {
+describe("nx-cdk-local", () => {
   const createNodesFunction = createNodesV2[1];
   let context: CreateNodesContext;
 

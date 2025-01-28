@@ -51,12 +51,13 @@
         "testTargetName": "test"
       }
     },
-    // {
-    //   "plugin": "@nx/eslint/plugin",
-    //   "options": {
-    //     "targetName": "lint"
-    //   }
-    // },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    "./tools/plugins/version.ts",
     "./packages/nx-cdk/src/index.ts",
     "./packages/nx-cdktf/src/index.ts",
     "./packages/nx-strapi/src/index.ts",
@@ -84,26 +85,6 @@
         "outputPath": "{projectRoot}/dist",
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
         "main": "{projectRoot}/src/index.ts"
-      }
-    },
-    "lint": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["prebuild"],
-      "inputs": [
-        "default",
-        "{workspaceRoot}/tools/eslint-rules/**/*",
-        "{workspaceRoot}/eslint.config.[m]js",
-        "{projectRoot}/eslint.config.[m]js"
-      ],
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "eslint . --quiet=false"
-      },
-      "cache": true,
-      "configurations": {
-        "ci": {
-          "command": "eslint . --quiet=true"
-        }
       }
     },
     "test": {

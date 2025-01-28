@@ -1,3 +1,19 @@
 {
-  "executors": {}
+  "executors": {
+    "synth": {
+      "implementation": "./dist/src/executors/synth/index",
+      "schema": "./dist/src/executors/synth/schema.json",
+      "description": "synth executor"
+    },
+    "deploy": {
+      "implementation": "./dist/src/executors/deploy/index",
+      "schema": "./dist/src/executors/deploy/schema.json",
+      "description": "deploy executor"
+    },
+    "get": {
+      "implementation": "./dist/src/executors/get/index",
+      "schema": "./dist/src/executors/get/schema.json",
+      "description": "get executor"
+    }
+  }
 }

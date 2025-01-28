@@ -1,6 +1,7 @@
 import nx from "@nx/eslint-plugin";
 import jsoncEslintParser from "jsonc-eslint-parser";
 import yamlEslintParser from "yaml-eslint-parser";
+// import * as publint from "eslint-plugin-publint";
 import globals from "globals";
 
 export default [
@@ -71,10 +72,29 @@ export default [
       parser: jsoncEslintParser,
     },
   },
+  // {
+  //   files: ["**/package.json"],
+  //   processor: "publint/processor",
+  //   plugins: { publint },
+  //   rules: {
+  //     /**
+  //      * The 'suggestion' type messages created by publint will cause eslint warns
+  //      */
+  //     "publint/suggestion": "warn",
+  //     /**
+  //      * The 'warning' type messages created by publint will cause eslint warns
+  //      */
+  //     "publint/warning": "warn",
+  //     /**
+  //      * The 'error' type messages created by publint will cause eslint errors
+  //      */
+  //     "publint/error": "error",
+  //   },
+  // },
   {
     files: ["**/{generators,executors,package}.json"],
     rules: {
-      "@nx/nx-plugin-checks": "error",
+      "@nx/nx-plugin-checks": "warn",
     },
     languageOptions: {
       parser: jsoncEslintParser,

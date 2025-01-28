@@ -19,7 +19,8 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker": "latest",
-    "ghcr.io/devcontainers-extra/features/pnpm": "10"
+    "ghcr.io/devcontainers-extra/features/pnpm": "10",
+    "ghcr.io/devcontainers/features/terraform": "latest"
   },
   "customizations": {
     "vscode": {
@@ -112,11 +113,15 @@
       "extensions": [
         "aaron-bond.better-comments",
         "vitest.explorer",
-        "42Crunch.vscode-openapi",
+        //"42Crunch.vscode-openapi",
         "christian-kohler.path-intellisense",
         "nrwl.angular-console",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "-ms-vscode.azure-account",
+        "-ms-azuretools.vscode-azureresourcegroups",
+        "-ms-azuretools.vscode-azureterraform",
+        "-hashicorp.terraform"
       ]
     }
   }

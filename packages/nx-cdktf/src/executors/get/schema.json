@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "GetExecutorOptions",
+  "description": "Options to use with cdktf get",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "postTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

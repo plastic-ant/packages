@@ -10,6 +10,12 @@
   },
   "nx": {
     "targets": {
+      "synth": {
+        "dependsOn": [
+          "cdk-synth"
+        ],
+        "command": "#### Done! (inferred) ####"
+      },
       "cdk-synth": {
         "options": {
           "args": [
@@ -18,32 +24,45 @@
           ]
         }
       },
+      "postTarget": {
+        "command": "#### Done! ####"
+      },
       "cdk-bootstrap-executor": {
         "executor": "@plastic-ant/nx-cdk:bootstrap",
         "options": {
           "account": "123456789",
-          "region": "us-east-2"
+          "region": "us-east-2",
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
         }
       },
       "cdk-synth-executor": {
         "executor": "@plastic-ant/nx-cdk:synth",
         "options": {
-          "debug": true
+          "debug": true,
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
         }
       },
       "cdk-deploy-executor": {
         "executor": "@plastic-ant/nx-cdk:deploy",
-        "options": {}
+        "options": {
+          "postTargets": [
+            "nx-cdktf-app:postTarget"
+          ]
+        }
       }
     }
   },
   "devDependencies": {
-    "aws-cdk": "^2.176.0",
+    "aws-cdk": "^2.177.0",
     "ts-node": "10.9.2",
     "typescript": "5.5.3"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.176.0",
+    "aws-cdk-lib": "^2.177.0",
     "constructs": "^10.4.2",
     "source-map-support": "^0.5.21"
   }
