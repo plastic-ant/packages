@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.8.0](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.7.11...nx-cdktf@0.8.0) (2025-01-28)
+
+
+### Features
+
+* **nx-cdktf:** added executors ([942477c](https://github.com/plastic-ant/packages/commit/942477c56d98014a6a9c81e21a3608af82791c5c))
+
 ## [0.7.11](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.7.10...nx-cdktf@0.7.11) (2025-01-21)
 
 
