@@ -1,0 +1,59 @@
+{
+  "name": "@plastic-ant/nx-react-router",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "commonjs",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plastic-ant/packages.git",
+    "directory": "packages/nx-react-router"
+  },
+  "homepage": "https://github.com/plastic-ant/packages/tree/main/packages/nx-react-router#readme",
+  "bugs": {
+    "url": "https://github.com/plastic-ant/packages/issues"
+  },
+  "keywords": [
+    "nx",
+    "crystal",
+    "plugin",
+    "react-router",
+    "v7"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "executors.json",
+    "generators.json",
+    "!**/*.map"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "scope": "@plastic-ant"
+  },
+  "author": {
+    "name": "pas-mike",
+    "url": "https://github.com/pas-mike"
+  },
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://buymeacoffee.com/plasticant"
+  },
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "devDependencies": {
+    "react-router": "^7.1.5",
+    "json-schema-to-typescript": "^15.0.3",
+    "typescript-json-schema": "0.65.1"
+  },
+  "dependencies": {
+    "@nx/devkit": "20.4.0",
+    "change-case": "4.1.2",
+    "nx": "20.3.2"
+  },
+  "peerDependencies": {
+    "react-router": "^7.1.5"
+  }
+}
