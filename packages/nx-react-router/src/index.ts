@@ -109,11 +109,15 @@ function buildTargets(
   }
 
   if (options.typecheckTargetName) {
-    targets[options.typecheckTargetName] = typeCheckTarget(options, namedInputs, configOutputs, projectRoot);
+    targets[options.typecheckTargetName] = typecheckTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
   if (options.devTargetName) {
     targets[options.devTargetName] = devTarget(options, namedInputs, configOutputs, projectRoot);
+  }
+
+  if (options.startTargetName) {
+    targets[options.startTargetName] = startTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
   //   if (options.devTargetName) {
@@ -125,6 +129,37 @@ function buildTargets(
   //   }
 
   return targets;
+}
+
+function startTarget(
+  options: ReactRouterPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  outputs: string[],
+  projectRoot: string
+): TargetConfiguration {
+  return {
+    command: `react-router start`,
+    cache: true,
+    options: { cwd: joinPathFragments(projectRoot) },
+    metadata: {
+      technologies: ["react-router"],
+      help: {
+        command: `${pmc.exec} react-router --help`,
+        example: {
+          options: {
+            strict: true,
+          },
+        },
+      },
+    },
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      {
+        externalDependencies: ["react-router"],
+      },
+    ],
+    outputs,
+  };
 }
 
 function devTarget(
@@ -158,7 +193,7 @@ function devTarget(
   };
 }
 
-function typeCheckTarget(
+function typecheckTarget(
   options: ReactRouterPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
@@ -224,5 +259,5 @@ function buildTarget(
 function getOutputs(workspaceRoot: string, projectRoot: string, configPath: string) {
   //const cdkConfig = JSON.parse(readFileSync(configPath, "utf-8"));
   const outputs: string[] = [];
-  return outputs; //.concat([join("{projectRoot}", cdkConfig.output ?? "cdk.out")]);
+  return outputs.concat([join("{projectRoot}", ".react-router")]);
 }

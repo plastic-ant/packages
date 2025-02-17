@@ -17,6 +17,15 @@
     },
     {
       "path": "./packages/nx-cdk"
+    },
+    {
+      "path": "./packages/nx-react-router"
+    },
+    {
+      "path": "./packages/nx-cdk-local"
+    },
+    {
+      "path": "./packages/nx-dvc"
     }
   ]
 }

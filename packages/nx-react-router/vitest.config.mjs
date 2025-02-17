@@ -9,7 +9,7 @@ export default defineConfig({
     include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     reporters: ["default"],
     coverage: {
-      reportsDirectory: "../../coverage/packages/nx-cdk",
+      reportsDirectory: "../../coverage/packages/nx-react-router",
       provider: "v8",
     },
   },
