@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.8.10](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.9...nx-cdk@0.8.10) (2025-03-26)
+
+
+### Bug Fixes
+
+* **repo:** vitest coverage ([faea3fe](https://github.com/plastic-ant/packages/commit/faea3fe115e29c60c990dcf1fef991d55e9cb20e))
+
 ## [0.8.9](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.8...nx-cdk@0.8.9) (2025-01-28)
 
 ## [0.8.8](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.7...nx-cdk@0.8.8) (2025-01-21)

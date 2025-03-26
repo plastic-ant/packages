@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-cdk",
-  "version": "0.8.9",
+  "version": "0.8.10",
   "license": "MIT",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",
