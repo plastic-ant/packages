@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-strapi",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "license": "MIT",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",

@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.14](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.13...nx-strapi@0.0.14) (2025-03-26)
+
+
+### Bug Fixes
+
+* **repo:** vitest coverage ([faea3fe](https://github.com/plastic-ant/packages/commit/faea3fe115e29c60c990dcf1fef991d55e9cb20e))
+
 ## [0.0.13](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.12...nx-strapi@0.0.13) (2025-01-28)
 
 ## [0.0.12](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.11...nx-strapi@0.0.12) (2025-01-21)
