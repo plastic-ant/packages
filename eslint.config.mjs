@@ -9,7 +9,7 @@ export default [
   ...nx.configs["flat/typescript"],
   ...nx.configs["flat/javascript"],
   {
-    ignores: ["**/dist/**", "**/node_modules/**"],
+    ignores: ["**/dist/**", "**/node_modules/**", "**/vitest.config.*.*"],
   },
   {
     languageOptions: {

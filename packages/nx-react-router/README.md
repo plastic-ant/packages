@@ -4,13 +4,12 @@
 [![Npm package version](https://badgen.net/npm/v/@plastic-ant/nx-react-router)](https://npmjs.com/package/@plastic-ant/nx-cdk)
 [![Downloads](https://img.shields.io/npm/dm/@plastic-ant/nx-react-router.svg)](https://npmjs.com/package/@plastic-ant/nx-cdk)
 
-An Nx (Project Crystal) plugin for developing with the [react-router](reactrouter.com)
+An Nx (Project Crystal) plugin for developing with the [react-router >= v7](reactrouter.com)
 
 ## Table of Contents
 
 - [Install](#install)
 - [Usage](#usage)
-- [Example App](https://github.com/plastic-ant/packages/tree/main/examples/nx-react-router-app)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -33,13 +32,33 @@ For using the inferred tasks (Project Crystal) add the plugin to your `nx.json` 
     {
       "plugin": "@plastic-ant/nx-react-router",
       "options": {
-          buildTargetName  (optional) generated target synth, default rr-build
-          devTargetName    (optional) generated target deploy, default rr-dev
-          startTargetName    (optional) generated target deploy, default rr-start
-          typecheckTargetName    (optional) generated target deploy, default rr-typecheck
+          buildTargetName  (optional) generated target build, default rr-build
+          devTargetName    (optional) generated target dev, default rr-dev
+          startTargetName    (optional) generated target start, default rr-start
+          typegenTargetName    (optional) generated target typegen, default rr-typegen
        }
     }
 ]
+```
+
+Included executors
+
+```
+"targets": {
+      "build": {
+        "executor": "@plastic-ant/nx-react-router:build",
+        "options": {}
+      },
+      "dev": {
+        "executor": "@plastic-ant/nx-react-router:dev",
+        "options": {}
+      },
+      "typegen": {
+        "executor": "@plastic-ant/nx-react-router:typegen",
+        "options": {}
+      },
+    }
+    ...
 ```
 
 ## License

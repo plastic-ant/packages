@@ -1,3 +1,19 @@
 {
-  "executors": {}
+  "executors": {
+    "build": {
+      "implementation": "./dist/src/executors/build/index",
+      "schema": "./dist/src/executors/build/schema.json",
+      "description": "build executor"
+    },
+    "dev": {
+      "implementation": "./dist/src/executors/dev/index",
+      "schema": "./dist/src/executors/dev/schema.json",
+      "description": "dev executor"
+    },
+    "typegen": {
+      "implementation": "./dist/src/executors/typegen/index",
+      "schema": "./dist/src/executors/typegen/schema.json",
+      "description": "typegen executor"
+    }
+  }
 }

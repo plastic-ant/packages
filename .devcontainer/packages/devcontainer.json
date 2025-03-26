@@ -86,7 +86,8 @@
           "**/.git": true,
           "**/CVS": true,
           "**/.DS_Store": true,
-          "**/Thumbs.db": true
+          "**/Thumbs.db": true,
+          "**/*.config.*.timestamp*": true
         },
         "search.exclude": {
           "**/.git": true,
@@ -107,7 +108,8 @@
           "**/.git/objects/**": true,
           "**/.git/subtree-cache/**": true,
           "**/node_modules/*/**": true,
-          "**/.hg/store/**": true
+          "**/.hg/store/**": true,
+          "**/*.config.*.timestamp*": true
         }
       },
       "extensions": [

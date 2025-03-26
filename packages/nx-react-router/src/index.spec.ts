@@ -43,7 +43,7 @@ describe("nx-react-router", () => {
         buildTargetName: "build-test",
         devTargetName: "dev-test",
         startTargetName: "start-test",
-        typecheckTargetName: "typecheck-test",
+        typegenTargetName: "typegen-test",
       },
       context
     );
@@ -86,9 +86,9 @@ describe("nx-react-router", () => {
                   options: { cwd: "proj" },
                   outputs: ["{projectRoot}/.react-router"],
                 },
-                "typecheck-test": {
+                "typegen-test": {
                   cache: true,
-                  command: "react-router typegen && tsc",
+                  command: "react-router typegen",
                   inputs: ["production", "^production", { externalDependencies: ["react-router"] }],
                   metadata: {
                     technologies: ["react-router"],
@@ -116,7 +116,7 @@ describe("nx-react-router", () => {
   //       buildTargetName: "build-test",
   //       devTargetName: "dev-test",
   //       startTargetName: "start-test",
-  //       typecheckTargetName: "typecheck-test",
+  //       typegenTargetName: "typegen-test",
   //     },
   //     context
   //   );

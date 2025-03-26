@@ -17,7 +17,7 @@ export default [
           checkObsoleteDependencies: true,
           checkVersionMismatches: true,
           buildTargets: ["build"],
-          ignoredDependencies: ["tslib", "react-router"],
+          ignoredDependencies: ["tslib", "react-router", "@react-router/dev"],
           ignoredFiles: ["**/*.config.{ts,js,cjs,mjs,mts}"],
         },
       ],

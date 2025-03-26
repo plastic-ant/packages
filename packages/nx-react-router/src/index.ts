@@ -13,6 +13,7 @@ import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash
 import { workspaceDataDirectory } from "nx/src/utils/cache-directory";
 import { InputDefinition } from "nx/src/config/workspace-json-project-json";
 import { hashObject } from "nx/src/hasher/file-hasher";
+import { createConfigLoader } from "@react-router/dev/config";
 
 const pmc = getPackageManagerCommand();
 
@@ -20,7 +21,7 @@ export interface ReactRouterPluginOptions {
   buildTargetName?: string;
   startTargetName?: string;
   devTargetName?: string;
-  typecheckTargetName?: string;
+  typegenTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
@@ -30,7 +31,7 @@ function normalizeOptions(options: ReactRouterPluginOptions | undefined) {
   options.buildTargetName ??= "rr-build";
   options.devTargetName ??= "rr-dev";
   options.startTargetName ??= "rr-start";
-  options.typecheckTargetName ??= "rr-typecheck";
+  options.typegenTargetName ??= "rr-typegen";
   return options;
 }
 
@@ -78,7 +79,7 @@ async function createNodesInternal(
   }
 
   const hash = await calculateHashForCreateNodes(projectRoot, options, context);
-  targetsCache[hash] ??= buildTargets(configFilePath, projectRoot, options, context);
+  targetsCache[hash] ??= await buildTargets(configFilePath, projectRoot, options, context);
 
   const targets = targetsCache[hash];
 
@@ -92,13 +93,13 @@ async function createNodesInternal(
   };
 }
 
-function buildTargets(
+async function buildTargets(
   configPath: string,
   projectRoot: string,
   options: ReactRouterPluginOptions,
   context: CreateNodesContext
 ) {
-  const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
+  const configOutputs = await getOutputs(context.workspaceRoot, projectRoot, configPath);
 
   const namedInputs = getNamedInputs(projectRoot, context);
 
@@ -108,8 +109,8 @@ function buildTargets(
     targets[options.buildTargetName] = buildTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
-  if (options.typecheckTargetName) {
-    targets[options.typecheckTargetName] = typecheckTarget(options, namedInputs, configOutputs, projectRoot);
+  if (options.typegenTargetName) {
+    targets[options.typegenTargetName] = typegenTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
   if (options.devTargetName) {
@@ -193,14 +194,14 @@ function devTarget(
   };
 }
 
-function typecheckTarget(
+function typegenTarget(
   options: ReactRouterPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
   projectRoot: string
 ): TargetConfiguration {
   return {
-    command: `react-router typegen && tsc`,
+    command: `react-router typegen`,
     cache: true,
     options: { cwd: joinPathFragments(projectRoot) },
     metadata: {
@@ -256,8 +257,11 @@ function buildTarget(
   };
 }
 
-function getOutputs(workspaceRoot: string, projectRoot: string, configPath: string) {
+async function getOutputs(workspaceRoot: string, projectRoot: string, configPath: string) {
   //const cdkConfig = JSON.parse(readFileSync(configPath, "utf-8"));
   const outputs: string[] = [];
+
+  const loader = await createConfigLoader();
+
   return outputs.concat([join("{projectRoot}", ".react-router")]);
 }

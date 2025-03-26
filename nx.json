@@ -46,6 +46,15 @@
       }
     },
     {
+      "plugin": "./packages/nx-react-router/src/index.ts",
+      "options": {
+        "buildTargetName": "build",
+        "startTargetName": "start",
+        "devTargetName": "dev",
+        "typecheckTargetName": "typecheck"
+      }
+    },
+    {
       "plugin": "@nx/vite/plugin",
       "options": {
         "testTargetName": "test"

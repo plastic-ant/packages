@@ -1,32 +1,21 @@
 {
   "name": "nx-react-router",
   "targets": {
-    // "version": {
-    //   "executor": "@jscutlery/semver:version",
-    //   "parallelism": false,
-    //   "options": {
-    //     "push": true,
-    //     "preset": "conventionalcommits",
-    //     "baseBranch": "main",
-    //     "tagPrefix": "{projectName}@",
-    //     "commitMessageFormat": "chore({projectName}): release version {version} [skip ci]",
-    //     "postTargets": ["build", "npm", "github"]
-    //   }
-    // },
-    // "github": {
-    //   "executor": "@jscutlery/semver:github",
-    //   "options": {
-    //     "tag": "{tag}",
-    //     "notes": "{notes}"
-    //   }
-    // },
-    // "npm": {
-    //   "executor": "ngx-deploy-npm:deploy",
-    //   "options": {
-    //     "access": "public",
-    //     "scope": "plastic-ant",
-    //     "distFolderPath": "{projectRoot}"
-    //   }
-    // }
+    "version": {},
+    "github": {},
+    "npm": {},
+    "prebuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/nx-react-router/src",
+        "commands": ["json2ts -i executors/build/schema.json -o executors/build/schema.d.ts --format"]
+      }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "assets": ["packages/nx-react-router/src/executors/build/schema.json"]
+      }
+    }
   }
 }
