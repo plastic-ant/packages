@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.2](https://github.com/plastic-ant/packages/compare/nx-dvc@0.0.1...nx-dvc@0.0.2) (2025-03-26)
+
+
+### Bug Fixes
+
+* **repo:** vitest coverage ([faea3fe](https://github.com/plastic-ant/packages/commit/faea3fe115e29c60c990dcf1fef991d55e9cb20e))
+
 ## 0.0.1 (2025-01-28)
 
 
