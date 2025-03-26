@@ -43,15 +43,13 @@
     "url": "https://buymeacoffee.com/plasticant"
   },
   "devDependencies": {
-    "@strapi/strapi": "^5.8.0",
-    "create-strapi": "^5.8.1"
+    "@strapi/strapi": "^5.8.0"
   },
   "dependencies": {
-    "@nx/devkit": "20.4.0",
-    "nx": "20.3.2"
+    "@nx/devkit": "20.6.4",
+    "nx": "20.6.4"
   },
   "peerDependencies": {
-    "@strapi/strapi": "^5.7.0",
-    "create-strapi": "^5.7.0"
+    "@strapi/strapi": "^5.7.0"
   }
 }
