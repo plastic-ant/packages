@@ -3,6 +3,8 @@
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
+coverage
+
 # compiled output
 dist
 tmp

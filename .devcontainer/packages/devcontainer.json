@@ -83,6 +83,7 @@
           "package.json": "json"
         },
         "files.exclude": {
+          "**/*.config.*.timestamp*": true,
           "**/.git": true,
           "**/CVS": true,
           "**/.DS_Store": true,

@@ -46,15 +46,15 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "aws-cdk": "^2.177.0",
-    "aws-cdk-lib": "^2.177.0",
-    "aws-cdk-local": "^2.19.1",
+    "aws-cdk": "^2.1006.0",
+    "aws-cdk-lib": "^2.185.0",
+    "aws-cdk-local": "^2.19.2",
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "20.4.0",
+    "@nx/devkit": "20.6.4",
     "change-case": "4.1.2",
-    "nx": "20.3.2"
+    "nx": "20.6.4"
   },
   "peerDependencies": {
     "aws-cdk": "^2.151.0",
