@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.13](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.12...nx-msbuild@0.0.13) (2025-04-08)
+
 ## [0.0.12](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.11...nx-msbuild@0.0.12) (2025-03-26)
 
 ## [0.0.11](https://github.com/plastic-ant/packages/compare/nx-msbuild@0.0.10...nx-msbuild@0.0.11) (2025-01-28)
