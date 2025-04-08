@@ -38,7 +38,7 @@
     "dotenv": "^16.4.7",
     "env-var": "^7.5.0",
     "openapi-client-axios": "^7.5.5",
-    "type-fest": "^4.38.0",
+    "type-fest": "^4.39.1",
     "urlcat": "^3.1.0"
   }
 }

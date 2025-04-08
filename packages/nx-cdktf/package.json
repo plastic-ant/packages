@@ -2,6 +2,7 @@
   "name": "@plastic-ant/nx-cdktf",
   "version": "0.8.1",
   "license": "MIT",
+  "description": "An Nx (Project Crystal) plugin for developing with the cdktf",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",
   "main": "./dist/src/index.js",
@@ -50,9 +51,9 @@
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "20.6.4",
+    "@nx/devkit": "20.7.1",
     "change-case": "4.1.2",
-    "nx": "20.6.4"
+    "nx": "20.7.1"
   },
   "peerDependencies": {
     "cdktf-cli": "^0.20.8"
