@@ -2,6 +2,7 @@
   "name": "@plastic-ant/nx-strapi",
   "version": "0.0.14",
   "license": "MIT",
+  "description": "An Nx (Project Crystal) plugin for developing with the Strapi CLI",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",
   "main": "./dist/src/index.js",
@@ -46,8 +47,8 @@
     "@strapi/strapi": "^5.8.0"
   },
   "dependencies": {
-    "@nx/devkit": "20.6.4",
-    "nx": "20.6.4"
+    "@nx/devkit": "20.7.1",
+    "nx": "20.7.1"
   },
   "peerDependencies": {
     "@strapi/strapi": "^5.7.0"

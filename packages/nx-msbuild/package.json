@@ -2,6 +2,7 @@
   "name": "@plastic-ant/nx-msbuild",
   "version": "0.0.12",
   "license": "MIT",
+  "description": "An Nx (Project Crystal) plugin for developing with the msbuild",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",
   "main": "./dist/src/index.js",
@@ -46,7 +47,7 @@
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "20.6.4",
-    "nx": "20.6.4"
+    "@nx/devkit": "20.7.1",
+    "nx": "20.7.1"
   }
 }

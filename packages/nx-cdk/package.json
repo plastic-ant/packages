@@ -2,6 +2,7 @@
   "name": "@plastic-ant/nx-cdk",
   "version": "0.8.10",
   "license": "MIT",
+  "description": "An Nx (Project Crystal) plugin for developing with the aws cdk",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",
   "main": "./dist/src/index.js",
@@ -45,16 +46,16 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "@aws-cdk/cli-lib-alpha": "2.1006.0-alpha.0",
-    "aws-cdk": "^2.1006.0",
-    "aws-cdk-lib": "^2.185.0",
+    "@aws-cdk/cli-lib-alpha": "2.1007.0-alpha.0",
+    "aws-cdk": "^2.1007.0",
+    "aws-cdk-lib": "^2.188.0",
     "json-schema-to-typescript": "^15.0.3",
     "typescript-json-schema": "0.65.1"
   },
   "dependencies": {
-    "@nx/devkit": "20.6.4",
+    "@nx/devkit": "20.7.1",
     "change-case": "4.1.2",
-    "nx": "20.6.4"
+    "nx": "20.7.1"
   },
   "peerDependencies": {
     "aws-cdk": "^2.151.0",
