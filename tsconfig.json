@@ -23,6 +23,12 @@
     },
     {
       "path": "./packages/nx-dvc"
+    },
+    {
+      "path": "./packages/nx-pixi-asset-pack"
+    },
+    {
+      "path": "./examples/nx-pixi-asset-pack-app"
     }
   ]
 }

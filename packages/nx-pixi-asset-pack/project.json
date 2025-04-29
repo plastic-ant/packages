@@ -1,0 +1,38 @@
+{
+  "name": "nx-pixi-asset-pack",
+  "targets": {
+    "prebuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/nx-pixi-asset-pack/src",
+        "commands": ["json2ts -i executors/pack/schema.json -o executors/pack/schema.d.ts"]
+      }
+    },
+    // "build": {
+    //   "executor": "@nx/js:tsc",
+    //   "options": {
+    //     "assets": ["packages/nx-pixi-asset-pack/src/executors/pack/schema.json"]
+    //   }
+    // }
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "options": {
+        "main": "packages/nx-pixi-asset-pack/src/index.ts",
+        "tsConfig": "packages/nx-pixi-asset-pack/tsconfig.lib.json",
+        "outputPath": "{projectRoot}/dist",
+        "format": ["esm", "cjs"]
+      }
+    }
+    // "build": {
+    //   "executor": "@nx/esbuild:esbuild",
+    //   "options": {
+    //     "main": "packages/nx-pixi-asset-pack/src/index.ts",
+    //     "tsConfig": "packages/nx-pixi-asset-pack/tsconfig.lib.json",
+    //     "outputPath": "{projectRoot}/dist",
+    //     "bundle": false,
+    //     "assets": ["packages/nx-pixi-asset-pack/src/executors/pack/schema.json"],
+    //     "format": ["esm", "cjs"]
+    //   }
+    // }
+  }
+}

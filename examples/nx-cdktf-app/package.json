@@ -47,14 +47,14 @@
     "node": ">=18.0"
   },
   "dependencies": {
-    "cdktf": "^0.20.11",
+    "cdktf": "^0.20.12",
     "constructs": "^10.4.2"
   },
   "devDependencies": {
-    "cdktf-cli": "^0.20.11",
+    "cdktf-cli": "^0.20.12",
     "jest": "^29.4.1",
-    "ts-jest": "^29.3.1",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }
