@@ -3,18 +3,12 @@
   "version": "0.1.1",
   "license": "MIT",
   "description": "An Nx (Project Crystal) plugin for developing with Pixi AssetPack",
-  "type": "module",
+  "type": "commonjs",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/src/index.js",
+  "module": "./dist/index.js",
   "engines": {
     "node": ">=18"
-  },
-  "types": "dist/index.cjs.d.ts",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.esm.d.ts",
-      "import": "./dist/index.esm.js"
-    }
   },
   "repository": {
     "type": "git",
