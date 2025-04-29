@@ -1,18 +1,27 @@
 {
-  "name": "@plastic-ant/nx-cdk",
-  "version": "0.8.11",
+  "name": "@plastic-ant/nx-pixi-asset-pack",
+  "version": "0.1.0",
   "license": "MIT",
-  "description": "An Nx (Project Crystal) plugin for developing with the aws cdk",
-  "type": "commonjs",
-  "types": "./dist/src/index.d.ts",
-  "main": "./dist/src/index.js",
-  "module": "./dist/index.js",
+  "description": "An Nx (Project Crystal) plugin for developing with Pixi AssetPack",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "types": "dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/plastic-ant/packages.git",
-    "directory": "packages/nx-cdk"
+    "directory": "packages/nx-pixi-asset-pack"
   },
-  "homepage": "https://github.com/plastic-ant/packages/tree/main/packages/nx-cdk#readme",
+  "homepage": "https://github.com/plastic-ant/packages/tree/main/packages/nx-pixi-asset-pack#readme",
   "bugs": {
     "url": "https://github.com/plastic-ant/packages/issues"
   },
@@ -20,9 +29,8 @@
     "nx",
     "crystal",
     "plugin",
-    "aws",
-    "cdk",
-    "cloud"
+    "assetpack",
+    "pixi"
   ],
   "files": [
     "dist",
@@ -30,6 +38,7 @@
     "LICENSE",
     "executors.json",
     "generators.json",
+    "!**/*.tsbuildinfo",
     "!**/*.map"
   ],
   "publishConfig": {
@@ -47,19 +56,16 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "@aws-cdk/cli-lib-alpha": "2.1012.0-alpha.0",
-    "aws-cdk": "^2.1012.0",
-    "aws-cdk-lib": "^2.192.0",
+    "nx": "^20.8.1",
+    "@nx/devkit": "^20.8.1",
+    "@assetpack/core": "^1.4.0",
     "json-schema-to-typescript": "^15.0.3",
     "typescript-json-schema": "0.65.1"
   },
-  "dependencies": {
-    "@nx/devkit": "20.8.1",
-    "change-case": "4.1.2",
-    "nx": "20.8.1"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "aws-cdk": "^2.151.0",
-    "aws-cdk-lib": "^2.151.0"
+    "nx": "^20.8.1",
+    "@nx/devkit": "^20.8.1",
+    "@assetpack/core": "^1.4.0"
   }
 }

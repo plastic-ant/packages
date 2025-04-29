@@ -61,6 +61,7 @@
     "./packages/nx-cdk/src/index.ts",
     "./packages/nx-cdktf/src/index.ts",
     "./packages/nx-strapi/src/index.ts",
+    "./packages/nx-pixi-asset-pack/src/index.ts",
     "./packages/nx-msbuild/src/index.ts"
   ],
   "targetDefaults": {
@@ -72,6 +73,11 @@
     "build": {
       "cache": true,
       "dependsOn": ["prebuild", "^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@nx/esbuild:esbuild": {
+      "cache": true,
+      "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
     "@nx/js:tsc": {

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "PackExecutorOptions",
+  "description": "Options to use with asset pack cli",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "postTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "watch": {
+      "type": "boolean"
+    }
+  }
+}

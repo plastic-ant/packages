@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "pack": {
+      "implementation": "./dist/src/executors/pack/index",
+      "schema": "./dist/src/executors/pack/schema.json",
+      "description": "assetpack executor"
+    }
+  }
+}
