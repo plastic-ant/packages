@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.5](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.4...nx-pixi-asset-pack@0.1.5) (2025-04-30)
+
+
+### Bug Fixes
+
+* **nx-pixi-asset-pack:** removed export keywords ([fb23b87](https://github.com/plastic-ant/packages/commit/fb23b878d037d75f6908649f09ec086e1ffeffe1))
+
 ## [0.1.4](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.3...nx-pixi-asset-pack@0.1.4) (2025-04-30)
 
 
