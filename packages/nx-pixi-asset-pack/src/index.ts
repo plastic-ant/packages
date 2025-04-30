@@ -13,6 +13,8 @@ import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash
 import { workspaceDataDirectory } from "nx/src/utils/cache-directory.js";
 import { InputDefinition } from "nx/src/config/workspace-json-project-json.js";
 import { hashObject } from "nx/src/hasher/file-hasher.js";
+import { pathToFileURL } from "node:url";
+import { AssetPackConfig } from "@assetpack/core";
 
 const pmc = getPackageManagerCommand();
 
@@ -52,6 +54,9 @@ export const createNodesV2: CreateNodesV2<AssetPackPluginOptions> = [
         options,
         context,
       );
+    } catch (error) {
+      console.error(error);
+      return [];
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
     }
@@ -125,11 +130,39 @@ function target(
   };
 }
 
+let importFresh: typeof import("import-fresh");
+
+export const loadJsSync = function loadJsSync(filepath: string) {
+  if (importFresh === undefined) {
+    importFresh = require("import-fresh");
+  }
+
+  return importFresh(filepath);
+};
+
+export const loadJs = async function loadJs(filepath: string) {
+  try {
+    const { href } = pathToFileURL(filepath);
+    return (await import(href)).default;
+  } catch (error) {
+    try {
+      return loadJsSync(filepath);
+    } catch (requireError: any) {
+      if (
+        requireError.code === "ERR_REQUIRE_ESM" ||
+        (requireError instanceof SyntaxError &&
+          requireError.toString().includes("Cannot use import statement outside a module"))
+      ) {
+        throw error;
+      }
+
+      throw requireError;
+    }
+  }
+};
+
 async function getOutputs(workspaceRoot: string, projectRoot: string, configPath: string) {
-  const importConfig = await import(configPath);
-  const config = importConfig.default;
-  return [
-    config.output ? join("{projectRoot}", config.output) : "{projectRoot}/public",
-    config.cacheLocation ? join("{projectRoot}", config.cacheLocation) : "{projectRoot}/.assetpack",
-  ];
+  //const config = (await import(resolve(configPath))).default;
+  const config = (await loadJs(configPath)) as AssetPackConfig;
+  return [config.output ?? "{projectRoot}/public", config.cacheLocation ?? "{projectRoot}/.assetpack"];
 }

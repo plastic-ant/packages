@@ -7,7 +7,7 @@ const runExecutor: PromiseExecutor<PackExecutorOptions> = async (options, contex
   if (context.projectName) {
     const projectDir = context.projectsConfigurations.projects[context.projectName].root;
 
-    const cmd = pmc.exec + "assetpack" + options.watch ? "-w" : "";
+    const cmd = `${pmc.exec} assetpack ${options.watch ? " -w" : ""}`;
 
     const result = await runCommandsImpl(
       {

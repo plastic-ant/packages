@@ -17,7 +17,7 @@ export default [
           checkObsoleteDependencies: true,
           checkVersionMismatches: true,
           buildTargets: ["build"],
-          ignoredDependencies: ["tslib", "@assetpack/core"],
+          ignoredDependencies: ["tslib", "@assetpack/core", "import-fresh"],
           ignoredFiles: ["**/*.config.{ts,js,cjs,mjs,mts}"],
         },
       ],

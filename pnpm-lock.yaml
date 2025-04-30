@@ -462,6 +462,10 @@ importers:
         version: 15.0.4
 
   packages/nx-pixi-asset-pack:
+    dependencies:
+      import-fresh:
+        specifier: ^3.3.1
+        version: 3.3.1
     devDependencies:
       '@assetpack/core':
         specifier: ^1.4.0
