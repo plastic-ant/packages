@@ -132,7 +132,7 @@ function target(
 
 let importFresh: typeof import("import-fresh");
 
-export const loadJsSync = function loadJsSync(filepath: string) {
+const loadJsSync = function loadJsSync(filepath: string) {
   if (importFresh === undefined) {
     importFresh = require("import-fresh");
   }
@@ -140,7 +140,7 @@ export const loadJsSync = function loadJsSync(filepath: string) {
   return importFresh(filepath);
 };
 
-export const loadJs = async function loadJs(filepath: string) {
+const loadJs = async function loadJs(filepath: string) {
   try {
     const { href } = pathToFileURL(filepath);
     return (await import(href)).default;
