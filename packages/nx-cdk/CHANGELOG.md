@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.9.0](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.13...nx-cdk@0.9.0) (2025-06-05)
+
+
+### Features
+
+* **nx-cdk:** added diff target ([85dfc5b](https://github.com/plastic-ant/packages/commit/85dfc5b35a1b1af26c454e46229ffc1ba78eb907))
+
 ## [0.8.13](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.12...nx-cdk@0.8.13) (2025-06-05)
 
 ## [0.8.12](https://github.com/plastic-ant/packages/compare/nx-cdk@0.8.11...nx-cdk@0.8.12) (2025-04-29)
