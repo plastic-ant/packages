@@ -64,6 +64,7 @@ describe("nx-cdk", () => {
     const results = await createNodesFunction(
       ["proj/cdk.json"],
       {
+        diffTargetName: "diff-test",
         destroyTargetName: "destroy-test",
         synthTargetName: "synth-test",
         deployTargetName: "deploy-test",
@@ -80,6 +81,16 @@ describe("nx-cdk", () => {
             proj: {
               root: "proj",
               targets: {
+                "diff-test": {
+                  cache: true,
+                  command: "cdk diff",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    technologies: ["cdk"],
+                  },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.out"],
+                },
                 "destroy-test": {
                   cache: true,
                   command: "cdk destroy",
