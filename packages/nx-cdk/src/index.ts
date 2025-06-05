@@ -42,6 +42,7 @@ export interface CdkAwsPluginOptions {
   deployTargetName?: string;
   bootstrapTargetName?: string;
   destroyTargetName?: string;
+  diffTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
@@ -52,6 +53,7 @@ function normalizeOptions(options: CdkAwsPluginOptions | undefined) {
   options.deployTargetName ??= "cdk-deploy";
   options.bootstrapTargetName ??= "cdk-bootstrap";
   options.destroyTargetName ??= "cdk-destroy";
+  options.diffTargetName ??= "cdk-diff";
   return options;
 }
 
@@ -151,6 +153,10 @@ function buildTargets(
     targets[options.destroyTargetName] = destroyTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
+  if (options.diffTargetName) {
+    targets[options.diffTargetName] = diffTarget(options, namedInputs, configOutputs, projectRoot);
+  }
+
   return targets;
 }
 
@@ -247,6 +253,29 @@ function destroyTarget(
 ): TargetConfiguration {
   return {
     command: `cdk destroy`,
+    cache: true,
+    options: { cwd: joinPathFragments(projectRoot) },
+    metadata: {
+      technologies: ["cdk"],
+    },
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      {
+        externalDependencies: ["aws-cdk"],
+      },
+    ],
+    outputs,
+  };
+}
+
+function diffTarget(
+  options: CdkAwsPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  outputs: string[],
+  projectRoot: string,
+): TargetConfiguration {
+  return {
+    command: `cdk diff`,
     cache: true,
     options: { cwd: joinPathFragments(projectRoot) },
     metadata: {
