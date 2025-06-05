@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-cdk",
-  "version": "0.8.12",
+  "version": "0.8.13",
   "license": "MIT",
   "description": "An Nx (Project Crystal) plugin for developing with the aws cdk",
   "type": "commonjs",
