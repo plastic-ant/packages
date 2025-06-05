@@ -13,19 +13,7 @@ const assetPackConfig = {
   cacheLocation: "./.assetpack-test",
   logLevel: "info",
   pipes: [],
-  assetSettings: [
-    {
-      files: ["**/*.png"],
-      settings: {
-        compress: {
-          jpg: true,
-          png: true,
-          webp: false,
-          avif: true,
-        },
-      },
-    },
-  ],
+  assetSettings: [],
 };
 
 // vi.mock("node:fs", async () => {
