@@ -37,8 +37,8 @@ describe("nx-cdk", () => {
           region: "us-east-2",
           account: "12345678",
         },
-        []
-      )
+        [],
+      ),
     ).toEqual("--region=us-east-2 --account=12345678 --all");
   });
 
@@ -49,8 +49,8 @@ describe("nx-cdk", () => {
           region: "us-east-2",
           account: "12345678",
         },
-        ["test-1", "test-2"]
-      )
+        ["test-1", "test-2"],
+      ),
     ).toEqual("--region=us-east-2 --account=12345678 test-1 test-2");
   });
 
@@ -63,8 +63,13 @@ describe("nx-cdk", () => {
 
     const results = await createNodesFunction(
       ["proj/cdk.json"],
-      { synthTargetName: "synth-test", deployTargetName: "deploy-test", bootstrapTargetName: "bootstrap-test" },
-      context
+      {
+        destroyTargetName: "destroy-test",
+        synthTargetName: "synth-test",
+        deployTargetName: "deploy-test",
+        bootstrapTargetName: "bootstrap-test",
+      },
+      context,
     );
 
     expect(results).toMatchObject([
@@ -75,6 +80,16 @@ describe("nx-cdk", () => {
             proj: {
               root: "proj",
               targets: {
+                "destroy-test": {
+                  cache: true,
+                  command: "cdk destroy",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: {
+                    technologies: ["cdk"],
+                  },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.out"],
+                },
                 "bootstrap-test": {
                   cache: true,
                   command: "cdk bootstrap",
@@ -140,7 +155,7 @@ describe("nx-cdk", () => {
         deployTargetName: "deploy-test",
         bootstrapTargetName: "bootstrap-test",
       },
-      context
+      context,
     );
 
     expect(results).toMatchObject([

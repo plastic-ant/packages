@@ -22,7 +22,7 @@ const pmc = getPackageManagerCommand();
 
 export function makeOptionsString(
   options: BootstrapExecutorOptions | Omit<DeployExecutorOptions | SynthExecutorOptions, "stacks">,
-  stacks?: string[]
+  stacks?: string[],
 ) {
   const str = Object.entries(options)
     .filter(([k]) => k != "postTargets" && k != "stacks")
@@ -41,6 +41,7 @@ export interface CdkAwsPluginOptions {
   synthTargetName?: string;
   deployTargetName?: string;
   bootstrapTargetName?: string;
+  destroyTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
@@ -50,6 +51,7 @@ function normalizeOptions(options: CdkAwsPluginOptions | undefined) {
   options.synthTargetName ??= "cdk-synth";
   options.deployTargetName ??= "cdk-deploy";
   options.bootstrapTargetName ??= "cdk-bootstrap";
+  options.destroyTargetName ??= "cdk-destroy";
   return options;
 }
 
@@ -75,7 +77,7 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
           createNodesInternal(configFile, normalizeOptions(options), context, targetsCache),
         configFiles,
         options,
-        context
+        context,
       );
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
@@ -97,7 +99,7 @@ async function createNodesInternal(
   configFilePath: string,
   options: CdkAwsPluginOptions,
   context: CreateNodesContext,
-  targetsCache: Record<string, Record<string, TargetConfiguration>>
+  targetsCache: Record<string, Record<string, TargetConfiguration>>,
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
@@ -125,7 +127,7 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: CdkAwsPluginOptions,
-  context: CreateNodesContext
+  context: CreateNodesContext,
 ) {
   const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
 
@@ -145,6 +147,10 @@ function buildTargets(
     targets[options.bootstrapTargetName] = bootstrapTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
+  if (options.destroyTargetName) {
+    targets[options.destroyTargetName] = destroyTarget(options, namedInputs, configOutputs, projectRoot);
+  }
+
   return targets;
 }
 
@@ -152,7 +158,7 @@ function synthTarget(
   options: CdkAwsPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: `cdk synth`,
@@ -183,7 +189,7 @@ function deployTarget(
   options: CdkAwsPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: `cdk deploy`,
@@ -214,10 +220,33 @@ function bootstrapTarget(
   options: CdkAwsPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: `cdk bootstrap`,
+    cache: true,
+    options: { cwd: joinPathFragments(projectRoot) },
+    metadata: {
+      technologies: ["cdk"],
+    },
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      {
+        externalDependencies: ["aws-cdk"],
+      },
+    ],
+    outputs,
+  };
+}
+
+function destroyTarget(
+  options: CdkAwsPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  outputs: string[],
+  projectRoot: string,
+): TargetConfiguration {
+  return {
+    command: `cdk destroy`,
     cache: true,
     options: { cwd: joinPathFragments(projectRoot) },
     metadata: {

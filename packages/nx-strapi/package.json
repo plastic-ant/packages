@@ -47,8 +47,8 @@
     "@strapi/strapi": "^5.12.6"
   },
   "dependencies": {
-    "@nx/devkit": "20.8.1",
-    "nx": "20.8.1"
+    "@nx/devkit": "21.1.2",
+    "nx": "21.1.2"
   },
   "peerDependencies": {
     "@strapi/strapi": "^5.7.0"

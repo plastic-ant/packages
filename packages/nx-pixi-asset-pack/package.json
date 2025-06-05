@@ -49,18 +49,18 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "nx": "^20.8.1",
-    "@nx/devkit": "^20.8.1",
     "@assetpack/core": "^1.4.0",
+    "@nx/devkit": "^21.1.2",
     "json-schema-to-typescript": "^15.0.3",
+    "nx": "^21.1.2",
     "typescript-json-schema": "0.65.1"
   },
   "dependencies": {
     "import-fresh": "^3.3.1"
   },
   "peerDependencies": {
-    "nx": "^20.8.1",
-    "@nx/devkit": "^20.8.1",
-    "@assetpack/core": "^1.4.0"
+    "@assetpack/core": "^1.4.0",
+    "@nx/devkit": "21.1.2",
+    "nx": "21.1.2"
   }
 }
