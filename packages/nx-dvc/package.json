@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-dvc",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "type": "commonjs",
   "types": "./dist/src/index.d.ts",
