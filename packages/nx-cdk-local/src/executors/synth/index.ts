@@ -15,11 +15,12 @@ const runExecutor: PromiseExecutor<SynthExecutorOptions> = async (options, conte
     const result = await runCommands(
       {
         cwd: projectDir,
+        envFile: options.envFile,
         color: true,
         command: `cdklocal synth ${options.stacks?.join(" ") ?? ""} ${optionsString}`,
         __unparsed__: [],
       },
-      context
+      context,
     );
 
     if (result.success && options.postTargets) {
@@ -30,7 +31,7 @@ const runExecutor: PromiseExecutor<SynthExecutorOptions> = async (options, conte
             command: `nx run ${postTarget}`,
             __unparsed__: [],
           },
-          context
+          context,
         );
       }
     }

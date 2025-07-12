@@ -4,13 +4,20 @@
   "description": "",
   "type": "object",
   "additionalProperties": false,
-  "required": ["region", "account"],
+  "required": [
+    "region",
+    "account"
+  ],
   "properties": {
     "postTargets": {
       "type": "array",
       "items": {
         "type": "string"
       }
+    },
+    "envFile": {
+      "type": "string",
+      "x-completion-type": "file"
     },
     "region": {
       "type": "string"

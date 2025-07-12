@@ -12,6 +12,10 @@
         "type": "string"
       }
     },
+    "envFile": {
+      "type": "string",
+      "x-completion-type": "file"
+    },
     "assetMetadata": {
       "description": "Include \"aws:asset:*\" CloudFormation metadata for resources that use assets",
       "type": "boolean"

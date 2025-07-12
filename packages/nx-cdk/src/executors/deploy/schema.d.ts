@@ -12,6 +12,7 @@ export type HotswapMode = "fall-back" | "hotswap-only" | "full-deployment";
  */
 export interface DeployExecutorOptions {
   postTargets?: string[];
+  envFile?: string;
   /**
    * Include "aws:asset:*" CloudFormation metadata for resources that use assets
    */

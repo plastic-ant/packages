@@ -6,7 +6,6 @@ import { makeOptionsString } from "../..";
 export default async function executor(options: BootstrapExecutorOptions, context: ExecutorContext) {
   if (context.projectName) {
     const projectDir = context.projectsConfigurations.projects[context.projectName].root;
-
     const optionsString = makeOptionsString(options);
 
     // --cloudformation-execution-policies=arn:aws:iam::aws:policy/AdministratorAccess
@@ -14,10 +13,11 @@ export default async function executor(options: BootstrapExecutorOptions, contex
       {
         cwd: projectDir,
         color: true,
+        envFile: options.envFile,
         command: `cdk bootstrap aws://${options.account}/${options.region} ${optionsString}`,
         __unparsed__: [],
       },
-      context
+      context,
     );
 
     if (result.success && options.postTargets) {
@@ -28,7 +28,7 @@ export default async function executor(options: BootstrapExecutorOptions, contex
             command: `nx run ${postTarget}`,
             __unparsed__: [],
           },
-          context
+          context,
         );
       }
     }

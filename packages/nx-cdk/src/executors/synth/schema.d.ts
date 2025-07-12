@@ -10,6 +10,7 @@
  */
 export interface SynthExecutorOptions {
   postTargets?: string[];
+  envFile?: string;
   /**
    * Include "aws:asset:*" CloudFormation metadata for resources that use assets
    */

@@ -8,12 +8,19 @@
   "definitions": {
     "RequireApproval": {
       "description": "In what scenarios should the CLI ask for approval",
-      "enum": ["any-change", "broadening", "never"],
+      "enum": [
+        "any-change",
+        "broadening",
+        "never"
+      ],
       "type": "string"
     },
     "StackActivityProgress": {
       "description": "Supported display modes for stack deployment activity",
-      "enum": ["bar", "events"],
+      "enum": [
+        "bar",
+        "events"
+      ],
       "type": "string"
     }
   },
@@ -23,6 +30,10 @@
       "items": {
         "type": "string"
       }
+    },
+    "envFile": {
+      "type": "string",
+      "x-completion-type": "file"
     },
     "app": {
       "description": "Command-line for executing your app or a cloud assembly directory e.g. 'node bin/my-app.js'",

@@ -50,9 +50,9 @@
   "executors": "./executors.json",
   "devDependencies": {
     "@assetpack/core": "^1.4.0",
-    "@nx/devkit": "^21.2.1",
+    "@nx/devkit": "^21.2.3",
     "json-schema-to-typescript": "^15.0.3",
-    "nx": "^21.2.1",
+    "nx": "^21.2.3",
     "typescript-json-schema": "0.65.1"
   },
   "dependencies": {

@@ -14,10 +14,11 @@ const runExecutor: PromiseExecutor<DeployExecutorOptions> = async (options, cont
       {
         cwd: projectDir,
         color: true,
+        envFile: options.envFile,
         command: `cdk deploy ${optionsString}`,
         __unparsed__: [],
       },
-      context
+      context,
     );
 
     if (result.success && options.postTargets) {
@@ -32,7 +33,7 @@ const runExecutor: PromiseExecutor<DeployExecutorOptions> = async (options, cont
             command: `nx run ${target}`,
             __unparsed__: [],
           },
-          context
+          context,
         );
       }
     }

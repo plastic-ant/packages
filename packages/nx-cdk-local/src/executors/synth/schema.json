@@ -12,6 +12,10 @@
         "type": "string"
       }
     },
+    "envFile": {
+      "type": "string",
+      "x-completion-type": "file"
+    },
     "app": {
       "description": "Command-line for executing your app or a cloud assembly directory e.g. 'node bin/my-app.js'",
       "type": "string"
