@@ -60,7 +60,7 @@
   },
   "peerDependencies": {
     "@assetpack/core": "^1.4.0",
-    "@nx/devkit": "21.2.1",
-    "nx": "21.2.1"
+    "@nx/devkit": "21.2.3",
+    "nx": "21.2.3"
   }
 }
