@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-strapi",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "license": "MIT",
   "description": "An Nx (Project Crystal) plugin for developing with the Strapi CLI",
   "type": "commonjs",

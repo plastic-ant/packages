@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.19](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.18...nx-strapi@0.0.19) (2025-07-12)
+
 ## [0.0.18](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.17...nx-strapi@0.0.18) (2025-06-30)
 
 ## [0.0.17](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.16...nx-strapi@0.0.17) (2025-06-05)
