@@ -7,6 +7,7 @@
 
 export interface BootstrapExecutorOptions {
   postTargets?: string[];
+  envFile?: string;
   region: string;
   account: string;
   /**

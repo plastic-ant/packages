@@ -15,11 +15,12 @@ export default async function executor(options: BootstrapExecutorOptions, contex
     const result = await runCommands(
       {
         cwd: projectDir,
+        envFile: options.envFile,
         color: true,
         command: `cdklocal bootstrap aws://${options.account}/${options.region} ${optionsString}`,
         __unparsed__: [],
       },
-      context
+      context,
     );
 
     if (result.success && options.postTargets) {
@@ -30,7 +31,7 @@ export default async function executor(options: BootstrapExecutorOptions, contex
             command: `nx run ${postTarget}`,
             __unparsed__: [],
           },
-          context
+          context,
         );
       }
     }

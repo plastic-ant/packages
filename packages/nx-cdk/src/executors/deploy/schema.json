@@ -6,17 +6,28 @@
   "additionalProperties": false,
   "definitions": {
     "HotswapMode": {
-      "enum": ["fall-back", "hotswap-only", "full-deployment"],
+      "enum": [
+        "fall-back",
+        "hotswap-only",
+        "full-deployment"
+      ],
       "type": "string"
     },
     "RequireApproval": {
       "description": "In what scenarios should the CLI ask for approval",
-      "enum": ["never", "any-change", "broadening"],
+      "enum": [
+        "never",
+        "any-change",
+        "broadening"
+      ],
       "type": "string"
     },
     "StackActivityProgress": {
       "description": "Supported display modes for stack deployment activity",
-      "enum": ["bar", "events"],
+      "enum": [
+        "bar",
+        "events"
+      ],
       "type": "string"
     }
   },
@@ -27,6 +38,10 @@
       "items": {
         "type": "string"
       }
+    },
+    "envFile": {
+      "type": "string",
+      "x-completion-type": "file"
     },
     "assetMetadata": {
       "description": "Include \"aws:asset:*\" CloudFormation metadata for resources that use assets",

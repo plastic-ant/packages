@@ -7,6 +7,7 @@
 
 export interface DeployExecutorOptions {
   postTargets?: string[];
+  envFile?: string;
   /**
    * Command-line for executing your app or a cloud assembly directory e.g. 'node bin/my-app.js'
    */

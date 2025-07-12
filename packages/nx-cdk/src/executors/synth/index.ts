@@ -12,10 +12,11 @@ const runExecutor: PromiseExecutor<SynthExecutorOptions> = async (options, conte
       {
         cwd: projectDir,
         color: true,
+        envFile: options.envFile,
         command: `cdk synth ${optionsString}`,
         __unparsed__: [],
       },
-      context
+      context,
     );
 
     if (result.success && options.postTargets) {
@@ -26,7 +27,7 @@ const runExecutor: PromiseExecutor<SynthExecutorOptions> = async (options, conte
             command: `nx run ${postTarget}`,
             __unparsed__: [],
           },
-          context
+          context,
         );
       }
     }

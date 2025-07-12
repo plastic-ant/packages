@@ -20,10 +20,39 @@ import { SynthExecutorOptions } from "./executors/synth/schema";
 
 const pmc = getPackageManagerCommand();
 
+export function variableReplace(value: string, vars: typeof process.env | Record<string, string>): string;
+export function variableReplace<T>(value: object, vars: typeof process.env | Record<string, string>): T;
+
+/**
+ * Replace variables in an object or string
+ * @param {object | string} value
+ * @param {Record<string, string> | Record<string, string>} vars - ${}, $, {} are accepted.
+ * @return {string | object}
+ */
+export function variableReplace<T>(value: T | string, vars: typeof process.env | Record<string, string>): string | T {
+  if (typeof value === "string") {
+    return value
+      .replace(/\$(\w+)/g, (_, key) => vars[key] || "")
+      .replace(/\${(\w+)}/g, (_, key) => vars[key] || "")
+      .replace(/\{(\w+)}/g, (_, key) => vars[key] || "");
+    //   .replace(/'/g, '"');
+  }
+
+  return JSON.parse(
+    JSON.stringify(value)
+      .replace(/\$(\w+)/g, (_, key) => vars[key] || "")
+      .replace(/\${(\w+)}/g, (_, key) => vars[key] || "")
+      .replace(/\{(\w+)}/g, (_, key) => vars[key] || ""),
+    //  .replace(/'/g, '"')
+  ) as T;
+}
+
 export function makeOptionsString(
   options: BootstrapExecutorOptions | Omit<DeployExecutorOptions | SynthExecutorOptions, "stacks">,
   stacks?: string[],
 ) {
+  options = variableReplace(options, process.env);
+
   const str = Object.entries(options)
     .filter(([k]) => k != "postTargets" && k != "stacks")
     .map(([k, v]) => `--${paramCase(k)}=${v.toString()}`);
