@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.7](https://github.com/plastic-ant/packages/compare/nx-cdk-local@0.0.6...nx-cdk-local@0.0.7) (2025-07-12)
+
 ## [0.0.6](https://github.com/plastic-ant/packages/compare/nx-cdk-local@0.0.5...nx-cdk-local@0.0.6) (2025-06-30)
 
 ## [0.0.5](https://github.com/plastic-ant/packages/compare/nx-cdk-local@0.0.4...nx-cdk-local@0.0.5) (2025-06-05)
