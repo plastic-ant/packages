@@ -1,4 +1,4 @@
-import { CreateNodesV2, CreateNodesContext, createNodesFromFiles, CreateNodesResult } from "@nx/devkit";
+import { CreateNodesV2, CreateNodesContextV2, createNodesFromFiles, CreateNodesResult } from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile } from "@nx/devkit";
 import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
@@ -42,7 +42,7 @@ export const createNodesV2: CreateNodesV2<VersionPluginOptions> = [
           createNodesInternal(configFile, normalizeOptions(options), context, targetsCache),
         configFiles,
         options,
-        context
+        context,
       );
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
@@ -53,8 +53,8 @@ export const createNodesV2: CreateNodesV2<VersionPluginOptions> = [
 async function createNodesInternal(
   configFilePath: string,
   opts: VersionPluginOptions,
-  context: CreateNodesContext,
-  targetsCache: Record<string, Record<string, TargetConfiguration>>
+  context: CreateNodesContextV2,
+  targetsCache: Record<string, Record<string, TargetConfiguration>>,
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const options = normalizeOptions(opts);
@@ -83,7 +83,7 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: Required<VersionPluginOptions>,
-  context: CreateNodesContext
+  context: CreateNodesContextV2,
 ) {
   const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
   const namedInputs = getNamedInputs(projectRoot, context);
@@ -100,7 +100,7 @@ function versionTarget(
   options: Required<VersionPluginOptions>,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     executor: "@jscutlery/semver:version",
@@ -121,7 +121,7 @@ function gitHubTarget(
   options: Required<VersionPluginOptions>,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     executor: "@jscutlery/semver:github",
@@ -137,7 +137,7 @@ function npmTarget(
   options: Required<VersionPluginOptions>,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   const packageJson = JSON.parse(readFileSync(join(projectRoot, "package.json"), "utf-8"));
   return {

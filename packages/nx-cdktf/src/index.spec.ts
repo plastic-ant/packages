@@ -1,4 +1,4 @@
-import { CreateNodesContext } from "@nx/devkit";
+import { CreateNodesContextV2 } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
 
@@ -9,7 +9,7 @@ vi.mock("node:fs", async () => {
 
 describe("nx-cdktf", () => {
   const createNodesFunction = createNodesV2[1];
-  let context: CreateNodesContext;
+  let context: CreateNodesContextV2;
 
   beforeEach(async () => {
     context = {
@@ -38,7 +38,7 @@ describe("nx-cdktf", () => {
     const results = await createNodesFunction(
       ["proj/cdktf.json"],
       { synthTargetName: "synth-test", deployTargetName: "deploy-test", getTargetName: "get-test" },
-      context
+      context,
     );
 
     expect(results).toMatchObject([
@@ -101,7 +101,7 @@ describe("nx-cdktf", () => {
         deployTargetName: "deploy-test",
         getTargetName: "get-test",
       },
-      context
+      context,
     );
 
     expect(results).toMatchObject([

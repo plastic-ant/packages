@@ -1,5 +1,5 @@
 import { CreateNodesResult, getPackageManagerCommand } from "@nx/devkit";
-import { CreateNodesV2, CreateNodesContext, createNodesFromFiles } from "@nx/devkit";
+import { CreateNodesV2, CreateNodesContextV2, createNodesFromFiles } from "@nx/devkit";
 import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile } from "@nx/devkit";
 import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
@@ -65,7 +65,7 @@ export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
           createNodesInternal(configFile, normalizeOptions(options), context, targetsCache),
         configFiles,
         options,
-        context
+        context,
       );
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
@@ -76,8 +76,8 @@ export const createNodesV2: CreateNodesV2<CdktfPluginOptions> = [
 async function createNodesInternal(
   configFilePath: string,
   options: CdktfPluginOptions,
-  context: CreateNodesContext,
-  targetsCache: Record<string, Record<string, TargetConfiguration>>
+  context: CreateNodesContextV2,
+  targetsCache: Record<string, Record<string, TargetConfiguration>>,
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
@@ -107,7 +107,7 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: CdktfPluginOptions,
-  context: CreateNodesContext
+  context: CreateNodesContextV2,
 ) {
   //const absoluteConfigFilePath = joinPathFragments(context.workspaceRoot, configFilePath);
 
@@ -136,7 +136,7 @@ function synthTarget(
   options: CdktfPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     cache: true,
@@ -165,7 +165,7 @@ function deployTarget(
   options: CdktfPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     cache: true,
@@ -182,7 +182,7 @@ function deployTarget(
 function getTarget(
   options: CdktfPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     cache: false,

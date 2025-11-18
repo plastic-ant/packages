@@ -1,6 +1,6 @@
 import {
   CreateNodesV2,
-  CreateNodesContext,
+  CreateNodesContextV2,
   createNodesFromFiles,
   getPackageManagerCommand,
   CreateNodesResult,
@@ -66,7 +66,7 @@ export const createNodesV2: CreateNodesV2<AssetPackPluginOptions> = [
 async function createNodesInternal(
   configFilePath: string,
   options: AssetPackPluginOptions,
-  context: CreateNodesContext,
+  context: CreateNodesContextV2,
   targetsCache: Record<string, Record<string, TargetConfiguration>>,
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
@@ -95,7 +95,7 @@ async function buildTargets(
   configPath: string,
   projectRoot: string,
   options: AssetPackPluginOptions,
-  context: CreateNodesContext,
+  context: CreateNodesContextV2,
 ) {
   const configOutputs = await getOutputs(context.workspaceRoot, projectRoot, configPath);
 

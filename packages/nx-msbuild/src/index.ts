@@ -1,8 +1,8 @@
-import { CreateNodes, CreateNodesV2, CreateNodesContext, createNodesFromFiles, CreateNodesResult } from "@nx/devkit";
-import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile, logger } from "@nx/devkit";
+import { CreateNodesV2, CreateNodesContextV2, createNodesFromFiles, CreateNodesResult } from "@nx/devkit";
+import { joinPathFragments, readJsonFile, TargetConfiguration, writeJsonFile } from "@nx/devkit";
 import { dirname, join } from "node:path";
 import { getNamedInputs } from "@nx/devkit/src/utils/get-named-inputs";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { calculateHashForCreateNodes } from "@nx/devkit/src/utils/calculate-hash-for-create-nodes";
 import { workspaceDataDirectory } from "nx/src/utils/cache-directory";
 import { InputDefinition } from "nx/src/config/workspace-json-project-json";
@@ -44,7 +44,7 @@ export const createNodesV2: CreateNodesV2<MSBuildPluginOptions> = [
           createNodesInternal(configFile, normalizeOptions(options), context, targetsCache),
         configFiles,
         options,
-        context
+        context,
       );
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
@@ -55,8 +55,8 @@ export const createNodesV2: CreateNodesV2<MSBuildPluginOptions> = [
 async function createNodesInternal(
   configFilePath: string,
   options: MSBuildPluginOptions,
-  context: CreateNodesContext,
-  targetsCache: Record<string, Record<string, TargetConfiguration>>
+  context: CreateNodesContextV2,
+  targetsCache: Record<string, Record<string, TargetConfiguration>>,
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
@@ -86,7 +86,7 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: MSBuildPluginOptions,
-  context: CreateNodesContext
+  context: CreateNodesContextV2,
 ) {
   const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
 
@@ -105,7 +105,7 @@ function buildTarget(
   options: MSBuildPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: options.msbuildPath,
