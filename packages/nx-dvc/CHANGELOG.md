@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.8](https://github.com/plastic-ant/packages/compare/nx-dvc@0.0.7...nx-dvc@0.0.8) (2025-11-18)
+
 ## [0.0.7](https://github.com/plastic-ant/packages/compare/nx-dvc@0.0.6...nx-dvc@0.0.7) (2025-07-12)
 
 ## [0.0.6](https://github.com/plastic-ant/packages/compare/nx-dvc@0.0.5...nx-dvc@0.0.6) (2025-06-30)
