@@ -1,4 +1,4 @@
-import { addProjectConfiguration, CreateNodesContext, Tree, updateJson, writeJson } from "@nx/devkit";
+import { addProjectConfiguration, CreateNodesContextV2, Tree, updateJson, writeJson } from "@nx/devkit";
 import { createNodesV2 } from "./index.js";
 //import { vol } from "memfs";
 import { createTreeWithEmptyWorkspace } from "@nx/devkit/testing";
@@ -33,7 +33,7 @@ const assetPackConfig = {
 
 describe("nx-pixi-asset-pack", () => {
   const createNodesFunction = createNodesV2[1];
-  let context: CreateNodesContext;
+  let context: CreateNodesContextV2;
   let tempFs: TempFs;
   const cwd = process.cwd();
   let originalCacheProjectGraph: string | undefined;

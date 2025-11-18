@@ -1,4 +1,4 @@
-import { CreateNodesContext } from "@nx/devkit";
+import { CreateNodesContextV2 } from "@nx/devkit";
 import { createNodesV2, makeOptionsString } from "./index.js";
 import { vol } from "memfs";
 
@@ -9,7 +9,7 @@ vi.mock("node:fs", async () => {
 
 describe("nx-cdk", () => {
   const createNodesFunction = createNodesV2[1];
-  let context: CreateNodesContext;
+  let context: CreateNodesContextV2;
 
   beforeEach(async () => {
     context = {
@@ -64,6 +64,8 @@ describe("nx-cdk", () => {
     const results = await createNodesFunction(
       ["proj/cdk.json"],
       {
+        flagsTargetName: "flags-test",
+        listTargetName: "list-test",
         diffTargetName: "diff-test",
         destroyTargetName: "destroy-test",
         synthTargetName: "synth-test",
@@ -81,13 +83,27 @@ describe("nx-cdk", () => {
             proj: {
               root: "proj",
               targets: {
+                "flags-test": {
+                  cache: true,
+                  command: "cdk flags",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: { technologies: ["cdk"] },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.out"],
+                },
+                "list-test": {
+                  cache: true,
+                  command: "cdk list",
+                  inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
+                  metadata: { technologies: ["cdk"] },
+                  options: { cwd: "proj" },
+                  outputs: ["{projectRoot}/cdk.out"],
+                },
                 "diff-test": {
                   cache: true,
                   command: "cdk diff",
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
-                  metadata: {
-                    technologies: ["cdk"],
-                  },
+                  metadata: { technologies: ["cdk"] },
                   options: { cwd: "proj" },
                   outputs: ["{projectRoot}/cdk.out"],
                 },
@@ -95,9 +111,7 @@ describe("nx-cdk", () => {
                   cache: true,
                   command: "cdk destroy",
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
-                  metadata: {
-                    technologies: ["cdk"],
-                  },
+                  metadata: { technologies: ["cdk"] },
                   options: { cwd: "proj" },
                   outputs: ["{projectRoot}/cdk.out"],
                 },
@@ -105,9 +119,7 @@ describe("nx-cdk", () => {
                   cache: true,
                   command: "cdk bootstrap",
                   inputs: ["production", "^production", { externalDependencies: ["aws-cdk"] }],
-                  metadata: {
-                    technologies: ["cdk"],
-                  },
+                  metadata: { technologies: ["cdk"] },
                   options: { cwd: "proj" },
                   outputs: ["{projectRoot}/cdk.out"],
                 },

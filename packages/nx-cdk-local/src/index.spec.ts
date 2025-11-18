@@ -1,4 +1,4 @@
-import { CreateNodesContext } from "@nx/devkit";
+import { CreateNodesContextV2 } from "@nx/devkit";
 import { createNodesV2 } from "./index.js";
 import { vol } from "memfs";
 
@@ -9,7 +9,7 @@ vi.mock("node:fs", async () => {
 
 describe("nx-cdk-local", () => {
   const createNodesFunction = createNodesV2[1];
-  let context: CreateNodesContext;
+  let context: CreateNodesContextV2;
 
   beforeEach(async () => {
     context = {
@@ -40,7 +40,7 @@ describe("nx-cdk-local", () => {
     const results = await createNodesFunction(
       ["proj/cdk.json"],
       { synthTargetName: "synth-test", deployTargetName: "deploy-test", bootstrapTargetName: "bootstrap-test" },
-      context
+      context,
     );
 
     expect(results).toMatchObject([
@@ -116,7 +116,7 @@ describe("nx-cdk-local", () => {
         deployTargetName: "deploy-test",
         bootstrapTargetName: "bootstrap-test",
       },
-      context
+      context,
     );
 
     expect(results).toMatchObject([

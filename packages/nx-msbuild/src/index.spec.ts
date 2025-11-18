@@ -1,4 +1,4 @@
-import { CreateNodesContext } from "@nx/devkit";
+import { CreateNodesContextV2 } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
 
@@ -9,7 +9,7 @@ vi.mock("node:fs", async () => {
 
 describe("nx-msbuild", () => {
   const createNodesFunction = createNodesV2[1];
-  let context: CreateNodesContext;
+  let context: CreateNodesContextV2;
 
   beforeEach(async () => {
     context = {
@@ -38,7 +38,7 @@ describe("nx-msbuild", () => {
     const results = await createNodesFunction(
       ["proj/project.vcxproj"],
       { targetName: "msbuild-test", msbuildPath: "./msbuild" },
-      context
+      context,
     );
 
     expect(results).toMatchObject([

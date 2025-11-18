@@ -1,25 +1,32 @@
 {
   "migrations": [
     {
-      "version": "20.5.0-beta.2",
-      "description": "Install jiti as a devDependency to allow vite to parse TS postcss files.",
-      "implementation": "./src/migrations/update-20-5-0/install-jiti",
-      "package": "@nx/vite",
-      "name": "update-20-5-0-install-jiti"
+      "version": "22.0.0-beta.1",
+      "description": "Updates release version config based on the breaking changes in Nx v22",
+      "implementation": "./src/migrations/update-22-0-0/release-version-config-changes",
+      "package": "nx",
+      "name": "22-0-0-release-version-config-changes"
     },
     {
-      "version": "20.5.0-beta.3",
-      "description": "Update resolve.conditions to include defaults that are no longer provided by Vite.",
-      "implementation": "./src/migrations/update-20-5-0/update-resolve-conditions",
-      "package": "@nx/vite",
-      "name": "update-20-5-0-update-resolve-conditions"
+      "version": "22.0.0-beta.2",
+      "description": "Consolidates releaseTag* options into nested releaseTag object structure",
+      "implementation": "./src/migrations/update-22-0-0/consolidate-release-tag-config",
+      "package": "nx",
+      "name": "22-0-0-consolidate-release-tag-config"
     },
     {
-      "version": "20.5.0-beta.3",
-      "description": "Add vite config temporary files to the ESLint configuration ignore patterns if ESLint is used.",
-      "implementation": "./src/migrations/update-20-5-0/eslint-ignore-vite-temp-files",
-      "package": "@nx/vite",
-      "name": "eslint-ignore-vite-temp-files"
+      "version": "21.5.0-beta.2",
+      "description": "Migrate the legacy 'development' custom condition to a workspace-unique custom condition name.",
+      "factory": "./src/migrations/update-21-5-0/migrate-development-custom-condition",
+      "package": "@nx/js",
+      "name": "migrate-development-custom-condition"
+    },
+    {
+      "version": "22.0.0-beta.0",
+      "description": "Remove the deprecated `external` and `externalBuildTargets` options from the `@nx/js:swc` and `@nx/js:tsc` executors.",
+      "factory": "./src/migrations/update-22-0-0/remove-external-options-from-js-executors",
+      "package": "@nx/js",
+      "name": "remove-external-options-from-js-executors"
     }
   ]
 }

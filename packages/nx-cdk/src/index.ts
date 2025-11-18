@@ -1,6 +1,6 @@
 import {
   CreateNodesV2,
-  CreateNodesContext,
+  CreateNodesContextV2,
   createNodesFromFiles,
   getPackageManagerCommand,
   CreateNodesResult,
@@ -72,6 +72,8 @@ export interface CdkAwsPluginOptions {
   bootstrapTargetName?: string;
   destroyTargetName?: string;
   diffTargetName?: string;
+  listTargetName?: string;
+  flagsTargetName?: string;
 }
 
 type Targets = Awaited<ReturnType<typeof buildTargets>>;
@@ -83,6 +85,8 @@ function normalizeOptions(options: CdkAwsPluginOptions | undefined) {
   options.bootstrapTargetName ??= "cdk-bootstrap";
   options.destroyTargetName ??= "cdk-destroy";
   options.diffTargetName ??= "cdk-diff";
+  options.listTargetName ??= "cdk-list";
+  options.flagsTargetName ??= "cdk-flags";
   return options;
 }
 
@@ -129,7 +133,7 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
 async function createNodesInternal(
   configFilePath: string,
   options: CdkAwsPluginOptions,
-  context: CreateNodesContext,
+  context: CreateNodesContextV2,
   targetsCache: Record<string, Record<string, TargetConfiguration>>,
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
@@ -158,7 +162,7 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: CdkAwsPluginOptions,
-  context: CreateNodesContext,
+  context: CreateNodesContextV2,
 ) {
   const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
 
@@ -184,6 +188,14 @@ function buildTargets(
 
   if (options.diffTargetName) {
     targets[options.diffTargetName] = diffTarget(options, namedInputs, configOutputs, projectRoot);
+  }
+
+  if (options.listTargetName) {
+    targets[options.listTargetName] = listTarget(options, namedInputs, configOutputs, projectRoot);
+  }
+
+  if (options.flagsTargetName) {
+    targets[options.flagsTargetName] = flagsTarget(options, namedInputs, configOutputs, projectRoot);
   }
 
   return targets;
@@ -305,6 +317,52 @@ function diffTarget(
 ): TargetConfiguration {
   return {
     command: `cdk diff`,
+    cache: true,
+    options: { cwd: joinPathFragments(projectRoot) },
+    metadata: {
+      technologies: ["cdk"],
+    },
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      {
+        externalDependencies: ["aws-cdk"],
+      },
+    ],
+    outputs,
+  };
+}
+
+function listTarget(
+  options: CdkAwsPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  outputs: string[],
+  projectRoot: string,
+): TargetConfiguration {
+  return {
+    command: `cdk list`,
+    cache: true,
+    options: { cwd: joinPathFragments(projectRoot) },
+    metadata: {
+      technologies: ["cdk"],
+    },
+    inputs: [
+      ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
+      {
+        externalDependencies: ["aws-cdk"],
+      },
+    ],
+    outputs,
+  };
+}
+
+function flagsTarget(
+  options: CdkAwsPluginOptions,
+  namedInputs: { [inputName: string]: (string | InputDefinition)[] },
+  outputs: string[],
+  projectRoot: string,
+): TargetConfiguration {
+  return {
+    command: `cdk flags`,
     cache: true,
     options: { cwd: joinPathFragments(projectRoot) },
     metadata: {

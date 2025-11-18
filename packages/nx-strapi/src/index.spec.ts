@@ -1,4 +1,4 @@
-import { CreateNodesContext } from "@nx/devkit";
+import { CreateNodesContextV2 } from "@nx/devkit";
 import { createNodesV2 } from "./index";
 import { vol } from "memfs";
 
@@ -9,7 +9,7 @@ vi.mock("node:fs", async () => {
 
 describe("nx-strapi", () => {
   const createNodesFunction = createNodesV2[1];
-  let context: CreateNodesContext;
+  let context: CreateNodesContextV2;
 
   beforeEach(async () => {
     context = {
@@ -41,7 +41,7 @@ describe("nx-strapi", () => {
         developTargetName: "dev-test",
         startTargetName: "start-test",
       },
-      context
+      context,
     );
 
     expect(results).toMatchObject([

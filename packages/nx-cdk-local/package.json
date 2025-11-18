@@ -47,14 +47,14 @@
   "executors": "./executors.json",
   "devDependencies": {
     "aws-cdk": "^2.1020.2",
-    "aws-cdk-lib": "^2.204.0",
+    "aws-cdk-lib": "^2.225.0",
     "aws-cdk-local": "^3.0.1",
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "21.2.3",
+    "@nx/devkit": "22.0.4",
     "change-case": "4.1.2",
-    "nx": "21.2.3"
+    "nx": "22.0.4"
   },
   "peerDependencies": {
     "aws-cdk": "^2.151.0",

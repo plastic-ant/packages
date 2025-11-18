@@ -47,16 +47,16 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "devDependencies": {
-    "@aws-cdk/cli-lib-alpha": "2.1020.2-alpha.0",
+    "@aws-cdk/cli-lib-alpha": "2.1029.4-alpha.0",
     "aws-cdk": "^2.1020.2",
-    "aws-cdk-lib": "^2.204.0",
+    "aws-cdk-lib": "^2.225.0",
     "json-schema-to-typescript": "^15.0.3",
     "typescript-json-schema": "0.65.1"
   },
   "dependencies": {
-    "@nx/devkit": "21.2.3",
+    "@nx/devkit": "22.0.4",
     "change-case": "4.1.2",
-    "nx": "21.2.3"
+    "nx": "22.0.4"
   },
   "peerDependencies": {
     "aws-cdk": "^2.151.0",

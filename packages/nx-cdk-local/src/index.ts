@@ -1,6 +1,6 @@
 import {
   CreateNodesV2,
-  CreateNodesContext,
+  CreateNodesContextV2,
   createNodesFromFiles,
   getPackageManagerCommand,
   CreateNodesResult,
@@ -54,7 +54,7 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
           createNodesInternal(configFile, normalizeOptions(options), context, targetsCache),
         configFiles,
         options,
-        context
+        context,
       );
     } finally {
       writeTargetsToCache(cachePath, targetsCache);
@@ -75,8 +75,8 @@ export const createNodesV2: CreateNodesV2<CdkAwsPluginOptions> = [
 async function createNodesInternal(
   configFilePath: string,
   options: CdkAwsPluginOptions,
-  context: CreateNodesContext,
-  targetsCache: Record<string, Record<string, TargetConfiguration>>
+  context: CreateNodesContextV2,
+  targetsCache: Record<string, Record<string, TargetConfiguration>>,
 ): Promise<CreateNodesResult> {
   const projectRoot = dirname(configFilePath);
   const siblingFiles = readdirSync(join(context.workspaceRoot, projectRoot));
@@ -104,7 +104,7 @@ function buildTargets(
   configPath: string,
   projectRoot: string,
   options: CdkAwsPluginOptions,
-  context: CreateNodesContext
+  context: CreateNodesContextV2,
 ) {
   const configOutputs = getOutputs(context.workspaceRoot, projectRoot, configPath);
 
@@ -131,7 +131,7 @@ function synthTarget(
   options: CdkAwsPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: `cdk synth`,
@@ -162,7 +162,7 @@ function deployTarget(
   options: CdkAwsPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: `cdk deploy`,
@@ -193,7 +193,7 @@ function bootstrapTarget(
   options: CdkAwsPluginOptions,
   namedInputs: { [inputName: string]: (string | InputDefinition)[] },
   outputs: string[],
-  projectRoot: string
+  projectRoot: string,
 ): TargetConfiguration {
   return {
     command: `cdk bootstrap`,

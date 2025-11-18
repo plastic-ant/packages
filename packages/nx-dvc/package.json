@@ -45,7 +45,7 @@
     "json-schema-to-typescript": "^15.0.3"
   },
   "dependencies": {
-    "@nx/devkit": "21.2.3",
-    "nx": "21.2.3"
+    "@nx/devkit": "22.0.4",
+    "nx": "22.0.4"
   }
 }
