@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-pixi-asset-pack",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "license": "MIT",
   "description": "An Nx (Project Crystal) plugin for developing with Pixi AssetPack",
   "types": "./dist/src/index.d.ts",

@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.10](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.9...nx-pixi-asset-pack@0.1.10) (2025-11-18)
+
 ## [0.1.9](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.8...nx-pixi-asset-pack@0.1.9) (2025-07-12)
 
 ## [0.1.8](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.7...nx-pixi-asset-pack@0.1.8) (2025-06-30)
