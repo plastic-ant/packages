@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-msbuild",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "license": "MIT",
   "description": "An Nx (Project Crystal) plugin for developing with the msbuild",
   "type": "commonjs",
