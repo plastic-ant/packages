@@ -1,6 +1,6 @@
 {
   "name": "@plastic-ant/nx-cdktf",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "license": "MIT",
   "description": "An Nx (Project Crystal) plugin for developing with the cdktf",
   "type": "commonjs",

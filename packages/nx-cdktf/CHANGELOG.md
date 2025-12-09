@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.8.8](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.8.7...nx-cdktf@0.8.8) (2025-12-09)
+
+
+### Bug Fixes
+
+* **repo:** added parallel to the dynamic targets ([7f00f88](https://github.com/plastic-ant/packages/commit/7f00f8879baea39390e2d225c85e6829dba051aa))
+
 ## [0.8.7](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.8.6...nx-cdktf@0.8.7) (2025-11-18)
 
 ## [0.8.6](https://github.com/plastic-ant/packages/compare/nx-cdktf@0.8.5...nx-cdktf@0.8.6) (2025-07-12)
