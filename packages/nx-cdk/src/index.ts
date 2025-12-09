@@ -210,7 +210,7 @@ function synthTarget(
   return {
     command: `cdk synth`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdk"],
       help: {
@@ -241,7 +241,7 @@ function deployTarget(
   return {
     command: `cdk deploy`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdk"],
       help: {
@@ -272,7 +272,7 @@ function bootstrapTarget(
   return {
     command: `cdk bootstrap`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdk"],
     },
@@ -295,7 +295,7 @@ function destroyTarget(
   return {
     command: `cdk destroy`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdk"],
     },
@@ -318,7 +318,7 @@ function diffTarget(
   return {
     command: `cdk diff`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdk"],
     },
@@ -341,7 +341,7 @@ function listTarget(
   return {
     command: `cdk list`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdk"],
     },
@@ -364,7 +364,7 @@ function flagsTarget(
   return {
     command: `cdk flags`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdk"],
     },

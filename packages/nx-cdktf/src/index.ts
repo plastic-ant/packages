@@ -141,7 +141,7 @@ function synthTarget(
   return {
     cache: true,
     command: `cdktf synth`,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["cdktf"],
       help: {
@@ -170,7 +170,7 @@ function deployTarget(
   return {
     cache: true,
     command: `cdktf deploy`,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     inputs: [
       ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
       { externalDependencies: ["cdktf-cli"] },
@@ -187,7 +187,7 @@ function getTarget(
   return {
     cache: false,
     command: `cdktf get`,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     inputs: [
       ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
       { externalDependencies: ["cdktf-cli"] },

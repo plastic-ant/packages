@@ -122,7 +122,7 @@ function buildTarget(
   return {
     command: `strapi build`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["strapi"],
       help: {
@@ -153,7 +153,7 @@ function developTarget(
   return {
     command: `strapi develop`,
     cache: true,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     metadata: {
       technologies: ["strapi"],
       help: {
@@ -184,7 +184,7 @@ function startTarget(
   return {
     command: `strapi start`,
     cache: false,
-    options: { cwd: joinPathFragments(projectRoot) },
+    options: { cwd: joinPathFragments(projectRoot), parallel: false },
     inputs: [
       ...("production" in namedInputs ? ["production", "^production"] : ["default", "^default"]),
       {
