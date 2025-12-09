@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.9](https://github.com/plastic-ant/packages/compare/nx-cdk-local@0.0.8...nx-cdk-local@0.0.9) (2025-12-09)
+
+
+### Bug Fixes
+
+* **repo:** added parallel to the dynamic targets ([7f00f88](https://github.com/plastic-ant/packages/commit/7f00f8879baea39390e2d225c85e6829dba051aa))
+
 ## [0.0.8](https://github.com/plastic-ant/packages/compare/nx-cdk-local@0.0.7...nx-cdk-local@0.0.8) (2025-11-18)
 
 ## [0.0.7](https://github.com/plastic-ant/packages/compare/nx-cdk-local@0.0.6...nx-cdk-local@0.0.7) (2025-07-12)
