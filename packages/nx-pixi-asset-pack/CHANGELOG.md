@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.11](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.10...nx-pixi-asset-pack@0.1.11) (2025-12-09)
+
+
+### Bug Fixes
+
+* **repo:** added parallel to the dynamic targets ([7f00f88](https://github.com/plastic-ant/packages/commit/7f00f8879baea39390e2d225c85e6829dba051aa))
+
 ## [0.1.10](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.9...nx-pixi-asset-pack@0.1.10) (2025-11-18)
 
 ## [0.1.9](https://github.com/plastic-ant/packages/compare/nx-pixi-asset-pack@0.1.8...nx-pixi-asset-pack@0.1.9) (2025-07-12)
