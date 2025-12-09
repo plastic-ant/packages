@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.21](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.20...nx-strapi@0.0.21) (2025-12-09)
+
+
+### Bug Fixes
+
+* **repo:** added parallel to the dynamic targets ([7f00f88](https://github.com/plastic-ant/packages/commit/7f00f8879baea39390e2d225c85e6829dba051aa))
+
 ## [0.0.20](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.19...nx-strapi@0.0.20) (2025-11-18)
 
 ## [0.0.19](https://github.com/plastic-ant/packages/compare/nx-strapi@0.0.18...nx-strapi@0.0.19) (2025-07-12)
